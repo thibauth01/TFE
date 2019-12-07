@@ -1,0 +1,71 @@
+//KROOBR
+
+Table account as acc {
+  id int [pk, increment] // auto-increment
+  first_name varchar
+  last_name varchar
+  email varchar
+  username varchar
+  password varchar
+  birth_date date
+  street varchar
+  postcode int
+  city varchar
+  country varchar
+  
+}
+
+Table requester{
+  id int[pk,increment]
+  id_account int [ref: - acc.id]
+  premium boolean [default:false]
+}
+
+Table worker {
+  id int[pk,increment]
+  maximum_distance int
+  id_type_work int [ref: > type_work.id]
+  id_account int [ref: - acc.id]
+  id_availability int [ref: > availability.id]
+  star double
+}
+
+Table type_work{
+  id int [pk, increment]
+  name varchar 
+}
+
+Table availability{
+  id int[pk,increment]
+  id_day int [ref: > day.id]
+  time_start time 
+  time_end time
+}
+
+Table day{
+  id int [pk,increment]
+  nom varchar
+}
+
+
+Table work{
+  id int[pk, increment]
+  title varchar
+  id_type int [ref: - type_work.id]
+  description text
+  id_requester int [ref: < requester.id]
+  id_worker int [ref: < worker.id,default: null]
+  date_start date
+  date_end time
+  time_start time
+  time_end time
+  place varchar
+  id_statut_progress int [ref: - statut_progress.id]
+  paid boolean [default:false]
+  cancelled boolean [default:false]
+}
+
+Table statut_progress{
+  id int[pk,increment]
+  name varchar[default:"To Come"]
+}
