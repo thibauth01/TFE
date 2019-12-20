@@ -3,18 +3,23 @@ requester: id,premium
 worker: id, maximum_distance, star
 
 
-DF, 11 account, 11 worker
-DF2, 11 account, 11 requester
+Inherit1, 11 account, 11 worker
+Inherit2, 11 account, 11 requester
 
+availability: id, day, time_start, time_end
 
+Having, 0N availability, 07 worker
 
-*************************
-PEUT VIVRE DANS, 1N ESPÈCE, 1N ENCLOS: nb. max. congénères
-ENCLOS: num. enclos
-OCCUPE, 1N ANIMAL, 1N PÉRIODE, 1N ENCLOS
-PÉRIODE: date début, _date fin
+work : id, title,description, date_start, date_end, time_start, time_end, place, statut_progress, paid, cancelled
 
-ESPÈCE: code espèce, libellé
-DF, 0N ESPÈCE, _11 ANIMAL
-ANIMAL: nom, sexe, date naissance, date décès
-A MÈRE, 01 ANIMAL, 0N> [mère] ANIMAL
+type_work : id, name
+
+defined, 11 work, 0N type_work
+perform, 0N worker, 01 work
+provide, 0N requester, 01 work
+
+bill : id, date_work, date_max, price_unit, quantity_unit, date_payment
+
+paid, 0N requester, 0N bill
+receive, 0N worker, 0N bill
+
