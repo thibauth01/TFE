@@ -16,13 +16,13 @@ Table account as acc {
 }
 
 Table requester{
-  id int[pk,increment]
+  id int [pk,increment]
   id_account int [ref: - acc.id]
   premium boolean [default:false]
 }
 
 Table worker {
-  id int[pk,increment]
+  id int [pk,increment]
   maximum_distance int
   id_type_work int [ref: > type_work.id]
   id_account int [ref: - acc.id]
@@ -36,7 +36,7 @@ Table type_work{
 }
 
 Table availability{
-  id int[pk,increment]
+  id int [pk,increment]
   id_day int [ref: > day.id]
   time_start time 
   time_end time
@@ -49,7 +49,7 @@ Table day{
 
 
 Table work{
-  id int[pk, increment]
+  id int [pk, increment]
   title varchar
   id_type int [ref: - type_work.id]
   description text
@@ -66,6 +66,22 @@ Table work{
 }
 
 Table statut_progress{
-  id int[pk,increment]
-  name varchar[default:"To Come"]
+  id int [pk,increment]
+  name varchar [default:"To Come"]
+}
+
+Table message{
+  id int [pk,increment]
+  id_sender int [ref: > account.id]
+  id_receiver int [ref: > account.id]
+  content varchar
+  sendtime timestamp
+}
+
+Table notification{
+  id int [pk,increment]
+  id_sender int [ref: > account.id]
+  id_receiver int [ref: > account.id]
+  content varchar
+  sendtime timestamp
 }
