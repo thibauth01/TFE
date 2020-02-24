@@ -16,7 +16,8 @@ const ListStackNavigator = createStackNavigator({
   SignUp: { 
     screen: SignUp,
     navigationOptions: {
-      title: 'SignUp'
+      title: 'SignUp',
+      headerShown: false
     }
   }
 
