@@ -1,7 +1,11 @@
 import React from 'react'
 import { StyleSheet, View, TextInput, Text , Platform, Button, TouchableOpacity, Alert, Image  } from 'react-native'
-import { AuthSession } from 'expo'
+import { LogIn } from './LogIn'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { NavigationContainer } from '@react-navigation/native';
 
+
+const Tab = createMaterialTopTabNavigator();
 
 
 class SignUp extends React.Component {
@@ -19,10 +23,13 @@ class SignUp extends React.Component {
       <View style={styles.main_container}>
 
         <View style={styles.header_container}>
+
           <View style={styles.logo_view}>
             <Image style={styles.logo_img} source={require('../Images/logo_youngr.png')}/>
           </View>
+
           <View tyle={styles.header_text_view}>
+
             <View style={styles.header_text_view_1}>
               <Text style={styles.header_text_1}>Looking for a service or a job ?</Text>
             </View>
@@ -32,11 +39,17 @@ class SignUp extends React.Component {
             <View style={styles.header_text_view_3}>
               <Text style={styles.header_text_3}>To facilitate liaison between {"\n"}young workers and requesters</Text>
             </View>
+
           </View>
         </View>
 
         <View style={styles.body_container}>
-
+          <NavigationContainer>
+            <Tab.Navigator>
+              <Tab.Screen name="SignUp" component={SignUp} />
+              {/* En faire la seule nav sur navigation .js et mettre les Tab.screen dedans */}
+            </Tab.Navigator>
+          </NavigationContainer>
         </View>
 
       </View>

@@ -5,3 +5,5 @@ yarn add react-native-safe-area-context
 yarn add react-native-safe-area-view react-native-safe-area-context
 yarn add react-native-reanimated react-native-screens
 yarn add @react-native-community/masked-view
+yarn add @react-navigation/material-top-tabs react-native-tab-view
+yarn add @react-navigation/native
