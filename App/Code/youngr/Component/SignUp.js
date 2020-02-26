@@ -25,18 +25,45 @@ class SignUp extends React.Component {
 
         
         <View style={styles.body_container}>
-        <Button
-          icon={
-            <Icon
-              name="envelope"
-              size={15}
-              color="black"
+          <View style={styles.view_button_Email}>
+            <Button
+              icon={
+                <View style={styles.view_Icon}>
+                  <Icon
+                    name="envelope"
+                    size={20}
+                    color="#C8D1D3"
+                    style={styles.Icon_Email}
+                  />
+                </View>
+              }
+              buttonStyle={styles.buttonStyle_Email}
+              titleStyle={styles.titleStyleButton_Email}
+              title="SIGN UP WITH EMAIL"
+              type="solid"
             />
-          }
-          buttonStyle={styles.button_signUp}
-          title="Sign Up Here"
-          type="solid"
-        />
+          </View>
+
+          <View style={styles.view_button_Facebook}>
+            <Button
+              icon={
+                <View style={styles.view_Icon}>
+                  <Icon
+                    name="facebook"
+                    size={20}
+                    color="white"
+                    style={styles.Icon_Facebook}
+                  />
+                </View>
+              }
+              buttonStyle={styles.buttonStyle_Facebook}
+              titleStyle={styles.titleStyleButton_Facebook}
+              title="SIGN UP WITH FACEBOOK"
+              type="solid"
+            />
+          </View>
+          
+        
         </View>
 
       </View>
@@ -49,7 +76,7 @@ const styles = StyleSheet.create({
   main_container: {
     flex: 1,
     backgroundColor:"#334856",
-    fontFamily:"Roboto",
+    fontFamily:"roboto-light",
     
   },
 
@@ -63,14 +90,68 @@ const styles = StyleSheet.create({
     
     
   },
+  view_button_Email:{
+    margin:18
 
-  button_signUp:{
-    marginLeft:10,
-    marginRight:10,
+  },
+  buttonStyle_Email:{
+    
     height:50,
-    backgroundColor: "grey",
-    borderRadius:30,
+    backgroundColor: "white",
+    borderRadius:20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    
+  },
+  titleStyleButton_Email:{
+    color: "#1B1C20", 
+    
+    
+    
+  },
+  view_Icon:{
+    marginRight:20
+  },
+  Icon_Email:{
+    
+
+  },
+
+
+  view_button_Facebook:{
+    margin:18
+  },
+  buttonStyle_Facebook:{
+    
+    height:50,
+    backgroundColor: "#4285f4",
+    borderRadius:20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+
+  },
+  titleStyleButton_Facebook:{
+    color: "white", 
+    
+
+  },
+  
+  Icon_Facebook:{
+
   }
+ 
 
 
 })

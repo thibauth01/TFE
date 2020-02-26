@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   main_container: {
     flex: 1,
     backgroundColor:"#334856",
-    fontFamily:"Roboto"
+    fontFamily:"roboto-light"
   },
 
   /*Header*/
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   header_text_view_1:{
     justifyContent:"center",
     alignItems:"flex-start",
-    marginLeft:10
+    marginLeft:10,
     
 
   },
