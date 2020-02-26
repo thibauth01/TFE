@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Nav from './Navigation/Navigation'
+import Connexion from './Component/Connexion'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Nav/>    
+      <Connexion/>    
     </View>
   );
 }

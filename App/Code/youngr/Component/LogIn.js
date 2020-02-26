@@ -18,7 +18,7 @@ class LogIn extends React.Component {
     return (
       <View style={styles.main_container}>
 
-        <Text>Hello</Text>
+        <Text>LogIn Here</Text>
 
       </View>
     )
