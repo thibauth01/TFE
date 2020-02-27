@@ -66,6 +66,22 @@ CREATE TABLE `statut_progress` (
   `name` varchar(255) DEFAULT "To Come"
 );
 
+CREATE TABLE `message` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id_sender` int,
+  `id_receiver` int,
+  `content` varchar(255),
+  `sendtime` timestamp
+);
+
+CREATE TABLE `notification` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id_sender` int,
+  `id_receiver` int,
+  `content` varchar(255),
+  `sendtime` timestamp
+);
+
 ALTER TABLE `requester` ADD FOREIGN KEY (`id_account`) REFERENCES `account` (`id`);
 
 ALTER TABLE `worker` ADD FOREIGN KEY (`id_type_work`) REFERENCES `type_work` (`id`);
@@ -83,3 +99,11 @@ ALTER TABLE `requester` ADD FOREIGN KEY (`id`) REFERENCES `work` (`id_requester`
 ALTER TABLE `worker` ADD FOREIGN KEY (`id`) REFERENCES `work` (`id_worker`);
 
 ALTER TABLE `work` ADD FOREIGN KEY (`id_statut_progress`) REFERENCES `statut_progress` (`id`);
+
+ALTER TABLE `message` ADD FOREIGN KEY (`id_sender`) REFERENCES `account` (`id`);
+
+ALTER TABLE `message` ADD FOREIGN KEY (`id_receiver`) REFERENCES `account` (`id`);
+
+ALTER TABLE `notification` ADD FOREIGN KEY (`id_sender`) REFERENCES `account` (`id`);
+
+ALTER TABLE `notification` ADD FOREIGN KEY (`id_receiver`) REFERENCES `account` (`id`);
