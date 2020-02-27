@@ -31,12 +31,13 @@ class SignUp extends React.Component {
                 <View style={styles.view_Icon}>
                   <Icon
                     name="envelope"
-                    size={20}
+                    size={25}
                     color="#C8D1D3"
                     style={styles.Icon_Email}
                   />
                 </View>
               }
+              
               buttonStyle={styles.buttonStyle_Email}
               titleStyle={styles.titleStyleButton_Email}
               title="SIGN UP WITH EMAIL"
@@ -50,7 +51,7 @@ class SignUp extends React.Component {
                 <View style={styles.view_Icon}>
                   <Icon
                     name="facebook"
-                    size={20}
+                    size={25}
                     color="white"
                     style={styles.Icon_Facebook}
                   />
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle_Email:{
     
-    height:50,
+    height:70,
     backgroundColor: "white",
     borderRadius:20,
     shadowColor: "#000",
@@ -111,6 +112,8 @@ const styles = StyleSheet.create({
   },
   titleStyleButton_Email:{
     color: "#1B1C20", 
+    fontSize:18,
+    
     
     
     
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle_Facebook:{
     
-    height:50,
+    height:70,
     backgroundColor: "#4285f4",
     borderRadius:20,
     shadowColor: "#000",
@@ -140,10 +143,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    
 
   },
   titleStyleButton_Facebook:{
     color: "white", 
+    fontSize:18,
     
 
   },
