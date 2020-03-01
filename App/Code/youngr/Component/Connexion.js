@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Text , Platform, Button, TouchableOpacity, Alert, Image  } from 'react-native'
+import { StyleSheet, View, TextInput, Text , Platform, Button, TouchableOpacity, Alert, Image, Dimensions  } from 'react-native'
 import { LogIn } from './LogIn'
 import {createAppContainer} from 'react-navigation'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
@@ -8,34 +8,27 @@ import { createStackNavigator } from 'react-navigation-stack'
 import  NavigationConnexion  from '../Navigation/NavigationConnexion'
 
 
-const Tab = createMaterialTopTabNavigator();
 
 
 class Connexion extends React.Component {
 
-  constructor(props) {
-     super(props)
-     this.state = {
-      
-    }
-   }
-
-
+ 
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.main_container}>
-
-        <View style={styles.header_container}>
-
-          <View style={styles.logo_view}>
-            <Image style={styles.logo_img} source={require('../Images/logo_youngr.png')}/>
-          </View>
-
-        </View>
-
+        
         <View style={styles.body_container}>
-          <NavigationConnexion/>
+          <Image style={styles.image} source={require('../Images/logo_youngr.png')} />
         </View>
+        <Button
+            title="LogIn"
+            onPress={() => navigate('LogIn')}
+          />
+        <Button
+          title="Sign Up"
+          onPress={() => navigate('SignUp')}
+        />
 
       </View>
     )
@@ -47,34 +40,23 @@ const styles = StyleSheet.create({
   main_container: {
     flex: 1,
     backgroundColor:"#334856",
-    fontFamily:"roboto-light"
-  },
-
-  /*Header*/
-  header_container:{
-    flex:2,
-    backgroundColor:"#334856"
-
-  },
-  logo_view:{
+    fontFamily:"roboto-light",
     justifyContent:"center",
-    alignItems:"center",
-    height:250,
-  },
-  logo_img:{
-    height:100,
-    width:250
-    
+    alignItems:"center"
   },
 
   
 
   /*Body*/
   body_container:{
-    backgroundColor:"#273640",
-    flex:6
+    
 
+  },
+  image:{
+    width:Dimensions.get("window").width,
+    height:100,
   }
+
 })
 
 export default Connexion

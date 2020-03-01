@@ -6,9 +6,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { color } from 'react-native-reanimated';
 
 
-const Tab = createMaterialTopTabNavigator();
-
-
 class SignUp extends React.Component {
 
   constructor(props) {
@@ -97,7 +94,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle_Email:{
     
-    height:70,
+    height:50,
     backgroundColor: "white",
     borderRadius:20,
     shadowColor: "#000",
@@ -132,7 +129,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle_Facebook:{
     
-    height:70,
+    height:50,
     backgroundColor: "#4285f4",
     borderRadius:20,
     shadowColor: "#000",

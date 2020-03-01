@@ -2,32 +2,39 @@ import React from 'react'
 import { StyleSheet, View, TextInput, Text , Platform, Button, TouchableOpacity, Alert  } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { NavigationContainer } from '@react-navigation/native';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+
+
 import SignUp from '../Component/SignUp'
 import LogIn from '../Component/LogIn'
+import Connexion from '../Component/Connexion'
 
 
-const Tab = createMaterialTopTabNavigator();
+const ListStackNavigator = createStackNavigator({
 
-function NavigationConnexion() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator
-      initialRouteName="Feed"
-      swipeEnabled="false"
-      tabBarOptions={{
-        indicatorStyle  :{backgroundColor: "#D97D54"},
-        activeTintColor: 'white',
-        pressColor: '#273640',
-        upperCaseLabel :false,
-        labelStyle: { fontSize: 13 },
-        style: { backgroundColor: '#334856' },
-      }}>
-        <Tab.Screen name="Sign Up" component={SignUp} />
-        <Tab.Screen name="Log In" component={LogIn} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
-//creer ici la vue createMaterialTopTabNavigator
 
-export default NavigationConnexion
+  Connexion: { // Ici j'ai appelé la vue "Test" mais on peut mettre ce que l'on veut. C'est le nom qu'on utilisera pour appeler cette vue
+    screen: Connexion,
+    navigationOptions: {
+      title: 'Connexion',
+      headerShown: false
+    }
+  },
+  LogIn: { 
+    screen: LogIn,
+    navigationOptions: {
+      title: 'LogIn'
+    }
+  },
+  SignUp: { 
+    screen: SignUp,
+    navigationOptions: {
+      title: 'SignUp',
+      headerShown: false
+    }
+  }
+
+})
+
+export default createAppContainer(ListStackNavigator)

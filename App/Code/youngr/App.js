@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Connexion from './Component/Connexion'
+import Nav from './Navigation/NavigationConnexion'
 
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Connexion/>    
+      <Nav/>    
     </View>
   );
 }
