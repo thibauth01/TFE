@@ -1,25 +1,34 @@
 account: id, first_name, last_name, email, username, password, bith_date, street, postcode, city, country,premium
-requester: id,premium
-worker: id, maximum_distance, star
+requester: id
+worker: id, id_availability,maximum_distance, star
 
 
-Inherit1, 11 account, 11 worker
+inherit1, 11 account, 11 worker
 Inherit2, 11 account, 11 requester
 
-availability: id, day, time_start, time_end
+availability: id, time_start, time_end
 
 Having, 0N availability, 07 worker
 
-work : id, title,description, date_start, date_end, time_start, time_end, place, statut_progress, paid, cancelled
+day: id, name
+
+include, 0N day, 11 availability
+
+work : id, title, description, date_start, date_end, time_start, time_end, place, statut_progress, paid, cancelled
 
 type_work : id, name
 
 defined, 11 work, 0N type_work
+
 perform, 0N worker, 01 work
 provide, 0N requester, 01 work
 
-bill : id, date_work, date_max, price_unit, quantity_unit, date_payment
 
-paid, 0N requester, 0N bill
-receive, 0N worker, 0N bill
+message :id, content, sendtime
+
+send, 0N account, 01 message
+
+notification: id, content, sendtime
+
+notifie, 0N account, 01 notification
 
