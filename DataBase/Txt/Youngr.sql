@@ -9,7 +9,8 @@ CREATE TABLE `account` (
   `street` varchar(255),
   `postcode` int,
   `city` varchar(255),
-  `country` varchar(255)
+  `country` varchar(255),
+  `premium` boolean
 );
 
 CREATE TABLE `requester` (
@@ -52,18 +53,13 @@ CREATE TABLE `work` (
   `id_requester` int,
   `id_worker` int DEFAULT null,
   `date_start` date,
-  `date_end` time,
-  `time_start` time,
-  `time_end` time,
+  `date_end` date,
+  `time_start` date,
+  `time_end` date,
   `place` varchar(255),
-  `id_statut_progress` int,
+  `id_statut_progress` varchar(255),
   `paid` boolean DEFAULT false,
   `cancelled` boolean DEFAULT false
-);
-
-CREATE TABLE `statut_progress` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT "To Come"
 );
 
 CREATE TABLE `message` (
@@ -97,8 +93,6 @@ ALTER TABLE `work` ADD FOREIGN KEY (`id_type`) REFERENCES `type_work` (`id`);
 ALTER TABLE `requester` ADD FOREIGN KEY (`id`) REFERENCES `work` (`id_requester`);
 
 ALTER TABLE `worker` ADD FOREIGN KEY (`id`) REFERENCES `work` (`id_worker`);
-
-ALTER TABLE `work` ADD FOREIGN KEY (`id_statut_progress`) REFERENCES `statut_progress` (`id`);
 
 ALTER TABLE `message` ADD FOREIGN KEY (`id_sender`) REFERENCES `account` (`id`);
 

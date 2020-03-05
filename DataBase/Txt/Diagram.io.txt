@@ -1,4 +1,4 @@
-//KROOBR
+//youngr
 
 Table account as acc {
   id int [pk, increment] // auto-increment
@@ -12,6 +12,7 @@ Table account as acc {
   postcode int
   city varchar
   country varchar
+  premium boolean
   
 }
 
@@ -56,19 +57,15 @@ Table work{
   id_requester int [ref: < requester.id]
   id_worker int [ref: < worker.id,default: null]
   date_start date
-  date_end time
-  time_start time
-  time_end time
+  date_end date
+  time_start date
+  time_end date
   place varchar
-  id_statut_progress int [ref: - statut_progress.id]
+  id_statut_progress varchar 
   paid boolean [default:false]
   cancelled boolean [default:false]
 }
 
-Table statut_progress{
-  id int [pk,increment]
-  name varchar [default:"To Come"]
-}
 
 Table message{
   id int [pk,increment]
