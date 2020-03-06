@@ -1,6 +1,6 @@
 account: id, first_name, last_name, email, username, password, bith_date, street, postcode, city, country,premium
 requester: id
-worker: id, id_availability,maximum_distance, star
+worker: id,maximum_distance, star
 
 
 inherit1, 11 account, 11 worker
@@ -21,14 +21,14 @@ type_work : id, name
 defined, 11 work, 0N type_work
 
 perform, 0N worker, 01 work
-provide, 0N requester, 01 work
+provide, 0N requester, 11 work
 
 
 message :id, content, sendtime
 
-send, 0N account, 01 message
+send, 0N account, 11 message
 
 notification: id, content, sendtime
 
-notifie, 0N account, 01 notification
+notifie, 0N account, 1N notification
 
