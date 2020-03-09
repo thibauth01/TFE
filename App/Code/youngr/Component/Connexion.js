@@ -6,7 +6,6 @@ import {createAppContainer} from 'react-navigation'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from 'react-navigation-stack'
-import  NavigationConnexion  from '../Navigation/NavigationConnexion'
 
 
 
