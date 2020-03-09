@@ -18,14 +18,16 @@ const ListStackNavigator = createStackNavigator({
     screen: Connexion,
     navigationOptions: {
       title: 'Connexion',
-      headerShown: false
+      headerShown: false,
+      
     }
   },
   LogIn: { 
     screen: LogIn,
     navigationOptions: {
       title: 'LogIn'
-    }
+    },
+   
   },
   SignUp: { 
     screen: SignUp,

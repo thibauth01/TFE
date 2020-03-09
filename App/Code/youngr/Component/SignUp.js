@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Text , Platform, TouchableOpacity, Alert, Image  } from 'react-native'
+import { StyleSheet, View, Dimensions,TextInput, Text ,KeyboardAvoidingView,SafeAreaView, Platform, TouchableOpacity, Alert, Image  } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { Button } from 'react-native-elements';
+import { Button , Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { color } from 'react-native-reanimated';
 
@@ -18,53 +18,62 @@ class SignUp extends React.Component {
 
   render() {
     return (
+      
       <View style={styles.main_container}>
-
-        
-        <View style={styles.body_container}>
-          <View style={styles.view_button_Email}>
-            <Button
-              icon={
-                <View style={styles.view_Icon}>
-                  <Icon
-                    name="envelope"
-                    size={25}
-                    color="#C8D1D3"
-                    style={styles.Icon_Email}
-                  />
-                </View>
-              }
-              
-              buttonStyle={styles.buttonStyle_Email}
-              titleStyle={styles.titleStyleButton_Email}
-              title="SIGN UP WITH EMAIL"
-              type="solid"
-            />
-          </View>
-
-          <View style={styles.view_button_Facebook}>
-            <Button
-              icon={
-                <View style={styles.view_Icon}>
-                  <Icon
-                    name="facebook"
-                    size={25}
-                    color="white"
-                    style={styles.Icon_Facebook}
-                  />
-                </View>
-              }
-              buttonStyle={styles.buttonStyle_Facebook}
-              titleStyle={styles.titleStyleButton_Facebook}
-              title="SIGN UP WITH FACEBOOK"
-              type="solid"
-            />
-          </View>
+        <SafeAreaView>
+         
           
-        
-        </View>
 
+            <View style={styles.view_text}>
+              <Text style={styles.text}>Create your account</Text>
+            </View>
+
+            <View style={styles.view_inputs}>
+              <View style={styles.view_input}>
+                <Input
+                  style={styles.input}
+                  placeholder='Username'
+                  inputContainerStyle={{borderBottomWidth:0}}
+                  leftIcon={
+                    <View style={styles.view_icon}>
+                      <Icon
+                        name='user-o'
+                        size={24}
+                        color='#A6BCD0'
+                        style={styles.icon}
+                      />
+                  </View>
+                  
+                  }
+                  inputStyle={{color:"white"}}
+                />
+              </View>
+
+              <View style={styles.view_input}>
+                <Input
+                  style={styles.input}
+                  placeholder='Password'
+                  secureTextEntry={true}
+                  inputContainerStyle={{borderBottomWidth:0}}
+                  leftIcon={
+                    <View style={styles.view_icon}>
+                      <Icon
+                        name='lock'
+                        size={24}
+                        color='#A6BCD0'
+                        style={styles.icon}
+                      />
+                  </View>
+                  
+                  }
+                  inputStyle={{color:"white"}}
+                />
+              </View>
+            </View>
+          
+        </SafeAreaView>
       </View>
+      
     )
   }
 }
@@ -78,82 +87,39 @@ const styles = StyleSheet.create({
     
   },
 
-
-
   /*Body*/
   body_container:{
     backgroundColor:"#273640",
-    flex:1,
     justifyContent:"center",
     
-    
-  },
-  view_button_Email:{
-    margin:18
-
-  },
-  buttonStyle_Email:{
-    
-    height:50,
-    backgroundColor: "white",
-    borderRadius:20,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    
-  },
-  titleStyleButton_Email:{
-    color: "#1B1C20", 
-    fontSize:18,
-    
-    
-    
-    
-  },
-  view_Icon:{
-    marginRight:20
-  },
-  Icon_Email:{
-    
-
   },
 
-
-  view_button_Facebook:{
-    margin:18
+  view_text:{
+    flex:1,
+    marginTop:20
+    
   },
-  buttonStyle_Facebook:{
-    
-    height:50,
-    backgroundColor: "#4285f4",
-    borderRadius:20,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    
-
+  text:{
+    marginLeft:20,
+    marginTop:10,
+    color:'white',
+    fontSize:25
   },
-  titleStyleButton_Facebook:{
-    color: "white", 
-    fontSize:18,
+  view_inputs:{
+    flex:1,
+    marginTop:100
+  },
+  view_input:{
+    backgroundColor:"#334856",
+    height:40,
+    borderRadius:10,
     
+  },
 
+  input:{
+    color:"white"
   },
   
-  Icon_Facebook:{
-
-  }
- 
 
 
 })
