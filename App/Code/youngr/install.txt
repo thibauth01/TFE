@@ -10,3 +10,5 @@ yarn add @react-navigation/native
 yarn add react-native-screens
 yarn add react-native-elements
 yarn add react-native-vector-icons
+yarn add react-native-datepicker
+yarn add react-native-picker-select
