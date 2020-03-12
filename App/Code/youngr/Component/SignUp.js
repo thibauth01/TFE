@@ -20,6 +20,7 @@ class SignUp extends React.Component {
 
   render() {
     var today = new Date().getDate();
+   
     return (
 
       <View style={styles.main_container}>
@@ -29,176 +30,198 @@ class SignUp extends React.Component {
         </View>
 
         <ScrollView>
-          <SafeAreaView>
-            <View style={styles.view_inputs}>
+
+          <View style={styles.view_inputs}>
 
 
 
-              {/*           LAST NAME          */}
-              <View style={styles.view_input}>
+            {/*           LAST NAME          */}
+            <View style={styles.view_input}>
+              <Input
+                style={styles.input}
+                placeholder='Last Name'
+                inputContainerStyle={{ borderBottomWidth: 0 }}
+                leftIcon={
+                  <View style={styles.view_icon}>
+                    <Icon
+                      name='user-o'
+                      size={24}
+                      color='#A6BCD0'
+                      style={styles.icon}
+                    />
+                  </View>
+
+                }
+                inputStyle={{ color: "white" }}
+              />
+            </View>
+
+
+            {/*           FIRST NAME          */}
+            <View style={styles.view_input}>
+              <Input
+                style={styles.input}
+                placeholder='First Name'
+                inputContainerStyle={{ borderBottomWidth: 0 }}
+                leftIcon={
+                  <View style={styles.view_icon}>
+                    <Icon
+                      name='user-o'
+                      size={24}
+                      color='#A6BCD0'
+                      style={styles.icon}
+                    />
+                  </View>
+
+                }
+                inputStyle={{ color: "white" }}
+              />
+            </View>
+
+
+            {/*           EMAIL          */}
+
+            <View style={styles.view_input}>
+              <Input
+                style={styles.input}
+                placeholder='Email'
+                inputContainerStyle={{ borderBottomWidth: 0 }}
+                leftIcon={
+                  <View style={styles.view_icon}>
+                    <Icon
+                      name='envelope-o'
+                      size={24}
+                      color='#A6BCD0'
+                      style={styles.icon}
+                    />
+                  </View>
+
+                }
+                inputStyle={{ color: "white" }}
+              />
+            </View>
+
+
+            {/*           USERNAME          */}
+
+            <View style={styles.view_input}>
+              <Input
+                style={styles.input}
+                placeholder='Username'
+                inputContainerStyle={{ borderBottomWidth: 0 }}
+                leftIcon={
+                  <View style={styles.view_icon}>
+                    <Icon
+                      name='user-o'
+                      size={24}
+                      color='#A6BCD0'
+                      style={styles.icon}
+                    />
+                  </View>
+
+                }
+                inputStyle={{ color: "white" }}
+              />
+            </View>
+
+
+
+            {/*           PASSWORD          */}
+            <View style={styles.view_input}>
+              <Input
+                style={styles.input}
+                placeholder='Password'
+                secureTextEntry={true}
+                inputContainerStyle={{ borderBottomWidth: 0 }}
+                leftIcon={
+                  <View style={styles.view_icon}>
+                    <Icon
+                      name='lock'
+                      size={24}
+                      color='#A6BCD0'
+                      style={styles.icon}
+                    />
+                  </View>
+
+                }
+                inputStyle={{ color: "white" }}
+              />
+            </View>
+
+
+
+
+            {/*           COMFIRM PASSWORD          */}
+            <View style={styles.view_input}>
+              <Input
+                style={styles.input}
+                placeholder='Confirm Password'
+                secureTextEntry={true}
+                inputContainerStyle={{ borderBottomWidth: 0 }}
+                leftIcon={
+                  <View style={styles.view_icon}>
+                    <Icon
+                      name='lock'
+                      size={24}
+                      color='#A6BCD0'
+                      style={styles.icon}
+                    />
+                  </View>
+
+                }
+                inputStyle={{ color: "white" }}
+              />
+            </View>
+
+
+
+            {/*           Birth Date          */}
+            <View style={styles.view_input}>
+              <DatePicker
+                style={styles.input}
+                mode="date"
+                placeholder="Birth Date"
+                format="DD-MM-YYYY"
+                minDate="1900-01-01"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+
+              >
+
+              </DatePicker>
+            </View>
+
+
+
+
+            {/*       Street        */}
+            <View style={styles.view_input}>
+              <Input
+                style={styles.input}
+                placeholder='Street'
+                inputContainerStyle={{ borderBottomWidth: 0 }}
+                leftIcon={
+                  <View style={styles.view_icon}>
+                    <Icon
+                      name='map-marker'
+                      size={24}
+                      color='#A6BCD0'
+                      style={styles.icon}
+                    />
+                  </View>
+
+                }
+                inputStyle={{ color: "white" }}
+              />
+            </View>
+
+
+            {/*       N°        */}
+            <View style={styles.view_inputs_short}>
+              <View style={styles.view_input_short}>
                 <Input
                   style={styles.input}
-                  placeholder='Last Name'
-                  inputContainerStyle={{ borderBottomWidth: 0 }}
-                  leftIcon={
-                    <View style={styles.view_icon}>
-                      <Icon
-                        name='user-o'
-                        size={24}
-                        color='#A6BCD0'
-                        style={styles.icon}
-                      />
-                    </View>
-
-                  }
-                  inputStyle={{ color: "white" }}
-                />
-              </View>
-
-
-              {/*           FIRST NAME          */}
-              <View style={styles.view_input}>
-                <Input
-                  style={styles.input}
-                  placeholder='First Name'
-                  inputContainerStyle={{ borderBottomWidth: 0 }}
-                  leftIcon={
-                    <View style={styles.view_icon}>
-                      <Icon
-                        name='user-o'
-                        size={24}
-                        color='#A6BCD0'
-                        style={styles.icon}
-                      />
-                    </View>
-
-                  }
-                  inputStyle={{ color: "white" }}
-                />
-              </View>
-
-
-              {/*           EMAIL          */}
-
-              <View style={styles.view_input}>
-                <Input
-                  style={styles.input}
-                  placeholder='Email'
-                  inputContainerStyle={{ borderBottomWidth: 0 }}
-                  leftIcon={
-                    <View style={styles.view_icon}>
-                      <Icon
-                        name='envelope-o'
-                        size={24}
-                        color='#A6BCD0'
-                        style={styles.icon}
-                      />
-                    </View>
-
-                  }
-                  inputStyle={{ color: "white" }}
-                />
-              </View>
-
-
-              {/*           USERNAME          */}
-
-              <View style={styles.view_input}>
-                <Input
-                  style={styles.input}
-                  placeholder='Username'
-                  inputContainerStyle={{ borderBottomWidth: 0 }}
-                  leftIcon={
-                    <View style={styles.view_icon}>
-                      <Icon
-                        name='user-o'
-                        size={24}
-                        color='#A6BCD0'
-                        style={styles.icon}
-                      />
-                    </View>
-
-                  }
-                  inputStyle={{ color: "white" }}
-                />
-              </View>
-
-
-
-              {/*           PASSWORD          */}
-              <View style={styles.view_input}>
-                <Input
-                  style={styles.input}
-                  placeholder='Password'
-                  secureTextEntry={true}
-                  inputContainerStyle={{ borderBottomWidth: 0 }}
-                  leftIcon={
-                    <View style={styles.view_icon}>
-                      <Icon
-                        name='lock'
-                        size={24}
-                        color='#A6BCD0'
-                        style={styles.icon}
-                      />
-                    </View>
-
-                  }
-                  inputStyle={{ color: "white" }}
-                />
-              </View>
-
-
-
-
-              {/*           COMFIRM PASSWORD          */}
-              <View style={styles.view_input}>
-                <Input
-                  style={styles.input}
-                  placeholder='Confirm Password'
-                  secureTextEntry={true}
-                  inputContainerStyle={{ borderBottomWidth: 0 }}
-                  leftIcon={
-                    <View style={styles.view_icon}>
-                      <Icon
-                        name='lock'
-                        size={24}
-                        color='#A6BCD0'
-                        style={styles.icon}
-                      />
-                    </View>
-
-                  }
-                  inputStyle={{ color: "white" }}
-                />
-              </View>
-
-
-
-              {/*           Birth Date          */}
-              <View style={styles.view_input}>
-                <DatePicker
-                  style={styles.input}
-                  mode="date"
-                  placeholder="Birth Date"
-                  format="DD-MM-YYYY"
-                  minDate="1900-01-01"
-                  maxDate={today}
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-
-                >
-
-                </DatePicker>
-              </View>
-
-
-
-
-              {/*       Street        */}
-              <View style={styles.view_input}>
-                <Input
-                  style={styles.input}
-                  placeholder='Street'
+                  placeholder='N°'
                   inputContainerStyle={{ borderBottomWidth: 0 }}
                   leftIcon={
                     <View style={styles.view_icon}>
@@ -215,92 +238,121 @@ class SignUp extends React.Component {
                 />
               </View>
 
+              {/*       Post Code        */}
+              <View style={styles.view_input_short}>
+                <Input
+                  style={styles.input}
+                  placeholder='Post Code '
+                  inputContainerStyle={{ borderBottomWidth: 0 }}
+                  leftIcon={
+                    <View style={styles.view_icon}>
+                      <Icon
+                        name='map-marker'
+                        size={24}
+                        color='#A6BCD0'
+                        style={styles.icon}
+                      />
+                    </View>
 
-              {/*       N°        */}
-              <View style={styles.view_inputs_short}>
-                <View style={styles.view_input_short}>
-                  <Input
-                    style={styles.input}
-                    placeholder='N°'
-                    inputContainerStyle={{ borderBottomWidth: 0 }}
-                    leftIcon={
-                      <View style={styles.view_icon}>
-                        <Icon
-                          name='map-marker'
-                          size={24}
-                          color='#A6BCD0'
-                          style={styles.icon}
-                        />
-                      </View>
-
-                    }
-                    inputStyle={{ color: "white" }}
-                  />
-                </View>
-
-                {/*       Post Code        */}
-                <View style={styles.view_input_short}>
-                  <Input
-                    style={styles.input}
-                    placeholder='Post Code '
-                    inputContainerStyle={{ borderBottomWidth: 0 }}
-                    leftIcon={
-                      <View style={styles.view_icon}>
-                        <Icon
-                          name='map-marker'
-                          size={24}
-                          color='#A6BCD0'
-                          style={styles.icon}
-                        />
-                      </View>
-
-                    }
-                    inputStyle={{ color: "white" }}
-                  />
-                </View>
-
-
-                {/*       City        */}
-                <View style={styles.view_input}>
-                  <Input
-                    style={styles.input}
-                    placeholder='City'
-                    inputContainerStyle={{ borderBottomWidth: 0 }}
-                    leftIcon={
-                      <View style={styles.view_icon}>
-                        <Icon
-                          name='map-marker'
-                          size={24}
-                          color='#A6BCD0'
-                          style={styles.icon}
-                        />
-                      </View>
-
-                    }
-                    inputStyle={{ color: "white" }}
-                  />
-                </View>
-
-
-
-                {/*       Country        */}
-                <View style={styles.view_input}>
-                  <RNPickerSelect
-
-                    items={[
-                      { label: 'Football', value: 'football' },
-                      { label: 'Baseball', value: 'baseball' },
-                      { label: 'Hockey', value: 'hockey' },
-                    ]}
-                  />
-                </View>
-
-
-
+                  }
+                  inputStyle={{ color: "white" }}
+                />
               </View>
-
             </View>
-          </SafeAreaView>
+
+            {/*       City        */}
+            <View style={styles.view_input}>
+              <Input
+                style={styles.input}
+                placeholder='City'
+                inputContainerStyle={{ borderBottomWidth: 0 }}
+                leftIcon={
+                  <View style={styles.view_icon}>
+                    <Icon
+                      name='map-marker'
+                      size={24}
+                      color='#A6BCD0'
+                      style={styles.icon}
+                    />
+                  </View>
+
+                }
+                inputStyle={{ color: "white" }}
+              />
+            </View>
+
+
+
+
+            {/*       Country        */}
+            <View style={styles.view_input}>
+              <RNPickerSelect
+                
+                style={styles.input}
+                items={[
+                  { label: 'Football', value: 'football' },
+                  { label: 'Baseball', value: 'baseball' },
+                  { label: 'Hockey', value: 'hockey' },
+                ]}
+                onValueChange={(value) => console.log(value)}
+              />
+            </View>
+
+
+
+
+
+
+
+
+          </View>
+
+          <View style={styles.view_buttons}>
+
+            {/*    BUTTON  WORKER     */}
+            <View style={styles.view_button_worker}> 
+              <Button
+              icon={
+                <View style={styles.view_icon_button}>
+                  <Icon
+                    name="arrow-right"
+                    size={20}
+                    color="#D97D54"
+                    style={styles.icon}
+                  />
+                </View>
+              }
+              iconRight
+              buttonStyle={styles.style_button_worker}
+              titleStyle={styles.title_style_button_worker}
+              title="I AM A WORKER"
+              type="solid"
+            />
+            </View>
+
+            {/*    BUTTON  REQUESTER     */}
+            <View style={styles.view_button_requester}> 
+              <Button
+              icon={
+                <View style={styles.view_icon_button}>
+                  <Icon
+                    name="arrow-right"
+                    size={20}
+                    color="white"
+                    style={styles.icon}
+                  />
+                </View>
+              }
+              iconRight
+              buttonStyle={styles.style_button_requester}
+              titleStyle={styles.title_style_button_requester}
+              title="I AM A REQUESTER"
+              type="solid"
+            />
+            </View>
+
+          </View>
+
         </ScrollView>
 
       </View>
@@ -340,7 +392,8 @@ const styles = StyleSheet.create({
 
   view_inputs: {
     flex: 1,
-    marginTop: 80
+    marginTop: 80,
+    marginBottom: 15
   },
 
   view_inputs_short: {
@@ -354,6 +407,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     marginTop: 15,
+    
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 0,
@@ -397,6 +451,48 @@ const styles = StyleSheet.create({
   view_icon: {
     marginRight: 20
   },
+
+
+  view_buttons:{
+    flexDirection:'row',
+    justifyContent:"space-around"
+  },
+
+  view_button_worker:{
+    width: (Dimensions.get("window").width) / 2 - 23,
+    marginBottom: 30,
+    marginTop: 20
+  },
+
+  view_button_requester:{
+    width: (Dimensions.get("window").width) / 2 - 23,
+    marginBottom: 30,
+    marginTop: 20
+  },
+
+ 
+
+  style_button_worker:{
+    backgroundColor:"white",
+    borderRadius:40,
+    height:50
+  },
+  style_button_requester:{
+    backgroundColor:"#D97D54",
+    borderRadius:40,
+    height:50
+  },
+  title_style_button_worker:{
+    color:'black',
+    fontSize:12,
+    marginRight:10
+  },
+  title_style_button_requester:{
+    color:'white',
+    fontSize:12,
+    marginRight:10
+  }
+
 
 
 })
