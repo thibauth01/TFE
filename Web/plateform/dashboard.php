@@ -53,9 +53,10 @@
                 <div class="content">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card card-tasks">
+                            <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Works - <strong class="text-danger">To do</strong></h4>
+                                    <h5 class="card-category">Work Proposal</h5>
+                                    <h4 class="card-title">Do you want to do this job?</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-full-width table-responsive">
@@ -63,12 +64,14 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <img src="img/user-1.jpg" height="50px" width="50px">
+                                                        <img src="img/user-1.jpg" height="50px" width="50px" style="min-width:50px;">
                                                     </td>
 
-                                                    <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
+                                                    <td class="text-left">Sign contract for </td>
+                                                    <td class="text-primary">Bricolage</td>
+                                                    <td>25/05/2020</td>
                                                     <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
+                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work" data-toggle="collapse" data-target="#explication1">
                                                             <i class="now-ui-icons travel_info"></i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Valid Work">
@@ -78,7 +81,6 @@
                                                             <i class="now-ui-icons ui-1_simple-remove"></i>
                                                         </button>
                                                     </td>
-                                                    
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -87,6 +89,8 @@
                                                     </td>
 
                                                     <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                                    <td class="text-primary">Computer</td>
+                                                    <td>18/10/2020</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
                                                             <i class="now-ui-icons travel_info"></i>
@@ -104,27 +108,44 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    
+                                    <div class="stats">
+                                        <i class="now-ui-icons objects_spaceship"></i> 2 proposal
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-3 d-flex">
+                            <div class="card card-user">
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <a href="#">
+                                            <img class="avatar border-gray" src="img/user-1.jpg" alt="...">
+                                            <h5 class="title">Thibaut Hermant</h5>
+                                        </a>
+                                        <p class="description">
+                                            Chimay
+                                        </p>
+                                    </div>
+                                    <p class="text-center"> 12 works already given</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9 d-flex">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row">
-                                        <div class="col-md-10">
-                                            <h5 class="card-title">Sign contract for "What are conference organizers afraid of?"</h5>
+                                        <div class="col-md-8">
+                                            <h5 class="card-title">Sign contract for </h5>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-4 text-right">
                                             <h5 class="card-title text-danger">Bricolage</h5>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row text-center">
+                                    <div class="row text-center mt-2">
                                         <div class="col-md-3">
                                             <i class="now-ui-icons ui-1_calendar-60" style="font-size:20px"></i>
                                             <p>12/05/2020<p>
@@ -138,8 +159,8 @@
                                             <p>Route du longchamps 14/302, 1348 Louvain-la-Neuve<p>
                                         </div>
                                         <div class="col-md-3">
-                                            <i class="now-ui-icons ui-2_chat-round" style="font-size:20px"></i>
-                                            <p>Text me !<p>
+                                            <i class="now-ui-icons shopping_credit-card" style="font-size:20px"></i>
+                                            <p>55€<p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -150,106 +171,57 @@
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card card-tasks">
-                                <div class="card-header">
-                                    <h4 class="card-title">Works - <strong class="text-warning">To Get Paid</strong></h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-full-width table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/user-1.jpg" height="50px" width="50px">
-                                                    </td>
-
-                                                    <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-warning btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons ui-1_bell-53"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/mike.jpg" height="50px" width="50px">
-
-                                                    </td>
-
-                                                    <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-warning btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons ui-1_bell-53"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card card-tasks">
-                                <div class="card-header">
-                                    <h4 class="card-title">Works - <strong class="text-success">Done</strong></h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-full-width table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/user-1.jpg" height="50px" width="50px">
-                                                    </td>
-
-                                                    <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons travel_info"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/mike.jpg" height="50px" width="50px">
-
-                                                    </td>
-
-                                                    <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons travel_info"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-category">All Persons List</h5>
-                                    <h4 class="card-title"> Employees Stats</h4>
+                                <h6 class="card-category">Next Work</h6>
+                                    <div class="row">
+                                        <div class="col-md-8"> 
+                                            <h5 class="card-title">Install a printer</h5>
+                                        </div>
+                                        <div class="col-md-4 text-right">
+                                            <h5 class="card-title text-danger">Bricolage</h5>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    <div class="row text-center mt-2">
+                                        <div class="col-md-4">
+                                            <i class="now-ui-icons ui-1_calendar-60" style="font-size:20px"></i>
+                                            <p>12/05/2020<p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <i class="now-ui-icons tech_watch-time" style="font-size:20px"></i>
+                                            <p>13h30 - 18h00<p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <i class="now-ui-icons shopping_credit-card" style="font-size:20px"></i>
+                                            <p>55€<p>
+                                        </div>
+                                    </div>
+                                    <div class="row  my-4">
+                                        <div class="cold-md-2 ml-4">
+                                            <i class="now-ui-icons location_pin" style="font-size:20px"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <p>Route du longchamps 14/302, 1348 Louvain-la-Neuve<p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 px-3">
+                                            <p>Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="card-category">Latest work</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -258,11 +230,8 @@
                                                 <th>
                                                     Name
                                                 </th>
-                                                <th>
-                                                    Country
-                                                </th>
-                                                <th>
-                                                    City
+                                                <th class="text-center">
+                                                    Date
                                                 </th>
                                                 <th class="text-right">
                                                     Salary
@@ -271,72 +240,46 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        Dakota Rice
+                                                        Keep my son
                                                     </td>
-                                                    <td>
-                                                        Niger
-                                                    </td>
-                                                    <td>
-                                                        Oud-Turnhout
+                                                    <td class="text-center">
+                                                        24/02/2020
                                                     </td>
                                                     <td class="text-right">
-                                                        $36,738
+                                                        25€
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Minerva Hooper
+                                                        Math lessons
                                                     </td>
-                                                    <td>
-                                                        Curaçao
-                                                    </td>
-                                                    <td>
-                                                        Sinaai-Waas
+                                                    <td class="text-center">
+                                                        03/01/2020
                                                     </td>
                                                     <td class="text-right">
-                                                        $23,789
+                                                        39€
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Sage Rodriguez
+                                                        Walk my dog
                                                     </td>
-                                                    <td>
-                                                        Netherlands
-                                                    </td>
-                                                    <td>
-                                                        Baileux
+                                                    <td class="text-center">
+                                                        22/12/2019
                                                     </td>
                                                     <td class="text-right">
-                                                        $56,142
+                                                        10€
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Doris Greene
+                                                        Assemble my wardrobe
                                                     </td>
-                                                    <td>
-                                                        Malawi
-                                                    </td>
-                                                    <td>
-                                                        Feldkirchen in Kärnten
+                                                    <td class="text-center">
+                                                        01/10/2019
                                                     </td>
                                                     <td class="text-right">
-                                                        $63,542
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Mason Porter
-                                                    </td>
-                                                    <td>
-                                                        Chile
-                                                    </td>
-                                                    <td>
-                                                        Gloucester
-                                                    </td>
-                                                    <td class="text-right">
-                                                        $78,615
+                                                        15€
                                                     </td>
                                                 </tr>
                                             </tbody>

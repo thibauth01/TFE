@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="orange">
+<div class="sidebar" data-color="orange" id="headerSidebar">
             <!--
             Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
             -->
@@ -12,16 +12,28 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="active">
+                    <li>
                         <a href="dashboard.php">
                             <i class="now-ui-icons ui-2_settings-90"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="dashboard_requester.php">
                             <i class="now-ui-icons ui-2_settings-90"></i>
                             <p>Dashboard Requester</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="works.php">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                            <p>Works</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="works_requester.php">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                            <p>Works Requester</p>
                         </a>
                     </li>
                     <li>
@@ -69,3 +81,13 @@
                 </ul>
             </div>
         </div>
+
+<script>
+    var url = window.location.href;
+    var li = document.querySelectorAll('#headerSidebar li a');
+    for (var i=0; i<li.length; i++) {
+        if(url === li[i].href) {
+            li[i].parentNode.className = 'active';
+        }
+    }
+</script>
