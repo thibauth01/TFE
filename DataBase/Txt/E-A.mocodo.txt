@@ -14,7 +14,7 @@ day: id, name
 
 include, 0N day, 11 availability
 
-work : id, title, description, date_start, date_end, time_start, time_end, place, statut_progress, paid, cancelled
+work : id, title, description,min_age_worker, date_start, date_end, time_start, time_end, place, statut_progress, paid, cancelled
 
 type_work : id, name
 

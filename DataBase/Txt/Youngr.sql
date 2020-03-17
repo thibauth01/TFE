@@ -52,6 +52,7 @@ CREATE TABLE `work` (
   `description` text,
   `id_requester` int,
   `id_worker` int DEFAULT null,
+  `min_age_worker` int,
   `date_start` date,
   `date_end` date,
   `time_start` date,

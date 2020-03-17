@@ -37,6 +37,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="messages.php">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                            <p>Messages</p>
+                        </a>
+                    </li>
+                    <li>
                         <a href="icons.html">
                             <i class="now-ui-icons education_atom"></i>
                             <p>Icons</p>

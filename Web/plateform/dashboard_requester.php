@@ -59,76 +59,157 @@
                                     <h4 class="card-title">Do you need help ?</h4>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-full-width table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/user-1.jpg" height="50px" width="50px" style="min-width:50px;">
-                                                    </td>
-
-                                                    <td class="text-left">Sign contract for </td>
-                                                    <td class="text-primary">Bricolage</td>
-                                                    <td>25/05/2020</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work" data-toggle="collapse" data-target="#explication1">
-                                                            <i class="now-ui-icons travel_info"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Valid Work">
-                                                            <i class="now-ui-icons ui-1_check"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove Work">
-                                                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/mike.jpg" height="50px" width="50px">
-
-                                                    </td>
-
-                                                    <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                    <td class="text-primary">Computer</td>
-                                                    <td>18/10/2020</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons travel_info"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                                                            <i class="now-ui-icons ui-1_check"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                                                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
                                     <div class="stats">
-                                        <i class="now-ui-icons objects_spaceship"></i> 2 proposal
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-6 pr-1">
+                                                    <div class="form-group">
+                                                        <label>Title (Short description)</label>
+                                                        <input type="text" class="form-control" maxlength="40" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 px-1">
+                                                    <label>Type</label>
+                                                    <select class="form-control">
+                                                        <option>Bricolage</option>
+                                                        <option>Bricolage</option>
+                                                        <option>Bricolage</option>
+                                                        <option>Bricolage</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3 px-1">
+                                                    <label>Age min worker</label>
+                                                    <input type="number" class="form-control" min="15" max="25">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 pr-1">
+                                                    <div class="form-group">
+                                                        <label>Date</label>
+                                                        <input type="date" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 pl-1">
+                                                    <div class="form-group">
+                                                        <label>Time Start</label>
+                                                        <input type="time" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 pl-1">
+                                                    <div class="form-group">
+                                                        <label>Time End</label>
+                                                        <input type="time" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <div class="form-group">
+                                                        <label>Street</label>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>N°</label>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 pr-1">
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 px-1">
+                                                    <div class="form-group">
+                                                        <label>Postal Code</label>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 pl-1">
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+                                                        <select class="form-control">
+                                                            <option>Belgium</option>
+                                                            <option>Belgium</option>
+                                                            <option>Belgium</option>
+                                                            <option>Belgium</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Description</label>
+                                                        <textarea rows="1" maxlength="200" cols="4" class="form-control" ></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3 d-flex">
+                        <div class="col-md-12 d-flex">
                             <div class="card card-user">
+                                <div class="card-header">
+                                    
+                                </div>
                                 <div class="card-body">
-                                    <div class="text-center">
-                                        <a href="#">
-                                            <img class="avatar border-gray" src="img/user-1.jpg" alt="...">
-                                            <h5 class="title">Thibaut Hermant</h5>
-                                        </a>
-                                        <p class="description">
-                                            Chimay
-                                        </p>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h5 class="card-category">Next Worker</h5>
+                                            <div class="text-center">
+                                                <a href="#">
+                                                    <img class="avatar border-gray" src="img/user-1.jpg" alt="...">
+                                                    <h5 class="title">Thibaut Hermant</h5>
+                                                </a>
+                                                <p class="description">
+                                                    Chimay
+                                                </p>
+                                            </div>
+                                            <p class="text-center"> 12 works already given</p>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h5 class="card-title">Sign contract for </h5>
+                                                </div>
+                                                <div class="col-md-4 text-right">
+                                                    <h5 class="card-title text-danger">Bricolage</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row text-center mt-5">
+                                                <div class="col-md-3">
+                                                    <i class="now-ui-icons ui-1_calendar-60" style="font-size:20px"></i>
+                                                    <p>12/05/2020<p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <i class="now-ui-icons tech_watch-time" style="font-size:20px"></i>
+                                                    <p>13h30 - 18h00<p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <i class="now-ui-icons location_pin" style="font-size:20px"></i>
+                                                    <p>Route du longchamps 14/302, 1348 Louvain-la-Neuve<p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <i class="now-ui-icons shopping_credit-card" style="font-size:20px"></i>
+                                                    <p>55€<p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mt-4">
+                                                    <p>Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-center"> 12 works already given</p>
                                 </div>
                             </div>
                         </div>
