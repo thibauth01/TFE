@@ -91,9 +91,9 @@ ALTER TABLE `availability` ADD FOREIGN KEY (`id_day`) REFERENCES `day` (`id`);
 
 ALTER TABLE `work` ADD FOREIGN KEY (`id_type`) REFERENCES `type_work` (`id`);
 
-ALTER TABLE `requester` ADD FOREIGN KEY (`id`) REFERENCES `work` (`id_requester`);
+ALTER TABLE `work` ADD FOREIGN KEY (`id_requester`) REFERENCES `requester` (`id`);
 
-ALTER TABLE `worker` ADD FOREIGN KEY (`id`) REFERENCES `work` (`id_worker`);
+ALTER TABLE `work` ADD FOREIGN KEY (`id_worker`) REFERENCES `worker` (`id`);
 
 ALTER TABLE `message` ADD FOREIGN KEY (`id_sender`) REFERENCES `account` (`id`);
 
