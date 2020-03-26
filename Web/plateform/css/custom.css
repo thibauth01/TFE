@@ -1,3 +1,18 @@
 .checked{
     color:orange;
 }
+.myAlert-bottom{
+    position: relative;
+    z-index: 1;
+}
+
+.alert{
+    display: none;
+}
+
+#errormsgSign{
+    width:300px;
+    bottom:10px;
+    position: fixed;
+    right:2%;
+}

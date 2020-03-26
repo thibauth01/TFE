@@ -25,10 +25,14 @@ Table requester{
 Table worker {
   id int [pk,increment]
   maximum_distance int
-  id_type_work int [ref: > type_work.id]
   id_account int [ref: - acc.id]
-  id_availability int [ref: > availability.id]
   star double
+}
+
+Table woker_Typer_work{
+  id int [pk,increment]
+  id_worker int [ref: > worker.id]
+  id_type_work int [ref: > type_work.id]
 }
 
 Table type_work{
@@ -38,9 +42,9 @@ Table type_work{
 
 Table availability{
   id int [pk,increment]
+  id_worker int [ref: > worker.id]
   id_day int [ref: > day.id]
-  time_start time 
-  time_end time
+  
 }
 
 Table day{
@@ -54,8 +58,8 @@ Table work{
   title varchar
   id_type int [ref: - type_work.id]
   description text
-  id_requester int [ref: < requester.id]
-  id_worker int [ref: < worker.id,default: null]
+  id_requester int [ref: > requester.id]
+  id_worker int [ref: > worker.id,default: null]
   min_age_worker int
   date_start date
   date_end date
