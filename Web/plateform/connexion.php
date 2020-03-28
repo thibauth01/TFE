@@ -1,5 +1,12 @@
+<?php
+    session_start();
+    session_unset();
+    $_SESSION = array();
+    
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="utf-8" />
@@ -36,35 +43,35 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header text-center text-primary">
-                                <h2 class="title">Sign Up</h2>
+                                <h2 class="title">Inscription</h2>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-md-8 pr-3 d-flex justify-content-around">
-                                    <button type="button" onclick="ShowWorkerSignUp();" class="btn btn-primary">I am a Worker</button>
-                                    <button type="button" onclick="ShowRequesterSignUp();" class="btn btn-outline-primary ml-3">I am a Requester</button>
+                                    <button type="button" onclick="ShowWorkerSignUp();" class="btn btn-primary">Je suis un travailleur</button>
+                                    <button type="button" onclick="ShowRequesterSignUp();" class="btn btn-outline-primary ml-3">Je suis demandeur</button>
                                 </div>
                             </div>
 
                             <div class="card-body">
                                 <div class="requesterSignUp" style="display:none;">
                                     <form method="post" id="requesterForm">
-                                        <h5 class="px-2"> Your Informations</h5>
+                                        <h5 class="px-2"> Vos Informations</h5>
                                         <div class="row">
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
-                                                    <label for="lastNameSignReq">Last Name</label>
-                                                    <input type="text" class="form-control" placeholder="Last Name" value="" name="lastName" id="lastNameSignReq">
+                                                    <label for="lastNameSignReq">Nom</label>
+                                                    <input type="text" class="form-control" placeholder="Nom" value="" name="lastName" id="lastNameSignReq">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="firstNameSignReq">First Name</label>
-                                                    <input type="text" class="form-control" placeholder="First Name" value="" name="firstName" id="firstNameSignReq">
+                                                    <label for="firstNameSignReq">Prénom</label>
+                                                    <input type="text" class="form-control" placeholder="Prénom" value="" name="firstName" id="firstNameSignReq">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="emailSignReq">Email address</label>
+                                                    <label for="emailSignReq">Email</label>
                                                     <input type="email" class="form-control" placeholder="Email" name="email" id="emailSignReq">
                                                 </div>
                                             </div>
@@ -72,34 +79,34 @@
                                         <div class="row">
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
-                                                    <label for="usernameSignReq">Username</label>
-                                                    <input type="text" class="form-control" placeholder="Username" value="" name="username" id="usernameSignReq">
+                                                    <label for="usernameSignReq">Nom d'utilisateur</label>
+                                                    <input type="text" class="form-control" placeholder="Nom d'utilisateur" value="" name="username" id="usernameSignReq">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="passwordSignReq">Password</label>
-                                                    <input type="password" class="form-control" placeholder="Password" value="" name="password" id="passwordSignReq">
+                                                    <label for="passwordSignReq">Mot de passe</label>
+                                                    <input type="password" class="form-control" placeholder="Mot de passe" value="" name="password" id="passwordSignReq">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="passwordConfirmSignReq">Password Confirm</label>
-                                                    <input type="password" class="form-control" placeholder="Password confirm" value="" name="Confirmpassword" id="passwordConfirmSignReq">
+                                                    <label for="passwordConfirmSignReq">Confirmation du mot de passe</label>
+                                                    <input type="password" class="form-control" placeholder="Confirmation du mot de passe" value="" name="Confirmpassword" id="passwordConfirmSignReq">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3 pr-1">
                                                 <div class="form-group">
-                                                    <label for="birthdaySignReq">Birth date</label>
-                                                    <input type="date" class="form-control" placeholder="Birth date" value="" name="birth" id="birthdaySignReq">
+                                                    <label for="birthdaySignReq">Date de naissance</label>
+                                                    <input type="date" class="form-control" placeholder="Date de naissance" value="" name="birth" id="birthdaySignReq">
                                                 </div>
                                             </div>
                                             <div class="col-md-7 px-1">
                                                 <div class="form-group">
-                                                    <label for="addressSignReq">Address</label>
-                                                    <input type="text" class="form-control" placeholder="Address" value="" name="address" id="addressSignReq">
+                                                    <label for="addressSignReq">Adresse</label>
+                                                    <input type="text" class="form-control" placeholder="Adresse" value="" name="address" id="addressSignReq">
                                                 </div>
                                             </div>
                                             <div class="col-md-2 px-1">
@@ -113,27 +120,27 @@
                                         <div class="row">
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
-                                                    <label for="postalSignReq">Postal code</label>
-                                                    <input type="text" class="form-control" placeholder="Postal Code" value="" name="postal" id="postalSignReq">
+                                                    <label for="postalSignReq">Code postal</label>
+                                                    <input type="text" class="form-control" placeholder="Code postal" value="" name="postal" id="postalSignReq">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="citySignReq">City</label>
-                                                    <input type="text" class="form-control" placeholder="City" value="" name="city" id="citySignReq">
+                                                    <label for="citySignReq">Ville</label>
+                                                    <input type="text" class="form-control" placeholder="Ville" value="" name="city" id="citySignReq">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="countrySignReq">Country</label>
-                                                    <input type="text" class="form-control" placeholder="Country" value="" name="country" id="countrySignReq">
+                                                    <label for="countrySignReq">Pays</label>
+                                                    <input type="text" class="form-control" placeholder="Pays" value="" name="country" id="countrySignReq">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-12 pr-3 d-flex justify-content-end">
-                                                <input type="submit" class="btn btn-outline-primary ml-3" value="I am a Requester">
+                                                <input type="submit" class="btn btn-outline-primary ml-3" value="Inscription">
                                             </div>
                                         </div>
                                     </form>
@@ -141,23 +148,23 @@
 
                                 <div class="workerSignUp" style="display:none">
                                     <form method="post" id="workerForm">
-                                        <h5 class="px-2"> Your Informations</h5>
+                                        <h5 class="px-2"> Vos Informations</h5>
                                         <div class="row">
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
-                                                    <label for="lastNameSignWork">Last Name</label>
-                                                    <input type="text" class="form-control" placeholder="Last Name" value="" name="lastName" id="lastNameSignWork">
+                                                    <label for="lastNameSignWork">Nom</label>
+                                                    <input type="text" class="form-control" placeholder="Nom" value="" name="lastName" id="lastNameSignWork">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="firstNameSignWork">First Name</label>
-                                                    <input type="text" class="form-control" placeholder="First Name" value="" name="firstName" id="firstNameSignWork">
+                                                    <label for="firstNameSignWork">Prénom</label>
+                                                    <input type="text" class="form-control" placeholder="Prénom" value="" name="firstName" id="firstNameSignWork">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="emailSignWork">Email address</label>
+                                                    <label for="emailSignWork">Email</label>
                                                     <input type="email" class="form-control" placeholder="Email" name="email" id="emailSignWork">
                                                 </div>
                                             </div>
@@ -165,34 +172,34 @@
                                         <div class="row">
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
-                                                    <label for="usernameSignWork">Username</label>
-                                                    <input type="text" class="form-control" placeholder="Username" value="" name="username" id="usernameSignWork">
+                                                    <label for="usernameSignWork">Nom d'utilisateur</label>
+                                                    <input type="text" class="form-control" placeholder="Nom d'utilisateur" value="" name="username" id="usernameSignWork">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="passwordSignWork">Password</label>
-                                                    <input type="password" class="form-control" placeholder="Password" value="" name="password" id="passwordSignWork">
+                                                    <label for="passwordSignWork">Mot de passe</label>
+                                                    <input type="password" class="form-control" placeholder="Mot de passe" value="" name="password" id="passwordSignWork">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="passwordConfirmSignWork">Password Confirm</label>
-                                                    <input type="password" class="form-control" placeholder="Password confirm" value="" name="Confirmpassword" id="passwordConfirmSignWork">
+                                                    <label for="passwordConfirmSignWork">Confirmation du mot de passe</label>
+                                                    <input type="password" class="form-control" placeholder="Confirmation du mot de passe" value="" name="Confirmpassword" id="passwordConfirmSignWork">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3 pr-1">
                                                 <div class="form-group">
-                                                    <label for="birthdaySignWork">Birth date</label>
-                                                    <input type="date" class="form-control" placeholder="Birth date" value="" name="birth" id="birthdaySignWork">
+                                                    <label for="birthdaySignWork">Date de naissance</label>
+                                                    <input type="date" class="form-control" placeholder="Date de naissance" value="" name="birth" id="birthdaySignWork">
                                                 </div>
                                             </div>
                                             <div class="col-md-7 px-1">
                                                 <div class="form-group">
-                                                    <label for="addressSignWork">Address</label>
-                                                    <input type="text" class="form-control" placeholder="Address" value="" name="address" id="addressSignWork">
+                                                    <label for="addressSignWork">Adresse</label>
+                                                    <input type="text" class="form-control" placeholder="Adresse" value="" name="address" id="addressSignWork">
                                                 </div>
                                             </div>
                                             <div class="col-md-2 px-1">
@@ -206,45 +213,45 @@
                                         <div class="row">
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
-                                                    <label for="postalSignWork">Postal code</label>
-                                                    <input type="text" class="form-control" placeholder="Postal Code" value="" name="postal" id="postalSignWork">
+                                                    <label for="postalSignWork">Code Postal</label>
+                                                    <input type="text" class="form-control" placeholder="Code postal" value="" name="postal" id="postalSignWork">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="citySignWork">City</label>
-                                                    <input type="text" class="form-control" placeholder="City" value="" name="city" id="citySignWork">
+                                                    <label for="citySignWork">Ville</label>
+                                                    <input type="text" class="form-control" placeholder="Ville" value="" name="city" id="citySignWork">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 px-1">
                                                 <div class="form-group">
-                                                    <label for="countrySignWork">Country</label>
-                                                    <input type="text" class="form-control" placeholder="Country" value="" name="country" id="countrySignWork">
+                                                    <label for="countrySignWork">Pays</label>
+                                                    <input type="text" class="form-control" placeholder="Pays" value="" name="country" id="countrySignWork">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-12">
                                             <div class="form-group ml-3">
-                                                <label class="pr-3">Maximum distance (km)</label>
+                                                <label class="pr-3">Distance Maximum (km)</label>
                                                 <input type="number" class="form-control" name="distance" max="50" min="1" value="20">
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-3 text-right">
-                                                <h5 class="px-2 mt-4">Your Skills</h5>
-                                            </div>
-                                            <div class="col-md-2"></div>
                                             <div class="col-md-4 text-right">
-                                                <h5 class="px-2 mt-4"> Your Availabilities</h5>
+                                                <h5 class="px-2 mt-4">Vos compétences</h5>
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4 text-right">
+                                                <h5 class="px-2 mt-4"> Vos disponibilitées</h5>
                                             </div>
                                             <div class="col-md-3"></div>
                                         </div>
 
                                         <div class="row">
 
-                                            <div class="col-md-3 text-right ">
+                                            <div class="col-md-4 text-right ">
                                                 <style>
                                                     .toggle.ios,
                                                     .toggle-on.ios,
@@ -261,15 +268,15 @@
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[babySitting]">
                                                 </div>
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3">Housework </label>
+                                                    <label class="pr-3">Travaux ménagers </label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[housework]">
                                                 </div>
                                                 <div class="form-group ml-3 ">
-                                                    <label class="pr-3">Gardening</label>
+                                                    <label class="pr-3">Jardinage</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[gardening]">
                                                 </div>
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3">Pet-Sitting </label>
+                                                    <label class="pr-3">Garde d'animaux </label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[petsitting]">
                                                 </div>
                                                 <div class="form-group ml-3">
@@ -277,57 +284,57 @@
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[bricolage]">
                                                 </div>
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3">Go Shopping</label>
+                                                    <label class="pr-3">Faire des courses</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[shopping]">
                                                 </div>
                                                 <div class="form-group ml-1">
-                                                    <label class="pr-3">Private Lessons</label>
+                                                    <label class="pr-3">Cours particuliers</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[lessons]">
                                                 </div>
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3">Technology</label>
+                                                    <label class="pr-3">Technologie</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[technology]">
                                                 </div>
                                                 <div class="form-group ml-5">
-                                                    <label class="pr-3">Other</label>
+                                                    <label class="pr-3">Autres</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[other]">
                                                 </div>
                                             </div>
-                                            <div class="col-md-2"></div>
+                                            <div class="col-md-1"></div>
                                             <div class="col-md-3 text-right">
 
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3"> Monday</label>
+                                                    <label class="pr-3"> Lundi</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[monday]">
                                                 </div>
 
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3"> Thuesday</label>
+                                                    <label class="pr-3"> Mardi</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[thuesday]">
                                                 </div>
 
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3"> wednesday</label>
+                                                    <label class="pr-3"> Mercredi</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[wednesday]">
                                                 </div>
 
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3"> Thursday</label>
+                                                    <label class="pr-3"> Jeudi</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[thursday]">
                                                 </div>
 
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3"> Friday</label>
+                                                    <label class="pr-3"> Vendredi</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[friday]">
                                                 </div>
 
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3"> Saturday</label>
+                                                    <label class="pr-3"> Samedi</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[saturday]">
                                                 </div>
 
                                                 <div class="form-group ml-3">
-                                                    <label class="pr-3"> Sunday</label>
+                                                    <label class="pr-3"> Dimanche</label>
                                                     <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[sunday]">
                                                 </div>
 
@@ -335,7 +342,7 @@
                                             <div class="col-md-4"></div>
                                             <div class="row ">
                                                 <div class="col-md-12 d-flex justify-content-center">
-                                                    <input type="submit" class="btn btn-primary" value="Sign up">
+                                                    <input type="submit" class="btn btn-primary" value="Inscription">
                                                 </div>
                                             </div>
 
@@ -348,24 +355,24 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-header text-center text-primary">
-                                <h2 class="title">Log In</h2>
+                                <h2 class="title">Connexion</h2>
                             </div>
                             <div class="card-body">
-                                <form method="post">
-                                    <h5 class="px-2"> Connect you !</h5>
+                                <form method="post" id="formConnect">
+                                    <h5 class="px-2"> Connecte toi !</h5>
                                     <div class="row">
                                         <div class="col-md-12 pr-3">
                                             <div class="form-group">
-                                                <label for="usernameLog">Username</label>
-                                                <input type="text" class="form-control" placeholder="username" value="" name="username" id="usernameLog">
+                                                <label for="usernameLog">Nom d'utilisateur</label>
+                                                <input type="text" class="form-control" placeholder="Nom d'utilisateur" value="" name="username" id="usernameLog">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 pr-3">
                                             <div class="form-group">
-                                                <label for="passwordLog">Password</label>
-                                                <input type="password" class="form-control" placeholder="password" value="" name="password" id="passwordLog">
+                                                <label for="passwordLog">Mot de passe</label>
+                                                <input type="password" class="form-control" placeholder="Mot de passe" value="" name="password" id="passwordLog">
                                             </div>
                                         </div>
                                     </div>

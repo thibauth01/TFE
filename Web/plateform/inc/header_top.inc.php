@@ -1,3 +1,4 @@
+
 <div class="collapse navbar-collapse justify-content-end" id="navigation">
 
 <!-- SEARCH BAR -->
@@ -22,9 +23,9 @@
                 </p>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">My Account</a>
+                <a class="dropdown-item" href="account.php">My Account</a>
                 <a class="dropdown-item" href="#">Parameters</a>
-                <a class="dropdown-item" href="#">Disconnect</a>
+                <a class="dropdown-item" href="connexion.php">Disconnect</a>
             </div>
         </li>
         

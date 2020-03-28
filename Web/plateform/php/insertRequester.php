@@ -67,7 +67,8 @@ if($return['statut'] == false){
 }
 
 else{
-    $accountQuery = $dbh->query( "INSERT INTO `account` (`first_name`,`last_name`,`email`,`username`,`password`,`birth_date`,`street`,`postcode`,`city`,`country`,`premium`) VALUES('$first_name','$last_name','$email','$username','$password','$birth','$street','$postcode','$city','$country',0)");
+    $password=password_hash($password, PASSWORD_DEFAULT);
+    $accountQuery = $dbh->query( "INSERT INTO `account` (`first_name`,`last_name`,`email`,`username`,`password`,`birth_date`,`street`,`postcode`,`city`,`country`,`premium`,`type`) VALUES('$first_name','$last_name','$email','$username','$password','$birth','$street','$postcode','$city','$country',0,'requester')");
     if ($accountQuery) {
         $accountQuery->closeCursor();
     } else {
@@ -97,6 +98,30 @@ else{
             $requesterQuery = $dbh->query( "INSERT INTO `requester` (`id_account`,`premium`) VALUES('$id',0)");
             if ($requesterQuery) {
                 $requesterQuery->closeCursor();
+
+                $requesterIdQuery = $dbh->prepare( "SELECT `id` FROM `requester` WHERE `id_account` = ?" );
+                $requesterIdQuery->bindValue( 1, $id);
+                $requesterIdQuery->execute();
+                
+                if($requesterIdQuery){
+                    $requester = $requesterIdQuery->fetch(PDO::FETCH_ASSOC);
+                    $requesterIdQuery->closeCursor();
+
+                    $messages=null;
+                    session_start();
+                    $_SESSION['user'] = $username;
+                    $_SESSION['first_name']= $first_name;
+                    $_SESSION['last_name']= $last_name;
+                    $_SESSION['idAccount'] = $id;
+                    $_SESSION['typeAccount'] = "requester";
+                    $_SESSION['idTypeAccount'] = $requester['id']; 
+                    print_r(json_encode($messages));
+                }
+                else{
+                    array_push($messages,'requester introuvbale');
+                    print_r(json_encode($messages));
+                }
+
             } else {
                 $return['statut'] = false;
                 array_push($messages,'Erreur lors de la création du compte Requester');

@@ -36,25 +36,25 @@ if(isset($_POST['day'])){
 
 if($password != $confirm_password){
     $return['statut'] = false;
-    array_push($messages,'Passwords do not match');   
+    array_push($messages,'Les mots de passe ne correspondent pas');   
 }
 if(strlen($password) < 8){
     $return['statut'] = false;
-    array_push($messages,'Passwords too short');    
+    array_push($messages,'Le mot de passe est trop court');    
     
 }
 if (!preg_match("#[0-9]+#", $password)) {
     $return['statut'] = false;
-    array_push($messages,'Passwords must contain a number');    
+    array_push($messages,'Le mot de passe doit contenir au moins un chiffre');    
 }
 if (!preg_match("#[a-zA-Z]+#", $password)) {
     $return['statut'] = false;
-    array_push($messages,'Passwords must contain a letter');    
+    array_push($messages,'Le mot de passe doit contenir au moins une lettre');    
 }
 
 if(age($birth) < 15 || age($birth) > 25){
     $return['statut'] = false;
-    array_push($messages,'You must be between 15 and 25 years old'); 
+    array_push($messages,'Vous devez avoir entre 15et 25 ans'); 
 }
 
 
@@ -73,7 +73,7 @@ $usernameQuery->execute();
 
 if( $usernameQuery->rowCount() >= 1 ) { 
     $return['statut'] = false;
-    array_push($messages,'username already use');
+    array_push($messages,"Nom d'utilisateur déjà pris");
 }
 
 if($types == null){
@@ -94,7 +94,8 @@ if($return['statut'] == false){
 }
 
 else{
-    $accountQuery = $dbh->query( "INSERT INTO `account` (`first_name`,`last_name`,`email`,`username`,`password`,`birth_date`,`street`,`postcode`,`city`,`country`,`premium`) VALUES('$first_name','$last_name','$email','$username','$password','$birth','$street','$postcode','$city','$country',0)");
+    $password=password_hash($password, PASSWORD_DEFAULT);
+    $accountQuery = $dbh->query( "INSERT INTO `account` (`first_name`,`last_name`,`email`,`username`,`password`,`birth_date`,`street`,`postcode`,`city`,`country`,`premium`,`type`) VALUES('$first_name','$last_name','$email','$username','$password','$birth','$street','$postcode','$city','$country',0,'worker')");
     if ($accountQuery) {
         $accountQuery->closeCursor();
     } 
@@ -244,7 +245,15 @@ else{
                             print_r(json_encode($messages));
                         }
                         else{
-                            print_r(json_encode("win"));
+                            $messages=null;
+                            session_start();
+                            $_SESSION['user'] = $username;
+                            $_SESSION['first_name']= $first_name;
+                            $_SESSION['last_name']= $last_name;
+                            $_SESSION['idAccount'] = $idAccount;
+                            $_SESSION['typeAccount'] = "worker";
+                            $_SESSION['idTypeAccount'] = $idWorker; 
+                            print_r(json_encode($messages));
                         }
 
                     
