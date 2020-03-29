@@ -2,7 +2,6 @@
     session_start();
     session_unset();
     $_SESSION = array();
-    
 ?>
 
 <!DOCTYPE html>

@@ -20,6 +20,7 @@ $(document).ready(function(){
     $('#requesterForm').on('submit',function(event){
         event.preventDefault();
         var formData = new FormData(this);
+        console.log(formData);
        
         $.ajax({
             url:'php/insertRequester.php',

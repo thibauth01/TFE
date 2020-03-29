@@ -1,3 +1,23 @@
+<?php 
+    
+    require_once('inc/db_connect.php');
+    
+    
+    //SELECT INFOS ACCOUNT
+    $requesterQuery = $dbh->prepare( "SELECT `first_name`, `last_name`, `email`, `username`, `street`,`postcode`,`city`,`country` FROM `account` WHERE `id` = ?" );
+    $requesterQuery->bindValue( 1, $_SESSION['idAccount']);
+    $requesterQuery->execute();
+
+    $infos = $requesterQuery->fetch(PDO::FETCH_ASSOC);
+    $requesterQuery->closeCursor();
+ 
+    //SELECT TYPE WORK
+    $typeWorkQuery = $dbh->query('SELECT * FROM type_work');
+    $typesWork = $typeWorkQuery->fetchAll(PDO::FETCH_ASSOC);
+    $typeWorkQuery->closeCursor();
+
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,7 +26,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
     <link rel="icon" type="image/png" href="img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Now UI Dashboard by Creative Tim</title>
+    <title>Dashboard - Youngr</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -16,6 +36,8 @@
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="demo/demo.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+
 </head>
 
 <body class="">
@@ -60,45 +82,46 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="stats">
-                                        <form>
+                                        <form id="addJobForm" method="post">
                                             <div class="row">
                                                 <div class="col-md-6 pr-1">
                                                     <div class="form-group">
                                                         <label>Title (Short description)</label>
-                                                        <input type="text" class="form-control" maxlength="40" value="">
+                                                        <input type="text" class="form-control" maxlength="40" value="test title" name="title">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 px-1">
                                                     <label>Type</label>
-                                                    <select class="form-control">
-                                                        <option>Bricolage</option>
-                                                        <option>Bricolage</option>
-                                                        <option>Bricolage</option>
-                                                        <option>Bricolage</option>
+                                                    <select class="form-control" name="type" id="selectType">
+                                                        <?php
+                                                            foreach($typesWork as $row){
+                                                                echo "<option id='".$row['id']."'>".$row['name']."</option>";
+                                                            }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-3 px-1">
                                                     <label>Age min worker</label>
-                                                    <input type="number" class="form-control" min="15" max="25">
+                                                    <input type="number" class="form-control" min="15" max="25" value="16" name="ageMin">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 pr-1">
                                                     <div class="form-group">
                                                         <label>Date</label>
-                                                        <input type="date" class="form-control">
+                                                        <input type="date" class="form-control" value="2020-04-23" name="date">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 pl-1">
                                                     <div class="form-group">
                                                         <label>Time Start</label>
-                                                        <input type="time" class="form-control">
+                                                        <input type="time" class="form-control" value="02:05"  name="timeStart">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 pl-1">
                                                     <div class="form-group">
                                                         <label>Time End</label>
-                                                        <input type="time" class="form-control">
+                                                        <input type="time" class="form-control" value="03:05" name="timeEnd">
                                                     </div>
                                                 </div>
                                             </div>
@@ -106,38 +129,27 @@
                                                 <div class="col-md-9">
                                                     <div class="form-group">
                                                         <label>Street</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" value="<?= $infos['street']?>" name="street">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 px-1">
                                                     <div class="form-group">
-                                                        <label>N°</label>
-                                                        <input type="text" class="form-control">
+                                                        <label>Postal Code</label>
+                                                        <input type="text" class="form-control" value="<?= $infos['postcode']?>" name="postal">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4 pr-1">
+                                                <div class="col-md-7 pr-1">
                                                     <div class="form-group">
                                                         <label>City</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" value="<?= $infos['city']?>" name="city">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4 px-1">
-                                                    <div class="form-group">
-                                                        <label>Postal Code</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 pl-1">
+                                                <div class="col-md-5 pl-1">
                                                     <div class="form-group">
                                                         <label>Country</label>
-                                                        <select class="form-control">
-                                                            <option>Belgium</option>
-                                                            <option>Belgium</option>
-                                                            <option>Belgium</option>
-                                                            <option>Belgium</option>
-                                                        </select>
+                                                        <input type="text" class="form-control disable"  value="<?= $infos['country']?>" name="country">
                                                     </div>
                                                 </div>
                                             </div>
@@ -145,8 +157,13 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Description</label>
-                                                        <textarea rows="1" maxlength="200" cols="4" class="form-control" ></textarea>
+                                                        <textarea rows="1" maxlength="200" cols="4" class="form-control" name="description" >voici la desc</textarea>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 pr-3 d-flex justify-content-end">
+                                                    <input type="submit" class="btn btn-outline-primary ml-3" value="Add job">
                                                 </div>
                                             </div>
                                         </form>
@@ -370,6 +387,7 @@
                             </div>
                         </div>
                     </div>
+                    <div id="errormsgSign" class="container"></div>
                 </div>
                 <footer class="footer">
                     <div class="container-fluid">
@@ -420,6 +438,8 @@
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="demo/demo.js"></script>
+<script src="js/dashboard.js"></script>
+
 <script>
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js

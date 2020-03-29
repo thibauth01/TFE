@@ -16,3 +16,7 @@
     position: fixed;
     right:2%;
 }
+.disable{
+    pointer-events:none;
+    background:#e3e3e3;
+}
