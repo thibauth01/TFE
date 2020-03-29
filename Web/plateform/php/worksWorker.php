@@ -16,8 +16,6 @@
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="demo/demo.css" rel="stylesheet" />
-
-    <link href="css/custom.css" rel="stylesheet"/>
 </head>
 
 <body class="">
@@ -48,8 +46,8 @@
                     </div>
                 </nav>
                 <!-- End Navbar -->
-                <div class="panel-header panel-header-lg">
-                    <canvas id="bigDashboardChart"></canvas>
+                <div class="panel-header panel-header-sm">
+                    
                 </div>
 
                 <div class="content">
@@ -57,7 +55,7 @@
                         <div class="col-md-12">
                             <div class="card card-tasks">
                                 <div class="card-header">
-                                    <h4 class="card-title">Workers - <strong class="text-danger">To do</strong></h4>
+                                    <h4 class="card-title">Works - <strong class="text-danger">To do</strong></h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-full-width table-responsive">
@@ -65,7 +63,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <img src="img/user-1.jpg" height="50px" width="50px">
+                                                        <img src="img/user-1.jpg" height="50px" width="50px" style="min-width:50px;">
                                                     </td>
 
                                                     <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
@@ -80,6 +78,7 @@
                                                             <i class="now-ui-icons ui-1_simple-remove"></i>
                                                         </button>
                                                     </td>
+                                                    
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -110,6 +109,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-3 d-flex">
                             <div class="card card-user">
@@ -120,16 +120,10 @@
                                             <h5 class="title">Thibaut Hermant</h5>
                                         </a>
                                         <p class="description">
-                                            18 years
+                                            Chimay
                                         </p>
                                     </div>
-                                    <p class="text-center">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                    </p>
+                                    <p class="text-center"> 12 works already given</p>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +173,7 @@
                         <div class="col-md-12">
                             <div class="card card-tasks">
                                 <div class="card-header">
-                                    <h4 class="card-title">Workers - <strong class="text-warning">To Pay</strong></h4>
+                                    <h4 class="card-title">Works - <strong class="text-warning">To Get Paid</strong></h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-full-width table-responsive">
@@ -192,8 +186,8 @@
 
                                                     <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
                                                     <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-primary btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons ui-1_send"></i>
+                                                        <button type="button" rel="tooltip" title="" class="btn btn-warning btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
+                                                            <i class="now-ui-icons ui-1_bell-53"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -205,8 +199,8 @@
 
                                                     <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
                                                     <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn  btn-round btn-icon btn-icon-mini btn-neutral btn-primary" data-original-title="Info Work">
-                                                            <i class="now-ui-icons ui-1_send"></i>
+                                                        <button type="button" rel="tooltip" title="" class="btn btn-warning btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
+                                                            <i class="now-ui-icons ui-1_bell-53"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -221,12 +215,11 @@
                         </div>
                     </div>
 
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card card-tasks">
                                 <div class="card-header">
-                                    <h4 class="card-title">Workers - <strong class="text-success">Done</strong></h4>
+                                    <h4 class="card-title">Works - <strong class="text-success">Done</strong></h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-full-width table-responsive">

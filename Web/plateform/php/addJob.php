@@ -45,8 +45,7 @@
     }
 
     else{
-        $workQuery = $dbh->query( "INSERT INTO `work` (`title`,`id_type`,`description`,`id_requester`,`id_worker`,`min_age_worker`,`date_start`,`time_start`,`time_end`,`place`,`statut_progress`,`paid`,`cancelled`) VALUES('$title','$idType','$description','$id_requester',NULL,'$ageMin','$date','$timeStart','$timeEnd','$place','To Do',0,0)");
-        print_r($dbh->errorInfo());
+        $workQuery = $dbh->query( "INSERT INTO `work` (`title`,`id_type`,`description`,`id_requester`,`id_worker`,`min_age_worker`,`date_start`,`time_start`,`time_end`,`place`,`statut_progress`,`paid`,`cancelled`,`finish`) VALUES('$title','$idType','$description','$id_requester',NULL,'$ageMin','$date','$timeStart','$timeEnd','$place','To Do',0,0,0)");
         if ($workQuery) {
             
             $workQuery->closeCursor();

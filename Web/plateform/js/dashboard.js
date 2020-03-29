@@ -1,5 +1,4 @@
 function myAlertBottom(){
-		
     $(".myAlert-bottom").show();
     setTimeout(function(){
         $(".myAlert-bottom").hide(); 
@@ -21,9 +20,14 @@ $(document).ready(function(){
             data:formData,
             success: function(data){
                 console.log(data);
-                /*data = JSON.parse(data);
+                data = JSON.parse(data);
                 if(data == null){
-                    window.location.href ='dashboard.php';
+                    var html = `<div class="myAlert-bottom alert alert-info">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Job Ajouté !</strong> 
+                            </div>`;
+                    $("#errormsgSign").html(html);
+                    myAlertBottom();
                 }
                 else{
                     var html="";
@@ -35,7 +39,7 @@ $(document).ready(function(){
                     });
                     $("#errormsgSign").html(html);
                     myAlertBottom();
-                }*/
+                }
                 
             },
             processData: false,
