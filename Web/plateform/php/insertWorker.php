@@ -211,10 +211,10 @@ else{
                                 case 'petsitting':
                                     $idType=4;
                                     break;
-                                case 'shopping':
+                                case 'bricolage':
                                     $idType=5;
                                     break;
-                                case 'technology':
+                                case 'shopping':
                                     $idType=6;
                                     break;
                                 case 'lessons':

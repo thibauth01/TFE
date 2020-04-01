@@ -77,8 +77,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-category">Add a job</h5>
-                                    <h4 class="card-title">Do you need help ?</h4>
+                                    <h5 class="card-category">Besoin d'aide ?</h5>
+                                    <h4 class="card-title">Ajoute un travail !</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="stats">
@@ -87,7 +87,7 @@
                                                 <div class="col-md-6 pr-1">
                                                     <div class="form-group">
                                                         <label>Title (Short description)</label>
-                                                        <input type="text" class="form-control" maxlength="40" value="test title" name="title">
+                                                        <input type="text" class="form-control" maxlength="40" value="" name="title">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 px-1">
@@ -102,26 +102,26 @@
                                                 </div>
                                                 <div class="col-md-3 px-1">
                                                     <label>Age min worker</label>
-                                                    <input type="number" class="form-control" min="15" max="25" value="16" name="ageMin">
+                                                    <input type="number" class="form-control" min="15" max="25" value="" name="ageMin">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 pr-1">
                                                     <div class="form-group">
                                                         <label>Date</label>
-                                                        <input type="date" class="form-control" value="2020-04-23" name="date">
+                                                        <input type="date" class="form-control" value="" name="date">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 pl-1">
                                                     <div class="form-group">
                                                         <label>Time Start</label>
-                                                        <input type="time" class="form-control" value="02:05"  name="timeStart">
+                                                        <input type="time" class="form-control" value=""  name="timeStart">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 pl-1">
                                                     <div class="form-group">
                                                         <label>Time End</label>
-                                                        <input type="time" class="form-control" value="03:05" name="timeEnd">
+                                                        <input type="time" class="form-control" value="" name="timeEnd">
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,7 +157,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Description</label>
-                                                        <textarea rows="1" maxlength="200" cols="4" class="form-control" name="description" >voici la desc</textarea>
+                                                        <textarea rows="1" maxlength="200" cols="4" class="form-control" name="description" ></textarea>
                                                     </div>
                                                 </div>
                                             </div>

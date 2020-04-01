@@ -1,3 +1,19 @@
+<?php
+
+    require_once('inc/db_connect.php');
+
+    $birthQuery = $dbh->query("SELECT birth_date FROM account WHERE id=". $_SESSION['idAccount']);
+
+    $birth = $birthQuery->fetchAll(PDO::FETCH_ASSOC);
+    $birthQuery->closeCursor();
+    $birth = $birth[0]['birth_date'];
+    function age($date){
+        $today = date("Y-m-d");
+        $diff = date_diff(date_create($date), date_create($today));
+        return $diff->format('%y');
+    }
+    $_SESSION['age'] = age($birth);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -55,13 +71,83 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-category">Work Proposal</h5>
-                                    <h4 class="card-title">Do you want to do this job?</h4>
+                                    <h5 class="card-category">Propositions de travail</h5>
+                                    <h4 class="card-title">Veux tu faire ce travail ?</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-full-width table-responsive">
                                         <table class="table">
                                             <tbody>
+                                            <?php
+                                                require_once('php/apiDistance.php');
+                                                //SELECT infos worker (adress,max distance)
+                                                $infosWorkerQuery = $dbh->query("   SELECT account.id as id,street, postcode,city,country,maximum_distance 
+                                                                                    FROM account 
+                                                                                    JOIN worker on account.id = worker.id_account
+                                                                                    WHERE account.id =".$_SESSION['idAccount']);
+
+                                                $infosWorker = $infosWorkerQuery->fetchAll(PDO::FETCH_ASSOC);
+                                                $infosWorkerQuery->closeCursor(); 
+                                                $infosWorker = $infosWorker[0]; 
+
+                                                //SELECT availability worker (id,day)
+                                                $availableWorkerQuery = $dbh->query("   SELECT id_day,nom
+                                                                                        FROM worker 
+                                                                                        JOIN availability on worker.id = availability.id_worker
+                                                                                        JOIN day on availability.id_day = day.id
+                                                                                        WHERE worker.id =".$_SESSION['idTypeAccount']);
+
+                                                $availableWorker = $availableWorkerQuery->fetchAll(PDO::FETCH_ASSOC);
+                                                $availableWorkerQuery->closeCursor();
+
+                                                //SELECT type_work worker (id,type)
+                                                $typeWorkerQuery = $dbh->query("SELECT id_type_work,name
+                                                                                FROM worker 
+                                                                                JOIN woker_Typer_work on worker.id = woker_Typer_work.id_worker
+                                                                                JOIN type_work on woker_Typer_work.id_type_work = type_work.id
+                                                                                WHERE worker.id =".$_SESSION['idTypeAccount']);
+
+                                                $typeWorker = $typeWorkerQuery->fetchAll(PDO::FETCH_ASSOC);
+                                                $typeWorkerQuery->closeCursor();
+
+
+                                                //SELECT all works free with age
+                                                $worksFreeQuery = $dbh->query("SELECT work.id as id, title, description,id_type,type_work.name as type_name, id_requester,date_start,time_start,time_end,place,first_name,last_name,city,profile_path 
+                                                                                FROM work
+                                                                                JOIN type_work on work.id_type = type_work.id
+                                                                                JOIN requester on id_requester = requester.id
+                                                                                JOIN account on requester.id_account = account.id
+                                                                                WHERE work.id_worker is NULL AND cancelled =0 AND finish = 0 AND min_age_worker <=".$_SESSION['age']);
+
+                                                $worksFree = $worksFreeQuery->fetchAll(PDO::FETCH_ASSOC);
+                                                $worksFreeQuery->closeCursor();
+                                                
+                                                $worksOk=array();
+                                                
+
+                                                foreach($worksFree as $work){
+                                                    $timestamp = strtotime($work['date_start']);
+                                                    $numberDayWork = date('N', $timestamp);
+
+                                                    foreach ($typeWorker as $type) {
+                                                        if($type['id_type_work'] == $work['id_type']){
+                                                            foreach($availableWorker as $day){
+                                                                if($day['id_day'] == $numberDayWork){
+                                                                  array_push($worksOk,$work);
+                                                                    break; 
+                                                                } 
+                                                            }
+                                                            break;
+                                                        }
+                                                        
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                print_r($worksOk);
+
+                                                //reste a calculer en fonction de la distance
+                                            ?>
                                                 <tr>
                                                     <td>
                                                         <img src="img/user-1.jpg" height="50px" width="50px" style="min-width:50px;">

@@ -28,6 +28,7 @@ $(document).ready(function(){
                             </div>`;
                     $("#errormsgSign").html(html);
                     myAlertBottom();
+                    document.getElementById("addJobForm").reset();
                 }
                 else{
                     var html="";

@@ -16,14 +16,8 @@
                 <ul class="nav">
                     <li>
                         <a href="dashboard.php">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
+                            <i class="now-ui-icons business_chart-bar-32"></i>
                             <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="dashboard_requester.php">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                            <p>Dashboard Requester</p>
                         </a>
                     </li>
                     <li>
@@ -33,14 +27,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="works_requester.php">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                            <p>Works Requester</p>
-                        </a>
-                    </li>
-                    <li>
                         <a href="messages.php">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
+                            <i class="now-ui-icons ui-1_send"></i>
                             <p>Messages</p>
                         </a>
                     </li>
