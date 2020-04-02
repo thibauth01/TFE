@@ -17,6 +17,7 @@
     $country = trim(htmlspecialchars($_POST['country']));
     $description = trim(htmlspecialchars($_POST['description']));
     $idType = trim(htmlspecialchars($_POST['idType']));
+    $price = trim(htmlspecialchars($_POST['price']));
 
     $id_requester = $_SESSION['idTypeAccount'];
     $place = $street." ".$postal." ".$city." ".$country;
@@ -37,6 +38,10 @@
         $return['statut'] = false;
         array_push($messages,"La date ne peux pas etre passée !");
     }
+    if($price < 8 || $price > 25){
+        $return['statut'] = false;
+        array_push($messages,"Le prix doit être compris entre 8 et 25€ /h");
+    }
     
     
     
@@ -45,7 +50,7 @@
     }
 
     else{
-        $workQuery = $dbh->query( "INSERT INTO `work` (`title`,`id_type`,`description`,`id_requester`,`id_worker`,`min_age_worker`,`date_start`,`time_start`,`time_end`,`place`,`statut_progress`,`paid`,`cancelled`,`finish`) VALUES('$title','$idType','$description','$id_requester',NULL,'$ageMin','$date','$timeStart','$timeEnd','$place','To Do',0,0,0)");
+        $workQuery = $dbh->query( "INSERT INTO `work` (`title`,`id_type`,`description`,`id_requester`,`id_worker`,`min_age_worker`,`date_start`,`time_start`,`time_end`,`place`,`statut_progress`,`paid`,`cancelled`,`finish`,`price`) VALUES('$title','$idType','$description','$id_requester',NULL,'$ageMin','$date','$timeStart','$timeEnd','$place','To Do',0,0,0,'$price')");
         if ($workQuery) {
             
             $workQuery->closeCursor();
@@ -54,7 +59,7 @@
 
         } else {
             $return['statut'] = false;
-            array_push($messages,'Erreur lors de la création du compte');
+            array_push($messages,'Erreur lors de l ajout du travail');
             print_r(json_encode($messages));
         }
         

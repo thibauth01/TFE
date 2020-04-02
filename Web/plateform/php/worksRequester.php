@@ -1,6 +1,7 @@
 <?php
 
     require_once('inc/db_connect.php');
+    require_once('php/utils.php');
     
 ?>
 <!DOCTYPE html>
@@ -68,7 +69,7 @@
                                         <table class="table">
                                             <tbody>
                                                 <?php
-                                                    $WorkQuery = $dbh->query("  SELECT work.id,title, id_type, description, id_requester, min_age_worker, date_start, time_start, time_end, place, statut_progress, name 
+                                                    $WorkQuery = $dbh->query("  SELECT work.id,title, id_type, description, id_requester, min_age_worker, date_start, time_start, time_end, place, statut_progress, name, price
                                                                                 FROM work JOIN type_work 
                                                                                 ON work.id_type = type_work.id 
                                                                                 WHERE id_requester = '".$_SESSION['idTypeAccount']."' AND id_worker is NULL AND finish = 0 AND cancelled =0 ");
@@ -114,6 +115,8 @@
                             $date = date("d-m-Y", $tmstp);
                             $timeStart = date("G:i", strtotime($work['time_start']));
                             $timeEnd = date("G:i", strtotime($work['time_end']));
+                            $minutesWork = timeSpace($work['time_start'],$work['time_end']);
+                            $price = $minutesWork * ($work['price']/60);
 
                         echo "<div class='row collapse'  id='detailFree".$work['id']."'>
                                     <div class='col-md-12 d-flex'>
@@ -147,7 +150,7 @@
                                                     </div>
                                                     <div class='col-md-3'>
                                                         <i class='now-ui-icons shopping_credit-card' style='font-size:20px'></i>
-                                                        <p>55€<p>
+                                                        <p>".$price."€<p>
                                                     </div>
                                                 </div>
                                                 <div class='row'>
@@ -176,7 +179,7 @@
                                         <table class="table">
                                             <tbody>
                                                 <?php
-                                                        $WorkQuery = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as name_type, id_account,star,first_name,last_name,birth_date,profile_path
+                                                        $WorkQuery = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as name_type, id_account,star,first_name,last_name,birth_date,profile_path,price
                                                                                     FROM work
                                                                                     JOIN type_work on work.id_type = type_work.id
                                                                                     JOIN worker on id_worker = worker.id
@@ -206,7 +209,7 @@
                                                                         <button type='button' rel='tooltip' title='' class='btn btn-info btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Info Work' data-toggle='collapse' data-target='#detailTake".$work['id']."'>
                                                                             <i class='now-ui-icons travel_info'></i>
                                                                         </button>
-                                                                        <button type='button' onclick='removeWorkTakeRequester(this);' rel='tooltip' title='' class='btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
+                                                                        <button type='button' onclick='acceptWork(this);' rel='tooltip' title='' class='btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
                                                                             <i class='now-ui-icons ui-1_simple-remove'></i>
                                                                         </button>
                                                                     </td>
@@ -225,11 +228,7 @@
                         </div>
                     </div>
                     <?php
-                        function age($date){
-                            $today = date("Y-m-d");
-                            $diff = date_diff(date_create($date), date_create($today));
-                            return $diff->format('%y');
-                        }
+                        
                         foreach($worksTake as $work){
 
                             $tmstp =  strtotime($work['date_start']);
@@ -240,6 +239,8 @@
                                 $work['profile_path'] = 'img/user-1.jpg';  
                             }
                             $age = age($work['birth_date']);
+                            $minutesWork = timeSpace($work['time_start'],$work['time_end']);
+                            $price = $minutesWork * ($work['price']/60);
 
                             echo "<div class='collapse'  id='detailTake".$work['id']."'>
                                     <div class='row'>
@@ -293,7 +294,7 @@
                                                             </div>
                                                             <div class='col-md-3'>
                                                                 <i class='now-ui-icons shopping_credit-card' style='font-size:20px'></i>
-                                                                <p>55€<p>
+                                                                <p>".$price."€<p>
                                                             </div>
                                                         </div>
                                                         <div class='row'>

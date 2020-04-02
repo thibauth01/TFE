@@ -37,7 +37,7 @@ function getDistance($addressFrom, $addressTo, $unit = ''){
     // Convert unit and return distance
     $unit = strtoupper($unit);
     if($unit == "K"){
-        return round($miles * 1.609344, 2).' km';
+        return round($miles * 1.609344, 2);
     }elseif($unit == "M"){
         return round($miles * 1609.344, 2).' meters';
     }else{

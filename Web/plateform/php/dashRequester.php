@@ -106,22 +106,28 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4 pr-1">
+                                                <div class="col-md-3 pr-1">
                                                     <div class="form-group">
                                                         <label>Date</label>
                                                         <input type="date" class="form-control" value="" name="date">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4 pl-1">
+                                                <div class="col-md-3 pl-1">
                                                     <div class="form-group">
                                                         <label>Time Start</label>
                                                         <input type="time" class="form-control" value=""  name="timeStart">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4 pl-1">
+                                                <div class="col-md-3 pl-1">
                                                     <div class="form-group">
                                                         <label>Time End</label>
                                                         <input type="time" class="form-control" value="" name="timeEnd">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 pl-1">
+                                                    <div class="form-group">
+                                                        <label>Rémunération / h</label>
+                                                        <input type="number" class="form-control" min="8" max="25" value="" name="price">
                                                     </div>
                                                 </div>
                                             </div>

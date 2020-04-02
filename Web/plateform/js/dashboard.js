@@ -5,6 +5,51 @@ function myAlertBottom(){
     }, 10000);
 }
 
+function acceptWork(elem){
+    var row= $(elem).parent().parent();
+    var id = row.attr('id').substring(7);
+    
+    Swal.fire({
+        title: 'Voulez vous effectuer ce travail ?',
+        text: "",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui'
+
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: 'php/acceptWork.php',
+                type: 'POST',
+                data: {
+                    'id':id
+                }
+            }).done(function(data) {
+                console.log(data);
+                Swal.fire(
+                    'Voila !',
+                    'Le travail vous à été accordé !',
+                    'success'
+                ).then((result) => {
+                    $(row).remove();
+                    $('#detailsProp'+id).remove();
+                })
+
+
+            }).fail(function(data) {
+                Swal.fire(
+                    'Impossible de vous accorder le travail !',
+                    'Veuillez reessayer ou contacter le webmaster',
+                    'error'
+                );
+            });
+        }
+
+    });
+}
+
+
 $(document).ready(function(){
 
     $('#addJobForm').on('submit',function(event){

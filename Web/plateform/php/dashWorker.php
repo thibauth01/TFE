@@ -1,17 +1,16 @@
 <?php
+    ini_set('display_errors', 0);
+    error_reporting(E_ALL);
 
     require_once('inc/db_connect.php');
+    require_once('php/utils.php');
 
     $birthQuery = $dbh->query("SELECT birth_date FROM account WHERE id=". $_SESSION['idAccount']);
 
     $birth = $birthQuery->fetchAll(PDO::FETCH_ASSOC);
     $birthQuery->closeCursor();
     $birth = $birth[0]['birth_date'];
-    function age($date){
-        $today = date("Y-m-d");
-        $diff = date_diff(date_create($date), date_create($today));
-        return $diff->format('%y');
-    }
+    
     $_SESSION['age'] = age($birth);
 ?>
 <!DOCTYPE html>
@@ -80,6 +79,7 @@
                                             <tbody>
                                             <?php
                                                 require_once('php/apiDistance.php');
+
                                                 //SELECT infos worker (adress,max distance)
                                                 $infosWorkerQuery = $dbh->query("   SELECT account.id as id,street, postcode,city,country,maximum_distance 
                                                                                     FROM account 
@@ -112,7 +112,7 @@
 
 
                                                 //SELECT all works free with age
-                                                $worksFreeQuery = $dbh->query("SELECT work.id as id, title, description,id_type,type_work.name as type_name, id_requester,date_start,time_start,time_end,place,first_name,last_name,city,profile_path 
+                                                $worksFreeQuery = $dbh->query("SELECT work.id as id, title, description,id_type,type_work.name as type_name, id_requester,date_start,time_start,time_end,place,first_name,last_name,city,profile_path,price 
                                                                                 FROM work
                                                                                 JOIN type_work on work.id_type = type_work.id
                                                                                 JOIN requester on id_requester = requester.id
@@ -144,120 +144,166 @@
                                                     }
                                                     
                                                 }
-                                                print_r($worksOk);
+                                                
+                                                $worksOkDistance = array();
+                                                
+                                                $adressWorker = $infosWorker['street'].", ".$infosWorker['postcode']." ".$infosWorker['city']." ".$infosWorker['country'];
+                                                $distanceMax = (float) $infosWorker['maximum_distance'];
+                                                
+                                                foreach($worksOk as $work){
+                                                    try{
+                                                        $distance = getDistance($adressWorker,$work['place'],'K');
+                                                        if($distance < $distanceMax){
+                                                            array_push($worksOkDistance,$work);
+                                                        }
+                                                    }
+                                                    catch(exception $e){
+                                                        break;
+                                                    }
+                                                    
+                                                }
+                                                
 
-                                                //reste a calculer en fonction de la distance
+                                                foreach($worksOkDistance as $work){
+                                                    $tmstp =  strtotime($work['date_start']);
+                                                    $work['date_start'] = date("d-m-Y", $tmstp);
+                                                    if($work['profile_path'] == NULL){
+                                                        $work['profile_path'] = 'img/user-1.jpg';  
+                                                    }
+                                                    
+
+                                                    echo "<tr id='rowFree".$work['id']."'>
+                                                            <td style='width:60px'>
+                                                                <img src='".$work['profile_path'] ."' height='50px' width='50px' style='min-width:50px;'>
+                                                            </td>
+
+                                                            <td class='text-left'>".$work['title'] ."</td>
+                                                            <td class='text-primary'>".$work['type_name'] ."</td>
+                                                            <td>25/05/2020</td>
+                                                            <td class='td-actions text-right'>
+                                                                <button type='button' rel='tooltip' title='' class='btn btn-info btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Info Work' data-toggle='collapse' data-target='#detailsProp".$work['id']."'>
+                                                                    <i class='now-ui-icons travel_info'></i>
+                                                                </button>
+                                                                <button type='button' onclick='acceptWork(this);' rel='tooltip' title='' class='btn btn-success btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Valid Work'>
+                                                                    <i class='now-ui-icons ui-1_check'></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>";
+                                                }
+
+                                                
+
                                             ?>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/user-1.jpg" height="50px" width="50px" style="min-width:50px;">
-                                                    </td>
 
-                                                    <td class="text-left">Sign contract for </td>
-                                                    <td class="text-primary">Bricolage</td>
-                                                    <td>25/05/2020</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work" data-toggle="collapse" data-target="#explication1">
-                                                            <i class="now-ui-icons travel_info"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Valid Work">
-                                                            <i class="now-ui-icons ui-1_check"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove Work">
-                                                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/mike.jpg" height="50px" width="50px">
-
-                                                    </td>
-
-                                                    <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                    <td class="text-primary">Computer</td>
-                                                    <td>18/10/2020</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons travel_info"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                                                            <i class="now-ui-icons ui-1_check"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                                                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="now-ui-icons objects_spaceship"></i> 2 proposal
+                                        <i class="now-ui-icons objects_spaceship"></i> 
+                                        <?php 
+                                            echo count($worksOkDistance);
+                                            if(count($worksOkDistance) == 1){
+                                                echo " travail";
+                                            }
+                                            else{
+                                                echo " travaux";
+                                            }
+                                        ?> 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3 d-flex">
-                            <div class="card card-user">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <a href="#">
-                                            <img class="avatar border-gray" src="img/user-1.jpg" alt="...">
-                                            <h5 class="title">Thibaut Hermant</h5>
-                                        </a>
-                                        <p class="description">
-                                            Chimay
-                                        </p>
+                    <?php
+                        
+
+                        foreach($worksOkDistance as $work){
+                            $NumberWorkQuery = $dbh->query("SELECT COUNT(id) as nbr FROM work WHERE finish=1 AND id_requester =".$work['id_requester']);
+
+                            $NumberWork = $NumberWorkQuery->fetchAll(PDO::FETCH_ASSOC);
+                            $NumberWorkQuery->closeCursor(); 
+                            $NumberWork = $NumberWork[0]['nbr'];
+
+
+                            $tmstp =  strtotime($work['date_start']);
+                            $work['date_start'] = date("d-m-Y", $tmstp);
+                            $timeStart = date("G:i", strtotime($work['time_start']));
+                            $timeEnd = date("G:i", strtotime($work['time_end']));
+                            if($work['profile_path'] == NULL){
+                                $work['profile_path'] = 'img/user-1.jpg';  
+                            }
+
+                            $minutesWork = timeSpace($work['time_start'],$work['time_end']);
+                            $price = $minutesWork * ($work['price']/60);
+
+                            
+                            echo "<div class='collapse' id='detailsProp".$work['id']."'>
+                                    <div class='row'>
+                                        <div class='col-md-3 d-flex'>
+                                            <div class='card card-user'>
+                                                <div class='card-body'>
+                                                    <div class='text-center'>
+                                                        <a href='#'>
+                                                            <img class='avatar border-gray' src='".$work['profile_path']."' alt='...'>
+                                                            <h5 class='title'>".$work['first_name']." ".$work['last_name']."</h5>
+                                                        </a>
+                                                        <p class='description'>
+                                                        ".$work['city']."
+                                                        </p>
+                                                    </div>
+                                                    <p class='text-center'> ".$NumberWork." travaux déjà donné</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='col-md-9 d-flex'>
+                                            <div class='card'>
+                                                <div class='card-header'>
+                                                    <div class='row'>
+                                                        <div class='col-md-8'>
+                                                            <h5 class='card-title'>".$work['title']."</h5>
+                                                        </div>
+                                                        <div class='col-md-4 text-right'>
+                                                            <h5 class='card-title text-danger'>".$work['type_name']."</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='card-body'>
+                                                    <div class='row text-center mt-4'>
+                                                        <div class='col-md-3'>
+                                                            <i class='now-ui-icons ui-1_calendar-60' style='font-size:20px'></i>
+                                                            <p>".$work['date_start']."<p>
+                                                        </div>
+                                                        <div class='col-md-3'>
+                                                            <i class='now-ui-icons tech_watch-time' style='font-size:20px'></i>
+                                                            <p>".$timeStart." - ".$timeEnd."<p>
+                                                        </div>
+                                                        <div class='col-md-3'>
+                                                            <i class='now-ui-icons location_pin' style='font-size:20px'></i>
+                                                            <p>".$work['place']."<p>
+                                                        </div>
+                                                        <div class='col-md-3'>
+                                                            <i class='now-ui-icons shopping_credit-card' style='font-size:20px'></i>
+                                                            <p>".$price."€<p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class='card-footer'>
+                                                    <div class='row'>
+                                                        <div class='col-md-12 px-3 pt-3'>
+                                                            <p>".$work['description']."</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-center"> 12 works already given</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9 d-flex">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <h5 class="card-title">Sign contract for </h5>
-                                        </div>
-                                        <div class="col-md-4 text-right">
-                                            <h5 class="card-title text-danger">Bricolage</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row text-center mt-2">
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons ui-1_calendar-60" style="font-size:20px"></i>
-                                            <p>12/05/2020<p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons tech_watch-time" style="font-size:20px"></i>
-                                            <p>13h30 - 18h00<p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons location_pin" style="font-size:20px"></i>
-                                            <p>Route du longchamps 14/302, 1348 Louvain-la-Neuve<p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons shopping_credit-card" style="font-size:20px"></i>
-                                            <p>55€<p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 px-3">
-                                            <p>Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                </div>";  
+                        }
+                    ?>
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
@@ -425,6 +471,10 @@
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="demo/demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<script src="js/dashboard.js"></script>
+
 <script>
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
