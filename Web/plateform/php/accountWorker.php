@@ -15,11 +15,12 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
     <!-- CSS Files -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="demo/demo.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
@@ -65,7 +66,7 @@
                     $infosWorker = $infosWorkerQuery->fetch(PDO::FETCH_ASSOC);
                     $infosWorkerQuery->closeCursor();
 
-                    $daysWorkerQuery = $dbh->query("   SELECT * FROM worker
+                    $daysWorkerQuery = $dbh->query("   SELECT day.id FROM worker
                                                         JOIN availability on worker.id = availability.id_worker
                                                         JOIN day on day.id= availability.id_day
                                                         where worker.id=".$_SESSION['idTypeAccount']);
@@ -73,17 +74,24 @@
                     $daysWorker = $daysWorkerQuery->fetchAll(PDO::FETCH_ASSOC);
                     $daysWorkerQuery->closeCursor();
 
-                    $typesWorkerQuery = $dbh->query("   SELECT * FROM worker
+                    $typesWorkerQuery = $dbh->query("   SELECT type_work.id FROM worker
                                                         JOIN woker_Typer_work on worker.id = woker_Typer_work.id_worker
                                                         JOIN type_work on type_work.id= woker_Typer_work.id_type_work
                                                         where worker.id=".$_SESSION['idTypeAccount']);
 
-                    $typessWorker = $typesWorkerQuery->fetchAll(PDO::FETCH_ASSOC);
+                    $typesWorker = $typesWorkerQuery->fetchAll(PDO::FETCH_ASSOC);
                     $typesWorkerQuery->closeCursor();
 
-                    /*
-                    ENCORE FAIRE LES COMPETENCES ET DISPO PUIS AJOUTER TOUT CA
-                    */
+
+                    $allTypesQuery = $dbh->query("SELECT * FROM type_work");
+                    $allTypes = $allTypesQuery->fetchAll(PDO::FETCH_ASSOC);
+                    $allTypesQuery->closeCursor();
+
+                    $allDayQuery = $dbh->query("SELECT * FROM day");
+                    $allDay = $allDayQuery->fetchAll(PDO::FETCH_ASSOC);
+                    $allDayQuery->closeCursor();
+                    
+                    
 
                 ?>
 
@@ -96,89 +104,71 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="">
-                                        <form method="post" id="workerForm">
+                                        <form method="post" id="updateAccount">
                                             <h5 class="px-2"> Vos Informations</h5>
                                             <div class="row">
                                                 <div class="col-md-4 pr-1">
                                                     <div class="form-group">
-                                                        <label for="lastNameSignWork">Nom</label>
-                                                        <input type="text" class="form-control" placeholder="Nom" value="<?=$infosWorker['last_name']?>" name="lastName" id="lastNameSignWork">
+                                                        <label for="lastName">Nom</label>
+                                                        <input type="text" class="form-control" placeholder="Nom" value="<?=$infosWorker['last_name']?>" name="lastName" id="lastName">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-1">
                                                     <div class="form-group">
-                                                        <label for="firstNameSignWork">Prénom</label>
-                                                        <input type="text" class="form-control" placeholder="Prénom" value="<?=$infosWorker['first_name']?>" name="firstName" id="firstNameSignWork">
+                                                        <label for="firstName">Prénom</label>
+                                                        <input type="text" class="form-control" placeholder="Prénom" value="<?=$infosWorker['first_name']?>" name="firstName" id="firstName">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-1">
                                                     <div class="form-group">
-                                                        <label for="emailSignWork">Email</label>
-                                                        <input type="email" class="form-control" placeholder="Email" value="<?=$infosWorker['email']?>" name="email" id="emailSignWork">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" class="form-control" placeholder="Email" value="<?=$infosWorker['email']?>" name="email" id="email">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 pr-1">
                                                     <div class="form-group">
-                                                        <label for="usernameSignWork">Nom d'utilisateur</label>
-                                                        <input type="text" class="form-control" placeholder="Nom d'utilisateur" value="<?=$infosWorker['username']?>" name="username" id="usernameSignWork">
+                                                        <label for="birthday">Date de naissance</label>
+                                                        <input type="date" class="form-control" placeholder="Date de naissance" value="<?=$infosWorker['birth_date']?>" name="birth" id="birthday">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-1">
                                                     <div class="form-group">
-                                                        <label for="passwordSignWork">Nouveau mot de passe</label>
-                                                        <input type="password" class="form-control" placeholder="Mot de passe" value="" name="password" id="passwordSignWork">
+                                                        <label for="address">Adresse</label>
+                                                        <input type="text" class="form-control" placeholder="Adresse" value="<?=$infosWorker['street']?>" name="address" id="address">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-1">
                                                     <div class="form-group">
-                                                        <label for="passwordConfirmSignWork">Confirmation du nouveau mot de passe</label>
-                                                        <input type="password" class="form-control" placeholder="Confirmation du mot de passe" value="" name="Confirmpassword" id="passwordConfirmSignWork">
+                                                        <label for="postal">Code Postal</label>
+                                                        <input type="text" class="form-control" placeholder="Code postal" value="<?=$infosWorker['postcode']?>" name="postal" id="postal">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                
                                                 <div class="col-md-4 pr-1">
                                                     <div class="form-group">
-                                                        <label for="birthdaySignWork">Date de naissance</label>
-                                                        <input type="date" class="form-control" placeholder="Date de naissance" value="" name="birth" id="birthdaySignWork">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 px-1">
-                                                    <div class="form-group">
-                                                        <label for="addressSignWork">Adresse</label>
-                                                        <input type="text" class="form-control" placeholder="Adresse" value="<?=$infosWorker['street']?>" name="address" id="addressSignWork">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 pr-1">
-                                                    <div class="form-group">
-                                                        <label for="postalSignWork">Code Postal</label>
-                                                        <input type="text" class="form-control" placeholder="Code postal" value="<?=$infosWorker['postcode']?>" name="postal" id="postalSignWork">
+                                                        <label for="city">Ville</label>
+                                                        <input type="text" class="form-control" placeholder="Ville" value="<?=$infosWorker['city']?>" name="city" id="city">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-1">
                                                     <div class="form-group">
-                                                        <label for="citySignWork">Ville</label>
-                                                        <input type="text" class="form-control" placeholder="Ville" value="<?=$infosWorker['city']?>" name="city" id="citySignWork">
+                                                        <label for="country">Pays</label>
+                                                        <input type="text" class="form-control" placeholder="Pays" value="<?=$infosWorker['country']?>" name="country" id="country">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-1">
-                                                    <div class="form-group">
-                                                        <label for="countrySignWork">Pays</label>
-                                                        <input type="text" class="form-control" placeholder="Pays" value="<?=$infosWorker['country']?>" name="country" id="countrySignWork">
+                                                    <div class="form-group ">
+                                                        <label class="">Distance Maximum (km)</label>
+                                                        <input type="number" class="form-control" name="distance" max="50" min="1" value="<?=$infosWorker['maximum_distance']?>">
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-3">
-                                                <div class="form-group ">
-                                                    <label class="">Distance Maximum (km)</label>
-                                                    <input type="number" class="form-control" name="distance" max="50" min="1" value="<?=$infosWorker['maximum_distance']?>">
-                                                </div>
-                                            </div>
+                                            
 
 
                                             <div class="row">
@@ -206,89 +196,64 @@
                                                             border-radius: 50px;
                                                         }
                                                     </style>
-                                                    <div class="form-group ml-3 ">
-                                                        <label class="pr-3">Baby-Sitting </label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[babySitting]">
-                                                    </div>
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3">Travaux ménagers </label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[housework]">
-                                                    </div>
-                                                    <div class="form-group ml-3 ">
-                                                        <label class="pr-3">Jardinage</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[gardening]">
-                                                    </div>
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3">Garde d'animaux </label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[petsitting]">
-                                                    </div>
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3">Bricolage</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[bricolage]">
-                                                    </div>
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3">Faire des courses</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[shopping]">
-                                                    </div>
-                                                    <div class="form-group ml-1">
-                                                        <label class="pr-3">Cours particuliers</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[lessons]">
-                                                    </div>
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3">Technologie</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[technology]">
-                                                    </div>
-                                                    <div class="form-group ml-5">
-                                                        <label class="pr-3">Autres</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[other]">
-                                                    </div>
+
+                                                    <?php
+                                                    $idTypesTake = array();
+                                                    foreach ($typesWorker as $type) {
+                                                        array_push($idTypesTake,$type['id']);
+                                                    }
+
+                                                    foreach($allTypes as $type){
+
+                                                        if (in_array($type['id'], $idTypesTake)){
+                                                            echo "  <div class='form-group ml-3 '>
+                                                                        <label class='pr-3'>".$type['name']." </label>
+                                                                        <input type='checkbox' data-style='ios' data-toggle='toggle' data-onstyle='success' data-size='small' data-offstyle='danger' name='type[".$type['id']."]' checked>
+                                                                    </div>";
+                                                        }
+                                                        else{
+                                                            echo "  <div class='form-group ml-3 '>
+                                                                        <label class='pr-3'>".$type['name']." </label>
+                                                                        <input type='checkbox' data-style='ios' data-toggle='toggle' data-onstyle='success' data-size='small' data-offstyle='danger' name='type[".$type['id']."]'>
+                                                                    </div>"; 
+                                                        }
+                                                        
+                                                    }
+                                                    
+                                                    ?>                             
                                                 </div>
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-3 text-right">
+                                                    <?php
+                                                        $idDaysTake = array();
+                                                        foreach ($daysWorker as $day) {
+                                                            array_push($idDaysTake,$day['id']);
+                                                        }
 
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Lundi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[monday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Mardi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[thuesday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Mercredi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[wednesday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Jeudi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[thursday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Vendredi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[friday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Samedi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[saturday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Dimanche</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[sunday]">
-                                                    </div>
-
+                                                        foreach($allDay as $day){
+                                                            if (in_array($day['id'], $idDaysTake)){
+                                                                echo "  <div class='form-group ml-3 '>
+                                                                            <label class='pr-3'>".$day['nom']." </label>
+                                                                            <input type='checkbox' data-style='ios' data-toggle='toggle' data-onstyle='success' data-size='small' data-offstyle='danger' name='day[".$day['id']."]' checked>
+                                                                        </div>";
+                                                            }
+                                                            else{
+                                                                echo "  <div class='form-group ml-3 '>
+                                                                            <label class='pr-3'>".$day['nom']." </label>
+                                                                            <input type='checkbox' data-style='ios' data-toggle='toggle' data-onstyle='success' data-size='small' data-offstyle='danger' name='day[".$day['id']."]'>
+                                                                        </div>"; 
+                                                            }
+                                                            
+                                                        }
+                                                        
+                                                        ?> 
                                                 </div>
                                                 <div class="col-md-4"></div>
-                                                <div class="row ">
-                                                    <div class="col-md-12 d-flex justify-content-center">
-                                                        <input type="submit" class="btn btn-primary" value="Inscription">
-                                                    </div>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="col-md-12 d-flex justify-content-center">
+                                                    <input type="submit" class="btn btn-primary" value="Enregistrer les modifications">
                                                 </div>
-
                                             </div>
                                         </form>
                                     </div>
@@ -296,6 +261,8 @@
                             </div>
                         </div>
                     </div>
+                    
+
                     <div id="errormsgSign" class="container"></div>
                 </div>
                 <footer class="footer">
@@ -349,6 +316,7 @@
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="demo/demo.js"></script>
+<script src="js/account.js"></script>
 <script>
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
