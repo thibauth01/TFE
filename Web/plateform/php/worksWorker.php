@@ -1,3 +1,7 @@
+<?php
+    require_once('inc/db_connect.php');
+    require_once('php/utils.php');
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,7 +10,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
     <link rel="icon" type="image/png" href="img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Now UI Dashboard by Creative Tim</title>
+    <title>Mes travaux - Youngr</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -61,44 +65,46 @@
                                     <div class="table-full-width table-responsive">
                                         <table class="table">
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/user-1.jpg" height="50px" width="50px" style="min-width:50px;">
-                                                    </td>
+                                                <?php
+                                                    $ToDoWorksQuery = $dbh->query(" SELECT work.id,title,id_type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path
+                                                                                    FROM work
+                                                                                    JOIN requester on work.id_requester = requester.id
+                                                                                    JOIN account on requester.id_account = account.id
+                                                                                    JOIN type_work on work.id_type = type_work.id
+                                                                                    WHERE finish = 0 AND cancelled = 0 AND id_worker =".$_SESSION['idTypeAccount']);
 
-                                                    <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons travel_info"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Valid Work">
-                                                            <i class="now-ui-icons ui-1_check"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove Work">
-                                                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                                                        </button>
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/mike.jpg" height="50px" width="50px">
+                                                    $ToDoWorks = $ToDoWorksQuery->fetchAll(PDO::FETCH_ASSOC);
+                                                    $ToDoWorksQuery->closeCursor();
 
-                                                    </td>
+                                                    foreach($ToDoWorks as $work){
+                                                        $id=$work['id'];
+                                                        $tmstp =  strtotime($work['date_start']);
+                                                        $work['date_start'] = date("d-m-Y", $tmstp);
 
-                                                    <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons travel_info"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                                                            <i class="now-ui-icons ui-1_check"></i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                                                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                                                        if($work['profile_path'] == NULL){
+                                                            $work['profile_path'] = 'img/user-1.jpg';  
+                                                        }
+
+                                                        echo "<tr id='rowtodo".$id."'>
+                                                                <td style='width:60px'>
+                                                                    <img src='".$work['profile_path'] ."' height='50px' width='50px'>
+                                                                </td>
+            
+                                                                <td class='text-left pl-3'>".$work['title']."</td>
+                                                                <td class='text-danger'>".$work['name']."</td>
+                                                                <td>".$work['date_start']."</td>
+                                                                <td class='td-actions text-right'>
+                                                                    <button type='button' rel='tooltip' title='' class='btn btn-info btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Info Work' data-toggle='collapse' data-target='#detailTodo".$work['id']."'>
+                                                                        <i class='now-ui-icons travel_info'></i>
+                                                                    </button>
+                                                                    <button type='button' onclick='acceptWork(this);' rel='tooltip' title='' class='btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
+                                                                        <i class='now-ui-icons ui-1_simple-remove'></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>";
+                                                    }
+                                                ?>
+              
                                             </tbody>
                                         </table>
                                     </div>
@@ -110,64 +116,82 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3 d-flex">
-                            <div class="card card-user">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <a href="#">
-                                            <img class="avatar border-gray" src="img/user-1.jpg" alt="...">
-                                            <h5 class="title">Thibaut Hermant</h5>
-                                        </a>
-                                        <p class="description">
-                                            Chimay
-                                        </p>
-                                    </div>
-                                    <p class="text-center"> 12 works already given</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9 d-flex">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <h5 class="card-title">Sign contract for </h5>
-                                        </div>
-                                        <div class="col-md-4 text-right">
-                                            <h5 class="card-title text-danger">Bricolage</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row text-center mt-2">
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons ui-1_calendar-60" style="font-size:20px"></i>
-                                            <p>12/05/2020<p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons tech_watch-time" style="font-size:20px"></i>
-                                            <p>13h30 - 18h00<p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons location_pin" style="font-size:20px"></i>
-                                            <p>Route du longchamps 14/302, 1348 Louvain-la-Neuve<p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons shopping_credit-card" style="font-size:20px"></i>
-                                            <p>55€<p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 px-3">
-                                            <p>Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <?php
+                        foreach($ToDoWorks as $work){
 
-                    </div>
+                            $tmstp =  strtotime($work['date_start']);
+                            $work['date_start'] = date("d-m-Y", $tmstp);
+                            $timeStart = date("G:i", strtotime($work['time_start']));
+                            $timeEnd = date("G:i", strtotime($work['time_end']));
+                            if($work['profile_path'] == NULL){
+                                $work['profile_path'] = 'img/user-1.jpg';  
+                            }
+                            $minutesWork = timeSpace($work['time_start'],$work['time_end']);
+                            $price = $minutesWork * ($work['price']/60);
+
+                            echo "<div class='collapse'  id='detailTodo".$work['id']."'>
+                                    <div class='row'>
+                                            <div class='col-md-3 d-flex'>
+                                                <div class='card card-user'>
+                                                    <div class='card-body'>
+                                                        <div class='text-center'>
+                                                            <a href='#'>
+                                                                <img class='avatar border-gray' src='".$work['profile_path']."' alt='Profile picture'>
+                                                                <h5 class='title'>".$work['first_name']." ".$work['last_name']."</h5>
+                                                            </a>
+                                                            <p class='description'>
+                                                                ".$work['city']."
+                                                            </p>
+                                                        </div>
+                                                        <p class='text-center'>12 job déja pris</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='col-md-9 d-flex'>
+                                                <div class='card'>
+                                                    <div class='card-header'>
+                                                        <div class='row'>
+                                                            <div class='col-md-8'>
+                                                                <h5 class='card-title'>".$work['title']."</h5>
+                                                            </div>
+                                                            <div class='col-md-4 text-right'>
+                                                                <h5 class='card-title text-danger'>".$work['name']."</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class='card-body'>
+                                                        <div class='row text-center mt-2'>
+                                                            <div class='col-md-3'>
+                                                                <i class='now-ui-icons ui-1_calendar-60' style='font-size:20px'></i>
+                                                                <p>".$work['date_start']."<p>
+                                                            </div>
+                                                            <div class='col-md-3'>
+                                                                <i class='now-ui-icons tech_watch-time' style='font-size:20px'></i>
+                                                                <p>".$timeStart." - ".$timeEnd."<p>
+                                                            </div>
+                                                            <div class='col-md-3'>
+                                                                <i class='now-ui-icons location_pin' style='font-size:20px'></i>
+                                                                <p>".$work['place']."<p>
+                                                            </div>
+                                                            <div class='col-md-3'>
+                                                                <i class='now-ui-icons shopping_credit-card' style='font-size:20px'></i>
+                                                                <p>".$price."€<p>
+                                                            </div>
+                                                        </div>
+                                                        <div class='row'>
+                                                            <div class='col-md-12 px-3 pt-4'>
+                                                                <p>".$work['description']."</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>";
+                        }
+                    
+                    ?>
+                 
 
                     <div class="row">
                         <div class="col-md-12">

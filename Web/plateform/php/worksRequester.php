@@ -81,6 +81,7 @@
                                                         $id=$work['id'];
                                                         $tmstp =  strtotime($work['date_start']);
                                                         $work['date_start'] = date("d-m-Y", $tmstp);
+                                                        
                                                         echo "<tr id='rowfree".$id."'>
                                                                 <td class='text-left'>".$work['title']."</td>
                                                                 <td></td>

@@ -1,6 +1,7 @@
 <?php 
     
     require_once('inc/db_connect.php');
+    require_once('php/utils.php');
     
     
     //SELECT INFOS ACCOUNT
@@ -178,150 +179,95 @@
                             </div>
                         </div>
                     </div>
+                    <?php
+                    $id_requester = $_SESSION['idTypeAccount'];
+                    $nextWorkQuery = $dbh->query("  SELECT title, name, description,date_start,time_start,time_end,place,price,account.city as city,account.first_name as first_name,account.last_name as last_name,account.profile_path as profile_path
+                                                    FROM work 
+                                                    JOIN type_work on type_work.id = work.id_type
+                                                    JOIN worker on  worker.id = work.id_worker
+                                                    JOIN account on account.id = worker.id_account
+                                                    WHERE id_worker IS NOT NULL AND finish = 0 AND cancelled = 0 AND id_requester = '$id_requester' order by date_start LIMIT 1");
+                                          
+                    $nextWork = $nextWorkQuery->fetch(PDO::FETCH_ASSOC);
+                    $nextWorkQuery->closeCursor();
+
+                    
+
+                    if($nextWork){
+                        $tmstp =  strtotime($nextWork['date_start']);
+                        $nextWork['date_start'] = date("d-m-Y", $tmstp);
+                        $timeStart = date("G:i", strtotime($nextWork['time_start']));
+                        $timeEnd = date("G:i", strtotime($nextWork['time_end']));
+                        $minutesWork = timeSpace($nextWork['time_start'],$nextWork['time_end']);
+                        $price = $minutesWork * ($nextWork['price']/60);
+                        if($nextWork['profile_path'] == NULL){
+                            $nextWork['profile_path'] = 'img/user-1.jpg';  
+                        }
+                        echo "<div class='row'>
+                                <div class='col-md-12 d-flex'>
+                                    <div class='card card-user'>
+                                        <div class='card-header'>
+                                            
+                                        </div>
+                                        <div class='card-body'>
+                                            <div class='row'>
+                                                <div class='col-md-3'>
+                                                    <h5 class='card-category'>Next Worker</h5>
+                                                    <div class='text-center'>
+                                                        <a href='#'>
+                                                            <img class='avatar border-gray' src='".$nextWork['profile_path']."' alt='...'>
+                                                            <h5 class='title'>".$nextWork['first_name']." ".$nextWork['last_name']."</h5>
+                                                        </a>
+                                                        <p class='description'>
+                                                        ".$nextWork['city']."
+                                                        </p>
+                                                    </div>
+                                                    <p class='text-center'> 12 works already given</p>
+                                                </div>
+                                                <div class='col-md-9'>
+                                                    <div class='row'>
+                                                        <div class='col-md-8'>
+                                                            <h5 class='card-title'>".$nextWork['title']."</h5>
+                                                        </div>
+                                                        <div class='col-md-4 text-right'>
+                                                            <h5 class='card-title text-danger'>".$nextWork['name']."</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class='row text-center mt-5'>
+                                                        <div class='col-md-3'>
+                                                            <i class='now-ui-icons ui-1_calendar-60' style='font-size:20px'></i>
+                                                            <p>".$nextWork['date_start']."<p>
+                                                        </div>
+                                                        <div class='col-md-3'>
+                                                            <i class='now-ui-icons tech_watch-time' style='font-size:20px'></i>
+                                                            <p>".$timeStart." - ".$timeEnd."<p>
+                                                        </div>
+                                                        <div class='col-md-3'>
+                                                            <i class='now-ui-icons location_pin' style='font-size:20px'></i>
+                                                            <p>".$nextWork['place']."<p>
+                                                        </div>
+                                                        <div class='col-md-3'>
+                                                            <i class='now-ui-icons shopping_credit-card' style='font-size:20px'></i>
+                                                            <p>".$price."€<p>
+                                                        </div>
+                                                    </div>
+                                                    <div class='row'>
+                                                        <div class='col-md-12 mt-4'>
+                                                            <p>".$nextWork['description']."</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>";
+                    }
+
+
+                    ?>
+                    
                     <div class="row">
-                        <div class="col-md-12 d-flex">
-                            <div class="card card-user">
-                                <div class="card-header">
-                                    
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <h5 class="card-category">Next Worker</h5>
-                                            <div class="text-center">
-                                                <a href="#">
-                                                    <img class="avatar border-gray" src="img/user-1.jpg" alt="...">
-                                                    <h5 class="title">Thibaut Hermant</h5>
-                                                </a>
-                                                <p class="description">
-                                                    Chimay
-                                                </p>
-                                            </div>
-                                            <p class="text-center"> 12 works already given</p>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <h5 class="card-title">Sign contract for </h5>
-                                                </div>
-                                                <div class="col-md-4 text-right">
-                                                    <h5 class="card-title text-danger">Bricolage</h5>
-                                                </div>
-                                            </div>
-                                            <div class="row text-center mt-5">
-                                                <div class="col-md-3">
-                                                    <i class="now-ui-icons ui-1_calendar-60" style="font-size:20px"></i>
-                                                    <p>12/05/2020<p>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <i class="now-ui-icons tech_watch-time" style="font-size:20px"></i>
-                                                    <p>13h30 - 18h00<p>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <i class="now-ui-icons location_pin" style="font-size:20px"></i>
-                                                    <p>Route du longchamps 14/302, 1348 Louvain-la-Neuve<p>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <i class="now-ui-icons shopping_credit-card" style="font-size:20px"></i>
-                                                    <p>55€<p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 mt-4">
-                                                    <p>Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9 d-flex">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <h5 class="card-title">Sign contract for </h5>
-                                        </div>
-                                        <div class="col-md-4 text-right">
-                                            <h5 class="card-title text-danger">Bricolage</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row text-center mt-2">
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons ui-1_calendar-60" style="font-size:20px"></i>
-                                            <p>12/05/2020<p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons tech_watch-time" style="font-size:20px"></i>
-                                            <p>13h30 - 18h00<p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons location_pin" style="font-size:20px"></i>
-                                            <p>Route du longchamps 14/302, 1348 Louvain-la-Neuve<p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i class="now-ui-icons shopping_credit-card" style="font-size:20px"></i>
-                                            <p>55€<p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 px-3">
-                                            <p>Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                <h6 class="card-category">Next Work</h6>
-                                    <div class="row">
-                                        <div class="col-md-8"> 
-                                            <h5 class="card-title">Install a printer</h5>
-                                        </div>
-                                        <div class="col-md-4 text-right">
-                                            <h5 class="card-title text-danger">Bricolage</h5>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="card-body">
-                                    <div class="row text-center mt-2">
-                                        <div class="col-md-4">
-                                            <i class="now-ui-icons ui-1_calendar-60" style="font-size:20px"></i>
-                                            <p>12/05/2020<p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <i class="now-ui-icons tech_watch-time" style="font-size:20px"></i>
-                                            <p>13h30 - 18h00<p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <i class="now-ui-icons shopping_credit-card" style="font-size:20px"></i>
-                                            <p>55€<p>
-                                        </div>
-                                    </div>
-                                    <div class="row  my-4">
-                                        <div class="cold-md-2 ml-4">
-                                            <i class="now-ui-icons location_pin" style="font-size:20px"></i>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <p>Route du longchamps 14/302, 1348 Louvain-la-Neuve<p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 px-3">
-                                            <p>Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">

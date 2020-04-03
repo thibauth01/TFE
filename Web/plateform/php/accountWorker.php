@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="">
-                                        <form method="post" id="updateAccount">
+                                        <form method="post" id="updateAccountWorker">
                                             <h5 class="px-2"> Vos Informations</h5>
                                             <div class="row">
                                                 <div class="col-md-4 pr-1">

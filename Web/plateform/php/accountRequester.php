@@ -1,3 +1,8 @@
+<?php
+    require_once('inc/db_connect.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -50,314 +55,86 @@
                     
                 </div>
 
+                <?php
+                    $infosRequesterQuery = $dbh->query("   SELECT * FROM account
+                                                            JOIN requester on requester.id_account = account.id
+                                                            where account.id=".$_SESSION['idAccount']);
+
+                    $infosRequester = $infosRequesterQuery->fetch(PDO::FETCH_ASSOC);
+                    $infosRequesterQuery->closeCursor();
+                ?>
+
                 <div class="content">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header text-center text-primary">
-                                    <h2 class="title">Inscription</h2>
+                                    <h2 class="title">Modifiez vos informations</h2>
                                 </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-8 pr-3 d-flex justify-content-around">
-                                        <button type="button" onclick="ShowWorkerSignUp();" class="btn btn-primary">Je suis un travailleur</button>
-                                        <button type="button" onclick="ShowRequesterSignUp();" class="btn btn-outline-primary ml-3">Je suis demandeur</button>
-                                    </div>
-                                </div>
-
                                 <div class="card-body">
-                                    <div class="requesterSignUp" style="display:none;">
-                                        <form method="post" id="requesterForm">
+                                    <div class="">
+                                        <form method="post" id="updateAccountRequester">
                                             <h5 class="px-2"> Vos Informations</h5>
                                             <div class="row">
                                                 <div class="col-md-4 pr-1">
                                                     <div class="form-group">
-                                                        <label for="lastNameSignReq">Nom</label>
-                                                        <input type="text" class="form-control" placeholder="Nom" value="" name="lastName" id="lastNameSignReq">
+                                                        <label for="lastName">Nom</label>
+                                                        <input type="text" class="form-control" placeholder="Nom" value="<?=$infosRequester['last_name']?>" name="lastName" id="lastName">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-1">
                                                     <div class="form-group">
-                                                        <label for="firstNameSignReq">Prénom</label>
-                                                        <input type="text" class="form-control" placeholder="Prénom" value="" name="firstName" id="firstNameSignReq">
+                                                        <label for="firstName">Prénom</label>
+                                                        <input type="text" class="form-control" placeholder="Prénom" value="<?=$infosRequester['first_name']?>" name="firstName" id="firstName">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-1">
                                                     <div class="form-group">
-                                                        <label for="emailSignReq">Email</label>
-                                                        <input type="email" class="form-control" placeholder="Email" name="email" id="emailSignReq">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" class="form-control" placeholder="Email" value="<?=$infosRequester['email']?>" name="email" id="email">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 pr-1">
                                                     <div class="form-group">
-                                                        <label for="usernameSignReq">Nom d'utilisateur</label>
-                                                        <input type="text" class="form-control" placeholder="Nom d'utilisateur" value="" name="username" id="usernameSignReq">
+                                                        <label for="birthday">Date de naissance</label>
+                                                        <input type="date" class="form-control" placeholder="Date de naissance" value="<?=$infosRequester['birth_date']?>" name="birth" id="birthday">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4 px-1">
+                                                <div class="col-md-8 px-1">
                                                     <div class="form-group">
-                                                        <label for="passwordSignReq">Mot de passe</label>
-                                                        <input type="password" class="form-control" placeholder="Mot de passe" value="" name="password" id="passwordSignReq">
+                                                        <label for="address">Adresse</label>
+                                                        <input type="text" class="form-control" placeholder="Adresse" value="<?=$infosRequester['street']?>" name="address" id="address">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4 px-1">
-                                                    <div class="form-group">
-                                                        <label for="passwordConfirmSignReq">Confirmation du mot de passe</label>
-                                                        <input type="password" class="form-control" placeholder="Confirmation du mot de passe" value="" name="Confirmpassword" id="passwordConfirmSignReq">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3 pr-1">
-                                                    <div class="form-group">
-                                                        <label for="birthdaySignReq">Date de naissance</label>
-                                                        <input type="date" class="form-control" placeholder="Date de naissance" value="" name="birth" id="birthdaySignReq">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-7 px-1">
-                                                    <div class="form-group">
-                                                        <label for="addressSignReq">Adresse</label>
-                                                        <input type="text" class="form-control" placeholder="Adresse" value="" name="address" id="addressSignReq">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 px-1">
-                                                    <div class="form-group">
-                                                        <label for="numberSignReq">N°</label>
-                                                        <input type="text" class="form-control" placeholder="N°" value="" name="number" id="numberSignReq">
-                                                    </div>
-                                                </div>
-
+                                                
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 pr-1">
                                                     <div class="form-group">
-                                                        <label for="postalSignReq">Code postal</label>
-                                                        <input type="text" class="form-control" placeholder="Code postal" value="" name="postal" id="postalSignReq">
+                                                        <label for="postal">Code Postal</label>
+                                                        <input type="text" class="form-control" placeholder="Code postal" value="<?=$infosRequester['postcode']?>" name="postal" id="postal">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-4 px-1">
+                                                    <div class="form-group">
+                                                        <label for="city">Ville</label>
+                                                        <input type="text" class="form-control" placeholder="Ville" value="<?=$infosRequester['city']?>" name="city" id="city">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-1">
                                                     <div class="form-group">
-                                                        <label for="citySignReq">Ville</label>
-                                                        <input type="text" class="form-control" placeholder="Ville" value="" name="city" id="citySignReq">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 px-1">
-                                                    <div class="form-group">
-                                                        <label for="countrySignReq">Pays</label>
-                                                        <input type="text" class="form-control" placeholder="Pays" value="" name="country" id="countrySignReq">
+                                                        <label for="country">Pays</label>
+                                                        <input type="text" class="form-control" placeholder="Pays" value="<?=$infosRequester['country']?>" name="country" id="country">
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="row">
-                                                <div class="col-md-12 pr-3 d-flex justify-content-end">
-                                                    <input type="submit" class="btn btn-outline-primary ml-3" value="Inscription">
+                                            <div class="row ">
+                                                <div class="col-md-12 d-flex justify-content-center">
+                                                    <input type="submit" class="btn btn-primary" value="Enregistrer les modifications">
                                                 </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="workerSignUp" style="display:none">
-                                        <form method="post" id="workerForm">
-                                            <h5 class="px-2"> Vos Informations</h5>
-                                            <div class="row">
-                                                <div class="col-md-4 pr-1">
-                                                    <div class="form-group">
-                                                        <label for="lastNameSignWork">Nom</label>
-                                                        <input type="text" class="form-control" placeholder="Nom" value="" name="lastName" id="lastNameSignWork">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 px-1">
-                                                    <div class="form-group">
-                                                        <label for="firstNameSignWork">Prénom</label>
-                                                        <input type="text" class="form-control" placeholder="Prénom" value="" name="firstName" id="firstNameSignWork">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 px-1">
-                                                    <div class="form-group">
-                                                        <label for="emailSignWork">Email</label>
-                                                        <input type="email" class="form-control" placeholder="Email" name="email" id="emailSignWork">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 pr-1">
-                                                    <div class="form-group">
-                                                        <label for="usernameSignWork">Nom d'utilisateur</label>
-                                                        <input type="text" class="form-control" placeholder="Nom d'utilisateur" value="" name="username" id="usernameSignWork">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 px-1">
-                                                    <div class="form-group">
-                                                        <label for="passwordSignWork">Mot de passe</label>
-                                                        <input type="password" class="form-control" placeholder="Mot de passe" value="" name="password" id="passwordSignWork">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 px-1">
-                                                    <div class="form-group">
-                                                        <label for="passwordConfirmSignWork">Confirmation du mot de passe</label>
-                                                        <input type="password" class="form-control" placeholder="Confirmation du mot de passe" value="" name="Confirmpassword" id="passwordConfirmSignWork">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3 pr-1">
-                                                    <div class="form-group">
-                                                        <label for="birthdaySignWork">Date de naissance</label>
-                                                        <input type="date" class="form-control" placeholder="Date de naissance" value="" name="birth" id="birthdaySignWork">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-7 px-1">
-                                                    <div class="form-group">
-                                                        <label for="addressSignWork">Adresse</label>
-                                                        <input type="text" class="form-control" placeholder="Adresse" value="" name="address" id="addressSignWork">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 px-1">
-                                                    <div class="form-group">
-                                                        <label for="numberSignWork">N°</label>
-                                                        <input type="text" class="form-control" placeholder="N°" value="" name="number" id="numberSignWork">
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 pr-1">
-                                                    <div class="form-group">
-                                                        <label for="postalSignWork">Code Postal</label>
-                                                        <input type="text" class="form-control" placeholder="Code postal" value="" name="postal" id="postalSignWork">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 px-1">
-                                                    <div class="form-group">
-                                                        <label for="citySignWork">Ville</label>
-                                                        <input type="text" class="form-control" placeholder="Ville" value="" name="city" id="citySignWork">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 px-1">
-                                                    <div class="form-group">
-                                                        <label for="countrySignWork">Pays</label>
-                                                        <input type="text" class="form-control" placeholder="Pays" value="" name="country" id="countrySignWork">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12">
-                                                <div class="form-group ml-3">
-                                                    <label class="pr-3">Distance Maximum (km)</label>
-                                                    <input type="number" class="form-control" name="distance" max="50" min="1" value="20">
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-4 text-right">
-                                                    <h5 class="px-2 mt-4">Vos compétences</h5>
-                                                </div>
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-4 text-right">
-                                                    <h5 class="px-2 mt-4"> Vos disponibilitées</h5>
-                                                </div>
-                                                <div class="col-md-3"></div>
-                                            </div>
-
-                                            <div class="row">
-
-                                                <div class="col-md-4 text-right ">
-                                                    <style>
-                                                        .toggle.ios,
-                                                        .toggle-on.ios,
-                                                        .toggle-off.ios {
-                                                            border-radius: 10px;
-                                                        }
-                                                        
-                                                        .toggle.ios .toggle-handle {
-                                                            border-radius: 10px;
-                                                        }
-                                                    </style>
-                                                    <div class="form-group ml-3 ">
-                                                        <label class="pr-3">Baby-Sitting </label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[babySitting]">
-                                                    </div>
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3">Travaux ménagers </label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[housework]">
-                                                    </div>
-                                                    <div class="form-group ml-3 ">
-                                                        <label class="pr-3">Jardinage</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[gardening]">
-                                                    </div>
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3">Garde d'animaux </label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[petsitting]">
-                                                    </div>
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3">Bricolage</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[bricolage]">
-                                                    </div>
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3">Faire des courses</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[shopping]">
-                                                    </div>
-                                                    <div class="form-group ml-1">
-                                                        <label class="pr-3">Cours particuliers</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[lessons]">
-                                                    </div>
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3">Technologie</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[technology]">
-                                                    </div>
-                                                    <div class="form-group ml-5">
-                                                        <label class="pr-3">Autres</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="type[other]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-3 text-right">
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Lundi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[monday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Mardi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[thuesday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Mercredi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[wednesday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Jeudi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[thursday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Vendredi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[friday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Samedi</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[saturday]">
-                                                    </div>
-
-                                                    <div class="form-group ml-3">
-                                                        <label class="pr-3"> Dimanche</label>
-                                                        <input type="checkbox" data-style="ios" data-toggle="toggle" data-onstyle="success" data-size="small" data-offstyle="danger" name="day[sunday]">
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-4"></div>
-                                                <div class="row ">
-                                                    <div class="col-md-12 d-flex justify-content-center">
-                                                        <input type="submit" class="btn btn-primary" value="Inscription">
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </form>
                                     </div>
@@ -365,6 +142,8 @@
                             </div>
                         </div>
                     </div>
+                    
+
                     <div id="errormsgSign" class="container"></div>
                 </div>
                 <footer class="footer">
@@ -416,6 +195,8 @@
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="demo/demo.js"></script>
+<script src="js/account.js"></script>
+
 <script>
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
