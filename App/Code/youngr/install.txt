@@ -10,5 +10,15 @@ yarn add @react-navigation/native
 yarn add react-native-screens
 yarn add react-native-elements
 yarn add react-native-vector-icons
-yarn add react-native-datepicker
-yarn add react-native-picker-select
+yarn add galio-framework
+yarn add react-navigation-tabs
+yarn add react-native-chart-kit
+yarn add react-native-svg
+expo install react-native-chart-kit
+
+
+eject gauth
+yarn add react-native-gesture-handler
+sudo npm install -g react-native-cli
+react-native link
+
