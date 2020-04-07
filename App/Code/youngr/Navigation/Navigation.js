@@ -11,7 +11,7 @@ import Login from '../Component/Login';
 import Dashboard from '../Component/Dashboard';
 import Message from '../Component/Message';
 import Works from '../Component/Works';
-
+import DetailsWork from '../Component/DetailsWork';
 
 
 
@@ -20,7 +20,6 @@ const bottomNavigator = createBottomTabNavigator({
     screen: Dashboard,
     navigationOptions: {
       title: 'Dashboard ',
-      headerShown: false,
       tabBarIcon: () => { // On définit le rendu de nos icônes par les images récemment ajoutés au projet
         return <Image
           source={require('../Images/dashboard.png')}
@@ -32,7 +31,7 @@ const bottomNavigator = createBottomTabNavigator({
   Works: { 
     screen: Works,
     navigationOptions: {
-      title: 'Works ',
+      title: 'Travaux',
       headerShown: false,
       tabBarIcon: () => { // On définit le rendu de nos icônes par les images récemment ajoutés au projet
         return <Image
@@ -45,7 +44,7 @@ const bottomNavigator = createBottomTabNavigator({
   Message: { 
     screen: Message,
     navigationOptions: {
-      title: 'Message ',
+      title: 'Messages',
       headerShown: false,
       tabBarIcon: () => { // On définit le rendu de nos icônes par les images récemment ajoutés au projet
         return <Image
@@ -74,7 +73,7 @@ const ListStackNavigator = createStackNavigator({
   Login: { 
     screen: Login,
     navigationOptions: {
-      title: 'Login ',
+      title: 'Connexion ',
       headerShown: false,
       
     }
@@ -84,6 +83,13 @@ const ListStackNavigator = createStackNavigator({
     navigationOptions: {
       title: 'Main ',
       headerShown: false,
+      
+    }
+  },
+  DetailsWork:{
+    screen: DetailsWork,
+    navigationOptions: {
+      title: 'Détails'
       
     }
   }

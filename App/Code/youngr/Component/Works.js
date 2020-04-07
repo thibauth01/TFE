@@ -5,7 +5,7 @@ import { theme } from '../Constants';
 
 
 
-class Message extends React.Component {
+class Works extends React.Component {
 
   constructor(props) {
     super(props)
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Message
+export default Works
