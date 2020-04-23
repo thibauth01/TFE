@@ -2,9 +2,9 @@ import React from 'react'
 import { StyleSheet,Image,View,Platform,TouchableOpacity,SafeAreaView, ImageBackground,Linking } from 'react-native'
 import {Button,Text, Block, Input,Card} from 'galio-framework'
 import { theme } from '../Constants';
+import moment from 'moment';
 
-
-class ItemWorksFree extends React.Component {
+class ItemWorksTodo extends React.Component {
 
   constructor(props) {
     super(props)
@@ -13,25 +13,38 @@ class ItemWorksFree extends React.Component {
     }
   }
 
+  getStatut(date){
+    const dateMoment = moment(date).format('YYYY MM DD')
+    const now = moment().format('YYYY MM DD')
+    
+    if(dateMoment >= now){
+      return moment(date).format('Do MMM YYYY')
+    }
+    else{
+      return "Terminé"
+    }
+  }
+
 
   render() {
     const {navigate} = this.props.navigate
-
+    const statut = this.getStatut(this.props.date_start)
     return (
-      <Block style={styles.itemWorksFree}>
+  
         <TouchableOpacity
-          onPress={() => navigate('DetailsWorkFree',this.props)}>
+          onPress={() => navigate('DetailsWorksTodo',this.props)}>
           <Card
             borderless
             style={styles.cardWorksFree}
             title={this.props.title}
             caption={this.props.type}
             captionColor={theme.COLORS.SECONDARY}
-            location={this.props.date}
-            avatar={this.props.path_profile}
+            location={statut}
+            avatar={this.props.profile_path}
           />
       </TouchableOpacity>
-    </Block>
+      
+   
         
     )
   }
@@ -44,10 +57,6 @@ const styles = StyleSheet.create({
     backgroundColor:theme.COLORS.BACKGROUND
     
   },
-  itemWorksFree:{
-    marginBottom:5,
-    backgroundColor:"white"
-  },
   cardWorksFree:{
     shadowColor: "#000",
     shadowOffset: {
@@ -58,9 +67,12 @@ const styles = StyleSheet.create({
     shadowRadius: 1.41,
 
     elevation: 2,
-    height:70
+    height:84,
+    marginTop:5,
+    marginBottom:5,
+    backgroundColor:theme.COLORS.DEFAULT
   }
 
 })
 
-export default ItemWorksFree
+export default ItemWorksTodo

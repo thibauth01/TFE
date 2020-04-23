@@ -4,7 +4,7 @@ import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
 
 
-class Message extends React.Component {
+class DetailsWorksFree extends React.Component {
 
   constructor(props) {
     super(props)
@@ -22,8 +22,8 @@ class Message extends React.Component {
             </Block>
             <Block flex={2} style={styles.infoprofileBlock}>
               <Block row  space="around" width={200}>
-                <Text h3 muted>Jason</Text> 
-                <Text h3 muted> Statam</Text>
+                <Text h3 muted>{state.params.title}</Text> 
+                <Text h3 muted> S</Text>
               </Block> 
               <Block row space="around" width={200}>
                 <Text muted > 22 ans</Text>
@@ -183,4 +183,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default Message
+export default DetailsWorksFree

@@ -11,7 +11,8 @@ import Login from '../Component/Login';
 import Dashboard from '../Component/Dashboard';
 import Message from '../Component/Message';
 import Works from '../Component/Works';
-import DetailsWork from '../Component/DetailsWork';
+import DetailsWorksFree from '../Component/DetailsWorksFree';
+import DetailsWorksTodo from '../Component/DetailsWorksTodo';
 
 
 
@@ -86,8 +87,15 @@ const ListStackNavigator = createStackNavigator({
       
     }
   },
-  DetailsWork:{
-    screen: DetailsWork,
+  DetailsWorksFree:{
+    screen: DetailsWorksFree,
+    navigationOptions: {
+      title: 'Détails'
+      
+    }
+  },
+  DetailsWorksTodo:{
+    screen:DetailsWorksTodo,
     navigationOptions: {
       title: 'Détails'
       

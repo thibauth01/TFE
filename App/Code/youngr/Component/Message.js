@@ -18,7 +18,7 @@ class Message extends React.Component {
    
     return (
         <Block middle  style={styles.main_container}>
-            <Text>Hello message</Text>
+            <Text>Hello Message</Text>
         </Block>
     )
   }
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   main_container: {
     flex:1,
     backgroundColor:theme.COLORS.BACKGROUND
-    
   },
 
 })

@@ -3,6 +3,9 @@ import { StyleSheet,Dimensions,Image,View,Platform,SafeAreaView, ImageBackground
 import {Button,Text, Block, Input} from 'galio-framework'
 import { theme } from '../Constants';
 
+import WorksRequester from './WorksRequester';
+import WorksWorker from './WorksWorker';
+
 
 
 class Works extends React.Component {
@@ -14,13 +17,25 @@ class Works extends React.Component {
     }
   }
 
+  worksType = (type) => {
+    if(type == "requester"){
+        return <WorksRequester navigate = {this.props.navigation}/>
+    }
+    else if(type == "worker"){
+        return <WorksWorker navigate =  {this.props.navigation}/>
+    }
+    else{
+        return <Text>hello</Text>
+    }
+}
+
 
   render() {
     
     
     return (
-        <Block top  style={styles.main_container}>
-          
+        <Block   style={styles.main_container}>
+          {this.worksType("requester")}
         </Block>
     )
   }
@@ -30,7 +45,7 @@ const styles = StyleSheet.create({
 
   main_container: {
     flex:1,
-    backgroundColor:theme.COLORS.BACKGROUND
+    backgroundColor:theme.COLORS.BACKGROUND,
     
   }
 })

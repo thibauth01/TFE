@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking } from 'react-native'
+import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking,Keyboard } from 'react-native'
 import {Button,Text, Block, Input} from 'galio-framework'
-import { theme } from '../Constants';
+import { theme } from '../Constants'
+import { connect } from 'react-redux'
 
 
 
@@ -10,11 +11,64 @@ class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+        user:"requesteradmin",
+        password:"covid19-19",
+        account:undefined
     }
   }
 
-  render() {
+  login = () =>{
+        
+        const {user,password} = this.state;
+        
+		if(user==""){
+		    alert("Utilisateur manquant");
+		}
+
+		else if(password==""){
+            alert("Mot de passe manquant");
+        }
+        
+		else{
+		
+		fetch('http://192.168.1.56/TFE/Web/plateform/api/login.php',{
+			method:'POST',
+			header:{
+				'Accept': 'application/json',
+				'Content-type': 'application/json'
+			},
+			body:JSON.stringify({
+				user: user,
+				password: password
+			})
+			
+		})
+		.then((response) => response.json())
+		 .then((responseJson)=>{
+			 if(responseJson.status){
+                this.setState({
+                    account:responseJson.data
+                })
+
+                const action = { type: "GET_ACCOUNT", value: this.state.account}
+                this.props.dispatch(action)
+                this.props.navigation.navigate("Dashboard")
+                
+             }
+             else{
+				 alert(responseJson.txt);
+			 }
+		 })
+		 .catch((error)=>{
+		 console.error(error);
+		 });
+		}
+		
+		
+		Keyboard.dismiss();
+	}
+
+  render() {      
     const {navigate} = this.props.navigation;
     return (
       <Block middle  style={styles.main_container}>
@@ -30,6 +84,7 @@ class Login extends React.Component {
                         icon="user"
                         family="antdesign"
                         iconColor={theme.COLORS.SECONDARY}
+                        onChangeText={user => this.setState({user})}
                     />
                 </Block>
                 <Block  width={250}>
@@ -40,6 +95,7 @@ class Login extends React.Component {
                         right
                         password
                         viewPass
+                        onChangeText={password => this.setState({password})}
                     />
                 </Block>
             </Block>
@@ -48,7 +104,7 @@ class Login extends React.Component {
                     radius={10}
                     size={300}
                     color={theme.COLORS.SECONDARY}
-                    onPress={() => navigate('Main')}
+                    onPress={this.login}
                 >
                     Connexion
                 </Button>
@@ -110,4 +166,10 @@ const styles = StyleSheet.create({
 
 })
 
-export default Login
+const mapStateToProps = (state) =>{
+    return {
+        account: state.account.account
+    }
+}
+
+export default connect(mapStateToProps)(Login)
