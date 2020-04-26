@@ -186,13 +186,23 @@
                                                     JOIN type_work on type_work.id = work.id_type
                                                     JOIN worker on  worker.id = work.id_worker
                                                     JOIN account on account.id = worker.id_account
-                                                    WHERE id_worker IS NOT NULL AND finish = 0 AND cancelled = 0 AND id_requester = '$id_requester' order by date_start LIMIT 1");
+                                                    WHERE id_worker IS NOT NULL AND finish = 0 AND cancelled = 0 AND id_requester = '$id_requester' order by date_start");
                                           
-                    $nextWork = $nextWorkQuery->fetch(PDO::FETCH_ASSOC);
+                    $nextWorks = $nextWorkQuery->fetchAll(PDO::FETCH_ASSOC);
                     $nextWorkQuery->closeCursor();
 
-                    
-
+                    //Prendre si la date n'est pas passée
+                    $nextWork;
+                    foreach($nextWorks as $work){
+                        $tmstp =  strtotime($work['date_start']);
+                        $date =  date("Ymd", $tmstp);
+                        $now = date("Ymd");
+                        
+                        if($date >= $now){
+                            $nextWork=$work;
+                            break;
+                        }
+                    }
                     if($nextWork){
                         $tmstp =  strtotime($nextWork['date_start']);
                         $nextWork['date_start'] = date("d-m-Y", $tmstp);
@@ -267,78 +277,6 @@
 
                     ?>
                     
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h6 class="card-category">Latest work</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class=" text-primary">
-                                                <th>
-                                                    Name
-                                                </th>
-                                                <th class="text-center">
-                                                    Date
-                                                </th>
-                                                <th class="text-right">
-                                                    Salary
-                                                </th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        Keep my son
-                                                    </td>
-                                                    <td class="text-center">
-                                                        24/02/2020
-                                                    </td>
-                                                    <td class="text-right">
-                                                        25€
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Math lessons
-                                                    </td>
-                                                    <td class="text-center">
-                                                        03/01/2020
-                                                    </td>
-                                                    <td class="text-right">
-                                                        39€
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Walk my dog
-                                                    </td>
-                                                    <td class="text-center">
-                                                        22/12/2019
-                                                    </td>
-                                                    <td class="text-right">
-                                                        10€
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Assemble my wardrobe
-                                                    </td>
-                                                    <td class="text-center">
-                                                        01/10/2019
-                                                    </td>
-                                                    <td class="text-right">
-                                                        15€
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div id="errormsgSign" class="container"></div>
                 </div>
                 <footer class="footer">

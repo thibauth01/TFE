@@ -18,7 +18,6 @@ class Login extends React.Component {
   }
 
   login = () =>{
-        
         const {user,password} = this.state;
         
 		if(user==""){
@@ -52,6 +51,7 @@ class Login extends React.Component {
 
                 const action = { type: "GET_ACCOUNT", value: this.state.account}
                 this.props.dispatch(action)
+                
                 this.props.navigation.navigate("Dashboard")
                 
              }

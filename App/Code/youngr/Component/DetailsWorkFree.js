@@ -2,74 +2,57 @@ import React from 'react'
 import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking, Dimensions, ScrollView, TouchableOpacity } from 'react-native'
 import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
+import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
 
 
-class DetailsWorksTodo extends React.Component {
+class DetailsWorkFree extends React.Component {
 
   constructor(props) {
     super(props)
+    this.state={
+    }
   }
 
 
+
   render() {
-    const {state} = this.props.navigation;
+    const {state} = this.props.navigation
     
     return (
         <Block style={styles.main_container}>
-          <Block flex={1.2} style={styles.headerBlock}>
-            <Block flex={1} style={styles.profileBlock}>
-              <Image style={styles.profile} source={require(`../Images/avatar.jpg`)}></Image>
-            </Block>
-            <Block flex={2} style={styles.infoprofileBlock}>
-              <Block row >
-                <Text h3 muted>{state.params.title}</Text> 
-              </Block> 
-              <Block row space="around" width={200}>
-                <Text muted > 22 ans</Text>
-                <Text muted> Louvain-la-Neuve</Text>
-              </Block>
-              <Block row style={styles.buttonsProfile}>
-                <Button style={styles.buttonProfileMessage}  iconColor={theme.COLORS.SECONDARY}	onlyIcon iconSize={20} icon="message-circle" iconFamily="feather" flex={2}></Button>
-                <Button style={styles.buttonProfilePhone}  iconColor={theme.COLORS.DEFAULT}	onlyIcon iconSize={20} icon="phone" iconFamily="feather" flex={2}></Button>
-              </Block>      
-            </Block>
-          </Block>
-          <Block flex={0.9} space="evenly" center fluid style={styles.titlesBlock}>
-              <Text style={styles.textTitle} h3>Nettoie sale fdp</Text>
-              <Text style={styles.textTitle} h5 color={theme.COLORS.SECONDARY}>Bricolage</Text>
+         
+          <Block flex={1}  middle  style={styles.titlesBlock}>
+              <Text style={styles.textTitle} h3>{state.params.title}</Text>
+              <Text style={styles.textTitle} h5 color={theme.COLORS.SECONDARY}>{state.params.type}</Text>
           </Block>
           
-          <Block flex={3} style={styles.contentBlock}>
+          <Block flex={3} middle style={styles.contentBlock}>
             <ScrollView >
               <Block row style={styles.itemBlock}>
                 <Icon  size={25} name="calendar" family="feather" color={theme.COLORS.MUTED}/>
-                <Text  style={styles.textContent}>20 Mars 2020</Text>
-                <Block middle style={styles.progressionBlock}>
-                  <Text color={theme.COLORS.ERROR}>A Faire </Text>
-                </Block>
+                  <Text  style={styles.textContent}>{reformatDate(state.params.date_start)}</Text>
               </Block>
               <Block row style={styles.itemBlock}>
                 <Icon size={25} name="clock" family="feather" color={theme.COLORS.MUTED}/>
-                <Text style={styles.textContent}>20h30 - 22h30</Text>
+                <Text style={styles.textContent}>{reformatTime(state.params.time_start)} - {reformatTime(state.params.time_end)}</Text>
               </Block>
               <Block row style={styles.itemBlock}>
                 <Icon size={25} name="dollar-sign" family="feather" color={theme.COLORS.MUTED}/>
-                <Text style={styles.textContent}>33€</Text>
+                <Text style={styles.textContent}>{getPrice(state.params.time_start,state.params.time_end,state.params.price)}€</Text>
               </Block>
               <Block row style={styles.itemBlock}>
                 <Icon size={25} name="map-pin" family="feather" color={theme.COLORS.MUTED}/>
-                <Text style={styles.textContent}>3 Rue des cochons 6440 Louvain la Neuve </Text>
+                <Text style={styles.textContent}>{state.params.place}</Text>
               </Block>
               <Block row style={styles.itemBlock}>
                 <Icon size={25} name="tag" family="feather" color={theme.COLORS.MUTED}/>
-                <Text style={styles.textContent}>3 Rue des cochons 6440 Louvain-la Neuve fuerifurieeeeeeee eeeeeeeeee eeeeeeeeeeeeegulbvreilvsjbfttd gshtrd gsht rsht </Text>
+                  <Text style={styles.textContent}>{state.params.description}</Text>
               </Block>
             </ScrollView>
           </Block>
           
           <Block row flex={0.5} space="evenly">
-           <Button style={styles.buttonDelete}>Annuler</Button>
-           <Button style={styles.buttonAccept}>Terminé !</Button>
+           <Button style={styles.buttonDelete}>Supprimer</Button>
             
           </Block>
         </Block>
@@ -143,7 +126,7 @@ const styles = StyleSheet.create({
 
   contentBlock:{
     width:Dimensions.get("window").width,
-    paddingRight:30,
+    marginRight:30,
   },
   itemBlock:{
     marginTop:15,
@@ -157,25 +140,17 @@ const styles = StyleSheet.create({
     backgroundColor:theme.COLORS.DEFAULT,
     width:80,
     height:30,
-    marginLeft:60,
+    marginLeft:80,
     borderRadius:5,
   },
   progressionText:{
     color:theme.COLORS.ERROR
   },
   buttonDelete:{
-    backgroundColor:theme.COLORS.MUTED,
-    width:80,
+    backgroundColor:theme.COLORS.ERROR,
+    width:150,
     height:35,
   },
-  buttonAccept:{
-    backgroundColor:theme.COLORS.SECONDARY,
-    width:80,
-    height:35,
-  }
-
-
-
 })
 
-export default DetailsWorksTodo
+export default DetailsWorkFree

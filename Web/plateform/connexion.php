@@ -98,26 +98,33 @@
                                         <div class="row">
                                             <div class="col-md-3 pr-1">
                                                 <div class="form-group">
+                                                    <label for="phoneSignReq">N° Téléphone</label>
+                                                    <input type="text" class="form-control" placeholder="N° Téléphone" value="" name="phone" id="phoneSignReq">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 pr-1">
+                                                <div class="form-group">
                                                     <label for="birthdaySignReq">Date de naissance</label>
                                                     <input type="date" class="form-control" placeholder="Date de naissance" value="" name="birth" id="birthdaySignReq">
                                                 </div>
                                             </div>
-                                            <div class="col-md-7 px-1">
+                                            <div class="col-md-6 px-1">
                                                 <div class="form-group">
                                                     <label for="addressSignReq">Adresse</label>
                                                     <input type="text" class="form-control" placeholder="Adresse" value="" name="address" id="addressSignReq">
                                                 </div>
                                             </div>
-                                            <div class="col-md-2 px-1">
+                                            
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2 pr-1">
                                                 <div class="form-group">
                                                     <label for="numberSignReq">N°</label>
                                                     <input type="text" class="form-control" placeholder="N°" value="" name="number" id="numberSignReq">
                                                 </div>
                                             </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 pr-1">
+                                            <div class="col-md-2 pr-1">
                                                 <div class="form-group">
                                                     <label for="postalSignReq">Code postal</label>
                                                     <input type="text" class="form-control" placeholder="Code postal" value="" name="postal" id="postalSignReq">
@@ -191,51 +198,62 @@
                                         <div class="row">
                                             <div class="col-md-3 pr-1">
                                                 <div class="form-group">
+                                                    <label for="phoneSignReq">N° Téléphone</label>
+                                                    <input type="text" class="form-control" placeholder="N° Téléphone" value="" name="phone" id="phoneSignReq">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 pr-1">
+                                                <div class="form-group">
                                                     <label for="birthdaySignWork">Date de naissance</label>
                                                     <input type="date" class="form-control" placeholder="Date de naissance" value="" name="birth" id="birthdaySignWork">
                                                 </div>
                                             </div>
-                                            <div class="col-md-7 px-1">
+                                            <div class="col-md-6 px-1">
                                                 <div class="form-group">
                                                     <label for="addressSignWork">Adresse</label>
                                                     <input type="text" class="form-control" placeholder="Adresse" value="" name="address" id="addressSignWork">
                                                 </div>
                                             </div>
-                                            <div class="col-md-2 px-1">
+                                            
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 pr-1">
                                                 <div class="form-group">
                                                     <label for="numberSignWork">N°</label>
                                                     <input type="text" class="form-control" placeholder="N°" value="" name="number" id="numberSignWork">
                                                 </div>
                                             </div>
-
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-4 pr-1">
                                                 <div class="form-group">
                                                     <label for="postalSignWork">Code Postal</label>
                                                     <input type="text" class="form-control" placeholder="Code postal" value="" name="postal" id="postalSignWork">
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 px-1">
+                                            <div class="col-md-5 px-1">
                                                 <div class="form-group">
                                                     <label for="citySignWork">Ville</label>
                                                     <input type="text" class="form-control" placeholder="Ville" value="" name="city" id="citySignWork">
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 px-1">
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 pr-1">
                                                 <div class="form-group">
                                                     <label for="countrySignWork">Pays</label>
                                                     <input type="text" class="form-control" placeholder="Pays" value="" name="country" id="countrySignWork">
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="form-group ml-3">
-                                                <label class="pr-3">Distance Maximum (km)</label>
-                                                <input type="number" class="form-control" name="distance" max="50" min="1" value="20">
+                                            <div class="col-md-6">
+                                                <div class="form-group ml-3">
+                                                    <label class="pr-3">Distance Maximum (km)</label>
+                                                    <input type="number" class="form-control" name="distance" max="50" min="1" value="20">
+                                                </div>
                                             </div>
                                         </div>
+
+                                        
 
                                         <div class="row">
                                             <div class="col-md-4 text-right">

@@ -11,8 +11,9 @@ import Login from '../Component/Login';
 import Dashboard from '../Component/Dashboard';
 import Message from '../Component/Message';
 import Works from '../Component/Works';
-import DetailsWorksFree from '../Component/DetailsWorksFree';
-import DetailsWorksTodo from '../Component/DetailsWorksTodo';
+import DetailsWorkProposal from '../Component/DetailsWorkProposal';
+import DetailsWork from '../Component/DetailsWork'
+import DetailsWorkFree from '../Component/DetailsWorkFree'
 
 
 
@@ -87,15 +88,22 @@ const ListStackNavigator = createStackNavigator({
       
     }
   },
-  DetailsWorksFree:{
-    screen: DetailsWorksFree,
+  DetailsWorkProposal:{
+    screen: DetailsWorkProposal,
     navigationOptions: {
       title: 'Détails'
       
     }
   },
-  DetailsWorksTodo:{
-    screen:DetailsWorksTodo,
+  DetailsWork:{
+    screen:DetailsWork,
+    navigationOptions: {
+      title: 'Détails'
+      
+    }
+  },
+  DetailsWorkFree:{
+    screen:DetailsWorkFree,
     navigationOptions: {
       title: 'Détails'
       

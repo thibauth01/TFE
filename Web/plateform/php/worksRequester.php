@@ -76,6 +76,8 @@
 
                                                     $worksFree = $WorkQuery->fetchAll(PDO::FETCH_ASSOC);
                                                     $WorkQuery->closeCursor();
+
+                                                    $worksFree = notPassedWorks($worksFree);
                                                 
                                                     foreach($worksFree as $work){
                                                         $id=$work['id'];
@@ -180,7 +182,7 @@
                                         <table class="table">
                                             <tbody>
                                                 <?php
-                                                        $WorkQuery = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as name_type, id_account,star,first_name,last_name,birth_date,profile_path,price
+                                                        $WorkQuery = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as name_type, id_account,star,first_name,last_name,birth_date,profile_path,price,phone
                                                                                     FROM work
                                                                                     JOIN type_work on work.id_type = type_work.id
                                                                                     JOIN worker on id_worker = worker.id
@@ -193,7 +195,16 @@
                                                         foreach($worksTake as $work){
                                                             
                                                             $tmstp =  strtotime($work['date_start']);
-                                                            $work['date_start'] = date("d-m-Y", $tmstp);
+                                                            $work['date_start'] = date("Ymd", $tmstp);
+                                                            $now = date("Ymd");
+
+                                                            if($work['date_start'] >= $now){
+                                                                $work['date_start'] = date("d-m-Y", $tmstp);
+                                                            }
+                                                            else{
+                                                                $work['date_start'] = "A Finir";
+                                                            }
+
                                                             if($work['profile_path'] == NULL){
                                                                 $work['profile_path'] = 'img/user-1.jpg';  
                                                             }
@@ -207,10 +218,13 @@
                                                                     <td class='text-danger'>".$work['name_type']."</td>
                                                                     <td>".$work['date_start']."</td>
                                                                     <td class='td-actions text-right'>
+                                                                        <button type='button' onclick='finishJob(this);' rel='tooltip' title='' class='btn btn-success btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
+                                                                            <i class='now-ui-icons ui-1_check'></i>
+                                                                        </button>
                                                                         <button type='button' rel='tooltip' title='' class='btn btn-info btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Info Work' data-toggle='collapse' data-target='#detailTake".$work['id']."'>
                                                                             <i class='now-ui-icons travel_info'></i>
                                                                         </button>
-                                                                        <button type='button' onclick='acceptWork(this);' rel='tooltip' title='' class='btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
+                                                                        <button type='button' onclick='removeWorkTakeRequester(this);' rel='tooltip' title='' class='btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
                                                                             <i class='now-ui-icons ui-1_simple-remove'></i>
                                                                         </button>
                                                                     </td>
@@ -258,11 +272,7 @@
                                                             </p>
                                                         </div>
                                                         <p class='text-center'>
-                                                            <span class='fa fa-star checked'></span>
-                                                            <span class='fa fa-star checked'></span>
-                                                            <span class='fa fa-star checked'></span>
-                                                            <span class='fa fa-star'></span>
-                                                            <span class='fa fa-star'></span>
+                                                            ".$work['phone']."
                                                         </p>
                                                     </div>
                                                 </div>
@@ -323,31 +333,41 @@
                                     <div class="table-full-width table-responsive">
                                         <table class="table">
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/user-1.jpg" height="50px" width="50px">
-                                                    </td>
+                                            <?php
+                                                        $WorkQuery = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as name_type, id_account,star,first_name,last_name,birth_date,profile_path,price,phone
+                                                                                    FROM work
+                                                                                    JOIN type_work on work.id_type = type_work.id
+                                                                                    JOIN worker on id_worker = worker.id
+                                                                                    JOIN account on worker.id_account = account.id
+                                                                                    WHERE work.id_requester = ".$_SESSION['idTypeAccount']." AND id_worker is NOT NULL AND finish = 1 AND cancelled =0;");
 
-                                                    <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons travel_info"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="img/mike.jpg" height="50px" width="50px">
+                                                        $worksDone = $WorkQuery->fetchAll(PDO::FETCH_ASSOC);
+                                                        $WorkQuery->closeCursor();
 
-                                                    </td>
-
-                                                    <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Info Work">
-                                                            <i class="now-ui-icons travel_info"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                                                        foreach($worksDone as $work){
+                                                            
+                                                            $tmstp =  strtotime($work['date_start']);
+                                                            $work['date_start'] = date("d-m-Y", $tmstp);
+                                                            if($work['profile_path'] == NULL){
+                                                                $work['profile_path'] = 'img/user-1.jpg';  
+                                                            }
+                                                            $id=$work['id'];
+                                                            echo "<tr id='rowDone".$id."'>
+                                                                    <td style='width:60px'>
+                                                                        <img src='".$work['profile_path'] ."' height='50px' width='50px'>
+                                                                    </td>
+                
+                                                                    <td class='text-left pl-3'>".$work['title']."</td>
+                                                                    <td class='text-danger'>".$work['name_type']."</td>
+                                                                    <td>".$work['date_start']."</td>
+                                                                    <td class='td-actions text-right'>
+                                                                        <button type='button' rel='tooltip' title='' class='btn btn-info btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Info Work' data-toggle='collapse' data-target='#detailDone".$work['id']."'>
+                                                                            <i class='now-ui-icons travel_info'></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>";
+                                                        }
+                                            ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -358,108 +378,86 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-category">All Persons List</h5>
-                                    <h4 class="card-title"> Employees Stats</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class=" text-primary">
-                                                <th>
-                                                    Name
-                                                </th>
-                                                <th>
-                                                    Country
-                                                </th>
-                                                <th>
-                                                    City
-                                                </th>
-                                                <th class="text-right">
-                                                    Salary
-                                                </th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        Dakota Rice
-                                                    </td>
-                                                    <td>
-                                                        Niger
-                                                    </td>
-                                                    <td>
-                                                        Oud-Turnhout
-                                                    </td>
-                                                    <td class="text-right">
-                                                        $36,738
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Minerva Hooper
-                                                    </td>
-                                                    <td>
-                                                        Curaçao
-                                                    </td>
-                                                    <td>
-                                                        Sinaai-Waas
-                                                    </td>
-                                                    <td class="text-right">
-                                                        $23,789
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Sage Rodriguez
-                                                    </td>
-                                                    <td>
-                                                        Netherlands
-                                                    </td>
-                                                    <td>
-                                                        Baileux
-                                                    </td>
-                                                    <td class="text-right">
-                                                        $56,142
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Doris Greene
-                                                    </td>
-                                                    <td>
-                                                        Malawi
-                                                    </td>
-                                                    <td>
-                                                        Feldkirchen in Kärnten
-                                                    </td>
-                                                    <td class="text-right">
-                                                        $63,542
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Mason Porter
-                                                    </td>
-                                                    <td>
-                                                        Chile
-                                                    </td>
-                                                    <td>
-                                                        Gloucester
-                                                    </td>
-                                                    <td class="text-right">
-                                                        $78,615
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    <?php
+                        
+                        foreach($worksDone as $work){
+
+                            $tmstp =  strtotime($work['date_start']);
+                            $work['date_start'] = date("d-m-Y", $tmstp);
+                            $timeStart = date("G:i", strtotime($work['time_start']));
+                            $timeEnd = date("G:i", strtotime($work['time_end']));
+                            if($work['profile_path'] == NULL){
+                                $work['profile_path'] = 'img/user-1.jpg';  
+                            }
+                            $age = age($work['birth_date']);
+                            $minutesWork = timeSpace($work['time_start'],$work['time_end']);
+                            $price = $minutesWork * ($work['price']/60);
+
+                            echo "<div class='collapse'  id='detailDone".$work['id']."'>
+                                    <div class='row'>
+                                            <div class='col-md-3 d-flex'>
+                                                <div class='card card-user'>
+                                                    <div class='card-body'>
+                                                        <div class='text-center'>
+                                                            <a href='#'>
+                                                                <img class='avatar border-gray' src='".$work['profile_path']."' alt='Profile picture'>
+                                                                <h5 class='title'>".$work['first_name']." ".$work['last_name']."</h5>
+                                                            </a>
+                                                            <p class='description'>
+                                                                ".$age." Ans
+                                                            </p>
+                                                        </div>
+                                                        <p class='text-center'>
+                                                            ".$work['phone']."
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='col-md-9 d-flex'>
+                                                <div class='card'>
+                                                    <div class='card-header'>
+                                                        <div class='row'>
+                                                            <div class='col-md-8'>
+                                                                <h5 class='card-title'>".$work['title']."</h5>
+                                                            </div>
+                                                            <div class='col-md-4 text-right'>
+                                                                <h5 class='card-title text-danger'>".$work['name_type']."</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class='card-body'>
+                                                        <div class='row text-center mt-2'>
+                                                            <div class='col-md-3'>
+                                                                <i class='now-ui-icons ui-1_calendar-60' style='font-size:20px'></i>
+                                                                <p>".$work['date_start']."<p>
+                                                            </div>
+                                                            <div class='col-md-3'>
+                                                                <i class='now-ui-icons tech_watch-time' style='font-size:20px'></i>
+                                                                <p>".$timeStart." - ".$timeEnd."<p>
+                                                            </div>
+                                                            <div class='col-md-3'>
+                                                                <i class='now-ui-icons location_pin' style='font-size:20px'></i>
+                                                                <p>".$work['place']."<p>
+                                                            </div>
+                                                            <div class='col-md-3'>
+                                                                <i class='now-ui-icons shopping_credit-card' style='font-size:20px'></i>
+                                                                <p>".$price."€<p>
+                                                            </div>
+                                                        </div>
+                                                        <div class='row'>
+                                                            <div class='col-md-12 px-3 pt-4'>
+                                                                <p>".$work['description']."</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>";
+                        }
+                        
+                    ?>
                 </div>
                 <footer class="footer">
                     <div class="container-fluid">

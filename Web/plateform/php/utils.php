@@ -11,3 +11,17 @@ function timeSpace($start,$end){
 	return $difference;
     
 }
+function notPassedWorks($all){
+    $notPassed=array();
+    foreach($all as $work){
+        $tmstp =  strtotime($work['date_start']);
+        $date =  date("Ymd", $tmstp);
+        $now = date("Ymd");
+        
+        if($date >= $now){
+            array_push($notPassed,$work);
+        }
+    }
+    return $notPassed;
+
+}

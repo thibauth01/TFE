@@ -4,6 +4,7 @@ import {Button,Text, Block, Input,Card} from 'galio-framework'
 import { theme } from '../Constants';
 import ItemWorksFree from './ItemWorksFree'
 import { connect } from 'react-redux'
+import CardWork from './Cardwork'
 
 import {
   LineChart,
@@ -74,11 +75,16 @@ class DashboardWorker extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      itemsCount:3,
+      dataNextWorks : undefined,
+      dateNotPassed : undefined
     }
   }
 
   componentDidMount(){
-    this.getDataNextWorks().then(response => this.setState({dataNextWorks : response}) );
+    this.getDataNextWorks().then(response => this.setState({dataNextWorks : response},() => {
+      this.setState({dateNotPassed : this.removeDatePassed()})
+    }));
   }
 
   getDataNextWorks(){
@@ -106,28 +112,61 @@ class DashboardWorker extends React.Component {
 
      
   }
-  
+
+  removeDatePassed(){
+
+    for (let index = 0; index < this.state.dataNextWorks.length; index++) {
+      const elem = this.state.dataNextWorks[index];
+
+      const dateItem= new Date(elem.date_start);
+      const now = new Date();
+      var newTab = [];
+      const dat1 = dateItem.getFullYear() + dateItem.getMonth() + dateItem.getDate();
+      const dat2 = now.getFullYear() + now.getMonth() + now.getDate();
+
+      if(dat1 >= dat2){
+        newTab.push(elem);
+      }
+ 
+    }
+    return newTab;
+  }
+
+  isWorks(){
+    if(this.state.dateNotPassed != undefined){
+      if(this.state.dateNotPassed.length > 0 ){
+        return(
+          <FlatList
+              data={this.state.dateNotPassed.slice(0,this.state.itemsCount)}
+              renderItem={({ item }) => <CardWork 
+                                          navigate={this.props.navigate}
+                                          item={item}
+                                        />}
+              keyExtractor={item => item.id}
+            />
+        )
+      }
+      else{
+        return(
+          <Block style={styles.noWork}>
+            <Text h5> Aucun travail de prévu</Text>
+          </Block>
+        )
+      }
+    }
+  }
 
   render() {
   const {navigate} = this.props;
 
     return (
-        <Block  style={styles.main_container}>
-
-          {/*<Block center style={styles.titleBlock}>
-            <Text h4 color="black" style={styles.title}>Dashboard</Text>
-          </Block>*/}
-          
-          <Block flex={4}>
-            <Text h4 muted style={styles.subtitle}>Propositions</Text>
-              <FlatList
-                data={dataJobsFree}
-                renderItem={({ item }) => <ItemWorksFree navigate={this.props.navigate} title={item.title} type={item.type} date={item.date} path_profile={item.path_profile} />}
-                keyExtractor={item => item.id}
-              />
-              
+        <Block  style={styles.main_container}> 
+          <Block flex={1}>
+            <Text h4 muted style={styles.subtitle}>Prochains travaux</Text>
+            {this.isWorks()}
+       
           </Block>
-          <Block flex={3}>
+          <Block flex={1.2}>
             <Text h4 muted style={styles.subtitle}>Revenus</Text>
             <LineChart
               data={{
@@ -191,11 +230,14 @@ const styles = StyleSheet.create({
     paddingLeft:20,
     marginBottom:10
   },
-  more:{
-    color:theme.COLORS.MUTED,
-    fontSize:15
+  noWork:{
+    marginBottom:10,
+    backgroundColor:theme.COLORS.DEFAULT,
+    marginLeft:10,
+    height:50,
+    borderRadius:10,
+    width:Dimensions.get("window").width-20
   }
-
 
 })
 

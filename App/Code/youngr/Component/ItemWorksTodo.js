@@ -14,14 +14,14 @@ class ItemWorksTodo extends React.Component {
   }
 
   getStatut(date){
-    const dateMoment = moment(date).format('YYYY MM DD')
-    const now = moment().format('YYYY MM DD')
-    
+    const dateMoment = new Date(date);
+    const now = new Date();
+    console.log(dateMoment.getFullYear())
     if(dateMoment >= now){
-      return moment(date).format('Do MMM YYYY')
+      return dateMoment.getDate() + "-" + dateMoment.getMonth() + "-" + dateMoment.getFullYear()
     }
     else{
-      return "Terminé"
+      return dateMoment.getDate() + "-" + dateMoment.getMonth() + "-" + dateMoment.getFullYear()
     }
   }
 

@@ -8,6 +8,10 @@ import { theme } from '../Constants';
 import { block } from 'react-native-reanimated';
 import ItemWorksTodo from './ItemWorksTodo'
 import { connect } from 'react-redux'
+import CardWork from './Cardwork';
+import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
+
+
 
 
 import {
@@ -50,18 +54,20 @@ class DashboardRequester extends React.Component {
     super(props)
     this.state = {
       itemsCount:3,
-      dataNextWorks : undefined
+      dataNextWorks : undefined,
+      dateNotPassed : undefined
     }
   }
 
   
 
   componentDidMount(){
-    this.getDataNextWorks().then(response => this.setState({dataNextWorks : response}) );
+    this.getDataNextWorks().then(response => this.setState({dataNextWorks : response},() => {
+      this.setState({dateNotPassed : this.removeDatePassed()})
+    }));  
   }
 
   getDataNextWorks(){
-
     return fetch('http://192.168.1.56/TFE/Web/plateform/api/nextWorks.php',{
       method:'POST',
       header:{
@@ -85,66 +91,124 @@ class DashboardRequester extends React.Component {
 
      
   }
-  
-  render() {
-    const {navigate} = this.props;
 
-    return (
-      <Block  style={styles.main_container}>
+  removeDatePassed(){
 
-        <Block flex={4}>
-          <Text h4 muted style={styles.subtitle}>Prochains travaux</Text>
+    for (let index = 0; index < this.state.dataNextWorks.length; index++) {
+      const elem = this.state.dataNextWorks[index];
+
+      const dateItem= new Date(elem.date_start);
+      const now = new Date();
+      var newTab = [];
+      const dat1 = dateItem.getFullYear() + dateItem.getMonth() + dateItem.getDate();
+      const dat2 = now.getFullYear() + now.getMonth() + now.getDate();
+
+
+      if(dat1 >= dat2){
+        newTab.push(elem);
+      }
+ 
+    }
+    return newTab;
+  }
+
+  isWorks(){
+    if(this.state.dateNotPassed != undefined){
+      if(this.state.dateNotPassed.length > 0){
+        return(
+          <Block middle>
             <FlatList
-              data={this.state.dataNextWorks == undefined ? this.state.dataNextWorks:this.state.dataNextWorks.slice(0,this.state.itemsCount)}
-              renderItem={({ item }) => <ItemWorksTodo 
+              data={this.state.dateNotPassed.slice(0,this.state.itemsCount)}
+              renderItem={({ item }) => <CardWork 
                                           navigate={this.props.navigate}
-                                          title={item.title} 
-                                          type={item.type} 
-                                          date_start={item.date_start} 
-                                          profile_path={item.profile_path} 
+                                          item={item}
                                         />}
               keyExtractor={item => item.id}
             />
-              
-        </Block>
-      
-        <Block flex={4}>
-          <Text h4 muted style={styles.subtitle}>Prochain travailleur</Text>
+          </Block>
+        )
+      }
+      else{
+        return(
+          <Block style={styles.noWork}>
+            <Text h5> Aucun travail de prévu</Text>
+          </Block>
+          
+        )
+      }
+    }
+  }
+
+  isWorker(){
+    if(this.state.dateNotPassed != undefined){
+      if(this.state.dateNotPassed.length > 0){
+        const elem = this.state.dateNotPassed[0]
+
+        return(
+          
           <Block style={styles.nextWork_block}>
             <Block row style={{marginTop:8}}>
-              <Image/>
               <Image style={styles.profile} source={require(`../Images/avatar.jpg`)}></Image>
               <Block  space="evenly" flex={1}>
-                <Text h5>Marcus Rashford</Text>
+                <Text h5>{elem.first_name} {elem.last_name}</Text>
                 <Block row >
-                  <Text muted>22 ans</Text>
+                  <Text muted>{getAge(elem.birth_date)} ans</Text>
                 </Block>
               </Block>
               <Block middle flex={0.3}>
-                <Text size={17} color={theme.COLORS.SECONDARY}>33€</Text>
+                <Text size={17} color={theme.COLORS.SECONDARY}>{getPrice(elem.time_start,elem.time_end,elem.price)}€</Text>
               </Block>
             </Block>
             <Block  middle style={styles.title_block}>
-              <Text h4> Nettoyage de tout</Text>
-              <Text h6 color={theme.COLORS.SECONDARY}>Bricolage</Text>
+              <Text h4>{elem.title}</Text>
+              <Text h6 color={theme.COLORS.SECONDARY}>{elem.type}</Text>
             </Block>
             <Block style={{marginTop:20}}>
               <Block row style={styles.itemBlock} space="between">
                 <Block row>
                   <Icon  size={25} name="calendar" family="feather" color={theme.COLORS.MUTED}/>
-                  <Text  style={styles.textContent}>20 Mars 2020</Text>
+                  <Text  style={styles.textContent}>{reformatDate(elem.date_start)}</Text>
                 </Block>
                 <Block row right style={{marginRight:10}}>
                   <Icon size={25} name="clock" family="feather" color={theme.COLORS.MUTED}/>
-                  <Text style={styles.textContent}>20h30 - 22h30</Text>
+                  <Text style={styles.textContent}>{reformatTime(elem.time_start)} - {reformatTime(elem.time_end)}</Text>
                 </Block>
               </Block>
               <Block row style={styles.itemBlock}>
                 <Icon size={25} name="map-pin" family="feather" color={theme.COLORS.MUTED}/>
-                <Text style={styles.textContent}>3 Rue des cochons 6440 Louvain la Neuve Belgique Afrique mon cul </Text>
+                <Text style={styles.textContent}>{elem.place} </Text>
               </Block>
             </Block>
           </Block>
+        )
+
+      }
+      else{
+        return(
+          <Block style={styles.noWork}>
+            <Text h5> Aucun travail de prévu</Text>
+          </Block>
+          
+        )
+      }
+    }
+  }
+
+
+  
+  render() {
+    
+    return (
+      <Block  style={styles.main_container}>
+
+        <Block >
+          <Text h4 muted style={styles.subtitle}>Prochains travaux</Text>
+            {this.isWorks()}   
+        </Block>
+      
+        <Block>
+          <Text h4 muted style={styles.subtitle}>Prochain travailleur</Text>
+          {this.isWorker()}
         </Block>
 
     </Block>
@@ -205,6 +269,14 @@ const styles = StyleSheet.create({
     paddingTop:2,
     fontSize:15,
     marginLeft:10
+  },
+  noWork:{
+    marginBottom:10,
+    backgroundColor:theme.COLORS.DEFAULT,
+    marginLeft:10,
+    height:50,
+    borderRadius:10,
+    width:Dimensions.get("window").width-20
   }
 
 

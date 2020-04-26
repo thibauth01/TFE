@@ -84,3 +84,46 @@ function removeWorkTakeRequester(elem){
 
     });
 }
+
+function finishJob(elem){
+    var row= $(elem).parent().parent();
+    var id = row.attr('id').substring(7);
+
+    Swal.fire({
+        title: 'Marquer comme achevé?',
+        text: "Ce travail est il terminé et payé ?",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui'
+
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: 'php/finishJob.php',
+                type: 'POST',
+                data: {
+                    'id':id
+                }
+            }).done(function(data) {
+                Swal.fire(
+                    'Voila !',
+                    'Travail terminé!',
+                    'success'
+                ).then((result) => {
+                    $(row).remove();
+                    $('#detailTake'+id).remove();
+                })
+
+
+            }).fail(function(data) {
+                Swal.fire(
+                    'Impossible de finir le travail !',
+                    'Veuillez reessayer ou contacter le webmaster',
+                    'error'
+                );
+            });
+        }
+
+    });
+}

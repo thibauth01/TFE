@@ -12,6 +12,7 @@ $username = trim(htmlspecialchars($_POST['username']));
 $password = trim(htmlspecialchars($_POST['password']));
 $confirm_password = trim(htmlspecialchars($_POST['Confirmpassword']));
 $birth = trim(htmlspecialchars($_POST['birth']));
+$phone = trim(htmlspecialchars($_POST['phone']));
 $street = trim(htmlspecialchars($_POST['address'])) . " " .trim(htmlspecialchars($_POST['number']));
 $postcode = trim(htmlspecialchars($_POST['postal']));
 $city = trim(htmlspecialchars($_POST['city']));  
@@ -56,6 +57,10 @@ if(age($birth) < 15 || age($birth) > 25){
     $return['statut'] = false;
     array_push($messages,'Vous devez avoir entre 15et 25 ans'); 
 }
+if(!preg_match('/(0[0-9]{9})/', $phone)) {
+    $return['statut'] = false;
+    array_push($messages,'Numéro de téléphone invalide'); 
+}
 
 
 
@@ -95,7 +100,7 @@ if($return['statut'] == false){
 
 else{
     $password=password_hash($password, PASSWORD_DEFAULT);
-    $accountQuery = $dbh->query( "INSERT INTO `account` (`first_name`,`last_name`,`email`,`username`,`password`,`birth_date`,`street`,`postcode`,`city`,`country`,`premium`,`type`) VALUES('$first_name','$last_name','$email','$username','$password','$birth','$street','$postcode','$city','$country',0,'worker')");
+    $accountQuery = $dbh->query( "INSERT INTO `account` (`first_name`,`last_name`,`email`,`username`,`password`,`birth_date`,`street`,`postcode`,`city`,`country`,`premium`,`type`,`phone`) VALUES('$first_name','$last_name','$email','$username','$password','$birth','$street','$postcode','$city','$country',0,'worker','$phone')");
     if ($accountQuery) {
         $accountQuery->closeCursor();
     } 
