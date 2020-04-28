@@ -29,6 +29,10 @@
 }
 
 #textareaSend{
-    
+    text-indent: 10px;
     border-top: 0.5px solid #868e96;
+}
+
+.conv{
+    cursor: pointer;
 }

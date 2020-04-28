@@ -40,13 +40,26 @@
                         <?php
                             foreach($works as $work){
                                 $id=$work['id'];
-                                echo "<a onclick='getMessages($id);' class='list-group-item list-group-item-action list-group-item-light rounded-0'>
+
+                                $Query = $dbh->query(" SELECT * FROM message WHERE id_work = '$id' ORDER BY sendtime desc LIMIT 1");
+                                $lastMessage = $Query->fetch(PDO::FETCH_ASSOC);
+                                $Query->closeCursor();
+                                $lastcontent = $lastMessage['content'];
+
+                                setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
+
+                                $tmstp =  strtotime($lastMessage['sendtime']);
+                                $lastdate = strftime("%e %b", $tmstp);
+
+
+                                
+                                echo "<a onclick='getMessages($id);' class='conv list-group-item list-group-item-action list-group-item-light rounded-0'>
                                         <div class='media'><img src='img/user-1.jpg' alt='user' width='50' class='rounded-circle'>
                                             <div class='media-body ml-4'>
                                                 <div class='d-flex align-items-center justify-content-between mb-1'>
-                                                    <h6 class='mb-0'>".$work['title']."</h6><small class='small font-weight-bold'>25 Dec</small>
+                                                    <h6 class='mb-0'>".$work['title']."</h6><small class='small font-weight-bold'>".$lastdate."</small>
                                                 </div>
-                                                <p class='font-italic text-muted mb-0 text-small'>Ok for 16888</p>
+                                                <p class='font-italic text-muted mb-0 text-small'>".$lastcontent."</p>
                                             </div>
                                         </div>
                                     </a>";
@@ -90,7 +103,7 @@
 
 
              <!-- Typing area -->
-             <form onsubmit="event.preventDefault(); sendMessage();" class="bg-light">
+             <form id="formSendMessage" onsubmit="event.preventDefault(); sendMessage();" class="bg-light">
                 <div class="row" >
                     <div class="col-md-10" >
                         <textarea id="textareaSend" type="text" placeholder="Ecrivez un message" class="form-control "></textarea>

@@ -41,7 +41,7 @@
 </head>
 
 <body class="">
-    <div class="wrapper ">
+    <div class="wrapper">
 
         <?php require_once ('inc/header_sidebar.inc.php'); ?>
 

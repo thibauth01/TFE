@@ -3,8 +3,46 @@ const monthNames = ["Janv", "Fevr", "Mars", "Avr", "Mai", "Juin",
 ];
 
 var currentConv;
+var timerConv;
+var numberMessages;
+
+function stopInterval(){
+    clearInterval(timerConv);
+}
 
 function getMessages(idWork){
+    numberMessages = 0;
+    stopInterval();
+    numberMessages = countMessages(idWork);
+    getMessage(idWork);
+
+    timerConv = setInterval(function(){
+        var count = countMessages(idWork);
+        if(count != numberMessages){
+            getMessage(idWork);
+            numberMessages = count;
+        }
+    },5000);
+}
+
+function countMessages(idWork){
+    var toreturn;
+    $.ajax({
+        url:'php/numberMessages.php',
+        type:'post',
+        data:{idWork:idWork},
+        success:function(data){
+            data= JSON.parse(data);
+            toreturn = data.count;
+        },
+        async:false
+
+    })
+    return toreturn;
+
+}
+
+function getMessage(idWork){
     $.ajax({
         type:'post',
         url:'php/getMessages.php',
@@ -51,10 +89,13 @@ function getMessages(idWork){
             scroll.scrollTop = scroll.scrollHeight;
         }
     })
+    
+    
 }
 
 function sendMessage(){
     var text = $("#textareaSend").val();
+    console.log(text);
     
     $.ajax({
         url:'php/sendMessage.php',
@@ -64,6 +105,21 @@ function sendMessage(){
             text : text
         },
         success:function(data){
+            $("#formSendMessage")[0].reset()
+            var current = $("#chatBox").html();
+            var date = new Date();
+            var showDate = date.getHours() +":"+date.getMinutes() + " | " + monthNames[date.getMonth()] + " " + date.getDate();
+            current +=  `<div class="media w-50 ml-auto mb-3">
+                            <div class="media-body">
+                                <div class="bg-primary rounded py-2 px-3 mb-2">
+                                    <p class="text-small mb-0 text-white">`+ text +`</p>
+                                </div>
+                                <p class="small text-muted">`+showDate +`</p>
+                            </div>
+                        </div>`;
+            $("#chatBox").html(current);
+            var scroll = document.getElementById('chatBox');
+            scroll.scrollTop = scroll.scrollHeight;
         }
     })
 }
