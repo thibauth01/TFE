@@ -9,6 +9,8 @@
 
     $messages = $Query->fetchAll(PDO::FETCH_ASSOC);
     $Query->closeCursor();
+
+    $Query = $dbh->query("UPDATE message SET isRead = 1 WHERE id_work =".$_POST['id']." AND id_sender !=".$_SESSION['idTypeAccount']);
     $toReturn = array(
         "messages" => $messages,
         "idTypeAccount" => $_SESSION['idTypeAccount']

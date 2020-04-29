@@ -51,8 +51,10 @@
                                 $tmstp =  strtotime($lastMessage['sendtime']);
                                 $lastdate = strftime("%e %b", $tmstp);
 
+                                if($lastMessage['isRead'] == 0 && $lastMessage['id_sender'] != $_SESSION['idTypeAccount']){
+                                    $lastcontent = "<strong>".$lastcontent."</strong>";
+                                }
 
-                                
                                 echo "<a onclick='getMessages($id);' class='conv list-group-item list-group-item-action list-group-item-light rounded-0'>
                                         <div class='media'><img src='img/user-1.jpg' alt='user' width='50' class='rounded-circle'>
                                             <div class='media-body ml-4'>
@@ -110,7 +112,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="input-group-append">
-                            <button  type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+                            <button  type="submit" class="btn btn-link"> <i class="text-primary fa fa-paper-plane"></i></button>
                         </div>
                     </div>
                 </div>

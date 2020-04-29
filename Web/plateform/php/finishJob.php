@@ -6,7 +6,8 @@ session_start();
 
 
 $Query = $dbh->query(" UPDATE work
-                        SET finish = 1
+                        SET finish = 1,
+                        paid = 1
                         WHERE id =".$_POST['id']);
 
 $Query->closeCursor();

@@ -108,7 +108,7 @@
                                                                     <button type='button' rel='tooltip' title='' class='btn btn-info btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Info Work' data-toggle='collapse' data-target='#detailTodo".$work['id']."'>
                                                                         <i class='now-ui-icons travel_info'></i>
                                                                     </button>
-                                                                    <button type='button' onclick='acceptWork(this);' rel='tooltip' title='' class='btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
+                                                                    <button type='button' onclick='removeWorkWorker(this);' rel='tooltip' title='' class='btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
                                                                         <i class='now-ui-icons ui-1_simple-remove'></i>
                                                                     </button>
                                                                 </td>

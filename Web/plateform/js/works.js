@@ -65,7 +65,7 @@ function removeWorkTakeRequester(elem){
             }).done(function(data) {
                 Swal.fire(
                     'Voila !',
-                    'Travail supprimé !',
+                    'Travail supprimé!',
                     'success'
                 ).then((result) => {
                     $(row).remove();
@@ -76,6 +76,49 @@ function removeWorkTakeRequester(elem){
             }).fail(function(data) {
                 Swal.fire(
                     'Impossible de supprimer le travail !',
+                    'Veuillez reessayer ou contacter le webmaster',
+                    'error'
+                );
+            });
+        }
+
+    });
+}
+
+function removeWorkWorker(elem){
+    var row= $(elem).parent().parent();
+    var id = row.attr('id').substring(7);
+    
+    Swal.fire({
+        title: 'Vous ne souhaitez plus réaliser ce travail ?',
+        text: " La personne en sera prevenue !",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui'
+
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: 'php/removeWorker.php',
+                type: 'POST',
+                data: {
+                    'id':id
+                }
+            }).done(function(data) {
+                Swal.fire(
+                    'Voila !',
+                    'Travail enlevé !',
+                    'success'
+                ).then((result) => {
+                    $(row).remove();
+                    $('#detailTodo'+id).remove();
+                })
+
+
+            }).fail(function(data) {
+                Swal.fire(
+                    'Impossible d\'enlever le travail !',
                     'Veuillez reessayer ou contacter le webmaster',
                     'error'
                 );

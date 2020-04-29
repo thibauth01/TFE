@@ -1,13 +1,35 @@
+<?php
+    require_once('inc/db_connect.php');
+    if($_SESSION['typeAccount'] == "requester"){
+        $Query = $dbh->query("SELECT count(id) as count FROM message WHERE isRead = 0 AND id_sender != ".$_SESSION['idTypeAccount']." AND  id_work in
+                                (SELECT id FROM work WHERE id_requester = ".$_SESSION['idTypeAccount']." AND finish = 0 AND cancelled = 0 AND paid = 0 AND id_worker is not null)");
 
+        $newMessages = $Query->fetch(PDO::FETCH_ASSOC);
+        $Query->closeCursor();
+        $newMessages = $newMessages['count'];
+        
+    }
+
+    else if($_SESSION['typeAccount'] == "worker"){
+        $Query = $dbh->query("SELECT count(id) as count FROM message WHERE isRead = 0 AND id_sender != ".$_SESSION['idTypeAccount']." AND  id_work in
+                                (SELECT id FROM work WHERE id_worker = ".$_SESSION['idTypeAccount']." AND finish = 0 AND cancelled = 0 AND paid = 0)");
+
+        $newMessages = $Query->fetch(PDO::FETCH_ASSOC);
+        $Query->closeCursor();
+        $newMessages = $newMessages['count'];
+    }
+
+    if($newMessages < 1){
+        $newMessages ="";
+    }
+?>
 
 <div class="sidebar" data-color="orange" id="headerSidebar">
             <!--
             Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
             -->
-            <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-                    YGR
-                </a>
+            <div class="logo text-center">
+                
                 <a href="http://www.creative-tim.com" class="simple-text logo-normal">
                     Youngr
                 </a>
@@ -29,7 +51,14 @@
                     <li>
                         <a href="messages.php">
                             <i class="now-ui-icons ui-1_send"></i>
-                            <p>Messages</p>
+                            <p>Messages <strong class="pl-5"><?php echo $newMessages ?></strong></p> 
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="account.php">
+                            <i class="now-ui-icons users_single-02"></i>
+                            <p>Mon compte</p>
                         </a>
                     </li>
                     <li>
@@ -44,12 +73,7 @@
                             <p>Maps</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="notifications.html">
-                            <i class="now-ui-icons ui-1_bell-53"></i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>
+                    
                     <li>
                         <a href="user.html">
                             <i class="now-ui-icons users_single-02"></i>

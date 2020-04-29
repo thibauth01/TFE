@@ -13,8 +13,6 @@
                 </p>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="account.php">Mon compte</a>
-                <a class="dropdown-item" href="notification.php">Notifications</a>
                 <a class="dropdown-item" href="connexion.php">Deconnexion</a>
             </div>
         </li>
