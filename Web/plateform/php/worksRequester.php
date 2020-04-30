@@ -16,7 +16,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <!-- CSS Files -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
@@ -218,11 +218,14 @@
                                                                     <td class='text-danger'>".$work['name_type']."</td>
                                                                     <td>".$work['date_start']."</td>
                                                                     <td class='td-actions text-right'>
-                                                                        <button type='button' onclick='finishJob(this);' rel='tooltip' title='' class='btn btn-success btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
+                                                                        <button type='button' onclick='finishJob(this);' rel='tooltip' title='' class='btn btn-success btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Terminer le travail' >
                                                                             <i class='now-ui-icons ui-1_check'></i>
                                                                         </button>
                                                                         <button type='button' rel='tooltip' title='' class='btn btn-info btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Info Work' data-toggle='collapse' data-target='#detailTake".$work['id']."'>
                                                                             <i class='now-ui-icons travel_info'></i>
+                                                                        </button>
+                                                                        <button type='button' onclick='refuseWorker(this);' rel='tooltip' title='' class='btn btn-warning btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Refuse worker' >
+                                                                            <i class='fa fa-user-slash'></i>
                                                                         </button>
                                                                         <button type='button' onclick='removeWorkTakeRequester(this);' rel='tooltip' title='' class='btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
                                                                             <i class='now-ui-icons ui-1_simple-remove'></i>

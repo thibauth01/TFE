@@ -4,6 +4,17 @@ function myAlertBottom(){
         $(".myAlert-bottom").hide(); 
     }, 10000);
 }
+function PreviewImage(input,id) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            $('#' + id).attr('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 $(document).ready(function(){
     $('#updateAccountWorker').on('submit',function(event){
         event.preventDefault();
@@ -41,7 +52,9 @@ $(document).ready(function(){
             processData: false,
             contentType: false,
             cache: false
-        })
+        });
+
+        
         
     });
 
@@ -83,5 +96,10 @@ $(document).ready(function(){
             cache: false
         })
         
+    });
+
+
+    $('#inputAvatar').change(function(){
+        PreviewImage(this,'imgAvatar');
     });
 });

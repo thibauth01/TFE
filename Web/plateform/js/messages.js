@@ -88,14 +88,15 @@ function getMessage(idWork){
             var scroll = document.getElementById('chatBox');
             scroll.scrollTop = scroll.scrollHeight;
         }
-    })
+    });
+
+    
     
     
 }
 
 function sendMessage(){
     var text = $("#textareaSend").val();
-    console.log(text);
     
     $.ajax({
         url:'php/sendMessage.php',

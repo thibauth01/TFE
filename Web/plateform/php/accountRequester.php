@@ -20,6 +20,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="css/custom.css" rel="stylesheet" />
     <link href="demo/demo.css" rel="stylesheet" />
 </head>
 
@@ -70,6 +71,12 @@
                             <div class="card">
                                 <div class="card-header text-center text-primary">
                                     <h2 class="title">Modifiez vos informations</h2>
+                                </div>
+                                <div class="ml-4 mb-3">
+                                    <div class="adduser text-center">
+                                        <img width="60px" id="imgAvatar" onclick="document.getElementById('inputAvatar').click();" class="mx-2 my-2" src="img/add-user.png" alt="add-user"/>
+                                    </div>
+                                    <input placeholder="3" id="inputAvatar" type="file" style="display:none"/>
                                 </div>
                                 <div class="card-body">
                                     <div class="">

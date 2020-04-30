@@ -56,7 +56,8 @@
                                     JOIN type_work on work.id_type = type_work.id
                                     JOIN requester on id_requester = requester.id
                                     JOIN account on requester.id_account = account.id
-                                    WHERE work.id_worker is NULL AND cancelled =0 AND finish = 0 AND min_age_worker <=".$age);
+                                    WHERE work.id_worker is NULL AND cancelled =0 AND finish = 0 AND min_age_worker <=".$age." AND work.id 
+                                    NOT IN (SELECT id_work from refused_worker WHERE id_worker =".$idTypeAccount.")");
 
     $worksFree = $worksFreeQuery->fetchAll(PDO::FETCH_ASSOC);
     $worksFreeQuery->closeCursor();
