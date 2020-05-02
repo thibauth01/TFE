@@ -1,9 +1,10 @@
 import React from 'react'
-import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking,TouchableOpacity, Dimensions } from 'react-native'
+import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking,TouchableOpacity, Dimensions, ScrollView } from 'react-native'
 import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
 import { connect } from 'react-redux'
 import {getAge,reformatDate,reformatTime,getPrice,loading} from '../Constants/Utils'
+
 
 
 
@@ -17,7 +18,9 @@ class Messages extends React.Component {
       idTypeAccount:undefined,
       messages:[],
       text:undefined,
-      viewMessages:undefined
+      viewMessages:undefined,
+      numberOfMessages:0,
+      interval:undefined
     }
   }
 
@@ -27,9 +30,43 @@ class Messages extends React.Component {
         this.showMessages()
       }))
     });
-    
-
+    this.timer();
+  
   }
+
+  componentWillUnmount() {
+    clearInterval(this.state.interval);
+  }
+
+  timer(){
+      this.state.interval = setInterval(() => {
+        fetch('http://192.168.1.56/TFE/Web/plateform/api/numberOfMessages.php',{
+          method:'POST',
+          header:{
+              'Accept': 'application/json',
+              'Content-type': 'application/json'
+          },
+          body:JSON.stringify({
+              idWork: this.state.idWork,
+          })
+          
+      })
+      .then((response) => response.json())
+          .then((responseJson)=>{
+              if(responseJson.data.count > this.state.numberOfMessages){
+                this.getData().then(response => this.setState({messages:response},()=>{
+                  this.showMessages()
+                }));
+                this.setState({numberOfMessages:responseJson.data.count})
+              }
+          })
+          .catch((error)=>{
+              console.error(error);
+          });
+
+    }, 5000);
+  }
+
 
   getData(){
     return fetch('http://192.168.1.56/TFE/Web/plateform/api/messages.php',{
@@ -62,19 +99,21 @@ class Messages extends React.Component {
       const view  = this.state.messages.map((props,key) => {
         if(props.id_sender == this.state.idTypeAccount){
           return(
-            <Block right>
+            <Block right style={styles.blockMsg}>
               <Block style={styles.msgMe}>
                 <Text color={theme.COLORS.DEFAULT} size={16} style={styles.textMe}>{props.content}</Text>
               </Block>
+             
             </Block>
           )
         }
         else{
           return(
-            <Block left>
+            <Block left style={styles.blockMsg}>
               <Block style={styles.msgOther} >
                 <Text muted style={styles.textOther} size={16}> {props.content}</Text>
               </Block>
+              
             </Block>
           )
         }
@@ -88,7 +127,6 @@ class Messages extends React.Component {
   }
 
   sendMessage = () =>{
-    console.log("send");
     if(this.state.text == undefined || this.state.text == ""){
       alert("Message vide")
     }
@@ -105,8 +143,35 @@ class Messages extends React.Component {
       this.setState({
         viewMessages:[...this.state.viewMessages, newView]
       });
-            /*ARRIVER ICI =>  FAIRE L'ENVOIT DE MESSAGES (+ACTUALISATION AU RETOUR DEMANDER GAUTHIER) 
-            MAIS AVANT CHANGER POST EN GET DE ASANA BISOU*/
+
+
+      fetch('http://192.168.1.56/TFE/Web/plateform/api/sendMessage.php',{
+        method:'POST',
+        header:{
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+        },
+        body:JSON.stringify({
+            idWork: this.state.idWork,
+            type: this.props.account.type,
+            idAccount: this.props.account.id,
+            content:this.state.text
+        })
+        
+    })
+    .then((response) => response.json())
+        .then((responseJson)=>{
+            if(responseJson.txt != null){
+              alert(responseJson.txt);
+            }
+            this.setState({text:undefined})
+        
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+
+      
 
     }
   }
@@ -117,7 +182,12 @@ class Messages extends React.Component {
     return (
         <Block style={styles.main_container}>
           <Block style={styles.MessagesBox} flex={8}>
-            {this.state.viewMessages}
+            <ScrollView 
+              ref={ref => {this.scrollView = ref}}
+              onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}
+            >
+              {this.state.viewMessages}
+            </ScrollView>
           </Block>
           <Block style={styles.sendBar} flex={1}>
             <Block row>
@@ -127,14 +197,14 @@ class Messages extends React.Component {
                   placeholder="Votre message" 
                   right
                   borderless
-                  family="antdesign"
                   iconColor={theme.COLORS.SECONDARY}
+                  value={this.state.text}
                   onChangeText={text => this.setState({text})}
                 />
               </Block>
               <Block flex={1} center>
                 <TouchableOpacity onPress={this.sendMessage}>
-                  <Icon name="send" family="feather" size={25} color={theme.COLORS.SECONDARY}/>
+                  <Icon name="send" family="ionicons" size={30} color={theme.COLORS.SECONDARY}/>
                 </TouchableOpacity>
               </Block>
             </Block>
@@ -153,7 +223,6 @@ const styles = StyleSheet.create({
   },
   MessagesBox:{
     justifyContent:"flex-end",
-    marginTop:20,
     marginBottom:10
   },
 
@@ -185,6 +254,13 @@ const styles = StyleSheet.create({
   textOther:{
     paddingLeft:15,
     paddingRight:15
+  },
+  blockMsg:{
+    marginBottom:10,
+  },
+  timeSend:{
+    marginLeft:10,
+    marginRight:10
   },
   sendBar:{
     flex:1,

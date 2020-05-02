@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import ItemWorksTodo from './ItemWorksTodo'
 import CardWork from './Cardwork';
 import CardWorkNotAttributed from './CardWorkNotAttributed';
+import { NavigationEvents } from 'react-navigation';
 import {getAge,reformatDate,reformatTime,getPrice,loading} from '../Constants/Utils'
 
 
@@ -170,6 +171,9 @@ class WorksRequester extends React.Component {
 
     return (
       <Block style={styles.main_container}>
+        <NavigationEvents
+                onDidFocus={() => this.componentDidMount()}
+            />
         <ScrollView>
           <Block  style={styles.block_content}> 
               <Text h4 muted style={styles.subtitle}>Mes travaux libres</Text>

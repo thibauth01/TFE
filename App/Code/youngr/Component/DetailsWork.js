@@ -3,6 +3,7 @@ import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking, D
 import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
 import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 
 class DetailsWork extends React.Component {
@@ -10,7 +11,85 @@ class DetailsWork extends React.Component {
   constructor(props) {
     super(props)
     this.state={
+      showAlert:false,
+      typeAlert:undefined
     }
+  }
+
+  showAlert = (bool) => {
+    if(bool){
+      this.setState({
+        showAlert: true,
+        typeAlert:true
+      });
+    }
+    else{
+      this.setState({
+        showAlert: true,
+        typeAlert:false
+      });
+    }
+    
+  };
+
+  hideAlert = () => {
+    this.setState({
+      showAlert: false
+    });
+  };
+
+ 
+
+  finish = ()=>{
+   
+    const idWork = this.props.navigation.state.params.id;
+    fetch('http://192.168.1.56/TFE/Web/plateform/api/finishWork.php',{
+      method:'POST',
+      header:{
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+          idWork: idWork
+      })
+      
+    })
+    .then((response) => response.json())
+        .then((responseJson)=>{
+            if(!responseJson.status){
+              alert("impossible de terminer")
+            };
+        
+        })
+        .catch((error)=>{
+            console.error(error);
+        }); 
+  }
+
+  cancel=()=>{
+    const idWork = this.props.navigation.state.params.id;
+
+    fetch('http://192.168.1.56/TFE/Web/plateform/api/removeWork.php',{
+      method:'POST',
+      header:{
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+          idWork: idWork
+      })
+      
+    })
+    .then((response) => response.json())
+        .then((responseJson)=>{
+            if(!responseJson.status){
+              alert("impossible de supprimer")
+            };
+        
+        })
+        .catch((error)=>{
+            console.error(error);
+        }); 
   }
 
 
@@ -68,10 +147,38 @@ class DetailsWork extends React.Component {
           </Block>
           
           <Block row flex={0.6} space="evenly">
-           <Button style={styles.buttonDelete}>Annuler</Button>
-           <Button style={styles.buttonAccept}>Terminé !</Button>
+           <Button style={styles.buttonDelete} onPress={this.showAlert.bind(this,false)} >Annuler</Button>
+           <Button style={styles.buttonAccept} onPress={this.showAlert.bind(this,true)}>Terminé !</Button>
             
           </Block>
+          <AwesomeAlert
+            show={this.state.showAlert}
+            showProgress={false}
+            title={this.state.typeAlert ?"Terminer ce travail" :"Annuler ce travail"}
+            message="Etes vous sûr?"
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={false}
+            showCancelButton={true}
+            showConfirmButton={true}
+            cancelText="Non"
+            confirmText={this.state.typeAlert ?"Oui, terminez-le" :"Oui, annulez-le"}
+            confirmButtonColor={theme.COLORS.SECONDARY}
+            onCancelPressed={() => {
+              this.hideAlert();
+            }}
+            onConfirmPressed={() => {
+              if(this.state.typeAlert){
+                this.finish();
+              }
+              else{
+                this.cancel();
+              }
+              
+              this.hideAlert();
+              this.props.navigation.goBack();
+            }}
+          />
+          
         </Block>
     )
   }

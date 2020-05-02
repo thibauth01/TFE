@@ -36,39 +36,6 @@ const datasGraph=[
   }
 ];
 
-const dataJobsFree = [
-  {
-    id: '1',
-    title: 'Keep my dog',
-    date:'24/03/2020',
-    type:'Petsitting',
-    path_profile:"comment.png"
-  },
-  {
-    id: '2',
-    title: 'Jean-christophe',
-    date:'24/03/2025',
-    type:'Fils de pute',
-    path_profile:'http://i.pravatar.cc/100?id=skater'
-  },
-  {
-    id: '3',
-    title: 'Mange tes mort',
-    date:'Lundi',
-    type:'Chez tes voisin',
-    path_profile:'http://i.pravatar.cc/100?id=skater'
-  },
-  {
-    id: '4',
-    title: 'Yolo',
-    date:'Lundi',
-    type:'Chez tes voisin',
-    path_profile:'http://i.pravatar.cc/100?id=skater'
-  }
-];
-
-
-
 
 class DashboardWorker extends React.Component {
 

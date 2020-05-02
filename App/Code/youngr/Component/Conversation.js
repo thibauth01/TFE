@@ -5,38 +5,21 @@ import { theme } from '../Constants';
 import { connect } from 'react-redux'
 import CardConv from './CardConv'
 
-const data = [
-  {
-    'title':'titre iuefhreg re g trg  tezgsr ez gfrez g re gre ers g res  g resg ',
-    'lastMessage':'coucou toi comment tu vas ? enculé de test grands mort quest ce quil y a',
-    'date_start':'2020-05-10'
-  },
-  {
-    'title':'titre2',
-    'lastMessage':'coucou2',
-    'date_start':'2020-05-10'
-
-  },
-  {
-    'title':'titre3',
-    'lastMessage':'coucou3',
-    'date_start':'2020-05-10'
-
-  },
-
-];
 
 class Conversation extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      conv:undefined
+      conv:undefined,
+      viewConv:undefined
     }
   }
 
   componentDidMount(){
-    this.getData().then(response => this.setState({conv:response}));  
+    this.getData().then(response => this.setState({conv:response},()=>{
+      this.showListMsg();
+    }));  
   }
 
   getData(){
@@ -67,7 +50,7 @@ class Conversation extends React.Component {
   
 
   showListMsg(){
-    return(
+    const view =
       <FlatList
         data={this.state.conv}
         renderItem={({ item }) => <CardConv 
@@ -76,7 +59,8 @@ class Conversation extends React.Component {
                                   />}
         keyExtractor={item => item.id}
       />
-    )
+    this.setState({viewConv:view});
+    
   }
 
 
@@ -86,7 +70,7 @@ class Conversation extends React.Component {
         <Block style={styles.main_container}>
           <Block >
             <Text h4 muted style={styles.subtitle}>Mes conversations</Text>
-              {this.showListMsg()}   
+              {this.state.viewConv}   
           </Block>
         </Block>
     )

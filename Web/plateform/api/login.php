@@ -23,7 +23,22 @@
         $isPasswordCorrect = password_verify($password, $user['password']);
         if($isPasswordCorrect){
 
+            if($user['type'] == "worker"){
+                $Query1 = $dbh->query("SELECT worker.id FROM worker WHERE id_account = ".$user['id']);
+                $idTypeAccount = $Query1->fetch(PDO::FETCH_ASSOC);
+                $idTypeAccount = $idTypeAccount['id'];
+            }
+            else if($user['type'] == "requester"){
+                $Query1 = $dbh->query("SELECT requester.id FROM requester WHERE id_account = ".$user['id']);
+                $idTypeAccount = $Query1->fetch(PDO::FETCH_ASSOC);
+                $idTypeAccount = $idTypeAccount['id'];
+            }
+            else{
+                $idTypeAccount = 0;
+            }
+
             unset($user["password"]);
+            $user["idTypeAccount"] = $idTypeAccount;
             $returnJSON["status"] = true;
             $returnJSON["data"] = $user;
             $returnJSON["txt"] = "ok";

@@ -2,23 +2,29 @@ import React from "react";
 import { View, Image,StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { Block,Text } from "galio-framework";
 import { theme } from '../Constants';
+import { NavigationEvents } from 'react-navigation';
+
 import {getAge,reformatDate,reformatTime,getPrice,mois,isNotTooLongText} from '../Constants/Utils'
+import { connect } from "react-redux";
 
 
 
-export default class CardConv extends React.Component { 
+class CardConv extends React.Component { 
 
     constructor(props){
         super(props);
         this.state={
             maxCharMessage : 55,
             maxCharTitle:30,
-            lastMessage:""
+            lastMessage:undefined,
+            colorLastMessage:undefined,
+            interval:undefined
         }
     }
 
     componentDidMount(){
-        this.getData().then(response => this.setState({lastMessage:response}));  
+        this.showMessage();
+        this.timer();
     }
 
     getData(){
@@ -45,33 +51,61 @@ export default class CardConv extends React.Component {
         
     }
 
-    getDate(date){
-     
-        const dateMoment = new Date(date);
+    showMessage(){
+        this.getData().then(response => this.setState({lastMessage:response},()=>{
+            if(this.state.lastMessage.isRead == 1 || this.props.account.idTypeAccount == this.state.lastMessage.id_sender){
+                this.setState({
+                    colorLastMessage : theme.COLORS.MUTED
+                })
+            }
+            else{
+                this.setState({
+                    colorLastMessage : theme.COLORS.GITHUB
+                })
+            }
+        }));
+        
+    }
 
-        return (
-            <Text color={theme.COLORS.SECONDARY}>{dateMoment.getDate() + " " +  mois[dateMoment.getMonth()]}</Text> 
-        )
+    timer(){
+        this.state.interval = setInterval(() => {
+            this.showMessage();
+        }, 5000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.interval);
+    }
+
+    showLastDate(){
+        if(this.state.lastMessage != undefined){
+
+            const date = this.state.lastMessage.sendtime.slice(0,10);
+            const dateMoment = new Date(date);
+
+            return (
+                <Text color={theme.COLORS.SECONDARY}>{dateMoment.getDate() + " " +  mois[dateMoment.getMonth()]}</Text> 
+            )
+        }
+        
       
     }
 
-    showLastMessage(){
-        if(this.state.lastMessage != undefined){
-            return(
-                this.state.lastMessage.content
-            )
-        }
-    }
+    
 
 
     render() { 
 
         const {navigate} = this.props.navigate
-        const date = this.getDate("2000-05-15");
         
       return (
+          
         <TouchableOpacity
             onPress={() => navigate('Messages',this.props.item)}>
+                
+            <NavigationEvents
+                onDidFocus={() => this.componentDidMount()}
+            />
             <Block flex={1} style={styles.block_main} height={70} row middle>
                 <Block flex={1.3}>
                     <Image style={styles.profile} source={require(`../Images/avatar.jpg`)}></Image>
@@ -81,13 +115,13 @@ export default class CardConv extends React.Component {
                         <Text size={16}>{isNotTooLongText(this.props.item.title,this.state.maxCharTitle)}</Text>
                     </Block>
                     <Block>
-                        <Text size={14} muted>{this.showLastMessage()}</Text>
+                        <Text size={14} italic color={this.state.colorLastMessage}>{this.state.lastMessage != undefined ? this.state.lastMessage.content:""}</Text>
                     </Block>
                     
                 </Block>
                 
                 <Block flex={1} style={{marginRight:10}} right>
-                    {date}
+                    {this.showLastDate()}
                 </Block>
             </Block>
         </TouchableOpacity>
@@ -122,3 +156,11 @@ export default class CardConv extends React.Component {
   
   
   })
+
+  const mapStateToProps = (state) =>{
+    return {
+        account: state.account.account
+    }
+  }
+
+  export default connect(mapStateToProps)(CardConv)

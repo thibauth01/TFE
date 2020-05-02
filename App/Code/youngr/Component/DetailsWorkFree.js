@@ -3,6 +3,7 @@ import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking, D
 import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
 import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 
 class DetailsWorkFree extends React.Component {
@@ -10,9 +11,46 @@ class DetailsWorkFree extends React.Component {
   constructor(props) {
     super(props)
     this.state={
+      showAlert:false
     }
   }
 
+  showAlert = () => {
+    this.setState({
+      showAlert: true
+    });
+  };
+
+  hideAlert = () => {
+    this.setState({
+      showAlert: false
+    });
+  };
+
+  remove = ()=>{
+    const idWork = this.props.navigation.state.params.id;
+    fetch('http://192.168.1.56/TFE/Web/plateform/api/removeWork.php',{
+      method:'POST',
+      header:{
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+          idWork: idWork
+      })
+      
+    })
+    .then((response) => response.json())
+        .then((responseJson)=>{
+            if(!responseJson.status){
+              alert("impossible de supprimer")
+            };
+        
+        })
+        .catch((error)=>{
+            console.error(error);
+        }); 
+  }
 
 
   render() {
@@ -52,9 +90,29 @@ class DetailsWorkFree extends React.Component {
           </Block>
           
           <Block row flex={0.5} space="evenly">
-           <Button style={styles.buttonDelete}>Supprimer</Button>
-            
+           <Button style={styles.buttonDelete} onPress={this.showAlert}>Supprimer</Button>
           </Block>
+          <AwesomeAlert
+            show={this.state.showAlert}
+            showProgress={false}
+            title="Supprimer ce travail"
+            message="Etes vous sûr?"
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={false}
+            showCancelButton={true}
+            showConfirmButton={true}
+            cancelText="Non"
+            confirmText="Oui, supprimez-le"
+            confirmButtonColor={theme.COLORS.SECONDARY}
+            onCancelPressed={() => {
+              this.hideAlert();
+            }}
+            onConfirmPressed={() => {
+              this.remove();
+              this.hideAlert();
+              this.props.navigation.goBack()
+            }}
+          />
         </Block>
     )
   }
