@@ -94,8 +94,8 @@
                                                         }
 
                                                         echo "<tr id='rowtodo".$id."'>
-                                                                <td style='width:60px'>
-                                                                    <img src='".$work['profile_path'] ."' height='50px' width='50px'>
+                                                                <td style='width:60px;height:60px'>
+                                                                    <img src='".$work['profile_path'] ."'>
                                                                 </td>
             
                                                                 <td class='text-left pl-3'>".$work['title']."</td>
@@ -236,8 +236,8 @@
                                                     }
                                                     $id=$work['id'];
                                                     echo "<tr id='rowDone".$id."'>
-                                                            <td style='width:60px'>
-                                                                <img src='".$work['profile_path'] ."' height='50px' width='50px'>
+                                                            <td style='width:60px;height:60px'>
+                                                                <img src='".$work['profile_path'] ."'>
                                                             </td>
         
                                                             <td class='text-left pl-3'>".$work['title']."</td>

@@ -37,6 +37,13 @@
     cursor: pointer;
 }
 
+.rounded_profile{
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
 /*USER*/
 .adduser{
     border-radius: 150px;

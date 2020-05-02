@@ -100,6 +100,49 @@ $(document).ready(function(){
 
 
     $('#inputAvatar').change(function(){
-        PreviewImage(this,'imgAvatar');
+        $("#uploadForm").submit()
+     
     });
+
+    $("#uploadForm").submit(function(event){
+        event.preventDefault();
+        $.ajax({
+            type:"post",
+            url:"php/uploadAvatar.php",
+            data:new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            success:function(data){
+                data=JSON.parse(data);
+                if(data.statut){
+                   var colorAlert = "info";
+                }
+                else{
+                    var colorAlert = "danger";
+                }
+                var html = `<div class="myAlert-bottom alert alert-`+ colorAlert+`">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>`+data.msg+`</strong> 
+                            </div>`;
+                            
+                $("#errormsgSign").html(html);
+                myAlertBottom();
+
+                if(data.statut){
+                    $('#imgAvatar').attr('src',data.path);
+
+                }
+
+
+
+            },
+            error:function(err){
+                console.log(err);
+            }
+            
+        });
+
+
+    })
 });

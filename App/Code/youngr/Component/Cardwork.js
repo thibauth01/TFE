@@ -2,9 +2,18 @@ import React from "react";
 import { View, Image,StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { Block,Text } from "galio-framework";
 import { theme } from '../Constants';
+import {getAge,reformatDate,reformatTime,getPrice,mois,isNotTooLongText} from '../Constants/Utils'
+
 
 
 export default class CardWork extends React.Component { 
+
+  constructor(props){
+    super(props);
+    this.state={
+        maxCharTitle:30
+    }
+  }
 
     getStatut(date){
         const dateMoment = new Date(date);
@@ -37,7 +46,7 @@ export default class CardWork extends React.Component {
                 </Block>
                 <Block flex={2}>
                     <Block>
-                        <Text size={16}>{this.props.item.title}</Text>
+                        <Text size={16}>{isNotTooLongText(this.props.item.title,this.state.maxCharTitle)}</Text>
                     </Block>
                     <Block>
                         <Text size={12} color={theme.COLORS.SECONDARY}>{this.props.item.type}</Text>

@@ -94,12 +94,14 @@ class DashboardRequester extends React.Component {
 
   removeDatePassed(){
 
+    var newTab = [];
+
     for (let index = 0; index < this.state.dataNextWorks.length; index++) {
+
       const elem = this.state.dataNextWorks[index];
 
       const dateItem= new Date(elem.date_start);
       const now = new Date();
-      var newTab = [];
       const dat1 = dateItem.getFullYear() + dateItem.getMonth() + dateItem.getDate();
       const dat2 = now.getFullYear() + now.getMonth() + now.getDate();
 
@@ -113,6 +115,7 @@ class DashboardRequester extends React.Component {
   }
 
   isWorks(){
+
     if(this.state.dateNotPassed != undefined){
       if(this.state.dateNotPassed.length > 0){
         return(

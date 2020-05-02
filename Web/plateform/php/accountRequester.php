@@ -1,6 +1,6 @@
 <?php
     require_once('inc/db_connect.php');
-
+    
 ?>
 
 <!DOCTYPE html>
@@ -63,6 +63,13 @@
 
                     $infosRequester = $infosRequesterQuery->fetch(PDO::FETCH_ASSOC);
                     $infosRequesterQuery->closeCursor();
+
+                    if($infosRequester['profile_path'] == null){
+                        $pathImg = "img/add-user.png";
+                    }
+                    else{
+                        $pathImg = $infosRequester['profile_path'];
+                    }
                 ?>
 
                 <div class="content">
@@ -72,12 +79,14 @@
                                 <div class="card-header text-center text-primary">
                                     <h2 class="title">Modifiez vos informations</h2>
                                 </div>
-                                <div class="ml-4 mb-3">
-                                    <div class="adduser text-center">
-                                        <img width="60px" id="imgAvatar" onclick="document.getElementById('inputAvatar').click();" class="mx-2 my-2" src="img/add-user.png" alt="add-user"/>
+                                <form id="uploadForm" method='post'>
+                                    <div class="ml-4 mb-3">
+                                        <div class="adduser text-center">
+                                            <img style="max-width:100px;max-height:100px" id="imgAvatar" onclick="document.getElementById('inputAvatar').click();" class="mx-2 my-2" src="<?= $pathImg?>" alt="add-user"/>
+                                        </div>
+                                        <input  id="inputAvatar" type="file" accept="image/*" name="imageAvatar" style="display:none"/>
                                     </div>
-                                    <input placeholder="3" id="inputAvatar" type="file" style="display:none"/>
-                                </div>
+                                </form>
                                 <div class="card-body">
                                     <div class="">
                                         <form method="post" id="updateAccountRequester">

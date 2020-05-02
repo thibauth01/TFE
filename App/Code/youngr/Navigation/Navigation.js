@@ -9,12 +9,12 @@ import { Icon } from 'galio-framework';
 
 import Login from '../Component/Login';
 import Dashboard from '../Component/Dashboard';
-import Message from '../Component/Message';
+import Conversation from '../Component/Conversation';
 import Works from '../Component/Works';
 import DetailsWorkProposal from '../Component/DetailsWorkProposal';
-import DetailsWork from '../Component/DetailsWork'
-import DetailsWorkFree from '../Component/DetailsWorkFree'
-
+import DetailsWork from '../Component/DetailsWork';
+import DetailsWorkFree from '../Component/DetailsWorkFree';
+import Messages from '../Component/Messages';
 
 
 const bottomNavigator = createBottomTabNavigator({
@@ -43,10 +43,10 @@ const bottomNavigator = createBottomTabNavigator({
       
     }
   },
-  Message: { 
-    screen: Message,
+  Conversation: { 
+    screen: Conversation,
     navigationOptions: {
-      title: 'Messages',
+      title: 'Conversation',
       headerShown: false,
       tabBarIcon: () => { // On définit le rendu de nos icônes par les images récemment ajoutés au projet
         return <Image
@@ -108,8 +108,14 @@ const ListStackNavigator = createStackNavigator({
       title: 'Détails'
       
     }
-  }
-
+  },
+  Messages:{
+    screen:Messages,
+    navigationOptions: {
+      title: 'Messages'
+      
+    }
+  },
 })
 
 const styles = StyleSheet.create({

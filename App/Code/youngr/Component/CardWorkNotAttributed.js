@@ -2,10 +2,18 @@ import React from "react";
 import { View, Image,StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { Block,Text } from "galio-framework";
 import { theme } from '../Constants';
+import {getAge,reformatDate,reformatTime,getPrice,mois,isNotTooLongText} from '../Constants/Utils'
+
 
 
 export default class CardWorkNotAttributed extends React.Component { 
 
+  constructor(props){
+    super(props);
+    this.state={
+        maxCharTitle:30
+    }
+  }
     getStatut(date){
         const dateMoment = new Date(date);
         const now = new Date();
@@ -33,7 +41,7 @@ export default class CardWorkNotAttributed extends React.Component {
             onPress={() => navigate('DetailsWorkFree',this.props.item)}>
             <Block flex={1} style={styles.block_main} height={70} row middle>
                 <Block style={{marginLeft:20}} flex={2}>
-                    <Text size={16}>{this.props.item.title}</Text>
+                    <Text size={16}>{isNotTooLongText(this.props.item.title,this.state.maxCharTitle)}</Text>
                 </Block>
                 <Block flex={2}>
                     <Text size={13} color={theme.COLORS.SECONDARY}>{this.props.item.type}</Text>

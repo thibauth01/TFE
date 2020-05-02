@@ -34,9 +34,13 @@
                             echo "Error";
                         }
 
+                        
+
                        
                     ?>
                     <div class="list-group rounded-0">
+
+                    
                         <?php
                             foreach($works as $work){
                                 $id=$work['id'];
@@ -51,12 +55,15 @@
                                 $tmstp =  strtotime($lastMessage['sendtime']);
                                 $lastdate = strftime("%e %b", $tmstp);
 
+                                if($work['profile_path'] == null){
+                                    $work['profile_path'] = 'img/user-1.jpg';  
+                                }
+
                                 if($lastMessage['isRead'] == 0 && $lastMessage['id_sender'] != $_SESSION['idTypeAccount']){
                                     $lastcontent = "<strong>".$lastcontent."</strong>";
                                 }
-
                                 echo "<a onclick='getMessages($id);' class='conv list-group-item list-group-item-action list-group-item-light rounded-0'>
-                                        <div class='media'><img src='img/user-1.jpg' alt='user' width='50' class='rounded-circle'>
+                                        <div class='media'><img src='".$work['profile_path']."' alt='user' width='60px' class='rounded-circle'>
                                             <div class='media-body ml-4'>
                                                 <div class='d-flex align-items-center justify-content-between mb-1'>
                                                     <h6 class='mb-0'>".$work['title']."</h6><small class='small font-weight-bold'>".$lastdate."</small>
@@ -68,35 +75,13 @@
                             }
                         
                         ?>
-                        <!--
-                        <a class="list-group-item list-group-item-action active text-white rounded-0">
-                            <div class="media"><img src="img/user-1.jpg" alt="user" width="50" class="rounded-circle">
-                                <div class="media-body ml-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-1">
-                                        <h6 class="mb-0">Thibaut Hermant</h6><small class="small font-weight-bold">25 Dec</small>
-                                    </div>
-                                    <p class="font-italic mb-0 text-small">Ok for 16h30</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-                            <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
-                                <div class="media-body ml-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-1">
-                                        <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">9 Nov</small>
-                                    </div>
-                                    <p class="font-italic text-muted mb-0 text-small">consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                </div>
-                            </div>
-                        </a>-->
 
                     </div>
                 </div>
             </div>
         </div>
 
-
+        
         <!-- Chat Box-->
         <div class="col-7 px-0">
             <div class="px-4 py-5 chat-box bg-white" id="chatBox">
