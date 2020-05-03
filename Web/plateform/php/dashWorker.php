@@ -175,7 +175,7 @@
 
                                                     echo "<tr id='rowFree".$work['id']."'>
                                                             <td style='width:60px'>
-                                                                <img src='".$work['profile_path'] ."' height='50px' width='50px' style='min-width:50px;'>
+                                                                <img src='".$work['profile_path'] ."' onerror=\"this.onerror=null; this.src='img/default-user.png'\" height='50px' width='50px' style='min-width:50px;'>
                                                             </td>
 
                                                             <td class='text-left'>".$work['title'] ."</td>
@@ -247,7 +247,7 @@
                                                 <div class='card-body'>
                                                     <div class='text-center'>
                                                         <a href='#'>
-                                                            <img class='avatar border-gray' src='".$work['profile_path']."' alt='...'>
+                                                            <img class='avatar border-gray' src='".$work['profile_path']."' onerror=\"this.onerror=null; this.src='img/default-user.png'\" alt='...'>
                                                             <h5 class='title'>".$work['first_name']." ".$work['last_name']."</h5>
                                                         </a>
                                                         <p class='description'>

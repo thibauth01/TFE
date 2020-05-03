@@ -7,8 +7,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { theme } from '../Constants';
 import { connect } from 'react-redux'
 import ItemWorksTodo from './ItemWorksTodo'
-import CardWork from './Cardwork';
+import CardWorkTakeReq from './CardWorkTakeReq';
 import CardWorkNotAttributed from './CardWorkNotAttributed';
+import CardWorkDone from './CardWorkDone'
 import { NavigationEvents } from 'react-navigation';
 import {getAge,reformatDate,reformatTime,getPrice,loading} from '../Constants/Utils'
 
@@ -110,7 +111,7 @@ class WorksRequester extends React.Component {
         return(
           <FlatList
               data={this.state.dataTake}
-              renderItem={({ item }) => <CardWork 
+              renderItem={({ item }) => <CardWorkTakeReq
                                           navigate={this.props.navigate} 
                                           item={item}
                                         />}
@@ -138,10 +139,11 @@ class WorksRequester extends React.Component {
   workDone(){
     if(this.state.dataDone != undefined){
       if(this.state.dataDone.length > 0){
+        console.log(this.state.dataDone);
         return(
           <FlatList
               data={this.state.dataDone}
-              renderItem={({ item }) => <CardWork 
+              renderItem={({ item }) => <CardWorkDone
                                           navigate={this.props.navigate} 
                                           item={item}
                                         />}

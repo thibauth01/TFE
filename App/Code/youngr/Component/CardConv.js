@@ -10,21 +10,29 @@ import { connect } from "react-redux";
 
 
 class CardConv extends React.Component { 
+    interval = 0;
 
     constructor(props){
         super(props);
+
         this.state={
             maxCharMessage : 55,
             maxCharTitle:30,
             lastMessage:undefined,
             colorLastMessage:undefined,
-            interval:undefined
         }
     }
 
     componentDidMount(){
         this.showMessage();
-        this.timer();
+
+        this.props.navigate.addListener('willFocus', async () =>{
+            this.timer();
+        });
+        this.props.navigate.addListener('willBlur', () => {
+            clearInterval(this.interval);
+        });
+        
     }
 
     getData(){
@@ -68,17 +76,16 @@ class CardConv extends React.Component {
     }
 
     timer(){
-        this.state.interval = setInterval(() => {
+        this.interval = setInterval(() => {
             this.showMessage();
+
         }, 5000);
     }
 
-    componentWillUnmount() {
-        clearInterval(this.state.interval);
-    }
+    
 
     showLastDate(){
-        if(this.state.lastMessage != undefined){
+        if(this.state.lastMessage != undefined && this.state.lastMessage != false){
 
             const date = this.state.lastMessage.sendtime.slice(0,10);
             const dateMoment = new Date(date);

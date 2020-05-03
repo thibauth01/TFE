@@ -15,6 +15,8 @@ import DetailsWorkProposal from '../Component/DetailsWorkProposal';
 import DetailsWork from '../Component/DetailsWork';
 import DetailsWorkFree from '../Component/DetailsWorkFree';
 import Messages from '../Component/Messages';
+import DetailsWorkDone from '../Component/DetailsWorkDone'
+import DetailsWorkTakeReq from '../Component/DetailsWorkTakeReq'
 
 
 const bottomNavigator = createBottomTabNavigator({
@@ -104,6 +106,20 @@ const ListStackNavigator = createStackNavigator({
   },
   DetailsWorkFree:{
     screen:DetailsWorkFree,
+    navigationOptions: {
+      title: 'Détails'
+      
+    }
+  },
+  DetailsWorkDone:{
+    screen:DetailsWorkDone,
+    navigationOptions: {
+      title: 'Détails'
+      
+    }
+  },
+  DetailsWorkTakeReq:{
+    screen:DetailsWorkTakeReq,
     navigationOptions: {
       title: 'Détails'
       

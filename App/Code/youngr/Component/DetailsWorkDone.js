@@ -3,98 +3,21 @@ import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking, D
 import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
 import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
-import AwesomeAlert from 'react-native-awesome-alerts';
 
 
-class DetailsWork extends React.Component {
+class DetailsWorkDone extends React.Component {
 
   constructor(props) {
     super(props)
     this.state={
-      showAlert:false,
-      typeAlert:undefined
+      
     }
   }
-
-  showAlert = (bool) => {
-    if(bool){
-      this.setState({
-        showAlert: true,
-        typeAlert:true
-      });
-    }
-    else{
-      this.setState({
-        showAlert: true,
-        typeAlert:false
-      });
-    }
-    
-  };
-
-  hideAlert = () => {
-    this.setState({
-      showAlert: false
-    });
-  };
 
  
-
-  finish = ()=>{
-   
-    const idWork = this.props.navigation.state.params.id;
-    fetch('http://192.168.1.56/TFE/Web/plateform/api/finishWork.php',{
-      method:'POST',
-      header:{
-          'Accept': 'application/json',
-          'Content-type': 'application/json'
-      },
-      body:JSON.stringify({
-          idWork: idWork
-      })
-      
-    })
-    .then((response) => response.json())
-        .then((responseJson)=>{
-            if(!responseJson.status){
-              alert("impossible de terminer")
-            };
-        
-        })
-        .catch((error)=>{
-            console.error(error);
-        }); 
-  }
-
-  cancel=()=>{
-    const idWork = this.props.navigation.state.params.id;
-
-    fetch('http://192.168.1.56/TFE/Web/plateform/api/removeWork.php',{
-      method:'POST',
-      header:{
-          'Accept': 'application/json',
-          'Content-type': 'application/json'
-      },
-      body:JSON.stringify({
-          idWork: idWork
-      })
-      
-    })
-    .then((response) => response.json())
-        .then((responseJson)=>{
-            if(!responseJson.status){
-              alert("impossible de supprimer")
-            };
-        
-        })
-        .catch((error)=>{
-            console.error(error);
-        }); 
-  }
-
-
   render() {
     const {state} = this.props.navigation
+    console.log(state.params);
     
     return (
         <Block style={styles.main_container}>
@@ -111,7 +34,6 @@ class DetailsWork extends React.Component {
                 <Text muted> {state.params.city}</Text>
               </Block>
               <Block row style={styles.buttonsProfile}>
-                <Button style={styles.buttonProfileMessage}  iconColor={theme.COLORS.SECONDARY}	onlyIcon iconSize={20} icon="message-circle" iconFamily="feather" flex={2}></Button>
                 <Button onPress={()=>{Linking.openURL(`tel:${state.params.phone}`)}} style={styles.buttonProfilePhone}  iconColor={theme.COLORS.DEFAULT}	onlyIcon iconSize={20} icon="phone" iconFamily="feather" flex={2}></Button>
               </Block>      
             </Block>
@@ -145,39 +67,9 @@ class DetailsWork extends React.Component {
               </Block>
             </ScrollView>
           </Block>
-          
-          <Block row flex={0.6} space="evenly">
-           <Button style={styles.buttonDelete} onPress={this.showAlert.bind(this,false)} >Annuler</Button>
-           <Button style={styles.buttonAccept} onPress={this.showAlert.bind(this,true)}>Terminé !</Button>
-            
+          <Block flex={0.4} center>
+            <Text size={20} color={theme.COLORS.SUCCESS}>Terminé !</Text>
           </Block>
-          <AwesomeAlert
-            show={this.state.showAlert}
-            showProgress={false}
-            title={this.state.typeAlert ?"Terminer ce travail" :"Annuler ce travail"}
-            message="Etes vous sûr?"
-            closeOnTouchOutside={true}
-            closeOnHardwareBackPress={false}
-            showCancelButton={true}
-            showConfirmButton={true}
-            cancelText="Non"
-            confirmText={this.state.typeAlert ?"Oui, terminez-le" :"Oui, annulez-le"}
-            confirmButtonColor={theme.COLORS.SECONDARY}
-            onCancelPressed={() => {
-              this.hideAlert();
-            }}
-            onConfirmPressed={() => {
-              if(this.state.typeAlert){
-                this.finish();
-              }
-              else{
-                this.cancel();
-              }
-              
-              this.hideAlert();
-              this.props.navigation.goBack();
-            }}
-          />
           
         </Block>
     )
@@ -224,17 +116,11 @@ const styles = StyleSheet.create({
   buttonsProfile:{
     width:200,
     paddingTop:10,
-    justifyContent:"space-around",
+    justifyContent:"center",
   },
-  buttonProfileMessage:{
-    width:80,
-    height:35,
-    backgroundColor: theme.COLORS.DEFAULT,
-    borderBottomColor:theme.COLORS.MUTED,
-    
-  },
+  
   buttonProfilePhone:{
-    width:80,
+    width:150,
     height:35,
     backgroundColor: theme.COLORS.SECONDARY
   },
@@ -282,4 +168,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DetailsWork
+export default DetailsWorkDone

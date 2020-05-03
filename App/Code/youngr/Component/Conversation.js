@@ -8,19 +8,30 @@ import CardConv from './CardConv'
 
 class Conversation extends React.Component {
 
+  interval = 0;
   constructor(props) {
     super(props)
     this.state = {
       conv:undefined,
-      viewConv:undefined
+      viewConv:undefined,
     }
   }
 
   componentDidMount(){
     this.getData().then(response => this.setState({conv:response},()=>{
       this.showListMsg();
-    }));  
+    })); 
+
+    this.props.navigation.addListener('willFocus', async () =>{
+      this.timer();
+    });
+    this.props.navigation.addListener('willBlur', () => {
+        clearInterval(this.interval);
+    });
   }
+
+  
+  
 
   getData(){
     return fetch('http://192.168.1.56/TFE/Web/plateform/api/conversations.php',{
@@ -45,6 +56,14 @@ class Conversation extends React.Component {
      });
 
      
+  }
+
+  timer(){
+    this.interval = setInterval(() => {
+      this.getData().then(response => this.setState({conv:response},()=>{
+        this.showListMsg();
+      }));
+    }, 5000);
   }
 
   

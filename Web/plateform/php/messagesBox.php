@@ -63,7 +63,7 @@
                                     $lastcontent = "<strong>".$lastcontent."</strong>";
                                 }
                                 echo "<a onclick='getMessages($id);' class='conv list-group-item list-group-item-action list-group-item-light rounded-0'>
-                                        <div class='media'><img src='".$work['profile_path']."' alt='user' width='60px' class='rounded-circle'>
+                                        <div class='media'><img src='".$work['profile_path']."' onerror=\"this.onerror=null; this.src='img/default-user.png'\" alt='user' width='60px' class='rounded-circle'>
                                             <div class='media-body ml-4'>
                                                 <div class='d-flex align-items-center justify-content-between mb-1'>
                                                     <h6 class='mb-0'>".$work['title']."</h6><small class='small font-weight-bold'>".$lastdate."</small>

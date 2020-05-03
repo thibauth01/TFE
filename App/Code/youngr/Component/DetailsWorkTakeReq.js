@@ -6,7 +6,7 @@ import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
 import AwesomeAlert from 'react-native-awesome-alerts';
 
 
-class DetailsWork extends React.Component {
+class DetailsWorkTakeReq extends React.Component {
 
   constructor(props) {
     super(props)
@@ -17,16 +17,22 @@ class DetailsWork extends React.Component {
   }
 
   showAlert = (bool) => {
-    if(bool){
+    if(bool == 1){
       this.setState({
         showAlert: true,
-        typeAlert:true
+        typeAlert:1
       });
+    }
+    else if(bool == 2){
+        this.setState({
+            showAlert: true,
+            typeAlert:2
+          });
     }
     else{
       this.setState({
         showAlert: true,
-        typeAlert:false
+        typeAlert:0
       });
     }
     
@@ -41,7 +47,6 @@ class DetailsWork extends React.Component {
  
 
   finish = ()=>{
-   
     const idWork = this.props.navigation.state.params.id;
     fetch('http://192.168.1.56/TFE/Web/plateform/api/finishWork.php',{
       method:'POST',
@@ -67,9 +72,36 @@ class DetailsWork extends React.Component {
   }
 
   cancel=()=>{
-    const idWork = this.props.navigation.state.params.id;
 
+    const idWork = this.props.navigation.state.params.id;
     fetch('http://192.168.1.56/TFE/Web/plateform/api/removeWork.php',{
+      method:'POST',
+      header:{
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+          idWork: idWork
+      })
+      
+    })
+    .then((response) => response.json())
+        .then((responseJson)=>{
+            if(!responseJson.status){
+              alert("impossible de supprimer")
+            };
+        
+        })
+        .catch((error)=>{
+            console.error(error);
+        }); 
+  }
+
+
+  free=()=>{
+
+    const idWork = this.props.navigation.state.params.id;
+    fetch('http://192.168.1.56/TFE/Web/plateform/api/refuseWorker.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
@@ -146,29 +178,39 @@ class DetailsWork extends React.Component {
             </ScrollView>
           </Block>
           
-          <Block row flex={0.6} space="evenly">
-           <Button style={styles.buttonDelete} onPress={this.showAlert.bind(this,false)} >Annuler</Button>
-           <Button style={styles.buttonAccept} onPress={this.showAlert.bind(this,true)}>Terminé !</Button>
-            
+          <Block flex={0.9} space="around">
+            <Block row space="evenly">
+                <Button style={styles.buttonDelete} onPress={this.showAlert.bind(this,0)} >Annuler</Button>
+                <Button style={styles.buttonFree} onPress={this.showAlert.bind(this,1)} >Liberé</Button>
+           
+            </Block>
+            <Block center>
+                <Button style={styles.buttonAccept} onPress={this.showAlert.bind(this,2)}>Terminé !</Button>
+
+            </Block>
           </Block>
+
           <AwesomeAlert
             show={this.state.showAlert}
             showProgress={false}
-            title={this.state.typeAlert ?"Terminer ce travail" :"Annuler ce travail"}
+            title={this.state.typeAlert == 1 ?"Enlever ce travailleur" :this.state.typeAlert == 2 ?"Terminer ce travail ":"Annuler ce travail"}
             message="Etes vous sûr?"
             closeOnTouchOutside={true}
             closeOnHardwareBackPress={false}
             showCancelButton={true}
             showConfirmButton={true}
             cancelText="Non"
-            confirmText={this.state.typeAlert ?"Oui, terminez-le" :"Oui, annulez-le"}
+            confirmText={"Oui, bien sûr"}
             confirmButtonColor={theme.COLORS.SECONDARY}
             onCancelPressed={() => {
               this.hideAlert();
             }}
             onConfirmPressed={() => {
-              if(this.state.typeAlert){
-                this.finish();
+              if(this.state.typeAlert == 1){
+                this.free();
+              }
+              else if(this.state.typeAlert == 2){
+                  this.finish();
               }
               else{
                 this.cancel();
@@ -274,12 +316,20 @@ const styles = StyleSheet.create({
     backgroundColor:theme.COLORS.MUTED,
     width:100,
     height:35,
+    marginBottom:10
   },
   buttonAccept:{
     backgroundColor:theme.COLORS.SECONDARY,
+    width:Dimensions.get("window").width -55,
+    height:35,
+    marginBottom:10
+  },
+  buttonFree:{
+    backgroundColor:theme.COLORS.WARNING,
     width:170,
     height:35,
+    marginBottom:10
   }
 })
 
-export default DetailsWork
+export default DetailsWorkTakeReq

@@ -225,7 +225,7 @@
                                                     <h5 class='card-category'>Next Worker</h5>
                                                     <div class='text-center'>
                                                         <a href='#'>
-                                                            <img class='avatar border-gray' src='".$nextWork['profile_path']."' alt='...'>
+                                                            <img class='avatar border-gray' onerror=\"this.onerror=null; this.src='img/default-user.png'\" src='".$nextWork['profile_path']."' alt='...'>
                                                             <h5 class='title'>".$nextWork['first_name']." ".$nextWork['last_name']."</h5>
                                                         </a>
                                                         <p class='description'>

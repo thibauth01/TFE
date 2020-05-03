@@ -211,7 +211,7 @@
                                                             $id=$work['id'];
                                                             echo "<tr id='rowtake".$id."'>
                                                                     <td style='width:60px;height:60px'>
-                                                                        <img src='".$work['profile_path'] ."'>
+                                                                        <img src='".$work['profile_path'] ."' onerror=\"this.onerror=null; this.src='img/default-user.png'\">
                                                                     </td>
                 
                                                                     <td class='text-left pl-3'>".$work['title']."</td>
@@ -267,7 +267,7 @@
                                                     <div class='card-body'>
                                                         <div class='text-center'>
                                                             <a href='#'>
-                                                                <img class='avatar border-gray' src='".$work['profile_path']."' alt='Profile picture'>
+                                                                <img class='avatar border-gray' src='".$work['profile_path']."' onerror=\"this.onerror=null; this.src='img/default-user.png'\" alt='Profile picture'>
                                                                 <h5 class='title'>".$work['first_name']." ".$work['last_name']."</h5>
                                                             </a>
                                                             <p class='description'>
@@ -357,7 +357,7 @@
                                                             $id=$work['id'];
                                                             echo "<tr id='rowDone".$id."'>
                                                                     <td style='width:60px;height:60px'>
-                                                                        <img src='".$work['profile_path']."'>
+                                                                        <img src='".$work['profile_path']."' onerror=\"this.onerror=null; this.src='img/default-user.png'\">
                                                                     </td>
                 
                                                                     <td class='text-left pl-3'>".$work['title']."</td>
@@ -404,7 +404,7 @@
                                                     <div class='card-body'>
                                                         <div class='text-center'>
                                                             <a href='#'>
-                                                                <img class='avatar border-gray' src='".$work['profile_path']."' alt='Profile picture'>
+                                                                <img class='avatar border-gray' src='".$work['profile_path']."' alt='Profile picture' onerror=\"this.onerror=null; this.src='img/default-user.png'\">
                                                                 <h5 class='title'>".$work['first_name']." ".$work['last_name']."</h5>
                                                             </a>
                                                             <p class='description'>

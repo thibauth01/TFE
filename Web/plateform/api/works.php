@@ -41,7 +41,7 @@
         $returnJSON['dataFree'] = $worksFree;
 
         //Take
-        $WorkQuery1 = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as type, id_account,star,first_name,last_name,birth_date,profile_path,price
+        $WorkQuery1 = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as type, id_account,star,city,first_name,last_name,birth_date,profile_path,price
                                     FROM work
                                     JOIN type_work on work.id_type = type_work.id
                                     JOIN worker on id_worker = worker.id
@@ -55,7 +55,7 @@
 
 
         //Done
-        $WorkQuery = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as type, id_account,star,first_name,last_name,birth_date,profile_path,price
+        $WorkQuery = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as type, id_account,star,first_name,city,last_name,birth_date,profile_path,price
                                     FROM work
                                     JOIN type_work on work.id_type = type_work.id
                                     JOIN worker on id_worker = worker.id

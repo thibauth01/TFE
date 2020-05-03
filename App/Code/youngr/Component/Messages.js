@@ -10,6 +10,7 @@ import {getAge,reformatDate,reformatTime,getPrice,loading} from '../Constants/Ut
 
 
 class Messages extends React.Component {
+  interval = 0;
 
   constructor(props) {
     super(props)
@@ -30,16 +31,19 @@ class Messages extends React.Component {
         this.showMessages()
       }))
     });
-    this.timer();
   
+    this.timer();
+
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.interval);
+    clearInterval(interval);
   }
 
+
   timer(){
-      this.state.interval = setInterval(() => {
+      interval = setInterval(() => {
+
         fetch('http://192.168.1.56/TFE/Web/plateform/api/numberOfMessages.php',{
           method:'POST',
           header:{
@@ -170,9 +174,6 @@ class Messages extends React.Component {
         .catch((error)=>{
             console.error(error);
         });
-
-      
-
     }
   }
   

@@ -8,7 +8,7 @@ import { theme } from '../Constants';
 import { block } from 'react-native-reanimated';
 import ItemWorksTodo from './ItemWorksTodo'
 import { connect } from 'react-redux'
-import CardWork from './Cardwork';
+import CardWorkTakeReq from './CardWorkTakeReq';
 import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
 
 
@@ -122,7 +122,7 @@ class DashboardRequester extends React.Component {
           <Block middle>
             <FlatList
               data={this.state.dateNotPassed.slice(0,this.state.itemsCount)}
-              renderItem={({ item }) => <CardWork 
+              renderItem={({ item }) => <CardWorkTakeReq 
                                           navigate={this.props.navigate}
                                           item={item}
                                         />}
