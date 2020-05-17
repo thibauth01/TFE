@@ -4,18 +4,18 @@
 
 <!-- SEARCH BAR -->
     <ul class="navbar-nav">
-        
-        <li class="nav-item dropdown">
+        <i class="now-ui-icons users_single-02"></i>
+        <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="now-ui-icons users_single-02"></i>
+                
                 <p>
                     <span class="d-lg-none d-md-block">Some Actions</span>
-                </p>
+                </p> 
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="connexion.php">Deconnexion</a>
-            </div>
-        </li>
+            </div> 
+        </li> -->
         
     </ul>
 </div>

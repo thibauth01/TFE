@@ -61,7 +61,13 @@
                             <p>Mon compte</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="active-pro">
+                        <a href="connexion.php">
+                            <i class="now-ui-icons sport_user-run"></i>
+                            <p>Déconnexion</p>
+                        </a>
+                    </li>
+                    <!-- <li>
                         <a href="icons.html">
                             <i class="now-ui-icons education_atom"></i>
                             <p>Icons</p>
@@ -97,7 +103,7 @@
                             <i class="now-ui-icons arrows-1_cloud-download-93"></i>
                             <p>Upgrade to PRO</p>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

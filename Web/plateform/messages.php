@@ -125,6 +125,8 @@
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="demo/demo.js"></script>
 <script src="js/messages.js"></script>
+<script src="js/main.js"></script>
+
 <script>
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js

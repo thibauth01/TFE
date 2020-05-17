@@ -513,6 +513,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="demo/demo.js"></script>
 <script src="js/works.js"></script>
+<script src="js/main.js"></script>
+
 <script>
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js

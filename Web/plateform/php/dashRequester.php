@@ -186,7 +186,7 @@
                                                     JOIN type_work on type_work.id = work.id_type
                                                     JOIN worker on  worker.id = work.id_worker
                                                     JOIN account on account.id = worker.id_account
-                                                    WHERE id_worker IS NOT NULL AND finish = 0 AND cancelled = 0 AND id_requester = '$id_requester' order by date_start");
+                                                    WHERE id_worker IS NOT NULL AND finish = 0 AND cancelled = 0 AND id_requester = '$id_requester' order by date_start, time_start");
                                           
                     $nextWorks = $nextWorkQuery->fetchAll(PDO::FETCH_ASSOC);
                     $nextWorkQuery->closeCursor();
@@ -329,6 +329,8 @@
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="demo/demo.js"></script>
 <script src="js/dashboard.js"></script>
+<script src="js/main.js"></script>
+
 
 <script>
     $(document).ready(function() {
