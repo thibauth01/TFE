@@ -127,3 +127,30 @@ function sendMessage() {
         }
     })
 }
+
+function getConv() {
+    var html = "";
+    $.ajax({
+        url: 'php/actualiseConv.php',
+        method: 'post',
+        success: function(data) {
+            html += data;
+        },
+        async: false
+    })
+    return html
+}
+
+$(document).ready(function() {
+    var htmlcurrent = getConv();
+    $("#listConv").html(htmlcurrent);
+
+    setInterval(function() {
+        var html = getConv();
+        if (html != htmlcurrent) {
+            $("#listConv").html(html);
+            htmlcurrent = html;
+        }
+    }, 3000);
+
+});

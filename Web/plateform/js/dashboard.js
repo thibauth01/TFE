@@ -19,6 +19,7 @@ function acceptWork(elem) {
 
     }).then((result) => {
         if (result.value) {
+            console.log(id);
             $.ajax({
                 url: 'php/acceptWork.php',
                 type: 'POST',
@@ -26,16 +27,24 @@ function acceptWork(elem) {
                     'id': id
                 }
             }).done(function(data) {
-                console.log(data);
-                Swal.fire(
-                    'Voila !',
-                    'Le travail vous à été accordé !',
-                    'success'
-                ).then((result) => {
-                    $(row).remove();
-                    $('#detailsProp' + id).remove();
-                    $('#nombreTravaux').html(Number($('#nombreTravaux').html() - 1));
-                })
+                if (!data) {
+                    Swal.fire(
+                        'Ce travail à déjà été attribué',
+                        'Veuillez choisir un autre travail',
+                        'error'
+                    );
+                } else {
+                    Swal.fire(
+                        'Voila !',
+                        'Le travail vous à été accordé !',
+                        'success'
+                    ).then((result) => {
+                        $(row).remove();
+                        $('#detailsProp' + id).remove();
+                        $('#nombreTravaux').html(Number($('#nombreTravaux').html() - 1));
+                    });
+                }
+
 
 
             }).fail(function(data) {

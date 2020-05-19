@@ -1,27 +1,6 @@
 <?php
     require_once('inc/db_connect.php');
-    if($_SESSION['typeAccount'] == "requester"){
-        $Query = $dbh->query("SELECT count(id) as count FROM message WHERE isRead = 0 AND id_sender != ".$_SESSION['idTypeAccount']." AND  id_work in
-                                (SELECT id FROM work WHERE id_requester = ".$_SESSION['idTypeAccount']." AND finish = 0 AND cancelled = 0 AND paid = 0 AND id_worker is not null)");
-
-        $newMessages = $Query->fetch(PDO::FETCH_ASSOC);
-        $Query->closeCursor();
-        $newMessages = $newMessages['count'];
-        
-    }
-
-    else if($_SESSION['typeAccount'] == "worker"){
-        $Query = $dbh->query("SELECT count(id) as count FROM message WHERE isRead = 0 AND id_sender != ".$_SESSION['idTypeAccount']." AND  id_work in
-                                (SELECT id FROM work WHERE id_worker = ".$_SESSION['idTypeAccount']." AND finish = 0 AND cancelled = 0 AND paid = 0)");
-
-        $newMessages = $Query->fetch(PDO::FETCH_ASSOC);
-        $Query->closeCursor();
-        $newMessages = $newMessages['count'];
-    }
-
-    if($newMessages < 1){
-        $newMessages ="";
-    }
+    
 ?>
 
 <div class="sidebar" data-color="orange" id="headerSidebar">
@@ -38,7 +17,7 @@
                 <ul class="nav">
                     <li>
                         <a href="dashboard.php">
-                            <i class="now-ui-icons business_chart-bar-32"></i>
+                            <i class="now-ui-icons objects_spaceship"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
@@ -51,16 +30,28 @@
                     <li>
                         <a href="messages.php">
                             <i class="now-ui-icons ui-1_send"></i>
-                            <p>Messages <strong class="pl-5"><?php echo $newMessages ?></strong></p> 
+                            <p>Messages <strong class="pl-5" id="sideMessage"></strong></p> 
                         </a>
                     </li>
-                    
+                    <li>
+                        <a href="notifications.php">
+                            <i class="now-ui-icons ui-1_bell-53"></i>
+                            <p>Notifications <strong class="pl-5" id="sideNotifications"></strong></p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="statistiques.php">
+                            <i class="now-ui-icons business_chart-bar-32"></i>
+                            <p>Statistiques</p>
+                        </a>
+                    </li>
                     <li>
                         <a href="account.php">
                             <i class="now-ui-icons users_single-02"></i>
                             <p>Mon compte</p>
                         </a>
                     </li>
+                   
                     <li class="active-pro">
                         <a href="connexion.php">
                             <i class="now-ui-icons sport_user-run"></i>

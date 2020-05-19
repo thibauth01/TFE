@@ -82,7 +82,7 @@
                                 <form id="uploadForm" method='post'>
                                     <div class="ml-4 mb-3">
                                         <div class="adduser text-center">
-                                            <img style="max-width:100px;max-height:100px" onerror="this.onerror=null; this.src='img/add-user.png'" id="imgAvatar" onclick="document.getElementById('inputAvatar').click();" class="mx-2 my-2" src="<?= $pathImg?>" alt="add-user"/>
+                                            <img style="max-width:80px;max-height:80px" onerror="this.onerror=null; this.src='img/add-user.png'" id="imgAvatar" onclick="document.getElementById('inputAvatar').click();" class="mx-2 my-2" src="<?= $pathImg?>" alt="add-user"/>
                                         </div>
                                         <input  id="inputAvatar" type="file" accept="image/*" name="imageAvatar" style="display:none"/>
                                     </div>
@@ -162,37 +162,8 @@
 
                     <div id="errormsgSign" class="container"></div>
                 </div>
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <nav>
-                            <ul>
-                                <li>
-                                    <a href="https://www.creative-tim.com">
-                                    Creative Tim
-                                </a>
-                                </li>
-                                <li>
-                                    <a href="http://presentation.creative-tim.com">
-                                    About Us
-                                </a>
-                                </li>
-                                <li>
-                                    <a href="http://blog.creative-tim.com">
-                                    Blog
-                                </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="copyright">
-                            &copy;
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>, Designed by
-                            <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-                            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-                        </div>
-                    </div>
-                </footer>
+                <?php require_once('inc/footer.php');?>
+
             </div>
     </div>
 </body>

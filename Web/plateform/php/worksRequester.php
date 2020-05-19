@@ -78,6 +78,11 @@
                                                     $WorkQuery->closeCursor();
 
                                                     $worksFree = notPassedWorks($worksFree);
+
+                                                    if(count($worksFree)<1){
+                                                        echo "Aucun travail &nbsp; &nbsp; <a href='dashboard.php'> Ajoute en ici !</a>";
+                                                    }
+                                                
                                                 
                                                     foreach($worksFree as $work){
                                                         $id=$work['id'];
@@ -120,6 +125,8 @@
                             $timeEnd = date("G:i", strtotime($work['time_end']));
                             $minutesWork = timeSpace($work['time_start'],$work['time_end']);
                             $price = $minutesWork * ($work['price']/60);
+                            $price = number_format((float)$price, 2, ',', ''); 
+
 
                         echo "<div class='row collapse'  id='detailFree".$work['id']."'>
                                     <div class='col-md-12 d-flex'>
@@ -191,6 +198,10 @@
 
                                                         $worksTake = $WorkQuery->fetchAll(PDO::FETCH_ASSOC);
                                                         $WorkQuery->closeCursor();
+
+                                                        if(count($worksTake)<1){
+                                                            echo "Aucun travail pris";
+                                                        }
                                                     
                                                         foreach($worksTake as $work){
                                                             
@@ -259,6 +270,8 @@
                             $age = age($work['birth_date']);
                             $minutesWork = timeSpace($work['time_start'],$work['time_end']);
                             $price = $minutesWork * ($work['price']/60);
+                            $price = number_format((float)$price, 2, ',', ''); 
+
 
                             echo "<div class='collapse'  id='detailTake".$work['id']."'>
                                     <div class='row'>
@@ -346,7 +359,9 @@
 
                                                         $worksDone = $WorkQuery->fetchAll(PDO::FETCH_ASSOC);
                                                         $WorkQuery->closeCursor();
-
+                                                        if(count($worksDone)<1){
+                                                            echo "Aucun travail terminé";
+                                                        }
                                                         foreach($worksDone as $work){
                                                             
                                                             $tmstp =  strtotime($work['date_start']);
@@ -396,6 +411,8 @@
                             $age = age($work['birth_date']);
                             $minutesWork = timeSpace($work['time_start'],$work['time_end']);
                             $price = $minutesWork * ($work['price']/60);
+                            $price = number_format((float)$price, 2, ',', ''); 
+
 
                             echo "<div class='collapse'  id='detailDone".$work['id']."'>
                                     <div class='row'>
@@ -462,37 +479,8 @@
                         
                     ?>
                 </div>
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <nav>
-                            <ul>
-                                <li>
-                                    <a href="https://www.creative-tim.com">
-                                    Creative Tim
-                                </a>
-                                </li>
-                                <li>
-                                    <a href="http://presentation.creative-tim.com">
-                                    About Us
-                                </a>
-                                </li>
-                                <li>
-                                    <a href="http://blog.creative-tim.com">
-                                    Blog
-                                </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="copyright">
-                            &copy;
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>, Designed by
-                            <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-                            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-                        </div>
-                    </div>
-                </footer>
+                <?php require_once('inc/footer.php');?>
+
             </div>
     </div>
 </body>

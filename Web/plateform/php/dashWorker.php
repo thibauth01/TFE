@@ -163,7 +163,10 @@
                                                     }
                                                     
                                                 }
-                                                
+
+                                                if(count($worksOkDistance) < 1){
+                                                    echo "Aucun travail disponible selon vos critères &nbsp; &nbsp; <a href='account.php'>Modifiez les ici !</a>";
+                                                }
 
                                                 foreach($worksOkDistance as $work){
                                                     $tmstp =  strtotime($work['date_start']);
@@ -337,6 +340,8 @@
                         $timeEnd = date("G:i", strtotime($nextWork['time_end']));
                         $minutesWork = timeSpace($nextWork['time_start'],$nextWork['time_end']);
                         $price = $minutesWork * ($nextWork['price']/60);
+                        $price = number_format((float)$price, 2, ',', ''); 
+
                         if($nextWork['profile_path'] == NULL){
                             $nextWork['profile_path'] = 'img/user-1.jpg';  
                         }
@@ -405,37 +410,7 @@
                     ?>
                    
                 </div>
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <nav>
-                            <ul>
-                                <li>
-                                    <a href="https://www.creative-tim.com">
-                                    Creative Tim
-                                </a>
-                                </li>
-                                <li>
-                                    <a href="http://presentation.creative-tim.com">
-                                    About Us
-                                </a>
-                                </li>
-                                <li>
-                                    <a href="http://blog.creative-tim.com">
-                                    Blog
-                                </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="copyright">
-                            &copy;
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>, Designed by
-                            <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-                            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-                        </div>
-                    </div>
-                </footer>
+                <?php require_once('inc/footer.php');?>
             </div>
     </div>
 </body>
