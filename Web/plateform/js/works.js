@@ -1,8 +1,7 @@
-
-function removeWorkFreeRequester(elem){
-    var row= $(elem).parent().parent();
+function removeWorkFreeRequester(elem) {
+    var row = $(elem).parent().parent();
     var id = row.attr('id').substring(7);
-    
+
     Swal.fire({
         title: 'Voulez-vous supprimer ce travail?',
         text: "Ce travail n'était pas encore attribué",
@@ -17,7 +16,8 @@ function removeWorkFreeRequester(elem){
                 url: 'php/removeJob.php',
                 type: 'POST',
                 data: {
-                    'id':id
+                    'id': id,
+                    'take': false
                 }
             }).done(function(data) {
                 Swal.fire(
@@ -26,7 +26,7 @@ function removeWorkFreeRequester(elem){
                     'success'
                 ).then((result) => {
                     $(row).remove();
-                    $('#detailFree'+id).remove();
+                    $('#detailFree' + id).remove();
                 })
 
 
@@ -42,10 +42,10 @@ function removeWorkFreeRequester(elem){
     });
 }
 
-function removeWorkTakeRequester(elem){
-    var row= $(elem).parent().parent();
+function removeWorkTakeRequester(elem) {
+    var row = $(elem).parent().parent();
     var id = row.attr('id').substring(7);
-    
+
     Swal.fire({
         title: 'Voulez-vous supprimer ce travail?',
         text: "Ce travail est déja attribué, le travailleur en sera prévenu !",
@@ -60,7 +60,8 @@ function removeWorkTakeRequester(elem){
                 url: 'php/removeJob.php',
                 type: 'POST',
                 data: {
-                    'id':id
+                    'id': id,
+                    'take': true
                 }
             }).done(function(data) {
                 Swal.fire(
@@ -69,7 +70,7 @@ function removeWorkTakeRequester(elem){
                     'success'
                 ).then((result) => {
                     $(row).remove();
-                    $('#detailTake'+id).remove();
+                    $('#detailTake' + id).remove();
                 })
 
 
@@ -85,10 +86,10 @@ function removeWorkTakeRequester(elem){
     });
 }
 
-function removeWorkWorker(elem){
-    var row= $(elem).parent().parent();
+function removeWorkWorker(elem) {
+    var row = $(elem).parent().parent();
     var id = row.attr('id').substring(7);
-    
+
     Swal.fire({
         title: 'Vous ne souhaitez plus réaliser ce travail ?',
         text: " La personne en sera prevenue !",
@@ -103,7 +104,7 @@ function removeWorkWorker(elem){
                 url: 'php/removeWorker.php',
                 type: 'POST',
                 data: {
-                    'id':id
+                    'id': id
                 }
             }).done(function(data) {
                 Swal.fire(
@@ -112,7 +113,7 @@ function removeWorkWorker(elem){
                     'success'
                 ).then((result) => {
                     $(row).remove();
-                    $('#detailTodo'+id).remove();
+                    $('#detailTodo' + id).remove();
                 })
 
 
@@ -128,8 +129,8 @@ function removeWorkWorker(elem){
     });
 }
 
-function finishJob(elem){
-    var row= $(elem).parent().parent();
+function finishJob(elem) {
+    var row = $(elem).parent().parent();
     var id = row.attr('id').substring(7);
 
     Swal.fire({
@@ -146,7 +147,7 @@ function finishJob(elem){
                 url: 'php/finishJob.php',
                 type: 'POST',
                 data: {
-                    'id':id
+                    'id': id
                 }
             }).done(function(data) {
                 Swal.fire(
@@ -155,7 +156,7 @@ function finishJob(elem){
                     'success'
                 ).then((result) => {
                     $(row).remove();
-                    $('#detailTake'+id).remove();
+                    $('#detailTake' + id).remove();
                 })
 
 
@@ -171,8 +172,8 @@ function finishJob(elem){
     });
 }
 
-function refuseWorker(elem){
-    var row= $(elem).parent().parent();
+function refuseWorker(elem) {
+    var row = $(elem).parent().parent();
     var id = row.attr('id').substring(7);
 
     Swal.fire({
@@ -189,7 +190,7 @@ function refuseWorker(elem){
                 url: 'php/refuseWorker.php',
                 type: 'POST',
                 data: {
-                    'id':id
+                    'id': id
                 }
             }).done(function(data) {
                 Swal.fire(
@@ -199,7 +200,7 @@ function refuseWorker(elem){
                 ).then((result) => {
                     console.log(data)
                     $(row).remove();
-                    $('#detailTake'+id).remove();
+                    $('#detailTake' + id).remove();
                 })
 
 

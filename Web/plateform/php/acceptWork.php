@@ -21,7 +21,7 @@
         $Query->closeCursor();
 
         // create notif
-        $message = "Votre travail ".$infoswork['title']."à été accepté par ".$_SESSION['first_name']." ".$_SESSION['last_name'] ;
+        $message = "Votre travail ".$infoswork['title']." à été accepté par ".$_SESSION['first_name']." ".$_SESSION['last_name'] ;
         
         $id_receiver = $infoswork['id_requester'];
 
