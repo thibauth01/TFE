@@ -33,9 +33,27 @@
         $toReturn['messages'] ="";
     }
     
-    print_r(json_encode($toReturn));
+    
+
+
 
     //ACTUALISE NOTIFICATIONS
 
+    $Query = $dbh->query("SELECT count(id) as count
+                            FROM notification 
+                            WHERE id_receiver =".$_SESSION['idTypeAccount']." AND isRead = 0");
 
+
+    $notifs = $Query->fetch(PDO::FETCH_ASSOC);
+    $Query->closeCursor();
+    $toReturn['notifications'] = $notifs['count'];
+
+
+    if($toReturn['notifications']  < 1){
+        $toReturn['notifications'] ="";
+    }
+
+
+
+    print_r(json_encode($toReturn));
 ?>

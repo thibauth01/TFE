@@ -22,6 +22,7 @@
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="demo/demo.css" rel="stylesheet" />
+    <link href="css/jquery.star-rating-svg.css" rel="stylesheet"/>
 
     <link href="css/custom.css" rel="stylesheet"/>
 </head>
@@ -69,6 +70,8 @@
                                         <table class="table">
                                             <tbody>
                                                 <?php
+                                                
+
                                                     $WorkQuery = $dbh->query("  SELECT work.id,title, id_type, description, id_requester, min_age_worker, date_start, time_start, time_end, place, statut_progress, name, price
                                                                                 FROM work JOIN type_work 
                                                                                 ON work.id_type = type_work.id 
@@ -126,6 +129,7 @@
                             $minutesWork = timeSpace($work['time_start'],$work['time_end']);
                             $price = $minutesWork * ($work['price']/60);
                             $price = number_format((float)$price, 2, ',', ''); 
+                            
 
 
                         echo "<div class='row collapse'  id='detailFree".$work['id']."'>
@@ -202,7 +206,6 @@
                                                         if(count($worksTake)<1){
                                                             echo "Aucun travail pris";
                                                         }
-                                                    
                                                         foreach($worksTake as $work){
                                                             
                                                             $tmstp =  strtotime($work['date_start']);
@@ -260,6 +263,15 @@
                         
                         foreach($worksTake as $work){
 
+                            $Query = $dbh->query("SELECT star
+                                                FROM work
+                                                WHERE finish = 1 AND star is not null AND id_worker = ".$work['id_worker']);
+
+
+                            $stars = $Query->fetchAll(PDO::FETCH_ASSOC);
+                            $Query->closeCursor();
+                            $star = calculStars($stars);
+
                             $tmstp =  strtotime($work['date_start']);
                             $work['date_start'] = date("d-m-Y", $tmstp);
                             $timeStart = date("G:i", strtotime($work['time_start']));
@@ -271,6 +283,8 @@
                             $minutesWork = timeSpace($work['time_start'],$work['time_end']);
                             $price = $minutesWork * ($work['price']/60);
                             $price = number_format((float)$price, 2, ',', ''); 
+
+                            
 
 
                             echo "<div class='collapse'  id='detailTake".$work['id']."'>
@@ -287,6 +301,9 @@
                                                                 ".$age." Ans
                                                             </p>
                                                         </div>
+                                                        <p>
+                                                            <div class='text-center rating".$star."'></div>
+                                                        </p>
                                                         <p class='text-center'>
                                                             ".$work['phone']."
                                                         </p>
@@ -401,6 +418,16 @@
                         
                         foreach($worksDone as $work){
 
+                            $Query = $dbh->query("SELECT star
+                                                FROM work
+                                                WHERE finish = 1 AND star is not null AND id_worker = ".$work['id_worker']);
+
+
+                            $stars = $Query->fetchAll(PDO::FETCH_ASSOC);
+                            $Query->closeCursor();
+                            $star = calculStars($stars);
+
+
                             $tmstp =  strtotime($work['date_start']);
                             $work['date_start'] = date("d-m-Y", $tmstp);
                             $timeStart = date("G:i", strtotime($work['time_start']));
@@ -424,13 +451,15 @@
                                                                 <img class='avatar border-gray' src='".$work['profile_path']."' alt='Profile picture' onerror=\"this.onerror=null; this.src='img/default-user.png'\">
                                                                 <h5 class='title'>".$work['first_name']." ".$work['last_name']."</h5>
                                                             </a>
-                                                            <p class='description'>
+                                                            <p class='description' style='font-size:13px'>
                                                                 ".$age." Ans
                                                             </p>
                                                         </div>
-                                                        <p class='text-center'>
-                                                            ".$work['phone']."
+                                                        <p>
+                                                            <div class='text-center rating".$star."'></div>
                                                         </p>
+                                                        <p class='text-center' style='font-size:13px'>".$work['phone']."</p> 
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -466,7 +495,7 @@
                                                             </div>
                                                         </div>
                                                         <div class='row'>
-                                                            <div class='col-md-12 px-3 pt-4'>
+                                                            <div class='col-md-12 px-3 pt-5'>
                                                                 <p>".$work['description']."</p>
                                                             </div>
                                                         </div>
@@ -482,6 +511,7 @@
                 <?php require_once('inc/footer.php');?>
 
             </div>
+            
     </div>
 </body>
 <!--   Core JS Files   -->
@@ -500,6 +530,7 @@
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="demo/demo.js"></script>
+<script src="js/plugins/jquery.star-rating-svg.js"></script>
 <script src="js/works.js"></script>
 <script src="js/main.js"></script>
 
@@ -508,6 +539,7 @@
         // Javascript method's body can be found in assets/js/demos.js
         demo.initDashboardPageCharts();
     });
+
 </script>
 
 </html>

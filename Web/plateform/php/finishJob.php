@@ -24,13 +24,8 @@ $Query->closeCursor();
 //create notif
 $message = $_SESSION['first_name']." ".$_SESSION['last_name']. " a marqué le travail ".$infoswork['title']." comme terminé et payé" ;
 
-if($_SESSION['typeAccount']=='worker'){
-        
-    $id_receiver = $infoswork['id_requester'];
-}
-else{
-    $id_receiver = $infoswork['id_worker'];
-}
+$id_receiver = $infoswork['id_worker'];
+
 
 $Query = $dbh->query("INSERT INTO `notification` (`id_receiver`,`content`,`isRead`,`type`) VALUES ('".$id_receiver."','".$message."',0,'info')");
         

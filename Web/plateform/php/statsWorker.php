@@ -51,15 +51,75 @@
                     </div>
                 </nav>
                 <!-- End Navbar -->
-                <div class="panel-header panel-header-sm">
+                <div class="panel-header panel-header-lg">
+                    <canvas id="salary"></canvas>
                     
                 </div>
 
                 <div class="content">
-                    
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card card-chart">
+                                <div class="card-header">
+                                    <h5 class="card-category">Total travaux terminé</h5>
+                                    <h4 class="card-title">Cette année</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="totalTravauxWorker"></canvas>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="now-ui-icons tech_watch-time"></i> <?php echo date("Y"); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 ">
+                            <div class="card card-chart">
+                                <div class="card-header">
+                                    <h5 class="card-category">Total travaux terminé</h5>
+                                    <h4 class="card-title">Par type</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="typeTravauxWorker" width="600" height="250"></canvas>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="now-ui-icons tech_watch-time"></i> depuis le début
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-lg-12 ">
+                            <div class="card card-chart">
+                                <div class="card-header">
+                                    <h5 class="card-category">Total travaux terminé</h5>
+                                    <h4 class="card-title">Par villes</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="placesTravauxWorker" width="auto" height="40"></canvas>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="now-ui-icons tech_watch-time"></i> depuis le début
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     
                 </div>
+
+                
                 <?php require_once('inc/footer.php');?>
             </div>
     </div>
@@ -77,8 +137,12 @@
 <script src="js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
+<script src="js/plugins/jquery.star-rating-svg.js"></script>
+
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-<script src="demo/demo.js"></script>
+<!-- <script src="demo/demo.js"></script> -->
+<script src="js/main.js"></script>
+<script src="js/statsWorker.js"></script>
 
 <script>
     $(document).ready(function() {

@@ -129,7 +129,7 @@ else{
             print_r(json_encode($messages));
         }
         else{
-            $requesterQuery = $dbh->query( "INSERT INTO `worker` (`maximum_distance`,`id_account`,`star`) VALUES('$distance','$idAccount',0)");
+            $requesterQuery = $dbh->query( "INSERT INTO `worker` (`maximum_distance`,`id_account`) VALUES('$distance','$idAccount')");
             if ($requesterQuery) {
                 $requesterQuery->closeCursor();
             } 

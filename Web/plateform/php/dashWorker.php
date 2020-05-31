@@ -61,8 +61,7 @@
                     </div>
                 </nav>
                 <!-- End Navbar -->
-                <div class="panel-header panel-header-lg">
-                    <canvas id="bigDashboardChart"></canvas>
+                <div class="panel-header panel-header-sm">
                 </div>
 
                 <div class="content">
@@ -242,6 +241,8 @@
                             $minutesWork = timeSpace($work['time_start'],$work['time_end']);
                             $price = $minutesWork * ($work['price']/60);
 
+
+
                             
                             echo "<div class='collapse' id='detailsProp".$work['id']."'>
                                     <div class='row'>
@@ -310,7 +311,7 @@
 
                 <?php
                     $id_worker = $_SESSION['idTypeAccount'];
-                    $nextWorkQuery = $dbh->query("  SELECT title, name, description,date_start,time_start,time_end,place,price,account.city as city,account.first_name as first_name,account.last_name as last_name,account.profile_path as profile_path
+                    $nextWorkQuery = $dbh->query("  SELECT id_requester, title, name, description,date_start,time_start,time_end,place,price,account.city as city,account.first_name as first_name,account.last_name as last_name,account.profile_path as profile_path
                                                     FROM work 
                                                     JOIN type_work on type_work.id = work.id_type
                                                     JOIN requester on  requester.id = work.id_requester
@@ -342,6 +343,12 @@
                         $price = $minutesWork * ($nextWork['price']/60);
                         $price = number_format((float)$price, 2, ',', ''); 
 
+                        $NumberWorkQuery = $dbh->query("SELECT COUNT(id) as nbr FROM work WHERE finish=1 AND id_requester =".$nextWork['id_requester']);
+
+                        $NumberWork = $NumberWorkQuery->fetchAll(PDO::FETCH_ASSOC);
+                        $NumberWorkQuery->closeCursor(); 
+                        $NumberWork = $NumberWork[0]['nbr'];
+
                         if($nextWork['profile_path'] == NULL){
                             $nextWork['profile_path'] = 'img/user-1.jpg';  
                         }
@@ -364,7 +371,7 @@
                                                         ".$nextWork['city']."
                                                         </p>
                                                     </div>
-                                                    <p class='text-center'> 12 works already given</p>
+                                                    <p class='text-center'> ".$NumberWork." travaux déjà donné</p>
                                                 </div>
                                                 <div class='col-md-9'>
                                                     <div class='row'>
@@ -428,10 +435,12 @@
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-<script src="demo/demo.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <script src="js/dashboard.js"></script>
+<script src="js/stats.js"></script>
+
 <script src="js/main.js"></script>
 
 <script>

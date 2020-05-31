@@ -4,7 +4,7 @@
 
     $Query = $dbh->query("SELECT id,content,sendtime,isRead,type
                             FROM notification 
-                            WHERE id_receiver =".$_SESSION['idTypeAccount']." AND isRead = 1 ORDER BY sendtime LIMIT 20");
+                            WHERE id_receiver =".$_SESSION['idTypeAccount']." AND isRead = 1 ORDER BY sendtime LIMIT 10");
 
 
     $notifs = $Query->fetchAll(PDO::FETCH_ASSOC);

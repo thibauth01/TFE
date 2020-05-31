@@ -1,5 +1,6 @@
 <?php
     require_once('inc/db_connect.php');
+    require_once('php/utils.php');
 
 ?>
 <!DOCTYPE html>
@@ -23,6 +24,8 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="demo/demo.css" rel="stylesheet" />
+    <link href="css/jquery.star-rating-svg.css" rel="stylesheet"/>
+
     <link href="css/custom.css" rel="stylesheet" />
 </head>
 
@@ -97,7 +100,15 @@
                     else{
                         $pathImg = $infosWorker['profile_path'];
                     }
-                    
+
+                    $Query = $dbh->query("SELECT star
+                                        FROM work
+                                        WHERE finish = 1 AND star is not null AND id_worker = ".$_SESSION['idTypeAccount']);
+
+
+                    $stars = $Query->fetchAll(PDO::FETCH_ASSOC);
+                    $Query->closeCursor();
+                    $star = calculStars($stars);
                     
 
                 ?>
@@ -112,11 +123,14 @@
                                 <form id="uploadForm" method='post'>
                                     <div class="ml-4 mb-3">
                                         <div class="adduser text-center">
-                                            <img style="max-width:100px;max-height:100px" id="imgAvatar" onerror="this.onerror=null; this.src='img/add-user.png'" onclick="document.getElementById('inputAvatar').click();" class="mx-2 my-2" src="<?= $pathImg?>" alt="add-user"/>
+                                            <img style="max-width:80px;max-height:80px" id="imgAvatar" onerror="this.onerror=null; this.src='img/add-user.png'" onclick="document.getElementById('inputAvatar').click();" class="mx-2 my-2" src="<?= $pathImg?>" alt="add-user"/>
                                         </div>
                                         <input  id="inputAvatar" type="file" accept="image/*" name="imageAvatar" style="display:none"/>
                                     </div>
                                 </form>
+                                <p>
+                                    <div class='ml-4 rating<?= $star ?>'></div>
+                                </p>
                                 <div class="card-body">
                                     <div class="">
                                         <form method="post" id="updateAccountWorker">
@@ -301,6 +315,7 @@
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="js/plugins/jquery.star-rating-svg.js"></script>
 <script src="demo/demo.js"></script>
 <script src="js/account.js"></script>
 <script src="js/main.js"></script>

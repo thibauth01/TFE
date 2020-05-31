@@ -10,6 +10,44 @@ $(document).ready(function() {
         getMessagesSide();
     }, 3000);
 
+
+
+
+    $('.rating1').starRating({
+        readOnly: true,
+        starSize: 20,
+        starShape: 'rounded',
+        initialRating: 1
+    });
+
+    $('.rating2').starRating({
+        readOnly: true,
+        starSize: 20,
+        starShape: 'rounded',
+        initialRating: 2
+    });
+
+    $('.rating3').starRating({
+        readOnly: true,
+        starSize: 20,
+        starShape: 'rounded',
+        initialRating: 3
+    });
+
+    $('.rating4').starRating({
+        readOnly: true,
+        starSize: 20,
+        starShape: 'rounded',
+        initialRating: 4
+    });
+
+    $('.rating5').starRating({
+        readOnly: true,
+        starSize: 20,
+        starShape: 'rounded',
+        initialRating: 5
+    });
+
 });
 
 function getMessagesSide() {
@@ -30,5 +68,5 @@ function getMessagesSide() {
                 $("#sideNotifications").html("");
             }
         }
-    })
+    });
 }

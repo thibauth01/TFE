@@ -9,7 +9,7 @@
             -->
             <div class="logo text-center">
                 
-                <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+                <a href="#" class="simple-text logo-normal">
                     Youngr
                 </a>
             </div>
@@ -49,6 +49,12 @@
                         <a href="account.php">
                             <i class="now-ui-icons users_single-02"></i>
                             <p>Mon compte</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="help.php">
+                            <i class="now-ui-icons business_bulb-63"></i>
+                            <p>Aide</p>
                         </a>
                     </li>
                    

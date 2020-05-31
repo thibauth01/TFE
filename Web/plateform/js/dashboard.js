@@ -15,7 +15,9 @@ function acceptWork(elem) {
         icon: 'question',
         showCancelButton: true,
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui'
+        confirmButtonText: 'Oui',
+        cancelButtonText: 'Non'
+
 
     }).then((result) => {
         if (result.value) {

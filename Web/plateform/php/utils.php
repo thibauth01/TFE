@@ -1,4 +1,5 @@
 <?php
+
 function age($date){
     $today = date("Y-m-d");
     $diff = date_diff(date_create($date), date_create($today));
@@ -24,4 +25,19 @@ function notPassedWorks($all){
     }
     return $notPassed;
 
+}
+
+function calculStars($stars){
+    $total;
+    if(sizeof($stars) < 1){
+        return -1;
+    }
+    else{
+        foreach ($stars as $key => $star) {
+            $total += (int)$star['star'];
+            
+        }
+        return intval($total/sizeof($stars));
+    }
+    
 }

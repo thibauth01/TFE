@@ -66,7 +66,7 @@
                                         <table class="table">
                                             <tbody>
                                                 <?php
-                                                    $ToDoWorksQuery = $dbh->query(" SELECT work.id,title,id_type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path
+                                                    $ToDoWorksQuery = $dbh->query(" SELECT id_requester,work.id,title,id_type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path
                                                                                     FROM work
                                                                                     JOIN requester on work.id_requester = requester.id
                                                                                     JOIN account on requester.id_account = account.id
@@ -99,16 +99,13 @@
 
                                                         echo "<tr id='rowtodo".$id."'>
                                                                 <td style='width:60px;height:60px'>
-                                                                    <img src='".$work['profile_path'] ."'>
+                                                                    <img src='".$work['profile_path'] ."' onerror=\"this.onerror=null; this.src='img/default-user.png'\" height='50px' width='50px' style='min-width:50px;'>
                                                                 </td>
             
                                                                 <td class='text-left pl-3'>".$work['title']."</td>
                                                                 <td class='text-danger'>".$work['name']."</td>
                                                                 <td>".$work['date_start']."</td>
                                                                 <td class='td-actions text-right'>
-                                                                    <button type='button' onclick='finishJob(this);' rel='tooltip' title='' class='btn btn-success btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Remove Work' >
-                                                                            <i class='now-ui-icons ui-1_check'></i>
-                                                                        </button>
                                                                     <button type='button' rel='tooltip' title='' class='btn btn-info btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Info Work' data-toggle='collapse' data-target='#detailTodo".$work['id']."'>
                                                                         <i class='now-ui-icons travel_info'></i>
                                                                     </button>
@@ -134,6 +131,12 @@
                     <?php
                         foreach($ToDoWorks as $work){
 
+                            $NumberWorkQuery = $dbh->query("SELECT COUNT(id) as nbr FROM work WHERE finish=1 AND id_requester =".$work['id_requester']);
+
+                            $NumberWork = $NumberWorkQuery->fetchAll(PDO::FETCH_ASSOC);
+                            $NumberWorkQuery->closeCursor(); 
+                            $NumberWork = $NumberWork[0]['nbr'];
+
                             $tmstp =  strtotime($work['date_start']);
                             $work['date_start'] = date("d-m-Y", $tmstp);
                             $timeStart = date("G:i", strtotime($work['time_start']));
@@ -152,14 +155,14 @@
                                                     <div class='card-body'>
                                                         <div class='text-center'>
                                                             <a href='#'>
-                                                                <img class='avatar border-gray' src='".$work['profile_path']."' alt='Profile picture'>
-                                                                <h5 class='title'>".$work['first_name']." ".$work['last_name']."</h5>
+                                                            <img class='avatar border-gray' src='".$work['profile_path']."' onerror=\"this.onerror=null; this.src='img/default-user.png'\" alt='...'>
+                                                            <h5 class='title'>".$work['first_name']." ".$work['last_name']."</h5>
                                                             </a>
                                                             <p class='description'>
                                                                 ".$work['city']."
                                                             </p>
                                                         </div>
-                                                        <p class='text-center'>12 job déja pris</p>
+                                                        <p class='text-center'>".$NumberWork." travaux déjà donné</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -246,7 +249,7 @@
                                                     $id=$work['id'];
                                                     echo "<tr id='rowDone".$id."'>
                                                             <td style='width:60px;height:60px'>
-                                                                <img src='".$work['profile_path'] ."'>
+                                                                <img src='".$work['profile_path'] ."' onerror=\"this.onerror=null; this.src='img/default-user.png'\" height='50px' width='50px' style='min-width:50px;'>
                                                             </td>
         
                                                             <td class='text-left pl-3'>".$work['title']."</td>
@@ -295,16 +298,14 @@
                                                     <div class='card-body'>
                                                         <div class='text-center'>
                                                             <a href='#'>
-                                                                <img class='avatar border-gray' src='".$work['profile_path']."' alt='Profile picture'>
+                                                                <img class='avatar border-gray' src='".$work['profile_path']."' onerror=\"this.onerror=null; this.src='img/default-user.png'\" alt='...'>
                                                                 <h5 class='title'>".$work['first_name']." ".$work['last_name']."</h5>
                                                             </a>
                                                             <p class='description'>
-                                                                ".$age." Ans
+                                                            ".$work['city']."
                                                             </p>
                                                         </div>
-                                                        <p class='text-center'>
-                                                            ".$work['phone']."
-                                                        </p>
+                                                        <p class='text-center'> ".$NumberWork." travaux déjà donné</p>
                                                     </div>
                                                 </div>
                                             </div>
