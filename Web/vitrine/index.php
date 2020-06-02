@@ -27,12 +27,8 @@
             <i class="ti-align-justify"></i>
           </a>
           <ul class="navbar-nav">    
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a  style="color:#ff7214" href="index.php">Home</a></li>
+            <li><a href="contact.php">Contact</a></li>
           </ul>
         </nav>
       </div>
@@ -49,12 +45,12 @@
               <h2>De l'aide pour tout vos travaux</h2>
               <p>Vous avez entre 15 et 25 ans ? <br>Effectuez des petits jobs chez des particuliers!</p>
               <p>Besoin d'aide pour un travail à domicile ?<br> Un jeune travailleur viendra vous aider !</p>
-              <a href="#" class="btn btn-default">J'en profite !</a>
+              <a href="#" class="btn btn-default">Découvrir</a>
             </div>
           </div>
           <div class="col-md-6 order-0 order-md-1">
             <figure class="ban-img">
-              <img src="images/unnamed.jpg" alt="">
+              <img src="images/unnamed.jpg" alt="jeunes et adulte">
             </figure>
           </div>
         </div>
@@ -66,27 +62,23 @@
     <section class="about">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="about-img-group">
-              <img src="images/liquid-img/bg.png" alt="" class="about-img-bg">
-              <div class="row">
-                <div class="col-md-7">
-                  <img src="images/liquid-img/1.jpg" alt="" class="about-img-1">
-                </div>
-                <div class="col-md-5">
-                  <img src="images/liquid-img/2.jpg" alt="" class="about-img-2">
-                  <h3>25 Years Working Experience</h3>
-                </div>
-              </div>
+          <div class="col-md-6">
+            <div class="content-box-fluid">
+              <span class="tagline">Travailleur</span>
+              <h2>Vous souhaitez devenir travailleur</h2>
+              <h5>Vous avez entre 15 et 25 ans et vous voulez gagner de l'argent de poche ?</h5>
+              <p> Vous avez des compétences en <strong>Baby-Sitting</strong>, <strong>Travaux ménagers</strong>, <strong>Garde d'animaux</strong>, <strong>Cours particuliers</strong>,<strong>Jardinage</strong>, <strong>Bricolage</strong>, <strong>Shopping</strong>, <strong>Technologie</strong>, <strong>...</strong> ?
+                <br> Inscrivez-vous en indiquant vos disponibilité et vos compténces ! Nous vous proposerons des travaux adapté !</p>
+              <a href="#" class="btn btn-default">Inscription</a>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-md-6">
             <div class="content-box-fluid">
-              <span class="tagline">About our company</span>
-              <h2>Make the customer the hero of your story</h2>
-              <h5>Open without also first greats land and bring said   you give second face seed deep whales.</h5>
-              <p>May is called whose was moveth was isn't. Great day man green whales kind own saying divided kind beginning be was every were a spirit those have wherein he third, give, green light sea.</p>
-              <a href="#" class="btn btn-default">Learn More</a>
+              <span class="tagline">Demandeur</span>
+              <h2>Vous souhaitez devenir Demandeur</h2>
+              <h5>Besoin d'aide pour vos travaux à domicile, garder vos enfants, aller faire vos courses, ...</h5>
+              <p>Faites appel à l'un de nos jeunes travailleurs ! <br>Inscrivez-vous et ajoutez votre besoin, nous vous metterons en lien avec un de nos travailleur !</p>
+              <a href="#" class="btn btn-default">Inscription</a>
             </div>
           </div>
         </div>
@@ -94,14 +86,47 @@
     </section>
     <!-- About section end -->
 
+    <!-- Funfacts section start -->
+    <section class="funfacts">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-sm-6">
+            <div class="single-fun">
+              <img src="images/icons/funfact/person.png" alt="">
+              <p><span>92</span>travailleurs</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <div class="single-fun">
+              <img src="images/icons/funfact/person2.png" alt="">
+              <p><span>85</span>demandeurs</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <div class="single-fun">
+              <img src="images/icons/funfact/agreement.png" alt="">
+              <p><span>67</span>travaux terminé</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <div class="single-fun">
+              <img src="images/icons/funfact/money.png" alt="">
+              <p><span>85€</span>revenu généré</p>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </section>
+    <!-- Funfacts section end -->
+
     <!-- Features section start -->
     <section class="features">
       <div class="container">
         <div class="row">
           <div class="col-md-7 m-auto text-center">
             <div class="sec-heading">
-              <span class="tagline">Special Features</span>
-              <h3 class="sec-title">Advertising with Difference</h3>
+              <span class="tagline">Outils</span>
+              <h3 class="sec-title">Une solution complète </h3>
             </div>
           </div>
         </div>
@@ -109,37 +134,37 @@
           <div class="col-lg-3 col-sm-6">
             <div class="iconBox">
               <span class="icon" style="background-color: #ffeee2;">
-                <i class="ti-pencil-alt"></i>
+                <i class="ti-desktop"></i>
               </span>
-              <a href="#">Unique Design</a>
-              <p>Bring creature let Fish to grass under the given a void from deep form greater and days give upon day light likeness.</p>
+              <a href="#">Plateforme Web</a>
+              <p>Plateforme en ligne pour gérer vos travaux </p>
             </div>
           </div>
           <div class="col-lg-3 col-sm-6">
             <div class="iconBox">
               <span class="icon" style="background-color: #ebe3ff;">
-                <i class="ti-pencil-alt"></i>
+                <i class="ti-mobile"></i>
               </span>
-              <a href="#">Standard Quality</a>
-              <p>Bring creature let Fish to grass under the given a void from deep form greater and days give upon day light likeness.</p>
+              <a href="#">Application mobile</a>
+              <p>Application Android et IOS pour avoir toutes vos informations sous la main !</p>
             </div>
           </div>
           <div class="col-lg-3 col-sm-6">
             <div class="iconBox">
               <span class="icon" style="background-color: #d5f8ff;">
-                <i class="ti-pencil-alt"></i>
+                <i class="ti-comments"></i>
               </span>
-              <a href="#">Standard Quality</a>
-              <p>Bring creature let Fish to grass under the given a void from deep form greater and days give upon day light likeness.</p>
+              <a href="#">Messages</a>
+              <p>Une messagerie pour des informations complémentaires</p>
             </div>
           </div>
           <div class="col-lg-3 col-sm-6">
             <div class="iconBox">
               <span class="icon" style="background-color: #ffedf5;">
-                <i class="ti-pencil-alt"></i>
+                <i class="ti-bar-chart"></i>
               </span>
-              <a href="#">24/7 Support</a>
-              <p>Bring creature let Fish to grass under the given a void from deep form greater and days give upon day light likeness.</p>
+              <a href="#">Statistiques</a>
+              <p>Des statistiques pour vous permettre de suivre votre évolution</p>
             </div>
           </div>
         </div>
@@ -147,7 +172,7 @@
     </section>
     <!-- Features section end -->
 
-    <!-- Works section start -->
+    <!-- Works section start 
     <section class="works">
       <div class="container-fluid">
         <div class="row">
@@ -199,42 +224,11 @@
         </div>
       </div>
     </section>
-    <!-- Works section end -->
+     Works section end -->
 
-    <!-- Funfacts section start -->
-    <section class="funfacts">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-sm-6">
-            <div class="single-fun">
-              <img src="images/icons/funfact/1.png" alt="">
-              <p><span>92</span>Satisfied client</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="single-fun">
-              <img src="images/icons/funfact/2.png" alt="">
-              <p><span>85</span>Total project</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="single-fun">
-              <img src="images/icons/funfact/3.png" alt="">
-              <p><span>67</span>work completed</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="single-fun">
-              <img src="images/icons/funfact/4.png" alt="">
-              <p><span>85</span>work completed</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Funfacts section end -->
+    
 
-    <!-- Testimonial start -->
+    <!-- Testimonial start 
     <section class="tesimonial">
       <div class="container-fluid">
         <div class="row">
@@ -272,9 +266,9 @@
         </div>
       </div>
     </section>
-    <!-- Testimonial end -->
+     Testimonial end -->
 
-    <!-- Team section start -->
+    <!-- Team section start 
     <section class="team">
       <div class="container">
         <div class="row">
@@ -334,9 +328,9 @@
         </div>
       </div>
     </section>
-    <!-- Team section end -->
+     Team section end -->
 
-    <!-- Latest News section start -->
+    <!-- Latest News section start 
     <section class="blog">
       <div class="container">
         <div class="row">
@@ -393,9 +387,9 @@
         </div>
       </div>
     </section>
-    <!-- Latest News section end -->
+     Latest News section end -->
 
-    <!-- Contact section start -->
+    <!-- Contact section start 
     <section class="contact">
       <div class="container">
         <div class="row">
@@ -428,9 +422,9 @@
         </div>
       </div>
     </section>
-    <!-- Contact section end -->
+     Contact section end -->
 
-    <!-- Partners section start -->
+    <!-- Partners section start 
     <section class="partners">
       <div class="container">
         <div class="row">
@@ -445,7 +439,7 @@
         </div>
       </div>
     </section>
-    <!-- Partners section end -->
+     Partners section end -->
 
     <!-- Footer strat -->
     <footer class="footer">
