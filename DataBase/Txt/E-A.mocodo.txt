@@ -1,34 +1,20 @@
-account: id, first_name, last_name, email, username, password, bith_date, street, postcode, city, country,premium
-requester: id
-worker: id,maximum_distance, star
-
-
-inherit1, 11 account, 11 worker
-Inherit2, 11 account, 11 requester
-
-availability: id, time_start, time_end
-
-Having, 0N availability, 07 worker
-
-day: id, name
-
-include, 0N day, 11 availability
-
-work : id, title, description,min_age_worker, date_start, date_end, time_start, time_end, place, statut_progress, paid, cancelled
-
+account: id,first_name, last_name, email,phone, username, password, birth_date, street, postcode, city,country,premium,type,profile_path
+requester:id
+worker:id,maximum_distance
+day: id,name
+work : id, title, description,min_age_worker, date_start, time_start, time_end, place,paid,cancelled,finish,price,star
 type_work : id, name
+message :id, content, sendtime,isRead
+notification: id, content, sendtime,isRead,type
 
-defined, 11 work, 0N type_work
-
-perform, 0N worker, 01 work
-provide, 0N requester, 11 work
-
-
-message :id, content, sendtime
-
-send, 0N account, 11 message
-
-notification: id, content, sendtime
-
-notifie, 0N account, 1N notification
-
+hérite, 11 account, 11 worker
+herite, 11 account, 11 requester
+est disponible, 0N day, 17 worker
+peut effectuer, 1N type_work, 1N worker
+réalise, 0N worker, 01 work
+fournit , 0N requester, 11 work
+possède, 11 work, 0N type_work
+refuse, 0N worker, 0N work
+envoit, 0N account, 11 message
+est lié, 0N work, 11 message
+reçoit, 11 notification, 0N account
