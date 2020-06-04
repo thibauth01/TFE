@@ -20,7 +20,6 @@ export default class CardWorkTakeReq extends React.Component {
         const now = new Date();
         const dat1 = dateMoment.getFullYear() + dateMoment.getMonth() + dateMoment.getDate();
         const dat2 = now.getFullYear() + now.getMonth() + now.getDate();
-
         if(dat1 >= dat2){
             const month = Number(dateMoment.getMonth()) + 1 
           return (

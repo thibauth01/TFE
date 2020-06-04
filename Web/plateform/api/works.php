@@ -77,7 +77,7 @@
         $idTypeAccount = $idTypeAccount['id'];
 
         //Proposal
-/*
+
         //SELECT infos worker (adress,max distance)
         $infosWorkerQuery = $dbh->query("   SELECT account.id as id,street,birth_date, postcode,city,country,maximum_distance 
                                             FROM account 
@@ -111,7 +111,7 @@
         $age = age($infosWorker['birth_date']);
 
         //SELECT all works free with age
-        $worksFreeQuery = $dbh->query("SELECT work.id as id, title, description,id_type,type_work.name as type_name, id_requester,date_start,time_start,time_end,place,first_name,last_name,city,profile_path,price 
+        $worksFreeQuery = $dbh->query("SELECT work.id as id, title,type_work.name as type,birth_date, description,id_type,type_work.name as type_name, id_requester,date_start,time_start,time_end,place,first_name,last_name,city,profile_path,price 
             FROM work
             JOIN type_work on work.id_type = type_work.id
             JOIN requester on id_requester = requester.id
@@ -163,11 +163,11 @@
         }
 
         $returnJSON['dataFree'] = $worksOkDistance;
-*/
+
 
 
         //Take
-        $Query = $dbh->query(" SELECT work.id,title,id_type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path
+        $Query = $dbh->query(" SELECT work.id,title,id_type,type_work.name as type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path,birth_date
                                         FROM work
                                         JOIN requester on work.id_requester = requester.id
                                         JOIN account on requester.id_account = account.id
@@ -181,7 +181,7 @@
 
 
         //Done
-        $Query = $dbh->query(" SELECT work.id,title,id_type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path
+        $Query = $dbh->query(" SELECT work.id,title,id_type,type_work.name as type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path,birth_date
                                         FROM work
                                         JOIN requester on work.id_requester = requester.id
                                         JOIN account on requester.id_account = account.id

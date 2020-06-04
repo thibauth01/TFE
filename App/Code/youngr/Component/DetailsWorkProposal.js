@@ -2,17 +2,73 @@ import React from 'react'
 import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking, Dimensions, ScrollView, TouchableOpacity } from 'react-native'
 import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
+import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
+import AwesomeAlert from 'react-native-awesome-alerts';
+import { connect } from 'react-redux'
 
 
-class DetailsWorksFree extends React.Component {
+
+class DetailsWorkProposal extends React.Component {
 
   constructor(props) {
     super(props)
+    this.state={
+      showAlert:false,
+      typeAlert:undefined
+    }
+  }
+
+  showAlert = () => {
+    
+    this.setState({
+      showAlert: true,
+      typeAlert:true
+    });
+    
+  
+    
+  };
+
+  hideAlert = () => {
+    this.setState({
+      showAlert: false
+    });
+  };
+
+ 
+
+
+  accept=()=>{
+    const idWork = this.props.navigation.state.params.id;
+
+    fetch('http://192.168.1.56/TFE/Web/plateform/api/acceptWork.php',{
+      method:'POST',
+      header:{
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+          idWork: idWork,
+          idTypeAccount: this.props.account.idTypeAccount
+      })
+      
+    })
+    .then((response) => response.json())
+        .then((responseJson)=>{
+            if(!responseJson.status){
+              alert("impossible de supprimer")
+            };
+        
+        })
+        .catch((error)=>{
+            console.error(error);
+        }); 
   }
 
 
   render() {
-    const {state} = this.props.navigation;
+    const {state} = this.props.navigation
+    console.log(this.props.account);
     
     return (
         <Block style={styles.main_container}>
@@ -21,59 +77,75 @@ class DetailsWorksFree extends React.Component {
               <Image style={styles.profile} source={require(`../Images/avatar.jpg`)}></Image>
             </Block>
             <Block flex={2} style={styles.infoprofileBlock}>
-              <Block row  space="around" width={200}>
-                <Text h3 muted>{state.params.title}</Text> 
-                <Text h3 muted> S</Text>
+              <Block row style={{marginLeft:10}}>
+                <Text h4 muted>{state.params.first_name} {state.params.last_name}</Text> 
               </Block> 
               <Block row space="around" width={200}>
-                <Text muted > 22 ans</Text>
-                <Text muted> Louvain-la-Neuve</Text>
+                <Text muted > {getAge(state.params.birth_date)} ans</Text>
+                <Text muted> {state.params.city}</Text>
               </Block>
               <Block row style={styles.buttonsProfile}>
                 <Button style={styles.buttonProfileMessage}  iconColor={theme.COLORS.SECONDARY}	onlyIcon iconSize={20} icon="message-circle" iconFamily="feather" flex={2}></Button>
-                <Button style={styles.buttonProfilePhone}  iconColor={theme.COLORS.DEFAULT}	onlyIcon iconSize={20} icon="phone" iconFamily="feather" flex={2}></Button>
+                <Button onPress={()=>{Linking.openURL(`tel:${state.params.phone}`)}} style={styles.buttonProfilePhone}  iconColor={theme.COLORS.DEFAULT}	onlyIcon iconSize={20} icon="phone" iconFamily="feather" flex={2}></Button>
               </Block>      
             </Block>
           </Block>
           <Block flex={0.9} space="evenly" center fluid style={styles.titlesBlock}>
-              <Text style={styles.textTitle} h3>Nettoie sale fdp</Text>
-              <Text style={styles.textTitle} h5 color={theme.COLORS.SECONDARY}>Bricolage</Text>
+              <Text style={styles.textTitle} h3>{state.params.title}</Text>
+              <Text style={styles.textTitle} h5 color={theme.COLORS.SECONDARY}>{state.params.type}</Text>
           </Block>
           
-          <Block flex={3} style={styles.contentBlock}>
+          <Block flex={2.5} style={styles.contentBlock}>
             <ScrollView >
               <Block row style={styles.itemBlock}>
                 <Icon  size={25} name="calendar" family="feather" color={theme.COLORS.MUTED}/>
-                <Text  style={styles.textContent}>20 Mars 2020</Text>
+                  <Text  style={styles.textContent}>{reformatDate(state.params.date_start)}</Text>
               </Block>
               <Block row style={styles.itemBlock}>
                 <Icon size={25} name="clock" family="feather" color={theme.COLORS.MUTED}/>
-                <Text style={styles.textContent}>20h30 - 22h30</Text>
+                <Text style={styles.textContent}>{reformatTime(state.params.time_start)} - {reformatTime(state.params.time_end)}</Text>
               </Block>
               <Block row style={styles.itemBlock}>
                 <Icon size={25} name="dollar-sign" family="feather" color={theme.COLORS.MUTED}/>
-                <Text style={styles.textContent}>33€</Text>
+                <Text style={styles.textContent}>{getPrice(state.params.time_start,state.params.time_end,state.params.price)}€</Text>
               </Block>
               <Block row style={styles.itemBlock}>
                 <Icon size={25} name="map-pin" family="feather" color={theme.COLORS.MUTED}/>
-                <Text style={styles.textContent}>3 Rue des cochons 6440 Louvain la Neuve </Text>
+                <Text style={styles.textContent}>{state.params.place}</Text>
               </Block>
               <Block row style={styles.itemBlock}>
                 <Icon size={25} name="tag" family="feather" color={theme.COLORS.MUTED}/>
-                <Text style={styles.textContent}>3 Rue des cochons 6440 Louvain-la Neuve fuerifurieeeeeeee eeeeeeeeee eeeeeeeeeeeeegulbvreilvsjbfttd gshtrd gsht rsht </Text>
+                  <Text style={styles.textContent}>{state.params.description}</Text>
               </Block>
             </ScrollView>
           </Block>
           
-          <Block row space="evenly" flex={0.5}>
-            <TouchableOpacity >
-              <Icon name="x" family="feather" size={25} color={theme.COLORS.ERROR}/>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Icon name="check" family="feather" size={25} color={theme.COLORS.SUCCESS}/>
-            </TouchableOpacity>
+          <Block row flex={0.6} space="evenly">
+           <Button style={styles.buttonAccept} onPress={this.showAlert.bind()} >Accepter</Button>
             
           </Block>
+          <AwesomeAlert
+            show={this.state.showAlert}
+            showProgress={false}
+            title={"Effectuer ce travail"}
+            message="Etes vous sûr?"
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={false}
+            showCancelButton={true}
+            showConfirmButton={true}
+            cancelText="Non"
+            confirmText={"Oui, Je veux le faire"}
+            confirmButtonColor={theme.COLORS.SECONDARY}
+            onCancelPressed={() => {
+              this.hideAlert();
+            }}
+            onConfirmPressed={() => {
+              this.accept();
+              this.hideAlert();
+              this.props.navigation.goBack();
+            }}
+          />
+          
         </Block>
     )
   }
@@ -145,7 +217,7 @@ const styles = StyleSheet.create({
 
   contentBlock:{
     width:Dimensions.get("window").width,
-    paddingRight:30,
+    marginRight:30,
   },
   itemBlock:{
     marginTop:15,
@@ -159,25 +231,28 @@ const styles = StyleSheet.create({
     backgroundColor:theme.COLORS.DEFAULT,
     width:80,
     height:30,
-    marginLeft:60,
+    marginLeft:80,
     borderRadius:5,
   },
   progressionText:{
-    color:theme.COLORS.SUCCESS
+    color:theme.COLORS.ERROR
   },
   buttonDelete:{
-    backgroundColor:theme.COLORS.ERROR,
-    width:80,
+    backgroundColor:theme.COLORS.MUTED,
+    width:100,
     height:35,
   },
   buttonAccept:{
-    backgroundColor:theme.COLORS.SUCCESS,
-    width:80,
+    backgroundColor:theme.COLORS.SECONDARY,
+    width:170,
     height:35,
   }
-
-
-
 })
 
-export default DetailsWorksFree
+const mapStateToProps = (state) =>{
+  return {
+      account: state.account.account
+  }
+}
+
+export default connect(mapStateToProps)(DetailsWorkProposal)

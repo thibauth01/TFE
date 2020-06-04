@@ -5,6 +5,8 @@ import { theme } from '../Constants';
 import ItemWorksFree from './ItemWorksFree'
 import { connect } from 'react-redux'
 import CardWork from './Cardwork'
+import { NavigationEvents } from 'react-navigation';
+
 
 import {
   LineChart,
@@ -128,6 +130,9 @@ class DashboardWorker extends React.Component {
 
     return (
         <Block  style={styles.main_container}> 
+          <NavigationEvents
+                  onDidFocus={() => this.componentDidMount()}
+          />
           <Block flex={1}>
             <Text h4 muted style={styles.subtitle}>Prochains travaux</Text>
             {this.isWorks()}

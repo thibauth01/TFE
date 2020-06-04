@@ -11,8 +11,9 @@ import { block } from 'react-native-reanimated';
 import ItemWorksTodo from './ItemWorksTodo'
 import CardWork from './Cardwork'
 import CardWorkFree from './CardWorkFree'
+import CardWorkDone from './CardWorkDone'
 import {getAge,reformatDate,reformatTime,getPrice,loading} from '../Constants/Utils'
-
+import { NavigationEvents } from 'react-navigation';
 
 
 
@@ -184,7 +185,7 @@ class WorksWorker extends React.Component {
         return(
           <FlatList
               data={this.state.dataDone}
-              renderItem={({ item }) => <CardWork 
+              renderItem={({ item }) => <CardWorkDone 
                                           navigate={this.props.navigate} 
                                           item={item}
                                         />}
@@ -217,7 +218,9 @@ class WorksWorker extends React.Component {
 
     return (
       <Block  style={styles.main_container}>
-
+        <NavigationEvents
+                onDidFocus={() => this.componentDidMount()}
+        />
         <ScrollView>
           <Block style={styles.block_content}> 
               <Text h4 muted style={styles.subtitle}>Propositions</Text>

@@ -17,7 +17,6 @@ class DetailsWorkDone extends React.Component {
  
   render() {
     const {state} = this.props.navigation
-    console.log(state.params);
     
     return (
         <Block style={styles.main_container}>

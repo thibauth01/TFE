@@ -139,7 +139,6 @@ class WorksRequester extends React.Component {
   workDone(){
     if(this.state.dataDone != undefined){
       if(this.state.dataDone.length > 0){
-        console.log(this.state.dataDone);
         return(
           <FlatList
               data={this.state.dataDone}

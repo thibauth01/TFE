@@ -16,7 +16,6 @@ class ItemWorksTodo extends React.Component {
   getStatut(date){
     const dateMoment = new Date(date);
     const now = new Date();
-    console.log(dateMoment.getFullYear())
     if(dateMoment >= now){
       return dateMoment.getDate() + "-" + dateMoment.getMonth() + "-" + dateMoment.getFullYear()
     }

@@ -40,31 +40,6 @@ class DetailsWork extends React.Component {
 
  
 
-  finish = ()=>{
-   
-    const idWork = this.props.navigation.state.params.id;
-    fetch('http://192.168.1.56/TFE/Web/plateform/api/finishWork.php',{
-      method:'POST',
-      header:{
-          'Accept': 'application/json',
-          'Content-type': 'application/json'
-      },
-      body:JSON.stringify({
-          idWork: idWork
-      })
-      
-    })
-    .then((response) => response.json())
-        .then((responseJson)=>{
-            if(!responseJson.status){
-              alert("impossible de terminer")
-            };
-        
-        })
-        .catch((error)=>{
-            console.error(error);
-        }); 
-  }
 
   cancel=()=>{
     const idWork = this.props.navigation.state.params.id;
@@ -148,32 +123,25 @@ class DetailsWork extends React.Component {
           
           <Block row flex={0.6} space="evenly">
            <Button style={styles.buttonDelete} onPress={this.showAlert.bind(this,false)} >Annuler</Button>
-           <Button style={styles.buttonAccept} onPress={this.showAlert.bind(this,true)}>Terminé !</Button>
             
           </Block>
           <AwesomeAlert
             show={this.state.showAlert}
             showProgress={false}
-            title={this.state.typeAlert ?"Terminer ce travail" :"Annuler ce travail"}
+            title={"Annuler ce travail"}
             message="Etes vous sûr?"
             closeOnTouchOutside={true}
             closeOnHardwareBackPress={false}
             showCancelButton={true}
             showConfirmButton={true}
             cancelText="Non"
-            confirmText={this.state.typeAlert ?"Oui, terminez-le" :"Oui, annulez-le"}
+            confirmText={"Oui, annulez-le"}
             confirmButtonColor={theme.COLORS.SECONDARY}
             onCancelPressed={() => {
               this.hideAlert();
             }}
             onConfirmPressed={() => {
-              if(this.state.typeAlert){
-                this.finish();
-              }
-              else{
-                this.cancel();
-              }
-              
+              this.cancel();
               this.hideAlert();
               this.props.navigation.goBack();
             }}
