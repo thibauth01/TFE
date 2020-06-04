@@ -5,31 +5,32 @@ Table account as acc {
   first_name varchar
   last_name varchar
   email varchar
+  phone varchar
   username varchar
   password varchar
-  birth_date date
+  birth_date datetime
   street varchar
   postcode int
   city varchar
   country varchar
   premium boolean
+  type varchar
+  profile_path varchar
   
 }
 
 Table requester{
   id int [pk,increment]
   id_account int [ref: - acc.id]
-  premium boolean [default:false]
 }
 
 Table worker {
   id int [pk,increment]
   maximum_distance int
   id_account int [ref: - acc.id]
-  star double
 }
 
-Table woker_Typer_work{
+Table worker_type_work{
   id int [pk,increment]
   id_worker int [ref: > worker.id]
   id_type_work int [ref: > type_work.id]
@@ -49,41 +50,51 @@ Table availability{
 
 Table day{
   id int [pk,increment]
-  nom varchar
+  name varchar
 }
 
 
 Table work{
   id int [pk, increment]
   title varchar
-  id_type int [ref: - type_work.id]
   description text
   id_requester int [ref: > requester.id]
   id_worker int [ref: > worker.id,default: null]
+  id_type int [ref: - type_work.id]
   min_age_worker int
-  date_start date
-  date_end date
-  time_start date
-  time_end date
+  date_start datetime
+  time_start datetime
+  time_end datetime
   place varchar
-  id_statut_progress varchar 
   paid boolean [default:false]
   cancelled boolean [default:false]
+  finish boolean
+  price double
+  star int
 }
 
 
 Table message{
   id int [pk,increment]
   id_sender int [ref: > account.id]
-  id_receiver int [ref: > account.id]
-  content varchar
-  sendtime timestamp
+  id_work int [ref: > work.id]
+  content text
+  sendtime datetime
+  isRead boolean
 }
 
 Table notification{
   id int [pk,increment]
-  id_sender int [ref: > account.id]
   id_receiver int [ref: > account.id]
   content varchar
   sendtime timestamp
+  isRead boolean
+  type varchar
+}
+
+Table refused_worker{
+  id int [pk,increment]
+  id_worker int [ref: > worker.id]
+  id_work int [ref: > work.id]
+
 }
