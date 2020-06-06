@@ -75,22 +75,35 @@ class WorksRequester extends React.Component {
             newArray.push(elem);
           }
         }
+        if (newArray.length < 1){
+          return(
+            <Block middle style={styles.noWork}>
+              <Text h5>Aucun travail libre</Text>
+            </Block>
+            
+          )
+        }
+
+        else{
+          return(
+            <FlatList
+              data={newArray}
+              renderItem={({ item }) => <CardWorkNotAttributed 
+                                          navigate={this.props.navigate} 
+                                          item={item}
+                                        />}
+              keyExtractor={item => item.id}
+            />
+          )
+
+        }
     
-        return(
-          <FlatList
-            data={newArray}
-            renderItem={({ item }) => <CardWorkNotAttributed 
-                                        navigate={this.props.navigate} 
-                                        item={item}
-                                      />}
-            keyExtractor={item => item.id}
-          />
-        )
+        
       }
       else{
         return(
           <Block middle style={styles.noWork}>
-            <Text h5> Creez de nouveaux travaux !</Text>
+            <Text h5> Aucun travail libre</Text>
           </Block>
           
         )

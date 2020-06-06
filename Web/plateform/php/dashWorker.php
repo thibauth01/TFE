@@ -128,11 +128,14 @@
                                                 foreach($worksFree as $work){
                                                     $timestamp = strtotime($work['date_start']);
                                                     $numberDayWork = date('N', $timestamp);
+                                                    $now = date("Ymd");
+                                                    $dateStart = date("Ymd",strtotime($work['date_start']));
+                                                    
 
                                                     foreach ($typeWorker as $type) {
                                                         if($type['id_type_work'] == $work['id_type']){
                                                             foreach($availableWorker as $day){
-                                                                if($day['id_day'] == $numberDayWork){
+                                                                if(($day['id_day'] == $numberDayWork) && ($dateStart >= $now)){
                                                                   array_push($worksOk,$work);
                                                                     break; 
                                                                 } 
@@ -144,6 +147,7 @@
                                                     }
                                                     
                                                 }
+
                                                 
                                                 $worksOkDistance = array();
                                                 
@@ -182,7 +186,7 @@
 
                                                             <td class='text-left'>".$work['title'] ."</td>
                                                             <td class='text-primary'>".$work['type_name'] ."</td>
-                                                            <td>25/05/2020</td>
+                                                            <td>".$work['date_start']."</td>
                                                             <td class='td-actions text-right'>
                                                                 <button type='button' rel='tooltip' title='' class='btn btn-info btn-round btn-icon btn-icon-mini btn-neutral' data-original-title='Info Work' data-toggle='collapse' data-target='#detailsProp".$work['id']."'>
                                                                     <i class='now-ui-icons travel_info'></i>

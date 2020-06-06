@@ -10,38 +10,35 @@
     $idWork = trim(htmlspecialchars($obj['idWork']));
     $firstName = trim(htmlspecialchars($obj['firstName']));
     $lastName = trim(htmlspecialchars($obj['lastName']));
-    $isTake = trim(htmlspecialchars($obj['isTake']));
 
     $returnJSON = array(
         "status" => null
     );
 
-    $Query = $dbh->query("SELECT id_worker,title,date_start
-                                FROM work 
-                                WHERE id =".$idWork);
+    $Query = $dbh->query("SELECT id_worker,id_requester,title,date_start
+                            FROM work 
+                            WHERE id =".$idWork);
 
 
     $infoswork = $Query->fetch(PDO::FETCH_ASSOC);
     $Query->closeCursor();
 
     $Query = $dbh->query(" UPDATE work
-                            SET cancelled = 1
+                            SET id_worker = null
                             WHERE id =".$idWork);
 
     if($Query){
         $Query->closeCursor();
         $returnJSON['status'] = true;
 
-        if($isTake){
-            // create notif
-            $message = "Le travail ".$infoswork['title']." de ".$firstName." ".$lastName. " a été annulé" ;  
-            $id_receiver = $infoswork['id_worker'];
-            $Query = $dbh->query("INSERT INTO `notification` (`id_receiver`,`content`,`isRead`,`type`) VALUES ('".$id_receiver."','".$message."',0,'danger')");
-            $Query->closeCursor();
+        // create notif
+        $message = $firstName." ".$lastName. " ne pourra pas effectuer votre travail ".$infoswork['title'].". Il est de nouveau libre !" ;
+                
+        $id_receiver = $infoswork['id_requester'];
 
-        }
+        $Query = $dbh->query("INSERT INTO `notification` (`id_receiver`,`content`,`isRead`,`type`) VALUES ('".$id_receiver."','".$message."',0,'warning')");
 
-        
+        $Query->closeCursor();
     }
     else{
         $returnJSON['status'] = false; 

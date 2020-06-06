@@ -4,6 +4,7 @@ import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
 import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { connect } from 'react-redux'
 
 
 class DetailsWorkTakeReq extends React.Component {
@@ -55,7 +56,9 @@ class DetailsWorkTakeReq extends React.Component {
           'Content-type': 'application/json'
       },
       body:JSON.stringify({
-          idWork: idWork
+          idWork: idWork,
+          firstName:this.props.account.first_name,
+          lastName:this.props.account.last_name
       })
       
     })
@@ -81,7 +84,10 @@ class DetailsWorkTakeReq extends React.Component {
           'Content-type': 'application/json'
       },
       body:JSON.stringify({
-          idWork: idWork
+          idWork: idWork,
+          firstName:this.props.account.first_name,
+          lastName:this.props.account.last_name,
+          isTake: true
       })
       
     })
@@ -108,7 +114,9 @@ class DetailsWorkTakeReq extends React.Component {
           'Content-type': 'application/json'
       },
       body:JSON.stringify({
-          idWork: idWork
+          idWork: idWork,
+          firstName:this.props.account.first_name,
+          lastName:this.props.account.last_name
       })
       
     })
@@ -332,4 +340,11 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DetailsWorkTakeReq
+const mapStateToProps = (state) =>{
+  return {
+      account: state.account.account
+  }
+}
+
+
+export default connect(mapStateToProps)(DetailsWorkTakeReq)

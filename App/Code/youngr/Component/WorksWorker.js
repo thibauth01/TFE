@@ -100,29 +100,23 @@ class WorksWorker extends React.Component {
       this.setState({dataFree:[]})
     }
     if(this.state.dataFree != undefined){
-
       if(this.state.dataFree.length > 0 ){
         
-        for (let i = 0; i < this.state.dataFree.length; i++) {
-          const elem = this.state.dataFree[i];
-          const date =  new Date(elem.date_start);
-          const now = new Date()
-          if(date >= now){
-            newArray.push(elem);
-          }
-        }
-    
-        return(
-          <FlatList
-            data={newArray}
-            renderItem={({ item }) => <CardWorkFree 
-                                        navigate={this.props.navigate} 
-                                        item={item}
-                                      />}
-            keyExtractor={item => item.id}
-          />
-        )
+      
+          return(
+            <FlatList
+              data={this.state.dataFree}
+              renderItem={({ item }) => <CardWorkFree 
+                                          navigate={this.props.navigate} 
+                                          item={item}
+                                        />}
+              keyExtractor={item => item.id}
+            />
+          )
+
       }
+        
+      
       else{
         
         return(

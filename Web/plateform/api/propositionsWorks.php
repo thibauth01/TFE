@@ -68,12 +68,15 @@
     foreach($worksFree as $work){
         $timestamp = strtotime($work['date_start']);
         $numberDayWork = date('N', $timestamp);
+        $now = date("Ymd");
+        $dateStart = date("Ymd",strtotime($work['date_start']));
+        
 
         foreach ($typeWorker as $type) {
             if($type['id_type_work'] == $work['id_type']){
                 foreach($availableWorker as $day){
-                    if($day['id_day'] == $numberDayWork){
-                        array_push($worksOk,$work);
+                    if(($day['id_day'] == $numberDayWork) && ($dateStart >= $now)){
+                      array_push($worksOk,$work);
                         break; 
                     } 
                 }

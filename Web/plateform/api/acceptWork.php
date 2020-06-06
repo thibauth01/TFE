@@ -9,6 +9,9 @@
 
     $idWork = trim(htmlspecialchars($obj['idWork']));
     $idTypeAccount = trim(htmlspecialchars($obj['idTypeAccount']));
+    $firstName = trim(htmlspecialchars($obj['firstName']));
+    $lastName = trim(htmlspecialchars($obj['lastName']));
+
 
 
     $returnJSON = array(
@@ -34,6 +37,16 @@
         if($Query){
             $Query->closeCursor();
             $returnJSON['status'] = true;
+
+            //notif
+            $message = "Votre travail ".$infoswork['title']." à été accepté par ".$firstName." ".$lastName ;
+        
+            $id_receiver = $infoswork['id_requester'];
+
+            $Query = $dbh->query("INSERT INTO `notification` (`id_receiver`,`content`,`isRead`,`type`) VALUES ('".$id_receiver."','".$message."',0,'info')");
+            
+            $Query->closeCursor();
+
         }
         else{
             $returnJSON['status'] = false; 

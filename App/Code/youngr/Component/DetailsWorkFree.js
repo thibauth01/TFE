@@ -4,6 +4,7 @@ import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
 import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { connect } from 'react-redux'
 
 
 class DetailsWorkFree extends React.Component {
@@ -36,7 +37,10 @@ class DetailsWorkFree extends React.Component {
           'Content-type': 'application/json'
       },
       body:JSON.stringify({
-          idWork: idWork
+          idWork: idWork,
+          firstName:this.props.account.first_name,
+          lastName:this.props.account.last_name,
+          isTake: false
       })
       
     })
@@ -211,4 +215,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default DetailsWorkFree
+const mapStateToProps = (state) =>{
+  return {
+      account: state.account.account
+  }
+}
+
+export default connect(mapStateToProps)(DetailsWorkFree)

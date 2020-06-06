@@ -49,7 +49,9 @@ class DetailsWorkProposal extends React.Component {
       },
       body:JSON.stringify({
           idWork: idWork,
-          idTypeAccount: this.props.account.idTypeAccount
+          idTypeAccount: this.props.account.idTypeAccount,
+          firstName:this.props.account.first_name,
+          lastName:this.props.account.last_name
       })
       
     })

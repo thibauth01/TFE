@@ -10,6 +10,8 @@ import ItemWorksTodo from './ItemWorksTodo'
 import { connect } from 'react-redux'
 import CardWorkTakeReq from './CardWorkTakeReq';
 import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
+import { NavigationEvents } from 'react-navigation';
+
 
 
 
@@ -133,7 +135,7 @@ class DashboardRequester extends React.Component {
       }
       else{
         return(
-          <Block style={styles.noWork}>
+          <Block middle style={styles.noWork}>
             <Text h5> Aucun travail de prévu</Text>
           </Block>
           
@@ -188,7 +190,7 @@ class DashboardRequester extends React.Component {
       }
       else{
         return(
-          <Block style={styles.noWork}>
+          <Block middle style={styles.noWork}>
             <Text h5> Aucun travail de prévu</Text>
           </Block>
           
@@ -203,7 +205,9 @@ class DashboardRequester extends React.Component {
     
     return (
       <Block  style={styles.main_container}>
-
+        <NavigationEvents
+                onDidFocus={() => this.componentDidMount()}
+            />
         <Block >
           <Text h4 muted style={styles.subtitle}>Prochains travaux</Text>
             {this.isWorks()}   

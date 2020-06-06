@@ -4,6 +4,7 @@ import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
 import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { connect } from 'react-redux'
 
 
 class DetailsWork extends React.Component {
@@ -44,14 +45,16 @@ class DetailsWork extends React.Component {
   cancel=()=>{
     const idWork = this.props.navigation.state.params.id;
 
-    fetch('http://192.168.1.56/TFE/Web/plateform/api/removeWork.php',{
+    fetch('http://192.168.1.56/TFE/Web/plateform/api/removeWorker.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
           'Content-type': 'application/json'
       },
       body:JSON.stringify({
-          idWork: idWork
+          idWork: idWork,
+          firstName:this.props.account.first_name,
+          lastName:this.props.account.last_name
       })
       
     })
@@ -250,4 +253,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DetailsWork
+const mapStateToProps = (state) =>{
+  return {
+      account: state.account.account
+  }
+}
+
+export default connect(mapStateToProps)(DetailsWork)
