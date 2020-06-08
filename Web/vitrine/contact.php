@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/themify-icons.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/icon.png" />
 
-    <title>Youngr</title>
+
+    <title>Youngr - Contact</title>
   </head>
-  <body><!doctype html>
+  <body>
 <html lang="fr">
   <head>
     <!-- Required meta tags -->
@@ -44,6 +46,7 @@
           <ul class="navbar-nav">    
             <li><a href="index.php">Home</a></li>
             <li ><a style="color:#ff7214" href="contact.php">Contact</a></li>
+            <li><a href="index.php">Dashboard</a></li>
           </ul>
         </nav>
       </div>
@@ -85,68 +88,6 @@
     </section>
      
 
-    <!-- Footer strat -->
-    <footer class="footer">
-      <div class="foo-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="widget widget-text">
-                <a href="home-01.html" class="logo">
-                  <img src="images/logo-white.png" alt="Maxon">
-                </a>
-                <p>Evening creature waters unto fill deep man given divided whales man kind Winged open us and there to multiply land evening under </p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="widget widget-navigation">
-                <h3 class="widget-title">Our Service</h3>
-                <ul>
-                  <li><a href="#">Frontend Developing</a></li>
-                  <li><a href="#">Graphic Design</a></li>
-                  <li><a href="#">Software Developing</a></li>
-                  <li><a href="#">Digital Marketing</a></li>
-                  <li><a href="#">Wordpress Developing</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="widget widget-insta-feed">
-                <h3 class="widget-title">Instagram feed</h3>
-                <ul>
-                  <li><a href="#"><img src="images/instagram/1.jpg" alt=""></a></li>
-                  <li><a href="#"><img src="images/instagram/2.jpg" alt=""></a></li>
-                  <li><a href="#"><img src="images/instagram/3.jpg" alt=""></a></li>
-                  <li><a href="#"><img src="images/instagram/4.jpg" alt=""></a></li>
-                  <li><a href="#"><img src="images/instagram/5.jpg" alt=""></a></li>
-                  <li><a href="#"><img src="images/instagram/6.jpg" alt=""></a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="widget widget-address">
-                <h3 class="widget-title">Contact Info</h3>
-                <address>
-                  <span><i class="ti-map-alt"></i> 67 Sasha Cove,67 Sasha Cove Eest, Andrewburgh, ML11 DB innings West pink city</span>
-                  <a href="tel:+0263949822698"><i class="ti-mobile"></i> +02 639 4982 2698 - 2</a>
-                  <a href="mailto:info@themeies.com"><i class="ti-email"></i> info@themeies.com</a>
-                </address>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="foo-btm">
-        <div class="container">
-          <div class="row">
-            <div class="col text-center">
-              <p class="copyright">Copyright © 2019 <a href="https://themeies.com">themeies.com</a> All Rights Reserved</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- Footer end -->
 
     <!-- JS -->
     <script src="js/jquery-3.3.1.min.js"></script>

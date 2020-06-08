@@ -6,7 +6,6 @@ import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { connect } from 'react-redux'
 
-/* FAIRE AVEC UN MODAL ET METTRE STAR RATINGS DEDANS */
 
 class DetailsWorkTakeReq extends React.Component {
 
