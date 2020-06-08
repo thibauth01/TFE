@@ -66,7 +66,7 @@ class DashboardRequester extends React.Component {
   }
 
   getDataNextWorks(){
-    return fetch('http://192.168.1.57/TFE/Web/plateform/api/nextWorks.php',{
+    return fetch('https://dashboard.youngr.be/api/nextWorks.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',

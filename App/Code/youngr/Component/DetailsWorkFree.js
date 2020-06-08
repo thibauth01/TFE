@@ -30,7 +30,7 @@ class DetailsWorkFree extends React.Component {
 
   remove = ()=>{
     const idWork = this.props.navigation.state.params.id;
-    fetch('http://192.168.1.57/TFE/Web/plateform/api/removeWork.php',{
+    fetch('https://dashboard.youngr.be/api/removeWork.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',

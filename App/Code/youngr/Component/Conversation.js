@@ -34,7 +34,7 @@ class Conversation extends React.Component {
   
 
   getData(){
-    return fetch('http://192.168.1.57/TFE/Web/plateform/api/conversations.php',{
+    return fetch('https://dashboard.youngr.be/api/conversations.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',

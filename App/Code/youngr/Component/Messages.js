@@ -44,7 +44,7 @@ class Messages extends React.Component {
   timer(){
       interval = setInterval(() => {
         console.log("time");
-        fetch('http://192.168.1.57/TFE/Web/plateform/api/numberOfMessages.php',{
+        fetch('https://dashboard.youngr.be/api/numberOfMessages.php',{
           method:'POST',
           header:{
               'Accept': 'application/json',
@@ -73,7 +73,7 @@ class Messages extends React.Component {
 
 
   getData(){
-    return fetch('http://192.168.1.57/TFE/Web/plateform/api/messages.php',{
+    return fetch('https://dashboard.youngr.be/api/messages.php',{
         method:'POST',
         header:{
             'Accept': 'application/json',
@@ -149,7 +149,7 @@ class Messages extends React.Component {
       });
 
 
-      fetch('http://192.168.1.57/TFE/Web/plateform/api/sendMessage.php',{
+      fetch('https://dashboard.youngr.be/api/sendMessage.php',{
         method:'POST',
         header:{
             'Accept': 'application/json',

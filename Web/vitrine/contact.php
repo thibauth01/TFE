@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/themify-icons.css">
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="images/icon.png" />
+
 
 
     <title>Youngr - Contact</title>
@@ -37,7 +39,7 @@
       <div class="container">
         <nav class="navbar">
           <!-- Site logo -->
-          <a href="home-01.html" class="logo">
+          <a href="index.php" class="logo">
             <img src="images/logo.png" alt="">
           </a>
           <a href="javascript:void(0);" id="mobile-menu-toggler">
@@ -46,7 +48,7 @@
           <ul class="navbar-nav">    
             <li><a href="index.php">Home</a></li>
             <li ><a style="color:#ff7214" href="contact.php">Contact</a></li>
-            <li><a href="index.php">Dashboard</a></li>
+            <li><a href="https://dashboard.youngr.be/dashboard.php">Dashboard</a></li>
           </ul>
         </nav>
       </div>
@@ -69,17 +71,17 @@
             </address>
           </div>  
           <div class="col-md-8">
-            <form action="home-01.html">
+            <form id="formContact" method="post">
               <div class="row">
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="" placeholder="Full Name" required>
+                  <input type="text" class="form-control" name="nom" placeholder="Nom" required>
                 </div>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="" placeholder="Phone">
+                  <input type="text" class="form-control" name="prenom" placeholder="Prénom">
                 </div>
               </div>
-              <input type="email" class="form-control" id="" placeholder="Email" required>
-              <textarea name="" class="form-control" placeholder="Your Message" required></textarea>
+              <input type="email" class="form-control" name="email" placeholder="Email" required>
+              <textarea class="form-control" name="message" placeholder="Votre message" required></textarea>
               <button type="submit" class="btn btn-default">Envoyer</button>
             </form>
           </div>
@@ -95,5 +97,50 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+
+    <script>
+      $(document).ready(function(){
+        
+        $('#formContact').on('submit',function(event){
+          event.preventDefault();
+          var formData = new FormData(this);
+
+          $.ajax({
+            url:'contactForm.php',
+            type:'post',
+            async:false,
+            data:formData,
+            success: function(data){
+              if(data){
+                document.getElementById('formContact').reset();
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Message envoyé !',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+
+              }
+              else{
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'error',
+                  title: "Erreur lors de l'envoi",
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              }
+            },
+            processData: false,
+            contentType: false,
+            cache: false
+          });
+        });
+      })
+
+    </script>
   </body>
 </html>

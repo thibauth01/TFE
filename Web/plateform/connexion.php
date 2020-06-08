@@ -357,13 +357,14 @@
 
                                             </div>
                                             <div class="col-md-4"></div>
-                                            <div class="row ">
+                                            
+
+                                        </div>
+                                        <div class="row ">
                                                 <div class="col-md-12 d-flex justify-content-center">
                                                     <input type="submit" class="btn btn-primary" value="Inscription">
                                                 </div>
                                             </div>
-
-                                        </div>
                                     </form>
                                 </div>
                             </div>

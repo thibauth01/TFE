@@ -37,12 +37,14 @@ export default class CardWork extends React.Component {
     render() { 
         const {navigate} = this.props.navigate
         const statut = this.getStatut(this.props.item.date_start)
+        const path = `https://dashboard.youngr.be/`+this.props.item.profile_path;
+        
       return (
         <TouchableOpacity
             onPress={() => navigate('DetailsWork',this.props.item)}>
             <Block flex={1} style={styles.block_main} height={70} row middle>
                 <Block flex={1.2}>
-                    <Image style={styles.profile} source={require(`../Images/avatar.jpg`)}></Image>
+                    <Image style={styles.profile} source={{uri:path}}></Image>
                 </Block>
                 <Block flex={2}>
                     <Block>

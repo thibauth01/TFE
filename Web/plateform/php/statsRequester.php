@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-area">
-                                        <canvas id="typeTravauxRequester" width="600" height="250"></canvas>
+                                        <canvas id="typeTravauxRequester" width="600" height="200"></canvas>
                                     </div>
                                 </div>
                                 <div class="card-footer">

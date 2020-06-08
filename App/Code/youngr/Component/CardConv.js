@@ -36,7 +36,7 @@ class CardConv extends React.Component {
     }
 
     getData(){
-        return fetch('http://192.168.1.57/TFE/Web/plateform/api/lastMessage.php',{
+        return fetch('https://dashboard.youngr.be/api/lastMessage.php',{
             method:'POST',
             header:{
                 'Accept': 'application/json',
@@ -104,7 +104,8 @@ class CardConv extends React.Component {
     render() { 
 
         const {navigate} = this.props.navigate
-        
+        const path = `https://dashboard.youngr.be/`+this.props.item.profile_path;
+
       return (
           
         <TouchableOpacity
@@ -115,7 +116,7 @@ class CardConv extends React.Component {
             />
             <Block flex={1} style={styles.block_main} height={70} row middle>
                 <Block flex={1.3}>
-                    <Image style={styles.profile} source={require(`../Images/avatar.jpg`)}></Image>
+                    <Image style={styles.profile} source={{uri:path}}></Image>
                 </Block>
                 <Block flex={3} >
                     <Block>

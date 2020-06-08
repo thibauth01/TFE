@@ -24,7 +24,7 @@
                     <li>
                         <a href="works.php">
                             <i class="now-ui-icons ui-2_settings-90"></i>
-                            <p>Works</p>
+                            <p>Travaux</p>
                         </a>
                     </li>
                     <li>

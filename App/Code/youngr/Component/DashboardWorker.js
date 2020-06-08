@@ -34,7 +34,7 @@ class DashboardWorker extends React.Component {
 
   getDataNextWorks(){
 
-    return fetch('http://192.168.1.57/TFE/Web/plateform/api/nextWorks.php',{
+    return fetch('https://dashboard.youngr.be/api/nextWorks.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',
@@ -59,7 +59,7 @@ class DashboardWorker extends React.Component {
   }
 
   getSalaryWorker(){
-    return fetch('http://192.168.1.57/TFE/Web/plateform/api/getSalaryWorker.php',{
+    return fetch('https://dashboard.youngr.be/api/getSalaryWorker.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',

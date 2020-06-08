@@ -7,8 +7,9 @@
       return $difference;
       
     }
+    
     try {
-        $dbh = new PDO('mysql:host=127.0.0.1;dbname=youngr_test','thibaut','Thib18-99');
+        $dbh = new PDO('mysql:host=185.98.131.128;dbname=young1377588','young1377588','srvq3gjnpp');
         // $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     } catch (Exception $e) {
@@ -70,7 +71,7 @@
       <div class="container">
         <nav class="navbar">
           <!-- Site logo -->
-          <a href="home-01.html" class="logo">
+          <a href="index.php" class="logo">
           <img src="images/logo.png" alt="">
           </a>
           <a href="javascript:void(0);" id="mobile-menu-toggler">
@@ -79,7 +80,7 @@
           <ul class="navbar-nav">    
             <li><a  style="color:#ff7214" href="index.php">Home</a></li>
             <li><a href="contact.php">Contact</a></li>
-            <li><a href="index.php">Dashboard</a></li>
+            <li><a href="https://dashboard.youngr.be/dashboard.php">Dashboard</a></li>
 
           </ul>
         </nav>
@@ -121,7 +122,7 @@
               <h5>Vous avez entre 15 et 25 ans et vous voulez gagner de l'argent de poche ?</h5>
               <p> Vous avez des compétences en <strong>Baby-Sitting</strong>, <strong>Travaux ménagers</strong>, <strong>Garde d'animaux</strong>, <strong>Cours particuliers</strong>,<strong>Jardinage</strong>, <strong>Bricolage</strong>, <strong>Shopping</strong>, <strong>Technologie</strong>, <strong>...</strong> ?
                 <br> Inscrivez-vous en indiquant vos disponibilité et vos compténces ! Nous vous proposerons des travaux adapté !</p>
-              <a href="#" class="btn btn-default">Inscription</a>
+              <a href="https://dashboard.youngr.be/connexion.php" class="btn btn-default">Inscription</a>
             </div>
           </div>
           <div class="col-md-6">
@@ -130,7 +131,7 @@
               <h2>Vous souhaitez devenir Demandeur</h2>
               <h5>Besoin d'aide pour vos travaux à domicile, garder vos enfants, aller faire vos courses, ...</h5>
               <p>Faites appel à l'un de nos jeunes travailleurs ! <br>Inscrivez-vous et ajoutez votre besoin, nous vous metterons en lien avec un de nos travailleur !</p>
-              <a href="#" class="btn btn-default">Inscription</a>
+              <a href="https://dashboard.youngr.be/connexion.php" class="btn btn-default">Inscription</a>
             </div>
           </div>
         </div>
@@ -157,7 +158,7 @@
           <div class="col-lg-3 col-sm-6">
             <div class="single-fun">
               <img src="images/icons/funfact/agreement.png" alt="">
-              <p><span><?php echo $nbrWork['nbrWork']?></span>travaux terminé</p>
+              <p><span><?php echo $nbrWork['nbrWork']?></span>travaux terminés</p>
             </div>
           </div>
           <div class="col-lg-3 col-sm-6">

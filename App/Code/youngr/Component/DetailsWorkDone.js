@@ -17,12 +17,14 @@ class DetailsWorkDone extends React.Component {
  
   render() {
     const {state} = this.props.navigation
+    const path = `https://dashboard.youngr.be/`+state.params.profile_path;
+
     
     return (
         <Block style={styles.main_container}>
           <Block flex={1.2} style={styles.headerBlock}>
             <Block flex={1} style={styles.profileBlock}>
-              <Image style={styles.profile} source={require(`../Images/avatar.jpg`)}></Image>
+              <Image style={styles.profile} source={{uri:path}}></Image>
             </Block>
             <Block flex={2} style={styles.infoprofileBlock}>
               <Block row style={{marginLeft:10}}>

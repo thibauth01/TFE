@@ -55,7 +55,7 @@ class DetailsWorkTakeReq extends React.Component {
 
   finish = ()=>{
     const idWork = this.props.navigation.state.params.id;
-    fetch('http://192.168.1.57/TFE/Web/plateform/api/finishWork.php',{
+    fetch('https://dashboard.youngr.be/api/finishWork.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
@@ -83,7 +83,7 @@ class DetailsWorkTakeReq extends React.Component {
   cancel=()=>{
 
     const idWork = this.props.navigation.state.params.id;
-    fetch('http://192.168.1.57/TFE/Web/plateform/api/removeWork.php',{
+    fetch('https://dashboard.youngr.be/api/removeWork.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
@@ -113,7 +113,7 @@ class DetailsWorkTakeReq extends React.Component {
   free=()=>{
 
     const idWork = this.props.navigation.state.params.id;
-    fetch('http://192.168.1.57/TFE/Web/plateform/api/refuseWorker.php',{
+    fetch('https://dashboard.youngr.be/api/refuseWorker.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
@@ -141,13 +141,14 @@ class DetailsWorkTakeReq extends React.Component {
 
   render() {
     const {state} = this.props.navigation
-    
+    const path = `https://dashboard.youngr.be/`+state.params.profile_path;
+
     return (
         <Block style={styles.main_container}>
           
           <Block flex={1.2} style={styles.headerBlock}>
             <Block flex={1} style={styles.profileBlock}>
-              <Image style={styles.profile} source={require(`../Images/avatar.jpg`)}></Image>
+              <Image style={styles.profile} source={{uri:path}}></Image>
             </Block>
             <Block flex={2} style={styles.infoprofileBlock}>
               <Block row style={{marginLeft:10}}>

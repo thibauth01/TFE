@@ -86,7 +86,7 @@
                                             <div class="row">
                                                 <div class="col-md-6 pr-1">
                                                     <div class="form-group">
-                                                        <label>Title (Short description)</label>
+                                                        <label>Titre (courte description)</label>
                                                         <input type="text" class="form-control" maxlength="40" value="" name="title">
                                                     </div>
                                                 </div>
@@ -101,7 +101,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-3 px-1">
-                                                    <label>Age min worker</label>
+                                                    <label>Age minimal travailleur</label>
                                                     <input type="number" class="form-control" min="15" max="25" value="" name="ageMin">
                                                 </div>
                                             </div>
@@ -114,13 +114,13 @@
                                                 </div>
                                                 <div class="col-md-3 pl-1">
                                                     <div class="form-group">
-                                                        <label>Time Start</label>
+                                                        <label>Heure début</label>
                                                         <input type="time" class="form-control" value=""  name="timeStart">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 pl-1">
                                                     <div class="form-group">
-                                                        <label>Time End</label>
+                                                        <label>Heure fin</label>
                                                         <input type="time" class="form-control" value="" name="timeEnd">
                                                     </div>
                                                 </div>
@@ -134,13 +134,13 @@
                                             <div class="row">
                                                 <div class="col-md-9">
                                                     <div class="form-group">
-                                                        <label>Street</label>
+                                                        <label>Adresse</label>
                                                         <input type="text" class="form-control" value="<?= $infos['street']?>" name="street">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 px-1">
                                                     <div class="form-group">
-                                                        <label>Postal Code</label>
+                                                        <label>Code postal</label>
                                                         <input type="text" class="form-control" value="<?= $infos['postcode']?>" name="postal">
                                                     </div>
                                                 </div>
@@ -148,13 +148,13 @@
                                             <div class="row">
                                                 <div class="col-md-7 pr-1">
                                                     <div class="form-group">
-                                                        <label>City</label>
+                                                        <label>Ville</label>
                                                         <input type="text" class="form-control" value="<?= $infos['city']?>" name="city">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-5 pl-1">
                                                     <div class="form-group">
-                                                        <label>Country</label>
+                                                        <label>Pays</label>
                                                         <input type="text" class="form-control disable"  value="<?= $infos['country']?>" name="country">
                                                     </div>
                                                 </div>

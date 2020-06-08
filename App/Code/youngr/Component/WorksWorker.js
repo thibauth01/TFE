@@ -33,7 +33,7 @@ class WorksWorker extends React.Component {
   }
 
   getData(){
-    return fetch('http://192.168.1.57/TFE/Web/plateform/api/works.php',{
+    return fetch('https://dashboard.youngr.be/api/works.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',

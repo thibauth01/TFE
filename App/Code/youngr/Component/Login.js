@@ -11,8 +11,8 @@ class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        user:"requesteradmin",
-        password:"covid19-19",
+        user:"workeradmin",
+        password:"Covid19-19",
         account:undefined
     }
   }
@@ -30,7 +30,7 @@ class Login extends React.Component {
         
 		else{
 		
-		fetch('http://192.168.1.57/TFE/Web/plateform/api/login.php',{
+		fetch('https://dashboard.youngr.be/api/login.php',{
 			method:'POST',
 			header:{
 				'Accept': 'application/json',
