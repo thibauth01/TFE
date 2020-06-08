@@ -45,7 +45,7 @@ class DetailsWork extends React.Component {
   cancel=()=>{
     const idWork = this.props.navigation.state.params.id;
 
-    fetch('http://192.168.1.56/TFE/Web/plateform/api/removeWorker.php',{
+    fetch('http://192.168.1.57/TFE/Web/plateform/api/removeWorker.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
@@ -73,7 +73,7 @@ class DetailsWork extends React.Component {
 
   render() {
     const {state} = this.props.navigation
-    
+    console.log(state.params);
     return (
         <Block style={styles.main_container}>
           <Block flex={1.2} style={styles.headerBlock}>
@@ -89,7 +89,7 @@ class DetailsWork extends React.Component {
                 <Text muted> {state.params.city}</Text>
               </Block>
               <Block row style={styles.buttonsProfile}>
-                <Button style={styles.buttonProfileMessage}  iconColor={theme.COLORS.SECONDARY}	onlyIcon iconSize={20} icon="message-circle" iconFamily="feather" flex={2}></Button>
+                <Button onPress={() => this.props.navigation.navigate('Messages',state.params)} style={styles.buttonProfileMessage}  iconColor={theme.COLORS.SECONDARY}	onlyIcon iconSize={20} icon="message-circle" iconFamily="feather" flex={2}></Button>
                 <Button onPress={()=>{Linking.openURL(`tel:${state.params.phone}`)}} style={styles.buttonProfilePhone}  iconColor={theme.COLORS.DEFAULT}	onlyIcon iconSize={20} icon="phone" iconFamily="feather" flex={2}></Button>
               </Block>      
             </Block>

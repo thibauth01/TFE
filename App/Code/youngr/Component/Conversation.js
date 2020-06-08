@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking,TouchableOpacity,FlatList } from 'react-native'
+import { StyleSheet,Image,View,Platform,SafeAreaView,Dimensions, ImageBackground,Linking,TouchableOpacity,FlatList } from 'react-native'
 import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
 import { connect } from 'react-redux'
@@ -34,7 +34,7 @@ class Conversation extends React.Component {
   
 
   getData(){
-    return fetch('http://192.168.1.56/TFE/Web/plateform/api/conversations.php',{
+    return fetch('http://192.168.1.57/TFE/Web/plateform/api/conversations.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',
@@ -69,7 +69,8 @@ class Conversation extends React.Component {
   
 
   showListMsg(){
-    const view =
+    if(this.state.conv.length > 0){
+       const view =
       <FlatList
         data={this.state.conv}
         renderItem={({ item }) => <CardConv 
@@ -78,7 +79,21 @@ class Conversation extends React.Component {
                                   />}
         keyExtractor={item => item.id}
       />
-    this.setState({viewConv:view});
+
+      this.setState({viewConv:view});
+
+
+    }
+    else{
+       const view =
+        <Block middle style={styles.noWork}>
+          <Text h5> Aucune conversation</Text>
+        </Block>
+        
+        this.setState({viewConv:view});
+
+    }
+    
     
   }
 
@@ -107,6 +122,14 @@ const styles = StyleSheet.create({
     paddingLeft:10,
     marginBottom:5
   },
+  noWork:{
+    marginBottom:10,
+    backgroundColor:theme.COLORS.DEFAULT,
+    marginLeft:10,
+    height:50,
+    borderRadius:10,
+    width:Dimensions.get("window").width-20
+  }
   
 
 })

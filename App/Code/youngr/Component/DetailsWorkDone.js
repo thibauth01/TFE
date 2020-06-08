@@ -67,7 +67,7 @@ class DetailsWorkDone extends React.Component {
             </ScrollView>
           </Block>
           <Block flex={0.4} center>
-            <Text size={20} color={theme.COLORS.SUCCESS}>Terminé !</Text>
+            <Text size={20} color={theme.COLORS.SUCCESS}>Travail terminé !</Text>
           </Block>
           
         </Block>

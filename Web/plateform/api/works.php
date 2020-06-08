@@ -41,7 +41,7 @@
         $returnJSON['dataFree'] = $worksFree;
 
         //Take
-        $WorkQuery1 = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as type, id_account,star,city,first_name,last_name,birth_date,profile_path,price
+        $WorkQuery1 = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as type, id_account,star,city,first_name,last_name,birth_date,profile_path,price,phone
                                     FROM work
                                     JOIN type_work on work.id_type = type_work.id
                                     JOIN worker on id_worker = worker.id
@@ -55,12 +55,12 @@
 
 
         //Done
-        $WorkQuery = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as type, id_account,star,first_name,city,last_name,birth_date,profile_path,price
+        $WorkQuery = $dbh->query("SELECT work.id as id, title, description, id_worker, date_start,time_start,time_end,place, type_work.name as type, id_account,star,first_name,city,last_name,birth_date,profile_path,price,phone
                                     FROM work
                                     JOIN type_work on work.id_type = type_work.id
                                     JOIN worker on id_worker = worker.id
                                     JOIN account on worker.id_account = account.id
-                                    WHERE work.id_requester = ".$idTypeAccount." AND id_worker is NOT NULL AND finish = 1 AND cancelled =0 ORDER by date_start");
+                                    WHERE work.id_requester = ".$idTypeAccount." AND id_worker is NOT NULL AND finish = 1 AND cancelled =0 ORDER by date_start LIMIT 30");
 
         $worksDone = $WorkQuery->fetchAll(PDO::FETCH_ASSOC);
         $WorkQuery->closeCursor();
@@ -79,7 +79,7 @@
         //Proposal
 
         //SELECT infos worker (adress,max distance)
-        $infosWorkerQuery = $dbh->query("   SELECT account.id as id,street,birth_date, postcode,city,country,maximum_distance 
+        $infosWorkerQuery = $dbh->query("   SELECT account.id as id,street,birth_date, postcode,city,country,maximum_distance,phone
                                             FROM account 
                                             JOIN worker on account.id = worker.id_account
                                             WHERE account.id =".$idAccount);
@@ -170,7 +170,7 @@
 
 
         //Take
-        $Query = $dbh->query(" SELECT work.id,title,id_type,type_work.name as type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path,birth_date
+        $Query = $dbh->query(" SELECT work.id,title,id_type,type_work.name as type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path,birth_date,phone
                                         FROM work
                                         JOIN requester on work.id_requester = requester.id
                                         JOIN account on requester.id_account = account.id
@@ -184,12 +184,12 @@
 
 
         //Done
-        $Query = $dbh->query(" SELECT work.id,title,id_type,type_work.name as type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path,birth_date
+        $Query = $dbh->query(" SELECT work.id,title,id_type,type_work.name as type,description,date_start,time_start,time_end,place,name,price,first_name,last_name,city,profile_path,birth_date,phone
                                         FROM work
                                         JOIN requester on work.id_requester = requester.id
                                         JOIN account on requester.id_account = account.id
                                         JOIN type_work on work.id_type = type_work.id
-                                        WHERE finish = 1 AND cancelled = 0 AND id_worker ='$idTypeAccount' ORDER by date_start ");
+                                        WHERE finish = 1 AND cancelled = 0 AND id_worker ='$idTypeAccount' ORDER by date_start LIMIT 30");
 
         $DoneWorks = $Query->fetchAll(PDO::FETCH_ASSOC);
         $Query->closeCursor();        

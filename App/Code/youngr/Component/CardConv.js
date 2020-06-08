@@ -36,7 +36,7 @@ class CardConv extends React.Component {
     }
 
     getData(){
-        return fetch('http://192.168.1.56/TFE/Web/plateform/api/lastMessage.php',{
+        return fetch('http://192.168.1.57/TFE/Web/plateform/api/lastMessage.php',{
             method:'POST',
             header:{
                 'Accept': 'application/json',

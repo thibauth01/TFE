@@ -30,7 +30,7 @@ class DetailsWorkFree extends React.Component {
 
   remove = ()=>{
     const idWork = this.props.navigation.state.params.id;
-    fetch('http://192.168.1.56/TFE/Web/plateform/api/removeWork.php',{
+    fetch('http://192.168.1.57/TFE/Web/plateform/api/removeWork.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     color:theme.COLORS.ERROR
   },
   buttonDelete:{
-    backgroundColor:theme.COLORS.ERROR,
+    backgroundColor:theme.COLORS.MUTED,
     width:150,
     height:35,
   },

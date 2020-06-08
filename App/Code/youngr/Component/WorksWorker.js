@@ -1,53 +1,16 @@
 import React from 'react'
 import { StyleSheet,Dimensions,FlatList,ScrollView,TouchableOpacity,Image,View,Platform,SafeAreaView, ImageBackground,Linking } from 'react-native'
 import {Button,Text, Block, Input,Card} from 'galio-framework'
-import RNPickerSelect from 'react-native-picker-select';
-import DatePicker from 'react-native-datepicker'
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { theme } from '../Constants';
 import { connect } from 'react-redux'
 
 import { block } from 'react-native-reanimated';
-import ItemWorksTodo from './ItemWorksTodo'
 import CardWork from './Cardwork'
 import CardWorkFree from './CardWorkFree'
 import CardWorkDone from './CardWorkDone'
 import {getAge,reformatDate,reformatTime,getPrice,loading} from '../Constants/Utils'
 import { NavigationEvents } from 'react-navigation';
 
-
-
-
-const dataJobsTodo= [
-  {
-    id: '1',
-    title: 'Keep my dog',
-    date:'24/03/2020',
-    type:'Petsitting',
-    path_profile:"comment.png"
-  },
-  {
-    id: '2',
-    title: 'Jean-christophe',
-    date:'24/03/2025',
-    type:'Fils de pute',
-    path_profile:'http://i.pravatar.cc/100?id=skater'
-  },
-  {
-    id: '3',
-    title: 'Mange tes mort',
-    date:'Lundi',
-    type:'Chez tes voisin',
-    path_profile:'http://i.pravatar.cc/100?id=skater'
-  },
-  {
-    id: '4',
-    title: 'Yolo',
-    date:'Lundi',
-    type:'Chez tes voisin',
-    path_profile:'http://i.pravatar.cc/100?id=skater'
-  }
-];
 
 
 class WorksWorker extends React.Component {
@@ -70,7 +33,7 @@ class WorksWorker extends React.Component {
   }
 
   getData(){
-    return fetch('http://192.168.1.56/TFE/Web/plateform/api/works.php',{
+    return fetch('http://192.168.1.57/TFE/Web/plateform/api/works.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',
@@ -95,7 +58,6 @@ class WorksWorker extends React.Component {
   }
 
   worksFree(){
-    var newArray=[]
     if(this.state.dataFree == null){
       this.setState({dataFree:[]})
     }
@@ -258,7 +220,7 @@ const styles = StyleSheet.create({
   subtitle:{
     marginTop:10,
     paddingLeft:20,
-    marginBottom:10
+    marginBottom:5
   },
   block_content:{
     width:Dimensions.get('window').width-10,

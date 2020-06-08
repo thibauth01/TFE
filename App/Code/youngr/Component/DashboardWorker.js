@@ -2,41 +2,14 @@ import React from 'react'
 import { StyleSheet,Dimensions,FlatList,TouchableOpacity,Image,View,Platform,SafeAreaView, ImageBackground,Linking } from 'react-native'
 import {Button,Text, Block, Input,Card} from 'galio-framework'
 import { theme } from '../Constants';
-import ItemWorksFree from './ItemWorksFree'
 import { connect } from 'react-redux'
 import CardWork from './Cardwork'
 import { NavigationEvents } from 'react-navigation';
-
-
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
+import { LineChart } from "react-native-chart-kit";
 
 
 const labelsGraph=["J","F","M","A","M","J","J","A","S","O","N","D"];
-const datasGraph=[
-  {
-    data: [
-      Math.random() * 10,
-      Math.random() * 10,
-      Math.random() * 10,
-      Math.random() * 10,
-      Math.random() * 10,
-      Math.random() * 10,
-      Math.random() * 10,
-      Math.random() * 10,
-      Math.random() * 10,
-      Math.random() * 10,
-      Math.random() * 10,
-      Math.random() * 10
-    ]
-  }
-];
+
 
 
 class DashboardWorker extends React.Component {
@@ -46,7 +19,8 @@ class DashboardWorker extends React.Component {
     this.state = {
       itemsCount:3,
       dataNextWorks : undefined,
-      dateNotPassed : undefined
+      dateNotPassed : undefined,
+      datasGraph : undefined
     }
   }
 
@@ -54,11 +28,13 @@ class DashboardWorker extends React.Component {
     this.getDataNextWorks().then(response => this.setState({dataNextWorks : response},() => {
       this.setState({dateNotPassed : this.removeDatePassed()})
     }));
+
+    this.getSalaryWorker().then(response => this.setState({datasGraph :response}));
   }
 
   getDataNextWorks(){
 
-    return fetch('http://192.168.1.56/TFE/Web/plateform/api/nextWorks.php',{
+    return fetch('http://192.168.1.57/TFE/Web/plateform/api/nextWorks.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',
@@ -82,6 +58,28 @@ class DashboardWorker extends React.Component {
      
   }
 
+  getSalaryWorker(){
+    return fetch('http://192.168.1.57/TFE/Web/plateform/api/getSalaryWorker.php',{
+      method:'POST',
+      header:{
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+        idWorker: this.props.account.idTypeAccount
+      })
+      
+    })
+    .then((response) => response.json())
+     .then((responseJson)=>{
+      return responseJson;
+       
+     })
+     .catch((error)=>{
+     console.error(error);
+     });
+  }
+
   removeDatePassed(){
 
     for (let index = 0; index < this.state.dataNextWorks.length; index++) {
@@ -102,6 +100,7 @@ class DashboardWorker extends React.Component {
   }
 
   isWorks(){
+
     if(this.state.dateNotPassed != undefined){
       if(this.state.dateNotPassed.length > 0 ){
         return(
@@ -123,11 +122,29 @@ class DashboardWorker extends React.Component {
         )
       }
     }
+    else{
+      return(
+        <Block middle style={styles.noWork}>
+          <Text h5> Aucun travail de prévu</Text>
+        </Block>
+      )
+    }
   }
+  
+
+  dataSalary(){
+    if(this.state.datasGraph != undefined && this.state.datasGraph.length > 0){
+      return this.state.datasGraph;
+    }
+    else{
+      return[0,0,0,0,0,0,0,0,0,0,0,0];
+    }
+  }
+
+  
 
   render() {
   const {navigate} = this.props;
-
     return (
         <Block  style={styles.main_container}> 
           <NavigationEvents
@@ -138,40 +155,47 @@ class DashboardWorker extends React.Component {
             {this.isWorks()}
        
           </Block>
-          <Block flex={1.2}>
-            <Text h4 muted style={styles.subtitle}>Revenus</Text>
-            <LineChart
-              data={{
-                labels:labelsGraph,
-                datasets: datasGraph
-              }}
-              width={(Dimensions.get("window").width)-10} // from react-native
-              height={220}
-              yAxisLabel="€"
-              yAxisSuffix=""
-              yAxisInterval={2} // optional, defaults to 1
-              chartConfig={{
-                backgroundColor: theme.COLORS.SECONDARY,
-                backgroundGradientFrom: theme.COLORS.SECONDARY,
-                backgroundGradientTo: theme.COLORS.SECONDARY,
-                decimalPlaces: 0, // optional, defaults to 2dp
-                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                style:{
-                  
-                },
-                propsForDots: {
-                  r: "2",
-                  strokeWidth: "2",
-                  stroke: "#fff"
-                }
-              }}
-              withShadow
-              bezier
-              style={{
-                borderRadius: 10
-              }}
-            />
+          <Block flex={1}>
+            <Text h4 muted bottom style={styles.subtitle}>Revenus</Text>
+            <Block middle flex={1}>
+              <LineChart
+                data={{
+                  labels:labelsGraph,
+                  datasets: [
+                    {
+                      data:this.dataSalary()
+                    }
+                  ]
+                }}
+                width={(Dimensions.get("window").width)-10} // from react-native
+                height={250}
+                yAxisLabel="€"
+                yAxisSuffix=""
+                yAxisInterval={2} // optional, defaults to 1
+                chartConfig={{
+
+                  backgroundColor: theme.COLORS.SECONDARY,
+                  backgroundGradientFrom: theme.COLORS.SECONDARY,
+                  backgroundGradientTo: theme.COLORS.SECONDARY,
+                  decimalPlaces: 0, // optional, defaults to 2dp
+                  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                  style:{
+                    
+                  },
+                  propsForDots: {
+                    r: "2",
+                    strokeWidth: "2",
+                    stroke: "#fff"
+                  }
+                }}
+                withShadow
+                bezier
+                style={{
+                  borderRadius: 10
+                }}
+              />
+            </Block>
           </Block>
 
         </Block>
@@ -200,7 +224,7 @@ const styles = StyleSheet.create({
   subtitle:{
     marginTop:10,
     paddingLeft:20,
-    marginBottom:10
+    marginBottom:5
   },
   noWork:{
     marginBottom:10,

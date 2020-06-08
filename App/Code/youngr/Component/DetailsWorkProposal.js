@@ -41,7 +41,7 @@ class DetailsWorkProposal extends React.Component {
   accept=()=>{
     const idWork = this.props.navigation.state.params.id;
 
-    fetch('http://192.168.1.56/TFE/Web/plateform/api/acceptWork.php',{
+    fetch('http://192.168.1.57/TFE/Web/plateform/api/acceptWork.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
@@ -87,7 +87,6 @@ class DetailsWorkProposal extends React.Component {
                 <Text muted> {state.params.city}</Text>
               </Block>
               <Block row style={styles.buttonsProfile}>
-                <Button style={styles.buttonProfileMessage}  iconColor={theme.COLORS.SECONDARY}	onlyIcon iconSize={20} icon="message-circle" iconFamily="feather" flex={2}></Button>
                 <Button onPress={()=>{Linking.openURL(`tel:${state.params.phone}`)}} style={styles.buttonProfilePhone}  iconColor={theme.COLORS.DEFAULT}	onlyIcon iconSize={20} icon="phone" iconFamily="feather" flex={2}></Button>
               </Block>      
             </Block>
@@ -193,7 +192,7 @@ const styles = StyleSheet.create({
   buttonsProfile:{
     width:200,
     paddingTop:10,
-    justifyContent:"space-around",
+    justifyContent:"center",
   },
   buttonProfileMessage:{
     width:80,
@@ -203,7 +202,7 @@ const styles = StyleSheet.create({
     
   },
   buttonProfilePhone:{
-    width:80,
+    width:150,
     height:35,
     backgroundColor: theme.COLORS.SECONDARY
   },

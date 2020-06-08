@@ -15,6 +15,17 @@ yarn add react-navigation-tabs
 yarn add react-native-chart-kit
 yarn add react-native-svg
 expo install react-native-chart-kit
+yarn add react-redux
+yarn add redux
+yarn add react-native-picker-select
+yarn add moment
+
+
+yarn add react-native-modal
+yarn add react-native-star-rating
+yarn add react-native-linear-gradient
+yarn add @freakycoder/react-native-text-area
+yarn add react-native-review-modal
 
 
 eject gauth

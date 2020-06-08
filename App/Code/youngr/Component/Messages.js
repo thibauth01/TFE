@@ -43,8 +43,8 @@ class Messages extends React.Component {
 
   timer(){
       interval = setInterval(() => {
-
-        fetch('http://192.168.1.56/TFE/Web/plateform/api/numberOfMessages.php',{
+        console.log("time");
+        fetch('http://192.168.1.57/TFE/Web/plateform/api/numberOfMessages.php',{
           method:'POST',
           header:{
               'Accept': 'application/json',
@@ -73,7 +73,7 @@ class Messages extends React.Component {
 
 
   getData(){
-    return fetch('http://192.168.1.56/TFE/Web/plateform/api/messages.php',{
+    return fetch('http://192.168.1.57/TFE/Web/plateform/api/messages.php',{
         method:'POST',
         header:{
             'Accept': 'application/json',
@@ -149,7 +149,7 @@ class Messages extends React.Component {
       });
 
 
-      fetch('http://192.168.1.56/TFE/Web/plateform/api/sendMessage.php',{
+      fetch('http://192.168.1.57/TFE/Web/plateform/api/sendMessage.php',{
         method:'POST',
         header:{
             'Accept': 'application/json',

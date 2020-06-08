@@ -1,12 +1,8 @@
 import React from 'react'
 import { StyleSheet,Dimensions,FlatList,TouchableOpacity,Image,View,Platform,SafeAreaView, ImageBackground,Linking } from 'react-native'
 import {Button,Text, Block, Icon, Input,Card} from 'galio-framework'
-import RNPickerSelect from 'react-native-picker-select';
-import DatePicker from 'react-native-datepicker'
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { theme } from '../Constants';
 import { block } from 'react-native-reanimated';
-import ItemWorksTodo from './ItemWorksTodo'
 import { connect } from 'react-redux'
 import CardWorkTakeReq from './CardWorkTakeReq';
 import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
@@ -70,7 +66,7 @@ class DashboardRequester extends React.Component {
   }
 
   getDataNextWorks(){
-    return fetch('http://192.168.1.56/TFE/Web/plateform/api/nextWorks.php',{
+    return fetch('http://192.168.1.57/TFE/Web/plateform/api/nextWorks.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',
@@ -214,7 +210,7 @@ class DashboardRequester extends React.Component {
         </Block>
       
         <Block>
-          <Text h4 muted style={styles.subtitle}>Prochain travailleur</Text>
+          <Text h4 muted style={styles.subtitle}>Prochain travail</Text>
           {this.isWorker()}
         </Block>
 

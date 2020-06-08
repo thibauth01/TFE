@@ -6,6 +6,7 @@ import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { connect } from 'react-redux'
 
+/* FAIRE AVEC UN MODAL ET METTRE STAR RATINGS DEDANS */
 
 class DetailsWorkTakeReq extends React.Component {
 
@@ -13,7 +14,9 @@ class DetailsWorkTakeReq extends React.Component {
     super(props)
     this.state={
       showAlert:false,
-      typeAlert:undefined
+      typeAlert:undefined,
+      starCount:undefined,
+      isModalOpen:true
     }
   }
 
@@ -46,10 +49,14 @@ class DetailsWorkTakeReq extends React.Component {
   };
 
  
+  ratingCompleted(){
+    console.log("rate");
+    
+  }
 
   finish = ()=>{
     const idWork = this.props.navigation.state.params.id;
-    fetch('http://192.168.1.56/TFE/Web/plateform/api/finishWork.php',{
+    fetch('http://192.168.1.57/TFE/Web/plateform/api/finishWork.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
@@ -71,13 +78,13 @@ class DetailsWorkTakeReq extends React.Component {
         })
         .catch((error)=>{
             console.error(error);
-        }); 
+        });  
   }
 
   cancel=()=>{
 
     const idWork = this.props.navigation.state.params.id;
-    fetch('http://192.168.1.56/TFE/Web/plateform/api/removeWork.php',{
+    fetch('http://192.168.1.57/TFE/Web/plateform/api/removeWork.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
@@ -107,7 +114,7 @@ class DetailsWorkTakeReq extends React.Component {
   free=()=>{
 
     const idWork = this.props.navigation.state.params.id;
-    fetch('http://192.168.1.56/TFE/Web/plateform/api/refuseWorker.php',{
+    fetch('http://192.168.1.57/TFE/Web/plateform/api/refuseWorker.php',{
       method:'POST',
       header:{
           'Accept': 'application/json',
@@ -138,6 +145,7 @@ class DetailsWorkTakeReq extends React.Component {
     
     return (
         <Block style={styles.main_container}>
+          
           <Block flex={1.2} style={styles.headerBlock}>
             <Block flex={1} style={styles.profileBlock}>
               <Image style={styles.profile} source={require(`../Images/avatar.jpg`)}></Image>
@@ -151,7 +159,7 @@ class DetailsWorkTakeReq extends React.Component {
                 <Text muted> {state.params.city}</Text>
               </Block>
               <Block row style={styles.buttonsProfile}>
-                <Button style={styles.buttonProfileMessage}  iconColor={theme.COLORS.SECONDARY}	onlyIcon iconSize={20} icon="message-circle" iconFamily="feather" flex={2}></Button>
+                <Button onPress={() => this.props.navigation.navigate('Messages',state.params)} style={styles.buttonProfileMessage}  iconColor={theme.COLORS.SECONDARY}	onlyIcon iconSize={20} icon="message-circle" iconFamily="feather" flex={2}></Button>
                 <Button onPress={()=>{Linking.openURL(`tel:${state.params.phone}`)}} style={styles.buttonProfilePhone}  iconColor={theme.COLORS.DEFAULT}	onlyIcon iconSize={20} icon="phone" iconFamily="feather" flex={2}></Button>
               </Block>      
             </Block>
@@ -189,11 +197,11 @@ class DetailsWorkTakeReq extends React.Component {
           <Block flex={0.9} space="around">
             <Block row space="evenly">
                 <Button style={styles.buttonDelete} onPress={this.showAlert.bind(this,0)} >Annuler</Button>
-                <Button style={styles.buttonFree} onPress={this.showAlert.bind(this,1)} >Liberé</Button>
+                <Button style={styles.buttonFree} onPress={this.showAlert.bind(this,1)} >Libérer</Button>
            
             </Block>
             <Block center>
-                <Button style={styles.buttonAccept} onPress={this.showAlert.bind(this,2)}>Terminé !</Button>
+                <Button style={styles.buttonAccept} onPress={this.showAlert.bind(this,2)}>Terminer</Button>
 
             </Block>
           </Block>
@@ -225,9 +233,11 @@ class DetailsWorkTakeReq extends React.Component {
               }
               
               this.hideAlert();
-              this.props.navigation.goBack();
+              /*this.props.navigation.goBack();*/
             }}
           />
+
+
           
         </Block>
     )
@@ -333,7 +343,7 @@ const styles = StyleSheet.create({
     marginBottom:10
   },
   buttonFree:{
-    backgroundColor:theme.COLORS.WARNING,
+    backgroundColor:theme.COLORS.GITHUB,
     width:170,
     height:35,
     marginBottom:10

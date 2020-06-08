@@ -1,12 +1,8 @@
 import React from 'react'
 import { StyleSheet,Dimensions,FlatList,TouchableOpacity,Image,View,Platform,SafeAreaView, ImageBackground,Linking, ScrollView } from 'react-native'
 import {Button,Text, Block, Input,Card} from 'galio-framework'
-import RNPickerSelect from 'react-native-picker-select';
-import DatePicker from 'react-native-datepicker'
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { theme } from '../Constants';
 import { connect } from 'react-redux'
-import ItemWorksTodo from './ItemWorksTodo'
 import CardWorkTakeReq from './CardWorkTakeReq';
 import CardWorkNotAttributed from './CardWorkNotAttributed';
 import CardWorkDone from './CardWorkDone'
@@ -38,7 +34,7 @@ class WorksRequester extends React.Component {
   }
 
   getData(){
-    return fetch('http://192.168.1.56/TFE/Web/plateform/api/works.php',{
+    return fetch('http://192.168.1.57/TFE/Web/plateform/api/works.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',

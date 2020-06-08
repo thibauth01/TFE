@@ -21,17 +21,12 @@ export default class CardWorkDone extends React.Component {
         const dat1 = dateMoment.getFullYear() + dateMoment.getMonth() + dateMoment.getDate();
         const dat2 = now.getFullYear() + now.getMonth() + now.getDate();
 
-        if(dat1 >= dat2){
-            const month = Number(dateMoment.getMonth()) + 1 
-          return (
-            <Text muted>{dateMoment.getDate() + "/" + month + "/" + dateMoment.getFullYear()}</Text> 
-          )
-        }
-        else{
-            return (
-                <Text color={theme.COLORS.ERROR}>A Finir</Text> 
-              )
-        }
+        
+        const month = Number(dateMoment.getMonth()) + 1 
+        return (
+          <Text muted>{dateMoment.getDate() + "/" + month + "/" + dateMoment.getFullYear()}</Text> 
+        )
+        
       }
 
     render() { 

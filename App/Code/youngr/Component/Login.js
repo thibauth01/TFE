@@ -30,7 +30,7 @@ class Login extends React.Component {
         
 		else{
 		
-		fetch('http://192.168.1.56/TFE/Web/plateform/api/login.php',{
+		fetch('http://192.168.1.57/TFE/Web/plateform/api/login.php',{
 			method:'POST',
 			header:{
 				'Accept': 'application/json',
@@ -71,10 +71,15 @@ class Login extends React.Component {
   render() {      
     const {navigate} = this.props.navigation;
     return (
-      <Block middle  style={styles.main_container}>
+      <Block   style={styles.main_container}>
+          <Block middle flex={0.5}>
+            <Image 
+                    style={styles.logo}
+                    source={require(`../Images/logo.png`)}
+                />
+          </Block>
           <Block center style={styles.block_login}>
-            <Text flex={2}h2 color={theme.COLORS.PRIMARY} style={styles.titleH2}>Connecte toi !</Text>
-            <Block  middle flex={3}>
+            <Block  space="evenly" flex={2.5}>
                 <Block middle width={250} >
                     <Input 
                         style={styles.input}
@@ -128,10 +133,15 @@ const styles = StyleSheet.create({
   titleH2:{
       paddingTop:15
   },
+  logo:{
+    width:230,
+    height:90
+  },
 
   block_login:{
+    paddingTop:20,
     backgroundColor:theme.COLORS.DEFAULT,
-    height:380,
+    height:350,
     width:300,
     borderRadius:15,
     shadowColor: "#000",
