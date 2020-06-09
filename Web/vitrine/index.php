@@ -8,7 +8,7 @@
       
     }
     
-    try {
+   try {
         $dbh = new PDO('mysql:host=185.98.131.128;dbname=young1377588','young1377588','srvq3gjnpp');
         // $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -72,7 +72,7 @@
         <nav class="navbar">
           <!-- Site logo -->
           <a href="index.php" class="logo">
-          <img src="images/logo.png" alt="">
+            <h2 style="color:#ff7214">Youngr</h2>
           </a>
           <a href="javascript:void(0);" id="mobile-menu-toggler">
             <i class="ti-align-justify"></i>

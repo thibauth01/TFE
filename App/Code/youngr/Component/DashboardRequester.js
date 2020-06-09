@@ -53,7 +53,8 @@ class DashboardRequester extends React.Component {
     this.state = {
       itemsCount:3,
       dataNextWorks : undefined,
-      dateNotPassed : undefined
+      dateNotPassed : undefined,
+      
     }
   }
 
@@ -74,7 +75,8 @@ class DashboardRequester extends React.Component {
       },
       body:JSON.stringify({
         type: this.props.account.type,
-        idAccount: this.props.account.id
+        idAccount: this.props.account.id,
+        jwt:this.props.account.jwt
       })
       
     })
@@ -141,15 +143,18 @@ class DashboardRequester extends React.Component {
   }
 
   isWorker(){
+    
+
     if(this.state.dateNotPassed != undefined){
       if(this.state.dateNotPassed.length > 0){
         const elem = this.state.dateNotPassed[0]
-
+        const path = `https://dashboard.youngr.be/`+ elem.profile_path;
+        
         return(
-          
+           
           <Block style={styles.nextWork_block}>
             <Block row style={{marginTop:8}}>
-              <Image style={styles.profile} source={require(`../Images/avatar.jpg`)}></Image>
+              <Image style={styles.profile} source={{uri:path}} />
               <Block  space="evenly" flex={1}>
                 <Text h5>{elem.first_name} {elem.last_name}</Text>
                 <Block row >

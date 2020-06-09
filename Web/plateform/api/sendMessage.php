@@ -14,26 +14,45 @@
     $idWork = trim(htmlspecialchars($obj['idWork']));
     $idAccount = trim(htmlspecialchars($obj['idAccount']));
     $content = trim(htmlspecialchars($obj['content']));
+    $jwt = trim(htmlspecialchars($obj['jwt']));
+
+    if($jwt == null){
+        print_r('access denied');
+        die();
+    }
+
+    $Query = $dbh->query("SELECT jwt FROM account WHERE id = ".$idAccount);
+    $jwtAccount = $Query->fetch(PDO::FETCH_ASSOC);
+    $Query->closeCursor();
+
+    if($jwtAccount['jwt'] == $jwt){
+        if($type == "worker"){
+
+            $Query1 = $dbh->query("SELECT worker.id FROM worker WHERE id_account = ".$idAccount);
+            $idTypeAccount = $Query1->fetch(PDO::FETCH_ASSOC);
+            $idTypeAccount = $idTypeAccount['id'];
+    
+        }
+        else if($type == "requester"){
+    
+            $Query1 = $dbh->query("SELECT requester.id FROM requester WHERE id_account = ".$idAccount);
+            $idTypeAccount = $Query1->fetch(PDO::FETCH_ASSOC);
+            $idTypeAccount = $idTypeAccount['id'];
+        }
+        $Query = $dbh->query("INSERT INTO message (id_work,id_sender,content,isRead) VALUES ('$idWork','$idTypeAccount','$content',0)");
+    
+        if(!$Query){
+            $returnJSON['txt'] = "Erreur lors de l'envoi du message";
+        }
+        echo json_encode($returnJSON);
+    
+        $Query->closeCursor();
+
+    }
+    else{
+        print_r('access denied');
+
+    }
     
 
-    if($type == "worker"){
-
-        $Query1 = $dbh->query("SELECT worker.id FROM worker WHERE id_account = ".$idAccount);
-        $idTypeAccount = $Query1->fetch(PDO::FETCH_ASSOC);
-        $idTypeAccount = $idTypeAccount['id'];
-
-    }
-    else if($type == "requester"){
-
-        $Query1 = $dbh->query("SELECT requester.id FROM requester WHERE id_account = ".$idAccount);
-        $idTypeAccount = $Query1->fetch(PDO::FETCH_ASSOC);
-        $idTypeAccount = $idTypeAccount['id'];
-    }
-    $Query = $dbh->query("INSERT INTO message (id_work,id_sender,content,isRead) VALUES ('$idWork','$idTypeAccount','$content',0)");
-
-    if(!$Query){
-        $returnJSON['txt'] = "Erreur lors de l'envoi du message";
-    }
-    echo json_encode($returnJSON);
-
-    $Query->closeCursor();
+  

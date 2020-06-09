@@ -52,6 +52,8 @@ class Messages extends React.Component {
           },
           body:JSON.stringify({
               idWork: this.state.idWork,
+              idAccount: this.props.account.id,
+              jwt:this.props.account.jwt
           })
           
       })
@@ -82,7 +84,8 @@ class Messages extends React.Component {
         body:JSON.stringify({
             idWork: this.state.idWork,
             type: this.props.account.type,
-            idAccount: this.props.account.id
+            idAccount: this.props.account.id,
+            jwt:this.props.account.jwt
         })
         
     })
@@ -159,7 +162,8 @@ class Messages extends React.Component {
             idWork: this.state.idWork,
             type: this.props.account.type,
             idAccount: this.props.account.id,
-            content:this.state.text
+            content:this.state.text,
+            jwt:this.props.account.jwt
         })
         
     })

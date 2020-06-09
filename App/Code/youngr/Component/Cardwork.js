@@ -11,7 +11,7 @@ export default class CardWork extends React.Component {
   constructor(props){
     super(props);
     this.state={
-        maxCharTitle:30
+        maxCharTitle:30,
     }
   }
 
@@ -44,7 +44,7 @@ export default class CardWork extends React.Component {
             onPress={() => navigate('DetailsWork',this.props.item)}>
             <Block flex={1} style={styles.block_main} height={70} row middle>
                 <Block flex={1.2}>
-                    <Image style={styles.profile} source={{uri:path}}></Image>
+                    <Image style={styles.profile} source={{uri:path}}/>
                 </Block>
                 <Block flex={2}>
                     <Block>

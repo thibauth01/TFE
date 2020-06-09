@@ -54,7 +54,9 @@ class DetailsWork extends React.Component {
       body:JSON.stringify({
           idWork: idWork,
           firstName:this.props.account.first_name,
-          lastName:this.props.account.last_name
+          lastName:this.props.account.last_name,
+          jwt:this.props.account.jwt,
+          idAccount:this.props.account.id
       })
       
     })

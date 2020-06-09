@@ -46,9 +46,8 @@ class Login extends React.Component {
 		 .then((responseJson)=>{
 			 if(responseJson.status){
                 this.setState({
-                    account:responseJson.data
+                    account:responseJson.data,
                 })
-
                 const action = { type: "GET_ACCOUNT", value: this.state.account}
                 this.props.dispatch(action)
                 

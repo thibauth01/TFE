@@ -73,7 +73,7 @@ if($return['statut'] == false){
 
 else{
     $password=password_hash($password, PASSWORD_DEFAULT);
-    $accountQuery = $dbh->query( "INSERT INTO `account` (`first_name`,`last_name`,`email`,`username`,`password`,`birth_date`,`street`,`postcode`,`city`,`country`,`premium`,`type`,`phone`) VALUES('$first_name','$last_name','$email','$username','$password','$birth','$street','$postcode','$city','$country',0,'requester','$phone')");
+    $accountQuery = $dbh->query( "INSERT INTO `account` (`first_name`,`last_name`,`email`,`username`,`password`,`birth_date`,`street`,`postcode`,`city`,`country`,`premium`,`type`,`profile_path`,`phone`) VALUES('$first_name','$last_name','$email','$username','$password','$birth','$street','$postcode','$city','$country',0,'requester','img/user-1.jpg','$phone')");
     if ($accountQuery) {
         $accountQuery->closeCursor();
     } else {

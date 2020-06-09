@@ -11,19 +11,39 @@
 
 
     $idWork = trim(htmlspecialchars($obj['idWork']));
+    $idAccount = trim(htmlspecialchars($obj['idAccount']));
+    $jwt = trim(htmlspecialchars($obj['jwt']));
 
-    $Query = $dbh->query(" SELECT * FROM message WHERE id_work = '$idWork' ORDER BY sendtime desc LIMIT 1");
-    $lastMessage = $Query->fetch(PDO::FETCH_ASSOC);
-   
-
-    if($Query){
-        $Query->closeCursor();
-        $returnJSON['data'] = $lastMessage;
+    if($jwt == null){
+        print_r('access denied');
+        die();
     }
+
+    $Query = $dbh->query("SELECT jwt FROM account WHERE id = ".$idAccount);
+    $jwtAccount = $Query->fetch(PDO::FETCH_ASSOC);
+    $Query->closeCursor();
+
+    if($jwtAccount['jwt'] == $jwt){
+        $Query = $dbh->query(" SELECT * FROM message WHERE id_work = '$idWork' ORDER BY sendtime desc LIMIT 1");
+        $lastMessage = $Query->fetch(PDO::FETCH_ASSOC);
+    
+
+        if($Query){
+            $Query->closeCursor();
+            $returnJSON['data'] = $lastMessage;
+        }
+        else{
+            $returnJSON['data'] = "flop";
+
+        }
+
+
+        echo json_encode($returnJSON);
+    }
+
+    
+
     else{
-        $returnJSON['data'] = "flop";
+        print_r('access denied');
 
     }
-
-
-    echo json_encode($returnJSON);

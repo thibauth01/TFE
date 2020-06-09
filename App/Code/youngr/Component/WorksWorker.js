@@ -41,7 +41,8 @@ class WorksWorker extends React.Component {
       },
       body:JSON.stringify({
         type: this.props.account.type,
-        idAccount: this.props.account.id
+        idAccount: this.props.account.id,
+        jwt: this.props.account.jwt
       })
       
     })

@@ -43,7 +43,9 @@ class CardConv extends React.Component {
                 'Content-type': 'application/json'
             },
             body:JSON.stringify({
-                idWork: this.props.item.id
+                idWork: this.props.item.id,
+                idAccount: this.props.account.id,
+                jwt:this.props.account.jwt
             })
             
         })

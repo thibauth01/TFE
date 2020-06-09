@@ -8,42 +8,59 @@
     $obj = json_decode($json,true);
 
     $idWorker = trim(htmlspecialchars($obj['idWorker']));
+    $idAccount = trim(htmlspecialchars($obj['idAccount']));
+    $jwt = trim(htmlspecialchars($obj['jwt']));
 
+    if($jwt == null){
+        print_r('access denied');
+        die();
+    }
 
-    $toReturn = [0,0,0,0,0,0,0,0,0,0,0,0];
-
-    $Query = $dbh->query("SELECT date_start,time_start,time_end,price
-                            FROM work 
-                            WHERE finish = 1 AND paid = 1 AND cancelled = 0 AND id_worker = ".$idWorker);
-
-    $works = $Query->fetchAll(PDO::FETCH_ASSOC);
+    $Query = $dbh->query("SELECT jwt FROM account WHERE id = ".$idAccount);
+    $jwtAccount = $Query->fetch(PDO::FETCH_ASSOC);
     $Query->closeCursor();
 
-    $workDateOK=array();
-    foreach ($works as $key => $work) {
-       $time =  strtotime($work['date_start']);
-       $nowtime = strtotime("now");
+    if($jwtAccount['jwt'] == $jwt){
+        $toReturn = [0,0,0,0,0,0,0,0,0,0,0,0];
 
-       $year=date("Y",$time);
-       $yearNow=date("Y",$nowtime);
+        $Query = $dbh->query("SELECT date_start,time_start,time_end,price
+                                FROM work 
+                                WHERE finish = 1 AND paid = 1 AND cancelled = 0 AND id_worker = ".$idWorker);
 
-       if($year == $yearNow){
-            array_push($workDateOK,$work);
-       }
-    }
+        $works = $Query->fetchAll(PDO::FETCH_ASSOC);
+        $Query->closeCursor();
 
-    foreach ($workDateOK as $key => $work) {
-        $minutesWork = timeSpace($work['time_start'],$work['time_end']);
-        $price = $minutesWork * ($work['price']/60);
-        $price= (float)round($price,2);
-
+        $workDateOK=array();
+        foreach ($works as $key => $work) {
         $time =  strtotime($work['date_start']);
-        $month=date("n",$time);
+        $nowtime = strtotime("now");
 
-        $toReturn[$month -1] += $price;
+        $year=date("Y",$time);
+        $yearNow=date("Y",$nowtime);
+
+        if($year == $yearNow){
+                array_push($workDateOK,$work);
+        }
+        }
+
+        foreach ($workDateOK as $key => $work) {
+            $minutesWork = timeSpace($work['time_start'],$work['time_end']);
+            $price = $minutesWork * ($work['price']/60);
+            $price= (float)round($price,2);
+
+            $time =  strtotime($work['date_start']);
+            $month=date("n",$time);
+
+            $toReturn[$month -1] += $price;
+
+        
+        }
+
+        echo json_encode($toReturn);
+
+    }
+    else{
+        print_r('access denied');
+    }
 
     
-    }
-
-    echo json_encode($toReturn);
-

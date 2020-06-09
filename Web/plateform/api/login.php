@@ -6,6 +6,7 @@
     
     $user = trim(htmlspecialchars($obj['user']));
     $password = trim(htmlspecialchars($obj['password']));
+    $username = $user;
 
     $returnJSON = array(
         "status" => null,
@@ -13,7 +14,7 @@
         "data" => null
     );
 
-    $userQuery = $dbh->prepare( "SELECT id,first_name,last_name,username,password,type FROM account WHERE username = ?" );
+    $userQuery = $dbh->prepare( "SELECT id,first_name,last_name,username,password,type,jwt FROM account WHERE username = ?" );
     $userQuery->bindValue( 1, $user );
     $userQuery->execute();
 
@@ -22,6 +23,19 @@
         $userQuery->closeCursor();
         $isPasswordCorrect = password_verify($password, $user['password']);
         if($isPasswordCorrect){
+
+            $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $longueurMax = strlen($caracteres);
+            $chaineAleatoire = '';
+
+            for ($i = 0; $i < 100; $i++){
+                $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+            }
+
+            $Query = $dbh->prepare("UPDATE account SET jwt='".$chaineAleatoire."' WHERE username = '".$username."'");
+            $Query -> execute();
+            $Query->closeCursor();
+
 
             if($user['type'] == "worker"){
                 $Query1 = $dbh->query("SELECT worker.id FROM worker WHERE id_account = ".$user['id']);
@@ -39,6 +53,7 @@
 
             unset($user["password"]);
             $user["idTypeAccount"] = $idTypeAccount;
+            $user["jwt"]=$chaineAleatoire;
             $returnJSON["status"] = true;
             $returnJSON["data"] = $user;
             $returnJSON["txt"] = "ok";

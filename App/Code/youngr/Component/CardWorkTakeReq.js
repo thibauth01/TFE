@@ -43,7 +43,7 @@ export default class CardWorkTakeReq extends React.Component {
             onPress={() => navigate('DetailsWorkTakeReq',this.props.item)}>
             <Block flex={1} style={styles.block_main} height={70} row middle>
                 <Block flex={1.2}>
-                    <Image style={styles.profile} source={{uri:path}}></Image>
+                  <Image style={styles.profile} source={{uri:path}}/>
                 </Block>
                 <Block flex={2}>
                     <Block>

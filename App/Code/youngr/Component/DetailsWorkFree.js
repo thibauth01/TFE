@@ -40,7 +40,10 @@ class DetailsWorkFree extends React.Component {
           idWork: idWork,
           firstName:this.props.account.first_name,
           lastName:this.props.account.last_name,
-          isTake: false
+          isTake: false,
+          idAccount:this.props.account.id,
+          jwt:this.props.account.jwt
+
       })
       
     })

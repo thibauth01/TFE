@@ -40,7 +40,7 @@
         <nav class="navbar">
           <!-- Site logo -->
           <a href="index.php" class="logo">
-            <img src="images/logo.png" alt="">
+            <h2 style="color:#ff7214">Youngr</h2>
           </a>
           <a href="javascript:void(0);" id="mobile-menu-toggler">
             <i class="ti-align-justify"></i>
@@ -62,8 +62,8 @@
         <div class="row">
           <div class="col-md-4">
             <div class="sec-heading">
-              <span class="tagline">contactez nous</span>
-              <h3 class="sec-title">Une question, n'hesitez pas </h3>
+              <span class="tagline">contactez-nous</span>
+              <h3 class="sec-title">Une question, n'hesitez pas!</h3>
             </div>
             <address class="contact-info">
               <span><img src="images/icons/map-marker.png" alt="">Louvain-la-Neuve, Belgique</span>

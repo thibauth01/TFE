@@ -8,28 +8,41 @@
     $obj = json_decode($json,true);
 
     $idWork = trim(htmlspecialchars($obj['idWork']));
+    $idAccount = trim(htmlspecialchars($obj['idAccount']));
     $firstName = trim(htmlspecialchars($obj['firstName']));
     $lastName = trim(htmlspecialchars($obj['lastName']));
+    $jwt = trim(htmlspecialchars($obj['jwt']));
 
     $returnJSON = array(
         "status" => null
     );
 
-    $Query = $dbh->query("SELECT id_worker,id_requester,title,date_start
-                                FROM work 
-                                WHERE id =".$idWork);
+    if($jwt == null){
+        print_r('access denied');
+        die();
+    }
 
-
-    $infoswork = $Query->fetch(PDO::FETCH_ASSOC);
+    $Query = $dbh->query("SELECT jwt FROM account WHERE id = ".$idAccount);
+    $jwtAccount = $Query->fetch(PDO::FETCH_ASSOC);
     $Query->closeCursor();
 
+    if($jwtAccount['jwt'] == $jwt){
+        
+        $Query = $dbh->query("SELECT id_worker,id_requester,title,date_start
+        FROM work 
+        WHERE id =".$idWork);
 
-    $Query = $dbh->query(" UPDATE work
-                            SET finish = 1,
-                                paid = 1
-                            WHERE id =".$idWork);
 
-    if($Query){
+        $infoswork = $Query->fetch(PDO::FETCH_ASSOC);
+        $Query->closeCursor();
+
+
+        $Query = $dbh->query(" UPDATE work
+        SET finish = 1,
+            paid = 1
+        WHERE id =".$idWork);
+
+        if($Query){
         $Query->closeCursor();
         $returnJSON['status'] = true;
 
@@ -40,13 +53,20 @@
 
 
         $Query = $dbh->query("INSERT INTO `notification` (`id_receiver`,`content`,`isRead`,`type`) VALUES ('".$id_receiver."','".$message."',0,'info')");
-                
+
         $Query->closeCursor();
 
+        }
+        else{
+        $returnJSON['status'] = false; 
+        }
+
+        echo json_encode($returnJSON);
     }
     else{
-        $returnJSON['status'] = false; 
+        print_r('access denied');
     }
 
-    echo json_encode($returnJSON);
+    
+
 

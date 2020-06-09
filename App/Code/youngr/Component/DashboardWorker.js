@@ -42,7 +42,8 @@ class DashboardWorker extends React.Component {
       },
       body:JSON.stringify({
         type: this.props.account.type,
-        idAccount: this.props.account.id
+        idAccount: this.props.account.id,
+        jwt:this.props.account.jwt
       })
       
     })
@@ -66,7 +67,9 @@ class DashboardWorker extends React.Component {
         'Content-type': 'application/json'
       },
       body:JSON.stringify({
-        idWorker: this.props.account.idTypeAccount
+        idWorker: this.props.account.idTypeAccount,
+        idAccount: this.props.account.id,
+        jwt:this.props.account.jwt
       })
       
     })

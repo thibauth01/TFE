@@ -63,8 +63,10 @@ class DetailsWorkTakeReq extends React.Component {
       },
       body:JSON.stringify({
           idWork: idWork,
+          idAccount:this.props.account.id,
           firstName:this.props.account.first_name,
-          lastName:this.props.account.last_name
+          lastName:this.props.account.last_name,
+          jwt:this.props.account.jwt
       })
       
     })
@@ -93,7 +95,10 @@ class DetailsWorkTakeReq extends React.Component {
           idWork: idWork,
           firstName:this.props.account.first_name,
           lastName:this.props.account.last_name,
-          isTake: true
+          isTake: true,
+          jwt:this.props.account.jwt,
+          idAccount:this.props.account.id
+
       })
       
     })
@@ -122,7 +127,9 @@ class DetailsWorkTakeReq extends React.Component {
       body:JSON.stringify({
           idWork: idWork,
           firstName:this.props.account.first_name,
-          lastName:this.props.account.last_name
+          lastName:this.props.account.last_name,
+          idAccount:this.props.account.id,
+          jwt:this.props.account.jwt
       })
       
     })
@@ -233,7 +240,7 @@ class DetailsWorkTakeReq extends React.Component {
               }
               
               this.hideAlert();
-              /*this.props.navigation.goBack();*/
+              this.props.navigation.goBack();
             }}
           />
 

@@ -12,11 +12,29 @@
 
 
     $idWork = trim(htmlspecialchars($obj['idWork']));
+    $idAccount = trim(htmlspecialchars($obj['idAccount']));
+    $jwt = trim(htmlspecialchars($obj['jwt']));
 
-    $Query = $dbh->query(" SELECT COUNT(id) as count FROM message WHERE id_work =".$idWork);
+    if($jwt == null){
+        print_r('access denied');
+        die();
+    }
 
-    $returnJSON['data'] = $Query->fetch(PDO::FETCH_ASSOC);
+    $Query = $dbh->query("SELECT jwt FROM account WHERE id = ".$idAccount);
+    $jwtAccount = $Query->fetch(PDO::FETCH_ASSOC);
     $Query->closeCursor();
 
+    if($jwtAccount['jwt'] == $jwt){
+        $Query = $dbh->query(" SELECT COUNT(id) as count FROM message WHERE id_work =".$idWork);
 
-    echo json_encode($returnJSON);
+        $returnJSON['data'] = $Query->fetch(PDO::FETCH_ASSOC);
+        $Query->closeCursor();
+
+
+        echo json_encode($returnJSON);
+    }
+    else{
+        print_r('access denied');
+    }
+
+    
