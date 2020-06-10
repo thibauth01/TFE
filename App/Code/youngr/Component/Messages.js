@@ -4,6 +4,7 @@ import {Button,Text, Block, Input, Icon} from 'galio-framework'
 import { theme } from '../Constants';
 import { connect } from 'react-redux'
 import {getAge,reformatDate,reformatTime,getPrice,loading} from '../Constants/Utils'
+import { Keyboard } from 'react-native'
 
 
 
@@ -173,6 +174,7 @@ class Messages extends React.Component {
               alert(responseJson.txt);
             }
             this.setState({text:undefined})
+            Keyboard.dismiss()
         
         })
         .catch((error)=>{

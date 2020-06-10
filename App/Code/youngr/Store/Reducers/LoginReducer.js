@@ -18,6 +18,15 @@ function account(state = initialState,action) {
                 }
                 return nextState
             }
+        break; 
+
+        case 'LOGOUT_ACCOUNT':
+            nextState = {
+                ...state,
+                account:initialState
+            }
+            return nextState
+
         default:
             return state
     }

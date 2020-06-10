@@ -105,7 +105,10 @@ class Conversation extends React.Component {
         <Block style={styles.main_container}>
           <Block >
             <Text h4 muted style={styles.subtitle}>Mes conversations</Text>
+            <Block middle>
               {this.state.viewConv}   
+
+            </Block>
           </Block>
         </Block>
     )
@@ -120,7 +123,7 @@ const styles = StyleSheet.create({
   },
   subtitle:{
     marginTop:10,
-    paddingLeft:10,
+    paddingLeft:20,
     marginBottom:5
   },
   noWork:{

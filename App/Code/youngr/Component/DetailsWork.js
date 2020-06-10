@@ -75,7 +75,6 @@ class DetailsWork extends React.Component {
 
   render() {
     const {state} = this.props.navigation
-    console.log(state.params);
     const path = `https://dashboard.youngr.be/`+state.params.profile_path;
 
     return (

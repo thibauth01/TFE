@@ -19,6 +19,8 @@ yarn add react-redux
 yarn add redux
 yarn add react-native-picker-select
 yarn add moment
+yarn add redux-persist
+yarn add @react-native-community/async-storage
 
 
 yarn add react-native-modal

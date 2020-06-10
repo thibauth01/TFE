@@ -11,6 +11,7 @@ import Login from '../Component/Login';
 import Dashboard from '../Component/Dashboard';
 import Conversation from '../Component/Conversation';
 import Works from '../Component/Works';
+import MyAccount from '../Component/MyAccount';
 import DetailsWorkProposal from '../Component/DetailsWorkProposal';
 import DetailsWork from '../Component/DetailsWork';
 import DetailsWorkFree from '../Component/DetailsWorkFree';
@@ -53,6 +54,18 @@ const bottomNavigator = createBottomTabNavigator({
       tabBarIcon: () => { // On définit le rendu de nos icônes par les images récemment ajoutés au projet
         return <Image
           source={require('../Images/comment.png')}
+          style={styles.icon}/> // On applique un style pour les redimensionner comme il faut
+      }
+    }
+  },
+  MyAccount: {
+    screen: MyAccount,
+    navigationOptions: {
+      title: 'Account',
+      headerShown: false,
+      tabBarIcon: () => { // On définit le rendu de nos icônes par les images récemment ajoutés au projet
+        return <Image
+          source={require('../Images/account.png')}
           style={styles.icon}/> // On applique un style pour les redimensionner comme il faut
       }
     }

@@ -1,8 +1,10 @@
 import React from 'react'
-import { StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking,Keyboard } from 'react-native'
+import { ActivityIndicator,StyleSheet,Image,View,Platform,SafeAreaView, ImageBackground,Linking,Keyboard } from 'react-native'
 import {Button,Text, Block, Input} from 'galio-framework'
 import { theme } from '../Constants'
 import { connect } from 'react-redux'
+import { NavigationEvents } from 'react-navigation';
+import {Toast} from 'native-base'
 
 
 
@@ -11,66 +13,150 @@ class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        user:"workeradmin",
-        password:"Covid19-19",
-        account:undefined
+        user:"",
+        password:"",
+        account:undefined,
+        loading:false
     }
   }
+    
+    componentWillMount(){
+        this.setState({
+            loading:false
+        })
 
-  login = () =>{
-        const {user,password} = this.state;
-        
-		if(user==""){
-		    alert("Utilisateur manquant");
-		}
+        if(this.props.navigation.state.params != undefined){
 
-		else if(password==""){
-            alert("Mot de passe manquant");
+            const action = { type: "LOGOUT_ACCOUNT", value: undefined}
+            this.props.dispatch(action)
+
+        }
+        else{
+            if(this.props.account.id != undefined){
+                this.props.navigation.navigate("Dashboard")
+            }
         }
         
-		else{
-		
-		fetch('https://dashboard.youngr.be/api/login.php',{
-			method:'POST',
-			header:{
-				'Accept': 'application/json',
-				'Content-type': 'application/json'
-			},
-			body:JSON.stringify({
-				user: user,
-				password: password
-			})
-			
-		})
-		.then((response) => response.json())
-		 .then((responseJson)=>{
-			 if(responseJson.status){
-                this.setState({
-                    account:responseJson.data,
-                })
-                const action = { type: "GET_ACCOUNT", value: this.state.account}
-                this.props.dispatch(action)
-                
-                this.props.navigation.navigate("Dashboard")
-                
-             }
-             else{
-				 alert(responseJson.txt);
-			 }
-		 })
-		 .catch((error)=>{
-		 console.error(error);
-		 });
-		}
-		
-		
-		Keyboard.dismiss();
-	}
+    }
 
-  render() {      
+    login = () =>{
+        const {user,password} = this.state;
+        this.setState({
+            loading:true
+        })
+        
+        if(user==""){
+            this.setState({
+                loading:false
+            })
+            Toast.show({
+                text: "Utilisateur manquant",
+                duration: 2000,
+                type:"danger"
+            })
+        }
+
+        else if(password==""){
+            this.setState({
+                loading:false
+            })
+            Toast.show({
+                text: "Mot de passe manquant",
+                duration: 2000,
+                type:"danger"
+            })
+        }
+        
+        else{
+        
+        fetch('https://dashboard.youngr.be/api/login.php',{
+            method:'POST',
+            header:{
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            body:JSON.stringify({
+                user: user,
+                password: password
+            })
+            
+        })
+        .then((response) => response.json())
+            .then((responseJson)=>{
+                if(responseJson.status){
+                    
+                    this.setState({
+                        account:responseJson.data,
+                    })
+                    const action = { type: "GET_ACCOUNT", value: this.state.account}
+                    this.props.dispatch(action)
+                    
+                    this.setState({
+                        user: "",
+                        password: ""
+                    })
+
+                    this.props.navigation.navigate("Dashboard")
+                
+                }
+                else{
+                    this.setState({
+                        loading:false
+                    })
+                    Toast.show({
+                        text: responseJson.txt,
+                        duration: 2000,
+                        type:"danger"
+                    })
+                }
+            })
+            .catch((error)=>{
+                this.setState({
+                    loading:false
+                })
+                console.error(error);
+            });
+        }
+        
+        
+        Keyboard.dismiss();
+    }
+    
+    isLoading(){
+        if(this.state.loading){
+            return(
+                <Button
+                    radius={10}
+                    size={300}
+                    color={theme.COLORS.SECONDARY}
+                    onPress={this.login}
+                >
+                    <ActivityIndicator/>
+                </Button>
+                
+            )
+        }
+        else{
+            return(
+                <Button
+                    radius={10}
+                    size={300}
+                    color={theme.COLORS.SECONDARY}
+                    onPress={this.login}
+                >
+                    Connexion
+                </Button>
+            )
+        }
+    }
+
+  render() {  
     const {navigate} = this.props.navigation;
     return (
       <Block   style={styles.main_container}>
+          <NavigationEvents
+                onDidFocus={() => this.componentWillMount()}
+            />
           <Block middle flex={0.5}>
             <Image 
                     style={styles.logo}
@@ -89,6 +175,7 @@ class Login extends React.Component {
                         family="antdesign"
                         iconColor={theme.COLORS.SECONDARY}
                         onChangeText={user => this.setState({user})}
+                        value={this.state.user}
                     />
                 </Block>
                 <Block  width={250}>
@@ -100,21 +187,16 @@ class Login extends React.Component {
                         password
                         viewPass
                         onChangeText={password => this.setState({password})}
+                        value={this.state.password}
                     />
                 </Block>
             </Block>
             <Block middle flex={2}>
-                <Button
-                    radius={10}
-                    size={300}
-                    color={theme.COLORS.SECONDARY}
-                    onPress={this.login}
-                >
-                    Connexion
-                </Button>
+                {this.isLoading()}
+                
             </Block>
             <Block middle flex={1}>
-                <Text>Pas encore de compte ?</Text><Text color={theme.COLORS.SECONDARY} onPress={ ()=> Linking.openURL('https://google.com') }>Inscris toi !</Text>
+                <Text>Pas encore de compte ?</Text><Text color={theme.COLORS.SECONDARY} onPress={ ()=> Linking.openURL('https://dashboard.youngr.be/connexion.php') }>Inscris toi !</Text>
             </Block>
           </Block>
       </Block>
