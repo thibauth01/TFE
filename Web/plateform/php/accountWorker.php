@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" href="img/icon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Mon compte - Youngr</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -279,9 +279,12 @@
                                                 </div>
                                                 <div class="col-md-4"></div>
                                             </div>
-                                            <div class="row ">
-                                                <div class="col-md-12 d-flex justify-content-center">
+                                            <div class="row mt-4">
+                                                <div class="col-md-7 d-flex justify-content-end">
                                                     <input type="submit" class="btn btn-primary" value="Enregistrer les modifications">
+                                                </div>
+                                                <div class="col-md-5 d-flex justify-content-end">
+                                                    <button type="button" onclick="deleteAccount();" class="btn btn-secondary">Supprimer mon compte</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -316,6 +319,8 @@
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="js/plugins/jquery.star-rating-svg.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <script src="demo/demo.js"></script>
 <script src="js/account.js"></script>
 <script src="js/main.js"></script>

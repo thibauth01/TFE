@@ -233,7 +233,7 @@
         <div class="container">
           <div class="row">
             <div class="col text-center">
-              <p class="copyright"> <a href="#">Condition générale d'utilisation</a> <br> <a href="#">Politique de confidentialité</a></p>
+              <p class="copyright"> <a href="images/conditions-generales-utilisation.pdf" target="_blank">Condition générale d'utilisation</a> <br> <a href="images/politique-confidentialite.pdf" target="_blank">Politique de confidentialité</a></p>
             </div>
           </div>
         </div>

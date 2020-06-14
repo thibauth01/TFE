@@ -15,6 +15,31 @@ function PreviewImage(input,id) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function deleteAccount(){
+    Swal.fire({
+        title:'Voulez-vous supprimer votre compte?',
+        text:'Cette action est irréversible',
+        icon:'question',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui',
+        cancelButtonText: 'Non'
+    }).then((result) => {
+        if(result.value){
+            $.ajax({
+                url:'php/deleteAccount.php',
+                type:'post',
+                success:function(data){
+                    window.location ="connexion.php"
+                }
+            });
+        }
+        
+    });
+}
+
+
 $(document).ready(function(){
     $('#updateAccountWorker').on('submit',function(event){
         event.preventDefault();
@@ -146,3 +171,4 @@ $(document).ready(function(){
 
     })
 });
+

@@ -10,7 +10,6 @@
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
-    <link rel="icon" type="image/png" href="img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Connexion - Youngr</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -25,6 +24,7 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="demo/demo.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
+    <link rel="icon" href="img/icon.png" />
 
 </head>
 
@@ -141,6 +141,13 @@
                                                     <label for="countrySignReq">Pays</label>
                                                     <input type="text" class="form-control" placeholder="Pays" value="" name="country" id="countrySignReq">
                                                 </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row ">
+                                            <div class="col-md-12 mt-4 ml-4">
+                                                <input type="checkbox" class="btn btn-primary" value="" required>
+                                                <label>J'accepte les <a href="img/conditions-generales-utilisation.pdf" target="_blank"> CGU</a> & la <a href="img/politique-confidentialite.pdf" target="_blank">politique de confidentialité</a></label>
                                             </div>
                                         </div>
 
@@ -361,10 +368,16 @@
 
                                         </div>
                                         <div class="row ">
-                                                <div class="col-md-12 d-flex justify-content-center">
-                                                    <input type="submit" class="btn btn-primary" value="Inscription">
-                                                </div>
+                                            <div class="col-md-12 mt-4 ml-4">
+                                                <input type="checkbox" class="btn btn-primary" value="" required>
+                                                <label>J'accepte les <a href="img/conditions-generales-utilisation.pdf" target="_blank"> CGU</a> & la <a href="img/politique-confidentialite.pdf" target="_blank">politique de confidentialité</a></label>
                                             </div>
+                                        </div>
+                                        <div class="row ">
+                                            <div class="col-md-12 d-flex justify-content-end">
+                                                <input type="submit" class="btn btn-primary" value="Inscription">
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -423,6 +436,8 @@
 <!--  Notifications Plugin    -->
 <script src="js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="demo/demo.js"></script>
