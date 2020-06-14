@@ -61,6 +61,8 @@
     <link rel="stylesheet" href="css/themify-icons.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="images/icon.png" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
 
     <title>Youngr</title>
   </head>
@@ -199,7 +201,12 @@
                 <i class="ti-mobile"></i>
               </span>
               <a href="#">Application mobile</a>
-              <p>Application Android et IOS pour avoir toutes vos informations sous la main !</p>
+              <p>Application Android et IOS pour avoir toutes vos informations sous la main !</p><br>
+              <p><i class="fab fa-google-play"></i> Bientot disponible</p>
+              <p><i class="fab fa-apple"></i> Bientot disponible</p>
+            </div>
+            <div class="ml-3">
+              <a href="youngr.apk" class="btn btn-default">Télécharger APK</a>
             </div>
           </div>
           <div class="col-lg-3 col-sm-6">

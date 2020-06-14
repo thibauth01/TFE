@@ -16,6 +16,49 @@ function ShowWorkerSignUp(){
     $('.workerSignUp').show();
 }
 
+
+
+async function recoverPassword(){
+    const { value: user } = await Swal.fire({
+        title: "Entrez votre nom d'utilisateur",
+        input: 'text',
+        inputPlaceholder: "Entrez votre nom d'utilisateur",
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ok',
+        cancelButtonText: 'Annuler'
+      })
+      
+      if (user) {
+          $.ajax({
+              url:"php/recoverPassword.php",
+              type:"post",
+              data:{"username":user},
+              success:function(data){
+                  if(data){
+                    Swal.fire(
+                        "Un nouveau mot de passe vous à été envoyé par email",
+                        "",
+                        'success'
+                    );
+                  }
+                  else{
+                    Swal.fire(
+                        "Nom d'utilisateur introuvable",
+                        "",
+                        'error'
+                    );
+                  }
+                  
+                },
+              error:function(data){
+                  console.log(data);
+              }
+              
+          })
+      } 
+}
+
 $(document).ready(function(){
     $('#requesterForm').on('submit',function(event){
         event.preventDefault();

@@ -39,9 +39,9 @@ if (!preg_match("#[a-zA-Z]+#", $password)) {
     array_push($messages,'Passwords must contain a letter');    
 }
 
-if(age($birth) < 15){
+if(age($birth) < 18){
     $return['statut'] = false;
-    array_push($messages,'Vous devez voir au moins 15 ans'); 
+    array_push($messages,'Vous devez voir au moins 18 ans'); 
 }
 if(!preg_match('/(0[0-9]{9})/', $phone)) {
     $return['statut'] = false;
@@ -121,6 +121,30 @@ else{
                     $_SESSION['typeAccount'] = "requester";
                     $_SESSION['idTypeAccount'] = $requester['id']; 
                     print_r(json_encode($messages));
+
+                    //sendEmail
+                    $from = "help@youngr.be";
+
+                    $to = $email;
+
+                    $subject = "Inscription à Youngr";
+
+
+                    $message = "
+                        Merci de vous être inscrit sur notre plateforme ! 
+                        Vous pouvez désormais y acceder en vous connectant sur https://dashboard.youngr.be/
+
+                        Pour toutes questions, l'adresse help@youngr.be est à votre disposition ! 
+
+                        L'équipe Youngr !
+                    ";
+
+                    $headers = "From:" . $from;
+
+
+                    mail($to,$subject,$message, $headers);
+                
+
                 }
                 else{
                     array_push($messages,'requester introuvbale');

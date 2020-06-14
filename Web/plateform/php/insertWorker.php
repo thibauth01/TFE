@@ -259,6 +259,28 @@ else{
                             $_SESSION['typeAccount'] = "worker";
                             $_SESSION['idTypeAccount'] = $idWorker; 
                             print_r(json_encode($messages));
+
+                            //sendEmail
+                            $from = "help@youngr.be";
+
+                            $to = $email;
+
+                            $subject = "Votre inscription à Youngr";
+
+
+                            $message = "
+                                Merci de vous être inscrit sur notre plateforme ! 
+                                Vous pouvez désormais y acceder en vous connectant sur https://dashboard.youngr.be/
+
+                                Pour toutes questions, l'adresse help@youngr.be est à votre disposition ! 
+
+                                L'équipe Youngr !
+                            ";
+
+                            $headers = "From:" . $from;
+
+
+                            mail($to,$subject,$message, $headers);
                         }
 
                     

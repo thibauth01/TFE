@@ -374,6 +374,12 @@
                                             </div>
                                         </div>
                                         <div class="row ">
+                                            <div class="col-md-12 ml-4">
+                                                <input type="checkbox" class="btn btn-primary" value="" checked required>
+                                                <label>Je dispose d'une autorisation parentale si je suis mineur</label>
+                                            </div>
+                                        </div>
+                                        <div class="row ">
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <input type="submit" class="btn btn-primary" value="Inscription">
                                             </div>
@@ -405,6 +411,11 @@
                                                 <label for="passwordLog">Mot de passe</label>
                                                 <input type="password" class="form-control" placeholder="Mot de passe" value="" name="password" id="passwordLog">
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex justify-content-start">
+                                        <div class="col-md-12">
+                                            <a onclick="recoverPassword();" href="#">Mot de passe oublié</a>
                                         </div>
                                     </div>
                                     <div class="row d-flex justify-content-center">
