@@ -19,7 +19,6 @@
     <!-- CSS Files -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="demo/demo.css" rel="stylesheet" />
     <link href="css/chat.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet"/>
@@ -93,8 +92,7 @@
 <script src="js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
-<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-<script src="demo/demo.js"></script>
+
 <script src="js/messages.js"></script>
 <script src="js/main.js"></script>
 

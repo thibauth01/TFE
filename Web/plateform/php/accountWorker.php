@@ -22,9 +22,8 @@
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="demo/demo.css" rel="stylesheet" />
     <link href="css/jquery.star-rating-svg.css" rel="stylesheet"/>
+    <link href="demo/demo.css" rel="stylesheet" />
 
     <link href="css/custom.css" rel="stylesheet" />
 </head>
@@ -289,6 +288,37 @@
                                             </div>
                                         </form>
                                     </div>
+                                    <div class="mt-5">
+                                        <form method="post" class="changePassword" onsubmit="event.preventDefault();changePassword(this);">
+                                            <h5 class="px-2"> Changement de votre mot de passe</h5>
+                                            <div class="row">
+                                                <div class="col-md-3 pr-1">
+                                                    <div class="form-group">
+                                                        <label for="oldPassword">Ancien mot de passe</label>
+                                                        <input type="text" class="form-control" placeholder="Ancien mot de passe" value="" name="oldPassword" id="oldPassword" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 px-1">
+                                                    <div class="form-group">
+                                                        <label for="newPassword">Nouveau mot de passe</label>
+                                                        <input type="text" class="form-control" placeholder="Nouveau mot de passe" value="" name="newPassword" id="newPassword" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 px-1">
+                                                    <div class="form-group">
+                                                        <label for="comfirmPassword">Comfirmation du nouveau mot de passe</label>
+                                                        <input type="text" class="form-control" placeholder="Comfirmation du nouveau mot de passe" value="" name="comfirmPassword" id="comfirmPassword" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 pt-3">
+                                                    <div class="form-group">
+                                                        <input type="submit" class="btn btn-primary" value="Changer mon mot de passe">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -321,7 +351,6 @@
 <script src="js/plugins/jquery.star-rating-svg.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-<script src="demo/demo.js"></script>
 <script src="js/account.js"></script>
 <script src="js/main.js"></script>
 

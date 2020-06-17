@@ -24,15 +24,15 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isConnected: false
+      isConnected:false
     }
+  }
+  
+  componentDidMount(){
+    NetInfo.addEventListener(this.handleConnectivityChange);
   }
 
   componentWillUnmount() {
-    NetInfo.removeEventListener(this.handleConnectivityChange);
-  }
-
-  componentDidMount(){
     NetInfo.addEventListener(this.handleConnectivityChange);
   }
 
@@ -43,23 +43,20 @@ class Dashboard extends React.Component {
       this.setState({isConnected: false});
     }
   };
-  
 
   dashboardType = () => {
-    if (!this.state.isConnected) {
-      return <Offline />;
+    
+    
+    if(this.props.account.type == "requester"){
+      return <DashboardRequester connected = {this.state.isConnected} navigate = {this.props.navigation}/>
+    }
+    else if(this.props.account.type == "worker"){
+        return <DashboardWorker connected = {this.state.isConnected} navigate =  {this.props.navigation}/>
     }
     else{
-      if(this.props.account.type == "requester"){
-        return <DashboardRequester navigate = {this.props.navigation}/>
-      }
-      else if(this.props.account.type == "worker"){
-          return <DashboardWorker navigate =  {this.props.navigation}/>
-      }
-      else{
-          return <Text>hello</Text>
-      }
+        return <Text>hello</Text>
     }
+    
     
 }
 

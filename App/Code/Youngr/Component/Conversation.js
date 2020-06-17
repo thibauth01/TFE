@@ -27,9 +27,8 @@ class Conversation extends React.Component {
     }
   }
 
-  componentDidMount(){
-    NetInfo.addEventListener(this.handleConnectivityChange);
-    if (this.state.isConnected) {
+  cmpdidMountafter(){
+    if(this.state.isConnected){
       this.getData().then(response => this.setState({conv:response},()=>{
         this.showListMsg();
       })); 
@@ -44,14 +43,22 @@ class Conversation extends React.Component {
     
   }
 
+  componentDidMount(){
+    NetInfo.addEventListener(this.handleConnectivityChange);
+    
+    
+  }
+
   componentWillUnmount() {
-    NetInfo.removeEventListener(this.handleConnectivityChange);
+    NetInfo.addEventListener(this.handleConnectivityChange);
   }
 
 
   handleConnectivityChange = state => {
     if (state.isConnected) {
-      this.setState({isConnected: true});
+      this.setState({isConnected: true},()=>{
+        this.cmpdidMountafter()
+      });
     } else {
       this.setState({isConnected: false});
     }

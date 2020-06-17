@@ -23,20 +23,20 @@ $country = trim(htmlspecialchars($_POST['country']));
 
 if($password != $confirm_password){
     $return['statut'] = false;
-    array_push($messages,'Passwords do not match');   
+    array_push($messages,'Les mots de passes ne correspondent pas');   
 }
 if(strlen($password) < 8){
     $return['statut'] = false;
-    array_push($messages,'Passwords too short');    
+    array_push($messages,'Mot de passe trop court');    
     
 }
 if (!preg_match("#[0-9]+#", $password)) {
     $return['statut'] = false;
-    array_push($messages,'Passwords must contain a number');    
+    array_push($messages,'Le mot de passe doit contenir un chiffre');    
 }
 if (!preg_match("#[a-zA-Z]+#", $password)) {
     $return['statut'] = false;
-    array_push($messages,'Passwords must contain a letter');    
+    array_push($messages,'Le mot de passe doit contenir une lettre');    
 }
 
 if(age($birth) < 18){

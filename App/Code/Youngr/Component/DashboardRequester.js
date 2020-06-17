@@ -7,18 +7,10 @@ import { connect } from 'react-redux'
 import CardWorkTakeReq from './CardWorkTakeReq';
 import {getAge,reformatDate,reformatTime,getPrice} from '../Constants/Utils'
 import { NavigationEvents } from 'react-navigation';
+import NetInfo from '@react-native-community/netinfo'
 import {Toast} from 'native-base'
 
 
-
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
 
  
 
@@ -55,26 +47,37 @@ class DashboardRequester extends React.Component {
       dataNextWorks : undefined,
       dateNotPassed : undefined,
       
-      
     }
   }
 
-  
-
+ 
+ 
   componentDidMount(){
     
-    this.getDataNextWorks().then(response => this.setState({dataNextWorks : response},() => {
-      this.setState({dateNotPassed : this.removeDatePassed()})
-    })); 
+
+    if (this.props.connected) {
+      this.getDataNextWorks().then(response => this.setState({dataNextWorks : response},() => {
+        this.setState({dateNotPassed : this.removeDatePassed()},()=>{
+          const action = { type: "GET_NEXT_WORK", value: this.state.dateNotPassed}
+          this.props.dispatch(action);
+        })
+      })); 
+    }
+    this.setState({
+      dateNotPassed:this.props.nextWork
+    }) 
+    
+    
+    
     
   }
 
   
-
   
 
   getDataNextWorks(){
-    return fetch('https://dashboard.youngr.be/api/nextWorks.php',{
+    
+      return fetch('https://dashboard.youngr.be/api/nextWorks.php',{
       method:'POST',
       header:{
         'Accept': 'application/json',
@@ -95,6 +98,8 @@ class DashboardRequester extends React.Component {
      .catch((error)=>{
         console.error(error);
      });
+    
+    
 
      
   }
@@ -211,7 +216,9 @@ class DashboardRequester extends React.Component {
 
   
   render() {
+
     
+
     return (
       
       <Block  style={styles.main_container}>
@@ -314,8 +321,11 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) =>{
+  console.log(state);
   return {
-      account: state.account.account
+      account: state.account.account,
+      nextWork: state.nextWork.nextWork
+      
   }
 }
 

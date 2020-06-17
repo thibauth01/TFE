@@ -47,6 +47,8 @@
             Vous avez demandez la récupération de mot de passe pour le compte ".$user." 
             Voici votre nouveau mot de passe : ".$chaineAleatoire."
 
+            Vous pouvez le modifier en allant dans la section Mon compte !
+
             Pour toutes questions, l'adresse help@youngr.be est à votre disposition ! 
 
             L'équipe Youngr !

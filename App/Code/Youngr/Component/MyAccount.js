@@ -28,7 +28,7 @@ class MyAccount extends React.Component {
   }
 
   componentWillUnmount() {
-    NetInfo.removeEventListener(this.handleConnectivityChange);
+    NetInfo.addEventListener(this.handleConnectivityChange);
   }
 
   componentDidMount(){

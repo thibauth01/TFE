@@ -20,7 +20,6 @@
     <!-- CSS Files -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="demo/demo.css" rel="stylesheet" />
     <link href="css/jquery.star-rating-svg.css" rel="stylesheet"/>
 
@@ -529,17 +528,10 @@
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
 <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="demo/demo.js"></script>
 <script src="js/plugins/jquery.star-rating-svg.js"></script>
 <script src="js/works.js"></script>
 <script src="js/main.js"></script>
 
-<script>
-    $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
-    });
 
-</script>
 
 </html>

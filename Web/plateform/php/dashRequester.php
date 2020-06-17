@@ -35,8 +35,8 @@
     <!-- CSS Files -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="demo/demo.css" rel="stylesheet" />
+
     <link href="css/custom.css" rel="stylesheet" />
 
 </head>
@@ -222,7 +222,7 @@
                                         <div class='card-body'>
                                             <div class='row'>
                                                 <div class='col-md-3'>
-                                                    <h5 class='card-category'>Next Worker</h5>
+                                                    <h5 class='card-category'>Prochain travailleur</h5>
                                                     <div class='text-center'>
                                                         <a href='#'>
                                                             <img class='avatar border-gray' onerror=\"this.onerror=null; this.src='img/default-user.png'\" src='".$nextWork['profile_path']."' alt='...'>
@@ -232,7 +232,7 @@
                                                         ".$nextWork['city']."
                                                         </p>
                                                     </div>
-                                                    <p class='text-center'> 12 works already given</p>
+                                                    
                                                 </div>
                                                 <div class='col-md-9'>
                                                     <div class='row'>
@@ -288,16 +288,13 @@
 <script src="js/core/popper.min.js"></script>
 <script src="js/core/bootstrap.min.js"></script>
 <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!-- Chart JS -->
 <script src="js/plugins/chartjs.min.js"></script>
 <!--  Notifications Plugin    -->
 <script src="js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
-<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-<script src="demo/demo.js"></script>
+
 <script src="js/dashboard.js"></script>
 <script src="js/main.js"></script>
 

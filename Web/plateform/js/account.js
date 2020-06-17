@@ -39,6 +39,41 @@ function deleteAccount(){
     });
 }
 
+function changePassword(elem){
+    var formData = new FormData(elem);
+    $.ajax({
+        url:'php/changePassword.php',
+        type:'post',
+        data:formData,
+        success:function(data){
+            data=JSON.parse(data);
+            if(data.statut == true){
+                var html = `<div class="myAlert-bottom alert alert-info">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>`+data.message[0]+`</strong> 
+                        </div>`;
+                $("#errormsgSign").html(html);
+                myAlertBottom();
+                $(".changePassword")[0].reset();
+            }
+            else{
+                var html="";
+                console.log(data.message);
+                $.each(data.message,function(index,value){
+                    html+= `<div class="myAlert-bottom alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>`+ value +`</strong> 
+                            </div>`;
+                });
+                $("#errormsgSign").html(html);
+                myAlertBottom();
+            }
+        },
+        processData: false,
+        contentType: false,
+        
+    });
+}
 
 $(document).ready(function(){
     $('#updateAccountWorker').on('submit',function(event){
@@ -167,6 +202,8 @@ $(document).ready(function(){
             }
             
         });
+
+    
 
 
     })

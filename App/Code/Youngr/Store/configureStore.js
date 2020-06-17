@@ -1,5 +1,6 @@
 import {createStore} from 'redux'
 import account from './Reducers/LoginReducer'
+import nextWork from './Reducers/NextWorkReducer'
 import { persistCombineReducers } from 'redux-persist'
 import AsyncStorage from '@react-native-community/async-storage'
 
@@ -8,4 +9,4 @@ const rootPersistConfig = {
     storage: AsyncStorage
   }
 
-export default createStore(persistCombineReducers(rootPersistConfig,{account}));
+export default createStore(persistCombineReducers(rootPersistConfig,{account,nextWork}));

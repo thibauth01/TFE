@@ -25,11 +25,17 @@ class DashboardWorker extends React.Component {
   }
 
   componentDidMount(){
-    this.getDataNextWorks().then(response => this.setState({dataNextWorks : response},() => {
-      this.setState({dateNotPassed : this.removeDatePassed()})
-    }));
-
-    this.getSalaryWorker().then(response => this.setState({datasGraph :response}));
+    if (this.props.connected) {
+      this.getDataNextWorks().then(response => this.setState({dataNextWorks : response},() => {
+        this.setState({dateNotPassed : this.removeDatePassed()})
+      }));
+  
+      this.getSalaryWorker().then(response => this.setState({datasGraph :response}));
+    }
+    this.setState({
+      dateNotPassed:this.props.nextWork
+    }) 
+    
   }
 
   getDataNextWorks(){
@@ -242,7 +248,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) =>{
   return {
-      account: state.account.account
+      account: state.account.account,
+      nextWork: state.nextWork.nextWork
   }
 }
 

@@ -25,10 +25,10 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!-- CSS Files -->
+    <link href="demo/demo.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="demo/demo.css" rel="stylesheet" />
+
 </head>
 
 <body class="">
@@ -120,7 +120,7 @@
 
                                     <h3>Mon compte</h3>
                                     <div class="ml-3">
-                                        <p>Cette section vous permet de modifier vos informations personnelles, vos critères de selection et votre nombre d'étoiles.<br>
+                                        <p>Cette section vous permet de modifier vos informations personnelles, changer votre mot de passe, vos critères de selection et votre nombre d'étoiles.<br>
                                             Vous pouvez ajouter une photo de profil en cliquant sur l'icone<p><br><br>
                                     </div>
                                 </div>
@@ -145,16 +145,7 @@
 <script src="js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="js/now-ui-dashboard.js?v=1.0.1"></script>
-<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-<script src="demo/demo.js"></script>
 <script src="js/notifications.js"></script>
 
-
-<script>
-    $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
-    });
-</script>
 
 </html>

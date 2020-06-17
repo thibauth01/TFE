@@ -5,7 +5,7 @@
     $return['statut'] = true;
     $messages = array();
 
-    $title = trim(htmlspecialchars($_POST['title']));
+    $title = addslashes(trim(htmlspecialchars($_POST['title'])));
     $type = trim(htmlspecialchars($_POST['type']));
     $ageMin = trim(htmlspecialchars($_POST['ageMin']));
     $date = trim(htmlspecialchars($_POST['date']));
@@ -15,7 +15,7 @@
     $city = trim(htmlspecialchars($_POST['city']));
     $postal = trim(htmlspecialchars($_POST['postal']));
     $country = trim(htmlspecialchars($_POST['country']));
-    $description = trim(htmlspecialchars($_POST['description']));
+    $description = addslashes(trim(htmlspecialchars($_POST['description'])));
     $idType = trim(htmlspecialchars($_POST['idType']));
     $price = trim(htmlspecialchars($_POST['price']));
 
@@ -58,6 +58,7 @@
             print_r(json_encode($messages));
 
         } else {
+            
             $return['statut'] = false;
             array_push($messages,'Erreur lors de l ajout du travail');
             print_r(json_encode($messages));

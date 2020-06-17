@@ -262,7 +262,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) =>{
     return {
-        account: state.account.account
+        account: state.account.account,
+       
     }
 }
 
